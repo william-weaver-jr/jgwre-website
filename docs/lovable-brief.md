@@ -1,154 +1,191 @@
-# Lovable/v0 Brief — jasminegarcia.com visual direction
+# Lovable Brief — jasminegarcia.com visual system
 
-Paste the **Prompt** section below into Lovable (or v0) to generate the visual
-direction for the site. Everything after the prompt is context for whoever runs the
-session. Per the project workflow (CLAUDE.md, Locked Decision #3), the output gets
-exported to GitHub and all subsequent work happens in Claude Code against this repo.
+**Scope: brand and visual system only.** This session exists to answer one question —
+what does Jasmine's brand look and sound like — and to produce a single home page that
+proves it. Everything else (the other 12+ pages, lead forms, Follow Up Boss wiring,
+CMS) gets built in Claude Code afterward, against the design tokens this session
+settles.
 
-**How to use it:** run the prompt, then iterate on aesthetics — palette, typography,
-imagery mood — with Jasmine in the room. Her taste decides the look. The prompt's job
-is to keep every iteration inside the legal and positioning guardrails so nothing has
-to be torn out after export.
-
-**Bring visual references into the session:** Lovable can't browse Instagram, so
-screenshot a handful of posts from her accounts and attach them as style references —
-[@myrealtorjasmine](https://www.instagram.com/myrealtorjasmine) (business — how she
-already presents professionally) and
-[@iheartjasz](https://www.instagram.com/iheartjasz) (personal — her actual taste and
-personality). The gap between the two is informative: the brand should feel like the
-person in the second account doing the job shown in the first. Her
-[Zillow profile](https://www.zillow.com/profile/myrealtorjasmine) and
-[bio video](https://youtu.be/J6T4pmDWQ6M) ("Meet Jasmine Garcia – Stone Realty Group")
-are useful for voice and on-camera presence.
+Do not ask Lovable to build the rest of the site. It costs credits we don't have and
+produces code that will be rewritten anyway.
 
 ---
 
-## Prompt
+## Constraints that shape this plan
 
-Build a personal-brand and lead-generation website for **Jasmine Garcia**, a
-Broker/REALTOR® with **Stone Realty Group** in Charlotte, NC. She is licensed in both
-North Carolina and South Carolina. This is a brand and conversion site — **not** a
-property-search portal.
+- **Free plan: 5 build credits/day, 30/month.** Confirmed against the "Bill's Lovable"
+  workspace on 2026-08-07.
+- **Rough credit costs:** a full landing page with images ≈ 1.7 credits; a simple style
+  change ≈ 0.5; a message in Plan mode = 1.
+- **Lovable cannot export into an existing GitHub repo** — it always creates a new
+  private one. So the export will land in a fresh repo, and the code gets pulled into
+  `william-weaver-jr/jgwre-website` from there. Don't try to point it at our repo.
 
-Tech target (the code will be exported and maintained by developers): **Next.js 15
-App Router, TypeScript, Tailwind CSS, shadcn/ui.** Put all colors and fonts in Tailwind
-design tokens — no hardcoded hex values in components, no inline styles.
+### Credit discipline — the rules that make 30/month work
 
-### Pages to build
-
-Build these four pages fully; they set the visual system for the rest of the site:
-
-1. **Home (`/`)** — positioning, proof, primary call-to-action
-2. **New Construction (`/new-construction`)** — flagship specialty page with a guide-download lead form
-3. **About (`/about`)** — her story
-4. **Contact (`/contact`)** — phone-first, form secondary
-
-Include a shared header (nav: Buyers, Sellers, New Construction, Relocation,
-NC/SC Border, Areas, Reviews, About, Contact, plus a "Search Homes" link that goes to
-an external URL) and a shared footer (requirements below).
-
-### Brand direction
-
-- Her brand identity is **being discovered in this exercise** — there is no existing
-  palette, typography, or logo. Propose a distinctive direction; expect iteration.
-- It must be clearly distinct from her brokerage's brand, which is black with a
-  hexagon motif. **Do not use black-dominant palettes or hexagon shapes.** Do not
-  restyle or incorporate any Stone Realty Group logo or mark.
-- Tone: warm, competent, direct. She spent a decade as a special-education teacher
-  before real estate — approachable expert, not luxury-aloof. Avoid both generic
-  corporate real estate and gold-serif "luxury agent" clichés.
-- Use placeholder image blocks for her photos (professional photography is not shot
-  yet). Label them clearly as placeholders.
-
-### Unique selling proposition — the hero must commit to one
-
-The homepage hero leads with a single, explicit USP — a claim only she can make — not
-a services list or a generic welcome. Generate hero variants for these candidate
-angles so Jasmine can pick and refine:
-
-1. **The builder's-table angle:** "Builders negotiate every day. You'll do it once.
-   I've done it 17 times." — the new-construction specialty as the spearhead.
-2. **The two-Carolinas angle:** one broker licensed on both sides of the NC/SC line —
-   for buyers who don't yet know which state they're choosing.
-3. **The teacher angle:** a decade in special education before real estate — she
-   explains the process better than anyone, especially for first-timers and
-   relocating buyers who are anxious and far away.
-
-The other pillars still get their pages either way; the USP decides what leads.
-
-### Copy — use these facts, nothing else
-
-Never write generic agent copy ("your trusted Charlotte REALTOR®" is banned). Her
-differentiators are specific — use them:
-
-- **New construction:** 17 new-construction closings with builders including Pulte,
-  Lennar, DR Horton, David Weekley, and Meritage. Angle: buyers negotiate with a
-  builder once in their life; the builder's sales office negotiates every day. She has
-  sat on the buyer's side of that table 17 times.
-- **Relocation:** 18 relocation transactions helping out-of-state buyers land in Charlotte.
-- **NC/SC border:** licensed in both Carolinas — Fort Mill, Tega Cay, Indian Land,
-  Lake Wylie, Waxhaw. 12 closings in the Fort Mill corridor.
-- **Teaching background:** a decade in special education before real estate — a career
-  spent explaining complex processes to anxious people.
-- Supporting stats (use sparingly, never as a wall of numbers): 73+ career
-  transactions, $30.9M career volume, 98.84% list-to-sale ratio, 105 five-star reviews.
-
-Voice: short sentences, numbers over adjectives. Banned words: "nestled," "boasts,"
-"dream home," "passionate about helping." **Do not invent any statistic, award,
-credential, or testimonial.** Where a real client review would go, use the literal
-placeholder text `[REAL CLIENT REVIEW — DO NOT FABRICATE]`.
-
-### Calls to action
-
-- **Phone-first.** The primary CTA everywhere is calling her: **(704) 200-9360**.
-  Make the number tappable (`tel:`) and prominent in the header and page CTAs.
-- Secondary CTA: the lead form (guide download on New Construction, contact form on
-  Contact). **No booking/calendar widget of any kind.**
-
-### Lead forms
-
-- Fields: name, email, phone. Every field gets a visible `<label>` — placeholders are
-  not labels.
-- Every form includes a required, **unchecked** consent checkbox with this exact text
-  (do not reword or shorten), with "Privacy Policy" as a link:
-
-  > I agree to be contacted by Stone Realty Group via call, email, and text for real
-  > estate services. To opt out, you can reply 'stop' at any time or reply 'help' for
-  > assistance. You can also click the unsubscribe link in the emails. Message and
-  > data rates may apply. Message frequency may vary.
-
-- Forms just POST to a stub — the real backend is wired later.
-
-### Footer — required on every page, non-negotiable
-
-- Brokerage identification, plain text: **Stone Realty Group**,
-  2459 Wilkinson Blvd, Suite 310, Charlotte, NC 28208
-- License numbers: **NC 334700 · SC 125546**
-- **Equal Housing Opportunity logo** and the REALTOR® mark (correct ® symbols and
-  capitalization everywhere they appear)
-- Privacy Policy link
-
-### Hard constraints
-
-- **No MLS/IDX data anywhere** — no listing cards, no property-search UI, no home-value
-  estimate widgets. "Search Homes" is an external link, nothing more.
-- Nothing may imply she is an independent brokerage — the site is her personal brand
-  *within* Stone Realty Group.
-- **Fair housing:** never describe the people of a neighborhood — no "safe
-  neighborhood," "good schools for families like yours," "up-and-coming area."
-  Describe housing stock, amenities, commute, and price instead.
-- **Accessibility:** WCAG 2.1 AA — 4.5:1 text contrast minimum, visible focus states,
-  semantic HTML, one `<h1>` per page, logical heading order, alt text on images.
+1. **Batch feedback.** Jasmine's reactions get collected into *one* prompt per round,
+   not six small ones. "Warm the palette, drop the hero font size, tighten the header
+   spacing" is one credit. Sent separately it's three.
+2. **Decide away from the keyboard.** Discussion costs credits in Lovable and nothing
+   at the kitchen table. Argue about the palette first, prompt second.
+3. **Never spend credits on content.** Copy, page structure, and the remaining pages
+   are Claude Code's job. Lovable only decides *look*.
+4. **Stop when the system is legible.** The deliverable is a set of decisions — colors,
+   type, spacing, tone — not a finished website.
 
 ---
 
-## After export (for the Claude Code side)
+## Session plan (~4 days, ~5 credits each, ~10 in reserve)
 
-- Verify the footer compliance block, consent text, and fair-housing language survived
-  generation verbatim — treat any drift as build-breaking.
-- (704) 200-9360 is the confirmed Follow Up Boss tracking number — correct as displayed,
-  no swap needed (Locked Decision #6).
-- Extract whatever palette/typography Jasmine approves into `tailwind.config.ts`
-  tokens and record the decision in CLAUDE.md Section 11.
-- Build out the remaining sitemap pages in Claude Code; wire forms to
-  `app/api/lead/route.ts` (Resend + Follow Up Boss) before anything ships.
+**Day 1 — generate and choose the USP.** Run the Day 1 prompt below. It produces the
+home page with three alternate heroes. Jasmine picks the angle that sounds like her.
+*Budget: ~2 for generation, ~3 for immediate obvious fixes.*
+
+**Day 2 — palette and typography.** One batched prompt per round, three or four rounds.
+This is the day that matters most; protect its credits. *Budget: ~5.*
+
+**Day 3 — refinement.** Header/footer treatment, mobile layout, spacing rhythm,
+photography placeholders. *Budget: ~5.*
+
+**Day 4 — polish and export.** Final batched pass, then push to GitHub. *Budget: ~3–5.*
+
+After each day, write the decisions into `docs/brand-decisions.md` in this repo — hex
+values, font names and weights, spacing scale. That file is what I translate into
+`tailwind.config.ts`. **The decisions are the deliverable; the Lovable project is
+scaffolding.**
+
+---
+
+## Day 1 prompt
+
+> Build a single home page for **Jasmine Garcia**, a Broker/REALTOR® with **Stone
+> Realty Group** in Charlotte, NC, licensed in both North Carolina and South Carolina.
+> This is a personal-brand and lead-generation page — not a property search portal.
+>
+> Target stack (this will be exported and maintained by developers): **Next.js App
+> Router, TypeScript, Tailwind CSS, shadcn/ui.** Put every color, font, and spacing
+> value in **Tailwind theme tokens** — no hardcoded hex values in components, no inline
+> styles. Name the tokens semantically (`primary`, `accent`, `surface`, `ink`), not by
+> color.
+>
+> ### What I need most
+>
+> This is a **brand exploration**. She has no existing palette, typography, or logo, and
+> the point of this page is to discover them. Propose a confident, specific visual
+> direction — I would rather react to a strong opinion than a safe one. Include a small
+> **style tile** section at the bottom of the page showing the palette swatches with
+> their hex values, the type scale with font names, and the button states, so the
+> system is readable at a glance.
+>
+> ### Brand direction
+>
+> - Must be **visually distinct from her brokerage**, which is black with a hexagon
+>   motif. **No black-dominant palettes, no hexagons.** Do not use or restyle any Stone
+>   Realty Group logo or mark.
+> - Tone: warm, competent, direct. She spent a decade as a **special-education teacher**
+>   before real estate — an approachable expert, not a luxury-aloof one. She is also a
+>   mother of twins and an HOA board president.
+> - Avoid both generic corporate real estate and the gold-serif "luxury agent" cliché.
+> - Use clearly-labeled **placeholder blocks** for her photography — none has been shot yet.
+>
+> ### Hero — three variants, please
+>
+> The hero must lead with **one specific claim only she can make**, not a services list
+> or a generic welcome. Build the page with the first hero, then provide the other two
+> as alternates I can swap in:
+>
+> 1. **"Builders negotiate every day. You'll do it once."** — she has represented buyers
+>    at the builder's table 17 times, with Pulte, Lennar, DR Horton, David Weekley, and
+>    Meritage.
+> 2. **"One broker. Both Carolinas."** — licensed in NC and SC, for buyers who haven't
+>    yet decided which side of the state line they're moving to. Fort Mill, Tega Cay,
+>    Indian Land, Lake Wylie, Waxhaw.
+> 3. **"I taught special ed for a decade. Explaining hard things is the job."** — the
+>    teaching background as the trust signal, aimed at first-time and relocating buyers.
+>
+> ### Page sections
+>
+> Hero (with the phone CTA) → the three specialty pillars as cards (new construction,
+> relocation, the NC/SC border) → a short proof strip → an about teaser → a reviews
+> placeholder → footer. Keep it to one screen of scroll per section.
+>
+> ### Copy — use these facts and nothing else
+>
+> Never write generic agent copy; "your trusted Charlotte REALTOR®" and anything like it
+> is banned. Use only these:
+>
+> - 17 new-construction closings (Pulte, Lennar, DR Horton, David Weekley, Meritage)
+> - 18 relocation transactions with out-of-state buyers
+> - Licensed in NC and SC; 12 closings in the Fort Mill corridor
+> - A decade teaching special education before real estate
+> - Sparingly: 73+ career transactions, $30.9M career volume, 98.84% list-to-sale ratio,
+>   105 five-star reviews
+>
+> Voice: short sentences, numbers over adjectives. Banned words: "nestled," "boasts,"
+> "dream home," "passionate about helping." **Do not invent any statistic, award,
+> credential, or testimonial.** Where a client review would go, use the literal
+> placeholder `[REAL CLIENT REVIEW — DO NOT FABRICATE]`.
+>
+> ### Calls to action
+>
+> **Phone-first.** The primary CTA everywhere is calling **(704) 200-9360** — make it a
+> tappable `tel:` link, prominent in the header and in the hero. Secondary CTA is a
+> button linking to `/contact`. **Do not build any lead-capture form or booking widget
+> on this page** — those are wired later.
+>
+> ### Footer — required, and a real design problem
+>
+> Every page carries a legally-required block. Make it look intentional rather than
+> bolted on:
+>
+> - **Stone Realty Group**, 2459 Wilkinson Blvd, Suite 310, Charlotte, NC 28208
+> - License numbers: **NC 334700 · SC 125546**
+> - **Equal Housing Opportunity logo** and the REALTOR® mark, correct ® symbols and
+>   capitalization throughout
+> - A Privacy Policy link
+>
+> ### Hard constraints
+>
+> - **No MLS/IDX content of any kind** — no listing cards, no property search, no
+>   home-value estimator. A "Search Homes" nav item links out externally; that's all.
+> - Nothing may imply she is an independent brokerage. This is her personal brand
+>   *within* Stone Realty Group.
+> - **Fair housing:** never characterize the people of a neighborhood. No "safe
+>   neighborhood," "good schools for families like yours," "up-and-coming area."
+>   Describe housing stock, amenities, commute, and price instead.
+> - **Accessibility, WCAG 2.1 AA:** 4.5:1 minimum text contrast, visible focus states,
+>   semantic HTML, one `<h1>`, logical heading order, alt text on every image.
+
+---
+
+## Bring visual references to the session
+
+Lovable can't browse Instagram, so screenshot a dozen posts and attach them as style
+references:
+
+- **[@myrealtorjasmine](https://www.instagram.com/myrealtorjasmine)** — how she already
+  presents professionally
+- **[@iheartjasz](https://www.instagram.com/iheartjasz)** — her actual taste and
+  personality
+
+The gap between those two accounts is the design target: **the brand should feel like
+the person in the personal account doing the job shown in the business account.** Most
+agent sites read like the business account alone, which is why they all look the same.
+
+Also useful for voice and on-camera presence: her
+[Zillow profile](https://www.zillow.com/profile/myrealtorjasmine) and the
+[bio video](https://youtu.be/J6T4pmDWQ6M), "Meet Jasmine Garcia – Stone Realty Group."
+
+---
+
+## After export (Claude Code side)
+
+- Pull the generated repo's code into `william-weaver-jr/jgwre-website`; Lovable's repo
+  is a source, not the home.
+- Lift the palette, type scale, and spacing into `tailwind.config.ts` tokens; record the
+  final USP wording and brand decisions in CLAUDE.md Section 11.
+- Audit the footer compliance block, REALTOR®/EHO marks, and fair-housing language —
+  treat any drift as build-breaking.
+- (704) 200-9360 is the confirmed Follow Up Boss tracking number; no swap needed.
+- Then build the remaining sitemap pages and wire every form to `app/api/lead/route.ts`
+  (Resend + Follow Up Boss) before anything ships.

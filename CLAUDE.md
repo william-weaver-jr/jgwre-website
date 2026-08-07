@@ -31,7 +31,7 @@ These are settled. Do not re-litigate them or propose alternatives unless explic
 |---|---|---|
 | 1 | **No IDX/MLS integration in Phase 1** | Canopy MLS licenses feeds through MLS Grid, requires Broker-in-Charge approval, and performs a compliance review that locks search/listing page changes. Costly and restricts design freedom. Revisit only if organic traffic justifies it. |
 | 2 | "Search Homes" links out to the **existing Stone Realty Group IDX** | Zero compliance surface, ships immediately. |
-| 3 | **Hybrid build workflow** | Visual direction generated in Lovable/v0 → exported to GitHub → all subsequent work done in Claude Code against the real repo. |
+| 3 | **Hybrid build workflow** | Visual direction generated in Lovable → exported to GitHub → all subsequent work done in Claude Code against the real repo. Lovable's scope is the **brand/visual system and one home page only**; it cannot export into an existing repo, so its output lands in a new repo and gets pulled into ours. Running on Lovable's free tier (5 credits/day, 30/month) — see `docs/lovable-brief.md` for the session plan and credit discipline. |
 | 4 | **No consultation booking tool** (no Cal.com) | Clients call her directly. Phone-first CTAs. |
 | 5 | **Follow Up Boss is the CRM** | Every lead form must reach FUB. Nothing ships with an unwired form. |
 | 6 | **Call tracking is handled inside Follow Up Boss** | Use the FUB-provided tracking number in site markup. Do not add a second call-tracking vendor. |
@@ -217,6 +217,8 @@ Real estate sites are a common target for ADA demand letters. This is a legal ri
 
 - [ ] Brand identity: palette, typography, logo — **not yet decided.** Do not invent one.
       Her brand must be visually distinct from Stone Realty Group's black/hexagon system.
+      Being decided in the Lovable sessions; decisions get logged to
+      `docs/brand-decisions.md`, then translated into `tailwind.config.ts` tokens.
 - [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch
 - [x] NC and SC license numbers — NC 334700, SC 125546 (in Section 6)
 - [ ] Broker-in-Charge written approval
