@@ -8,41 +8,73 @@ Editor: https://lovable.dev/projects/389f0bc8-dbb0-4b1d-8fa5-64cc251c28b0
 
 ---
 
-## Day 1 — 2026-08-07 — first generation
+## Day 1 — 2026-08-07
 
-**Status: proposed, awaiting Jasmine's review.** Generated without the Instagram
-reference screenshots, so treat the palette as a starting position, not a read on her
-taste.
+Two rounds. Round 1 generated the page blind (no Instagram references). Round 2
+redirected the palette after review and fixed three copy/link defects.
 
-### Direction
+### Round 1 — rejected direction (kept for the record)
 
-"Clay and pine on oat paper." Warm earth tones, deliberately not black — the brokerage
-owns black. No hexagons. Reads closer to a well-set print piece than to a typical agent
-site, which is the right instinct for copy that argues rather than sells.
+"Clay and pine on oat paper" — clay `#A24112`, pine `#175A45`, oat `#F8F3E9`, with
+Fraunces display and IBM Plex Mono figures. **Rejected as too editorial and too earthy.**
+Generated without reference to her actual social presence.
+
+---
+
+### Round 2 — current direction
+
+**Status: proposed, awaiting Jasmine's review.**
+
+Redirected after reviewing her business Instagram, which runs ivory and cream grounds,
+gold serif testimonial cards, and generous margins. Brief was: classy, polished,
+high-profile — the register of a private client advisor — while still warm, since she
+serves clients at every price point.
+
+**Ivory and cream grounds, charcoal-navy ink, one antique-gold accent** used only as
+hairlines, small-caps labels, and underlines. No gradients, no metallic fills, no flat
+black fields — the brokerage owns black.
 
 ### Palette
 
 | Token | Hex | Role |
 |---|---|---|
-| `primary` | `#A24112` | Clay — CTAs, numerals, accents |
-| `primary-deep` | `#6B2A0B` | Clay pressed / hover |
-| `accent` | `#175A45` | Pine — plates, focus rings, footer |
-| `accent-soft` | `#C3E3D6` | Pine tint on dark plates |
-| `ink` | `#261D16` | Body and headings |
-| `ink-muted` | `#665B53` | Secondary text |
-| `surface` | `#F8F3E9` | Oat — page ground |
-| `surface-sunken` | `#EDE3D2` | Sand — banded sections |
-| `surface-raised` | `#FFFFFF` | Cards and plates |
+| `ink` | `#1B2230` | Charcoal-navy — headings and body |
+| `ink-muted` | `#4E5768` | Secondary text (AA on ivory) |
+| `primary` | `#232C3D` | Deep navy — primary buttons |
+| `primary-deep` | `#10161F` | Primary pressed / hover |
+| `accent` | `#8A6A2F` | Antique gold — labels, links, rules |
+| `accent-soft` | `#C9A96A` | Champagne — hairlines and dividers |
+| `surface` | `#FCFAF6` | Ivory — page ground |
+| `surface-sunken` | `#F4EFE6` | Cream — banded sections |
+| `surface-raised` | `#FFFFFF` | Raised plate (Case 01) |
 
 ### Typography
 
-- **Display:** Fraunces, 500/600/700 — headings, case-study titles
-- **Body:** Archivo, 400/500/600/700
-- **Figures:** IBM Plex Mono, 400/600, tabular — all dollar amounts and the phone number
+- **Display:** Cormorant Garamond, 400/500/600 — headings, case-study titles
+- **Body:** Libre Franklin, 400/500/600
+- **Figures:** Libre Franklin Medium with `tabular-nums`
 
-Setting the transaction figures in tabular mono is the strongest single decision in the
-draft. It makes the numbers read as ledger entries — evidence — instead of marketing,
-which is exactly what `CASE-STUDIES.md` asks for.
+The ledger treatment of the dollar figures survived the redirect, which was the goal.
+Round 1 set them in IBM Plex Mono, which read technical rather than refined; moving to
+the body sans with tabular figures keeps the aligned-ledger quality — numbers as
+evidence, not marketing — at a more composed register.
+
+`It's not.` is now set in display italic rather than in an accent color. Quieter and
+better.
+
+### Round 2 fixes — all verified in source
+
+| Fix | Status |
+|---|---|
+| `realtor.com` → `SEARCH_HOMES_URL` constant in `src/lib/site.ts`, used in header and footer, carrying a TODO for the real SRG IDX URL | done |
+| Privacy link `/privacy` → `/privacy-policy` | done |
+| Hero subhead: deleted the invented "A roof. A rate. Who pays for what at the table." | done |
+| Palette and type redirect | done |
+| Figures off IBM Plex Mono onto tabular-nums sans | done |
+| Case 03 dark plate softened to a cream inset with a gold left hairline; Case 01 promoted to the most visual presence (raised white plate, gold top rule, largest heading) | done |
+
+`SiteFooter` was correctly moved out of `__root.tsx` into each route so the style tile
+can sit below the footer on the home page. No duplicate footer.
 
 ### What worked
 
@@ -59,24 +91,24 @@ which is exactly what `CASE-STUDIES.md` asks for.
 
 ### Open questions for Jasmine
 
-1. Does clay/pine/oat feel like her, or is it too editorial?
-2. Fraunces is characterful — confidence or affectation?
-3. Is the dark pine plate on Case 03 right, or does highlighting the $50,000 case
-   undercut the argument that the roof case is the more interesting one?
+1. Does ivory/navy/antique-gold feel like her, or still too restrained?
+2. Cormorant Garamond is a classical serif — elegant, or too formal for a broker who
+   serves clients at every price point?
+3. Case 01 now carries the most visual weight and Case 03 is quiet. Right balance?
+4. Is a photography-forward hero wanted, or does the type-led hero hold once her real
+   portrait replaces the placeholder?
 
 ---
 
-## Fix list — batch into the Day 2 prompt
+## Day 2 — pending
 
-Do not spend separate credits on these. Send with the palette feedback.
+Credits exhausted 2026-08-07. Resume next session.
 
-1. **`Search Homes` points to realtor.com** — a fabricated destination, and a competitor
-   portal. Locked Decision #2 requires the Stone Realty Group IDX. Appears in both
-   `site-header.tsx` and `site-footer.tsx`.
-2. **Privacy link goes to `/privacy`** — sitemap says `/privacy-policy`.
-3. **Hero subhead adds "A roof. A rate. Who pays for what at the table."** — not from
-   approved copy. "A rate" implies mortgage-rate negotiation, which is a lender function
-   and not something she controls. Cut or rewrite.
+**Carry into the Day 2 prompt (batch, do not send separately):**
+
+- Whatever Jasmine says to the four open questions above
+- Mobile layout review — never checked at any breakpoint
+- Confirm the real Stone Realty Group IDX URL and replace the `SEARCH_HOMES_URL` TODO
 
 ## Fix list — handle in Claude Code after export
 

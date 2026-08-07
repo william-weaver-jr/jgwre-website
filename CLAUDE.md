@@ -17,7 +17,9 @@ Personal-brand and lead-generation website for **Jasmine Garcia**, Broker/REALTO
 **Stone Realty Group** (Matt Stone Team), Charlotte NC.
 
 - **Domain:** jasminegarcia.com (owned, currently no live site)
-- **Repo:** `~/Projects/jgwre-website`
+- **Repo:** `~/Projects/jgwre-website` · GitHub `william-weaver-jr/jgwre-website`
+- **Phone (display everywhere):** (704) 200-9360 — the Follow Up Boss tracking number
+  (Locked Decision #6). Confirmed; safe to use in site markup.
 - **Replaces:** a Placester-built site (poor service/communication)
 - **Not replacing:** mattstoneteam.com — the team site stays as-is on AgentFire
 
@@ -128,6 +130,18 @@ Never claim credentials, awards, designations, or statistics not documented in S
 or `docs/CASE-STUDIES.md`. If copy needs a number you don't have, insert `TODO(verify)`
 and leave it.
 
+### Brand & voice references
+Calibrate voice and visual direction against these. Do not lift stats or claims from them
+without verifying against Section 5.
+
+- **Instagram (business):** [@myrealtorjasmine_](https://www.instagram.com/myrealtorjasmine_)
+  — note the trailing underscore
+- **Instagram (personal):** [@iheartjasz](https://www.instagram.com/iheartjasz)
+- **Zillow profile:** https://www.zillow.com/profile/myrealtorjasmine
+- **Bio video:** "Meet Jasmine Garcia – Stone Realty Group" — https://youtu.be/J6T4pmDWQ6M
+- **Placester site content:** available from Bill on request, needed for the 301 map
+  before that site is retired
+
 ---
 
 ## 7. Compliance — non-negotiable
@@ -139,7 +153,7 @@ Advertising rules apply to every page. Treat violations as build-breaking.
   North Carolina requires brokerage identification in a broker's advertising; South
   Carolina has an equivalent requirement. She may not present as an independent firm.
 - **Brokerage address:** 2459 Wilkinson Blvd, Suite 310, Charlotte, NC 28208
-- **License numbers, NC and SC** — `TODO(verify)`, obtain from Jasmine
+- **License numbers:** NC 334700 · SC 125546
 - **Equal Housing Opportunity logo** in the footer
 - **Privacy policy** page, linked from footer and every form
 - **Results disclaimer** adjacent to every page displaying specific dollar outcomes —
@@ -237,12 +251,22 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
 
 - [ ] **Confirm Jasmine's comfort with the candid origin story** — see `docs/BRAND-VOICE.md`
       §3. This gates the About page. Do not write it either way until she has answered.
-- [ ] Brand identity: palette, typography, logo — **not yet decided.** Do not invent one.
+- [ ] Brand identity: palette, typography, logo — **proposed, pending her review.** Current
+      direction and open questions in `docs/brand-decisions.md`. Do not invent an alternative.
       Must be visually distinct from Stone Realty Group's black/hexagon system.
-- [ ] CMS final pick: Sanity vs Payload
-- [ ] NC and SC license numbers
+- [ ] **"Queen of Negotiations" is live in her Instagram bio.** §2 rejects the title on the
+      stated grounds that it is "not in use anywhere, no equity to preserve" — that premise is
+      factually wrong. The decision may still be right, but retiring a title she actively uses
+      is a conversation with her, not a silent omission. Raise before the About page.
+- [ ] **Stat discrepancy.** Her IG bio reads "Top 5 producer | 85+ families served | $30M+ in
+      sales"; §5 documents 73+ transactions / $30.9M. Both may be true (families ≠
+      transactions), but her bio and her site must not visibly disagree. Reconcile with her —
+      the site's numbers may be understating her.
+- [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch
+- [x] NC and SC license numbers — NC 334700, SC 125546 (§7)
 - [ ] Broker-in-Charge written approval (site + results disclaimer wording)
 - [ ] Confirm Placester contract term, auto-renewal date, and content/domain ownership
       before giving notice
-- [ ] Follow Up Boss API credentials + confirm the call-tracking number to display
+- [ ] Confirm the Stone Realty Group IDX search URL (the "Search Homes" destination)
+- [ ] Follow Up Boss API credentials (tracking number confirmed: (704) 200-9360)
 - [ ] Professional photography and any brand video
