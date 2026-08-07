@@ -12,8 +12,8 @@ Personal-brand and lead-generation website for **Jasmine Garcia**, Broker/REALTO
 **Stone Realty Group** (Matt Stone Team), Charlotte NC.
 
 - **Domain:** jasminegarcia.com (owned, currently no live site)
-- **Agent phone (direct):** (704) 200-9360 — per Locked Decision #6, site markup should
-  display the FUB tracking number once confirmed; use this direct line until then.
+- **Phone (display everywhere):** (704) 200-9360 — this is the Follow Up Boss-provided
+  tracking number (Locked Decision #6). Confirmed; safe to use in site markup.
 - **Repo:** `~/Projects/jgwre-website`
 - **Replaces:** a Placester-built site (poor service/communication)
 - **Not replacing:** mattstoneteam.com — the team site stays as-is on AgentFire
@@ -66,6 +66,11 @@ These are settled. Do not re-litigate them or propose alternatives unless explic
 Do **not** write generic agent copy. "Your trusted Charlotte REALTOR®" and equivalents are
 banned. Her record is unusually specific and the specificity is the differentiator.
 
+**USP requirement:** the site (homepage hero first) must lead with a single, explicit
+unique selling proposition synthesized from the pillars below — not a list of services.
+Final USP wording is TBD with Jasmine (see Open Items); candidate angles live in
+`docs/lovable-brief.md`.
+
 **Four pillars, each gets a dedicated page + lead magnet + form:**
 
 1. **New construction** — 17 closings with Copper Builders, David Weekley, Vista Homes,
@@ -98,6 +103,17 @@ LoSo, Uptown, Pineville (NC) · Fort Mill, Tega Cay, Indian Land, Lake Wylie, Wa
   about helping."
 - Never claim credentials, awards, designations, or statistics that are not in Section 4.
   If copy needs a number you do not have, insert `TODO(verify)` and leave it.
+
+### Brand & voice references
+Use these to calibrate voice and brand direction. Do not lift stats or claims from
+them without verifying against Section 4.
+
+- **Instagram (business):** [@myrealtorjasmine](https://www.instagram.com/myrealtorjasmine)
+- **Instagram (personal/public):** [@iheartjasz](https://www.instagram.com/iheartjasz)
+- **Zillow profile:** https://www.zillow.com/profile/myrealtorjasmine (source of the 42 Zillow reviews)
+- **Bio video:** "Meet Jasmine Garcia – Stone Realty Group" — https://youtu.be/J6T4pmDWQ6M
+- **Placester site content:** available from Bill on request, for sitemap/content indexing
+  before that site is retired
 
 ---
 
@@ -206,5 +222,6 @@ Real estate sites are a common target for ADA demand letters. This is a legal ri
 - [ ] Broker-in-Charge written approval
 - [ ] Confirm Placester contract term, auto-renewal date, and content/domain ownership
       before giving notice
-- [ ] Follow Up Boss API credentials + confirm the call-tracking number to display
+- [ ] Follow Up Boss API credentials (call-tracking number confirmed: (704) 200-9360)
+- [ ] USP final wording — decide with Jasmine from the candidate angles in `docs/lovable-brief.md`
 - [ ] Professional photography and any brand video
