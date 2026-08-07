@@ -20,6 +20,12 @@ export function SiteHeader() {
 
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
           <Link
+            href="/about"
+            className="text-sm decoration-accent-soft decoration-1 underline-offset-[6px] hover:underline"
+          >
+            About
+          </Link>
+          <Link
             href="/negotiation"
             className="text-sm decoration-accent-soft decoration-1 underline-offset-[6px] hover:underline"
           >

@@ -83,8 +83,21 @@ Credentials, awards, designations, or statistics not documented in `CLAUDE.md` �
 
 ## 3. The origin story — handle with care
 
-**GATED. Do not write the About page until Jasmine confirms which version she is
-comfortable with.** See `CLAUDE.md` §12.
+**RESOLVED 2026-08-07. Version A approved, with one adjustment: the copy must carry her
+tenacity, not read as quitting.** The burnout stays — it is the honest answer and the whole
+point — but the page states plainly that ten years is a long time to do that job for that
+money and that she did not leave early. What she left was the job. She did not leave the
+work.
+
+Shipped in `app/about/page.tsx`.
+
+The rule against inventing a third version still stands. This is a framing adjustment to
+Version A, not a substitution of a nicer reason.
+
+**Superseded:** her live Placester bio read *"Jasmine Garcia didn't leave teaching — she
+simply brought her classroom skills into the world of real estate."* That is the collapsed
+version this section warns against, and it contradicts the documented facts. It retires with
+that site.
 
 ### The facts
 She taught special education for ten years. She left because of **burnout, low pay, and

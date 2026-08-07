@@ -249,19 +249,32 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
 
 ## 12. Open items
 
-- [ ] **Confirm Jasmine's comfort with the candid origin story** — see `docs/BRAND-VOICE.md`
-      §3. This gates the About page. Do not write it either way until she has answered.
+- [x] **Origin story — RESOLVED 2026-08-07.** Version A (candid) approved, framed to carry
+      her tenacity rather than reading as quitting. See `docs/BRAND-VOICE.md` §3. Shipped.
 - [ ] Brand identity: palette, typography, logo — **proposed, pending her review.** Current
       direction and open questions in `docs/brand-decisions.md`. Do not invent an alternative.
       Must be visually distinct from Stone Realty Group's black/hexagon system.
-- [ ] **"Queen of Negotiations" is live in her Instagram bio.** §2 rejects the title on the
-      stated grounds that it is "not in use anywhere, no equity to preserve" — that premise is
-      factually wrong. The decision may still be right, but retiring a title she actively uses
-      is a conversation with her, not a silent omission. Raise before the About page.
-- [ ] **Stat discrepancy.** Her IG bio reads "Top 5 producer | 85+ families served | $30M+ in
-      sales"; §5 documents 73+ transactions / $30.9M. Both may be true (families ≠
-      transactions), but her bio and her site must not visibly disagree. Reconcile with her —
-      the site's numbers may be understating her.
+- [x] **"Queen of Negotiations" — RESOLVED 2026-08-07.** It is a self-applied nickname she
+      uses on Instagram and in a video, not an identity that competes with the site's
+      positioning. **She keeps using it on Instagram; it simply never appears on this site.**
+      Instagram and the website do not share an audience, and they do not have to say the
+      same thing. §2's rejection stands for the *site* only — the stated premise that the
+      title was "not in use anywhere" was wrong, and that reasoning is retired.
+- [x] **Stat discrepancy — RESOLVED 2026-08-07.** No reconciliation needed. "Families served"
+      and "transactions" are different measures for different audiences, and the two may
+      differ without either being wrong. Present her as the top performer she is, using the
+      strongest **documented** figures.
+      **This does not loosen §6:** only numbers documented in §5 or `docs/CASE-STUDIES.md` may
+      ship. The Instagram figures (85+ families, $30M+) are not documented here and are not
+      used until someone verifies them.
+- [ ] **Refresh the §5 stat block.** The documented counts date from an earlier pull and are
+      likely low — she has closed more since. Get current numbers from Follow Up Boss or the
+      MLS, including a families-served count if she wants that framing on the site.
+- [x] **Vitality Homebuyers — RESOLVED 2026-08-07.** She co-owned it; it is no longer active.
+      **Not disclosed on the site.** The investor-side experience still informs how she reads
+      a property, so the About page reflects that perspective without naming the company.
+      (Her live Placester bio does name it as current — another reason that site should not
+      outlive this one.)
 - [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch
 - [x] NC and SC license numbers — NC 334700, SC 125546 (§7)
 - [ ] Broker-in-Charge written approval (site + results disclaimer wording)

@@ -40,6 +40,11 @@ export function SiteFooter() {
 
           <nav aria-label="Footer" className="text-sm">
             <ul className="space-y-2">
+              <li>
+                <Link href="/about" className="underline-offset-4 hover:underline">
+                  About Jasmine
+                </Link>
+              </li>
               {PILLARS.map((pillar) => (
                 <li key={pillar.href}>
                   <Link href={pillar.href} className="underline-offset-4 hover:underline">
