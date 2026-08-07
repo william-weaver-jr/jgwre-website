@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { AGENT, BROKERAGE, SEARCH_HOMES_URL } from "@/lib/site";
+import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
 
 /**
  * Required on every page. Carries brokerage identification, both license
@@ -40,6 +40,13 @@ export function SiteFooter() {
 
           <nav aria-label="Footer" className="text-sm">
             <ul className="space-y-2">
+              {PILLARS.map((pillar) => (
+                <li key={pillar.href}>
+                  <Link href={pillar.href} className="underline-offset-4 hover:underline">
+                    {pillar.title}
+                  </Link>
+                </li>
+              ))}
               <li>
                 <Link href="/negotiation" className="underline-offset-4 hover:underline">
                   The 19 Things Besides Price You Can Negotiate

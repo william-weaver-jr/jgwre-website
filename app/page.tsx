@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
+import {
+  CaseLedger,
+  CASE_CONDITION,
+  CASE_NEW_CONSTRUCTION,
+  CASE_RESALE,
+} from "@/components/case-ledger";
+import { PhoneCta } from "@/components/phone-cta";
+import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { JsonLd, realEstateAgentSchema } from "@/lib/schema";
-import { AGENT, RESULTS_DISCLAIMER } from "@/lib/site";
+import { AGENT, PILLARS } from "@/lib/site";
 
 /*
   The case-study-led home page specified in docs/CONTENT-PLAN.md, ported from the
@@ -47,58 +54,6 @@ function PhotoPlaceholder({
   );
 }
 
-/** Shared ledger row. The `<dl>` markup is deliberate: these are term/value pairs. */
-function LedgerRow({ term, value }: { term: string; value: string }) {
-  return (
-    <div className="flex items-baseline justify-between gap-6 py-3.5">
-      <dt className="text-base">{term}</dt>
-      <dd className="figure-plain text-lg">{value}</dd>
-    </div>
-  );
-}
-
-const CASE_01 = [
-  { term: "Roof", value: "Brand new" },
-  { term: "HVAC", value: "Serviced" },
-  { term: "Home warranty", value: "Included" },
-  { term: "Refrigerator", value: "Included" },
-];
-
-const CASE_02 = [
-  { term: "Below list price", value: "$20,000" },
-  { term: "Seller-paid concessions", value: "$22,210" },
-  { term: "Immediate equity at closing", value: "$34,000" },
-];
-
-const CASE_03 = [
-  { term: "Builder incentives", value: "$50,000" },
-  { term: "Closing costs paid", value: "3%" },
-  { term: "Refrigerator", value: "Included" },
-];
-
-const SPECIALTIES = [
-  {
-    n: "01",
-    title: "New construction",
-    body: "The builder’s sales office negotiates daily. The buyer never has.",
-  },
-  {
-    n: "02",
-    title: "Sellers",
-    body: "The buyer’s agent works for the buyer. So does the inspector.",
-  },
-  {
-    n: "03",
-    title: "Relocation",
-    body: "Everyone in the transaction is local except you.",
-  },
-  {
-    n: "04",
-    title: "The NC/SC border",
-    body: "Two states, two tax regimes, two rulebooks.",
-  },
-];
-
 const RECORD = [
   { value: "98.84%", label: "List-to-sale ratio" },
   { value: "73+", label: "Transactions" },
@@ -127,17 +82,13 @@ export default function HomePage() {
               for.
             </p>
 
-            <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-              <Button asChild variant="phone" size="xl" className="w-full sm:w-auto">
-                <a href={AGENT.phoneHref}>
-                  <span className="sr-only">Call {AGENT.name} at </span>
-                  {AGENT.phoneDisplay}
-                </a>
-              </Button>
-              <Button asChild variant="outlineInk" size="xl" className="w-full sm:w-auto">
-                <Link href="/negotiation">The 19 Things Besides Price You Can Negotiate</Link>
-              </Button>
-            </div>
+            <PhoneCta
+              className="mt-10"
+              secondary={{
+                href: "/negotiation",
+                label: "The 19 Things Besides Price You Can Negotiate",
+              }}
+            />
           </div>
 
           <PhotoPlaceholder
@@ -160,25 +111,25 @@ export default function HomePage() {
 
         <div className="mt-14 space-y-12">
           {/*
-            Case 01 leads because it is the most surprising, not the biggest — the
-            one where the price never moved. It gets the most visual presence:
-            raised ivory plate, gold top rule, largest heading.
+            Case 2 in docs/CASE-STUDIES.md leads here because it is the most
+            surprising, not the biggest — the one where the price never moved. It
+            gets the most visual presence: raised ivory plate, gold top rule,
+            largest heading.
+
+            The cards are labelled by what they are rather than by number: display
+            order is not doc order, and "Case 01" on the page previously meant
+            something different from "Case 1" in the doc.
           */}
           <article className="border-t-2 border-accent bg-surface-raised px-7 py-10 md:px-12 md:py-14">
             <div className="grid gap-8 md:grid-cols-[11rem_1fr]">
               <div>
-                <p className="eyebrow tabular-nums">Case 01</p>
-                <p className="mt-2 text-sm text-ink-muted">Condition, not price</p>
+                <p className="eyebrow">Condition, not price</p>
               </div>
               <div>
                 <h3 className="max-w-xl font-display text-3xl leading-snug md:text-4xl">
                   No money off the price. All of it in condition.
                 </h3>
-                <dl className="mt-8 divide-y divide-border border-y border-border">
-                  {CASE_01.map((row) => (
-                    <LedgerRow key={row.term} {...row} />
-                  ))}
-                </dl>
+                <CaseLedger className="mt-8" entries={CASE_CONDITION} />
                 <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-muted">
                   The list price never moved. The house that closed was not the house that was
                   listed.
@@ -187,51 +138,34 @@ export default function HomePage() {
             </div>
           </article>
 
-          {/* Case 02 — plain on the page ground. Three ledger figures, nothing else. */}
+          {/* Case 1 — plain on the page ground. Three ledger figures, nothing else. */}
           <article className="grid gap-8 rule-top pt-10 md:grid-cols-[11rem_1fr]">
             <div>
-              <p className="eyebrow tabular-nums">Case 02</p>
-              <p className="mt-2 text-sm text-ink-muted">One contract, three wins</p>
+              <p className="eyebrow">One contract, three wins</p>
             </div>
             <div>
               <h3 className="font-display text-2xl leading-snug md:text-3xl">
                 Price, cash, and position in one contract.
               </h3>
-              <dl className="mt-6 divide-y divide-border border-y border-border">
-                {CASE_02.map((row) => (
-                  <LedgerRow key={row.term} {...row} />
-                ))}
-              </dl>
+              <CaseLedger className="mt-6" entries={CASE_RESALE} />
             </div>
           </article>
 
-          {/* Case 03 — quiet cream inset with a gold left hairline. No dark field. */}
+          {/* Case 3 — quiet cream inset with a gold left hairline. No dark field. */}
           <article className="grid gap-8 border-l-2 border-accent-soft bg-surface-sunken px-7 py-10 md:grid-cols-[11rem_1fr] md:px-10">
             <div>
-              <p className="eyebrow tabular-nums">Case 03</p>
-              <p className="mt-2 text-sm text-ink-muted">New construction</p>
+              <p className="eyebrow">New construction</p>
             </div>
             <div>
               <h3 className="font-display text-2xl leading-snug md:text-3xl">
                 The builder&rsquo;s own money.
               </h3>
-              <dl className="mt-6 divide-y divide-border border-y border-border">
-                {CASE_03.map((row) => (
-                  <LedgerRow key={row.term} {...row} />
-                ))}
-              </dl>
+              <CaseLedger className="mt-6" entries={CASE_NEW_CONSTRUCTION} />
             </div>
           </article>
         </div>
 
-        {/*
-          Required by the BIC adjacent to any block showing dollar outcomes. Body
-          weight, body color, immediately below — never a footnote, never small gray
-          type. CLAUDE.md §7 and docs/CASE-STUDIES.md.
-        */}
-        <p className="mt-12 max-w-3xl border-l-2 border-accent pl-5 text-base leading-relaxed text-ink">
-          {RESULTS_DISCLAIMER}
-        </p>
+        <ResultsDisclaimer className="mt-12" />
       </section>
 
       {/* -------------------------------------------------------------- SPECIALTY */}
@@ -245,12 +179,22 @@ export default function HomePage() {
             Four situations with lopsided information.
           </h2>
 
+          {/* Each card is the entry point to its pillar page. */}
           <div className="mt-14 grid gap-x-14 gap-y-12 sm:grid-cols-2">
-            {SPECIALTIES.map((c) => (
-              <article key={c.n} className="rule-gold pt-6">
-                <p className="eyebrow tabular-nums">{c.n}</p>
-                <h3 className="mt-3 font-display text-2xl md:text-3xl">{c.title}</h3>
-                <p className="mt-3 max-w-md text-base leading-relaxed text-ink-muted">{c.body}</p>
+            {PILLARS.map((pillar) => (
+              <article key={pillar.n} className="rule-gold pt-6">
+                <p className="eyebrow tabular-nums">{pillar.n}</p>
+                <h3 className="mt-3 font-display text-2xl md:text-3xl">
+                  <Link
+                    href={pillar.href}
+                    className="decoration-accent-soft decoration-1 underline-offset-[6px] hover:underline"
+                  >
+                    {pillar.title}
+                  </Link>
+                </h3>
+                <p className="mt-3 max-w-md text-base leading-relaxed text-ink-muted">
+                  {pillar.table}
+                </p>
               </article>
             ))}
           </div>
@@ -318,17 +262,10 @@ export default function HomePage() {
               Ten minutes on the phone tells you which terms are worth asking for on your house.
               Charlotte, the surrounding NC counties, and across the South Carolina line.
             </p>
-            <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-              <Button asChild variant="phone" size="xl">
-                <a href={AGENT.phoneHref}>
-                  <span className="sr-only">Call {AGENT.name} at </span>
-                  {AGENT.phoneDisplay}
-                </a>
-              </Button>
-              <Button asChild variant="outlineInk" size="xl">
-                <Link href="/negotiation">See the 19 things</Link>
-              </Button>
-            </div>
+            <PhoneCta
+              className="mt-9"
+              secondary={{ href: "/negotiation", label: "See the 19 things" }}
+            />
           </div>
           <PhotoPlaceholder
             label="Charlotte housing stock — exterior"

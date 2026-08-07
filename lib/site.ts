@@ -41,6 +41,40 @@ export const BROKERAGE = {
 export const SEARCH_HOMES_URL = "https://mattstoneteam.com";
 
 /**
+ * The four pillars. Each is the USP applied to one specific table — CLAUDE.md §5
+ * and docs/CONTENT-PLAN.md. `table` is what the other side knows that the reader
+ * does not; it is the reason the page exists, so it lives with the route.
+ *
+ * Shared by the home page cards, the footer nav, and each pillar's own hero.
+ */
+export const PILLARS = [
+  {
+    n: "01",
+    href: "/new-construction",
+    title: "New construction",
+    table: "The builder’s sales office negotiates daily. The buyer never has.",
+  },
+  {
+    n: "02",
+    href: "/sellers",
+    title: "Sellers",
+    table: "The buyer’s agent works for the buyer. So does the inspector.",
+  },
+  {
+    n: "03",
+    href: "/relocation",
+    title: "Relocation",
+    table: "Everyone in the transaction is local except you.",
+  },
+  {
+    n: "04",
+    href: "/carolinas-border",
+    title: "The NC/SC border",
+    table: "Two states, two tax regimes, two rulebooks.",
+  },
+] as const;
+
+/**
  * Required adjacent to any page showing specific dollar outcomes. Body-text
  * weight and color — never a footnote, never small gray type.
  * Exact wording from docs/CASE-STUDIES.md. BIC must approve before launch.

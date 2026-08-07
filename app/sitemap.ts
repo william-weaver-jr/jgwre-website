@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { SITE_URL } from "@/lib/site";
+import { PILLARS, SITE_URL } from "@/lib/site";
 
 /*
   Add routes here as pages ship. See the build order in docs/CONTENT-PLAN.md.
@@ -11,7 +11,7 @@ import { SITE_URL } from "@/lib/site";
   /style-tile is deliberately absent: it is an internal review page and carries
   robots noindex.
 */
-const routes = ["", "/negotiation", "/privacy-policy"];
+const routes = ["", "/negotiation", ...PILLARS.map((p) => p.href), "/privacy-policy"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
