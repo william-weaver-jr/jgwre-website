@@ -4,6 +4,11 @@ Read this file at the start of every session. It is the source of truth for scop
 brand, and compliance. If a request in chat conflicts with the **Compliance** section,
 stop and flag it rather than complying.
 
+**Companion docs — read before writing any copy:**
+- `docs/BRAND-VOICE.md` — USP, voice rules, origin story, banned language
+- `docs/CASE-STUDIES.md` — the three negotiation case studies + required disclaimer
+- `docs/CONTENT-PLAN.md` — page-by-page content direction and the lead magnet spec
+
 ---
 
 ## 1. Project
@@ -12,8 +17,6 @@ Personal-brand and lead-generation website for **Jasmine Garcia**, Broker/REALTO
 **Stone Realty Group** (Matt Stone Team), Charlotte NC.
 
 - **Domain:** jasminegarcia.com (owned, currently no live site)
-- **Phone (display everywhere):** (704) 200-9360 — this is the Follow Up Boss-provided
-  tracking number (Locked Decision #6). Confirmed; safe to use in site markup.
 - **Repo:** `~/Projects/jgwre-website`
 - **Replaces:** a Placester-built site (poor service/communication)
 - **Not replacing:** mattstoneteam.com — the team site stays as-is on AgentFire
@@ -23,30 +26,58 @@ into Follow Up Boss. This is a brand + conversion site, not a property search po
 
 ---
 
-## 2. Locked decisions
+## 2. The USP — everything on this site serves this
 
-These are settled. Do not re-litigate them or propose alternatives unless explicitly asked.
+> **The other side of the table does this for a living.
+> They know what's askable. Now you do too.**
+
+The core insight, in her own words from an Instagram post:
+
+> "Most people think negotiating is just about getting the price down. It's not.
+> Sometimes the biggest savings come from things buyers don't even know to ask for."
+
+**Why this is the direction:** "great negotiator" is a claim every agent makes, so it is
+worthless as positioning. This instead names the client's real, unspoken fear — *I don't
+know what I don't know, and the professional across the table does* — and answers it with
+parity rather than superiority. It is a service posture, not a boast.
+
+**It is evergreen.** Which levers matter shifts with the market (concessions when rates are
+high, builder incentives when inventory sits). That a once-in-a-lifetime buyer never knows
+the full list of levers does not shift, ever.
+
+**Every page must answer:** what does the other side of *this* table know that our reader
+doesn't? See `docs/CONTENT-PLAN.md` for the per-page application.
+
+### Explicitly rejected
+- **"Negotiation Queen"** — dropped. Not in use anywhere, no equity to preserve, and a
+  self-applied title reads as arrogance. Do not reintroduce it in any form.
+- Any bare assertion that she is a skilled negotiator. The case studies say it. She doesn't.
+
+---
+
+## 3. Locked decisions
+
+Settled. Do not re-litigate or propose alternatives unless explicitly asked.
 
 | # | Decision | Rationale |
 |---|---|---|
 | 1 | **No IDX/MLS integration in Phase 1** | Canopy MLS licenses feeds through MLS Grid, requires Broker-in-Charge approval, and performs a compliance review that locks search/listing page changes. Costly and restricts design freedom. Revisit only if organic traffic justifies it. |
 | 2 | "Search Homes" links out to the **existing Stone Realty Group IDX** | Zero compliance surface, ships immediately. |
-| 3 | **Hybrid build workflow** | Visual direction generated in Lovable → exported to GitHub → all subsequent work done in Claude Code against the real repo. Lovable's scope is the **brand/visual system and one home page only**; it cannot export into an existing repo, so its output lands in a new repo and gets pulled into ours. Running on Lovable's free tier (5 credits/day, 30/month) — see `docs/lovable-brief.md` for the session plan and credit discipline. |
-| 4 | **No consultation booking tool** (no Cal.com) | Clients call her directly. Phone-first CTAs. |
+| 3 | **Hybrid build workflow** | Visual direction generated in Lovable/v0 → exported to GitHub → all subsequent work done in Claude Code against the real repo. |
+| 4 | **No consultation booking tool** (no Cal.com) | Clients call her directly. Phone-first CTAs throughout. |
 | 5 | **Follow Up Boss is the CRM** | Every lead form must reach FUB. Nothing ships with an unwired form. |
 | 6 | **Call tracking is handled inside Follow Up Boss** | Use the FUB-provided tracking number in site markup. Do not add a second call-tracking vendor. |
+| 7 | **USP locked** (Section 2) | Derived from her own words; validated against her three documented case studies. |
 
 ---
 
-## 3. Stack
+## 4. Stack
 
 - **Framework:** Next.js 15, App Router, TypeScript
 - **Styling:** Tailwind CSS + shadcn/ui
 - **Hosting:** Vercel (jasminegarcia.com apex + www redirect)
-- **Content:** CMS is planned but **non-critical for Phase 1** — the site can launch with
-  content in the repo. Long-term, Jasmine must be able to publish and edit without a
-  developer (Sanity or Payload; final pick TBD — see Open Items). Structure content
-  (blog posts, area pages) so a CMS can be slotted in later without rewrites.
+- **Content:** CMS required — Jasmine must be able to publish and edit without a developer.
+  (Sanity or Payload; final pick TBD — see Open Items.)
 - **Forms:** Next.js Route Handler → (a) transactional email via Resend, (b) POST to Follow Up Boss
 - **Analytics:** Vercel Analytics + GA4
 - **Images:** `next/image`, AVIF/WebP, explicit width/height on everything
@@ -61,30 +92,22 @@ These are settled. Do not re-litigate them or propose alternatives unless explic
 
 ---
 
-## 4. Positioning
+## 5. Positioning pillars
 
-Do **not** write generic agent copy. "Your trusted Charlotte REALTOR®" and equivalents are
-banned. Her record is unusually specific and the specificity is the differentiator.
-
-**USP requirement:** the site (homepage hero first) must lead with a single, explicit
-unique selling proposition synthesized from the pillars below — not a list of services.
-Final USP wording is TBD with Jasmine (see Open Items); candidate angles live in
-`docs/lovable-brief.md`.
-
-**Four pillars, each gets a dedicated page + lead magnet + form:**
+Four pillars. Each gets a dedicated page, and each is the USP applied to a specific table.
 
 1. **New construction** — 17 closings with Copper Builders, David Weekley, Vista Homes,
-   DRB, Pulte, Meritage, Lennar, DR Horton, Kolter, Hopper Communities. Angle: buyers
-   negotiate once; builder sales offices negotiate daily. She has sat at those tables 17 times.
-2. **Relocation** — 18 relocation transactions. Out-of-state buyer guide, Charlotte
-   orientation, NC vs SC decision framework.
+   DRB, Pulte, Meritage, Lennar, DR Horton, Kolter, Hopper Communities.
+   *The table:* the builder's sales office negotiates daily; the buyer never has.
+2. **Relocation** — 18 relocation transactions.
+   *The table:* everyone in the transaction is local except the client.
 3. **The NC/SC border** — licensed in both states. Fort Mill, Tega Cay, Indian Land,
-   Lake Wylie, Waxhaw. 12 closings in the Fort Mill corridor. Dual licensure is a real moat.
-4. **The teaching background** — a decade in special education before real estate. A
-   career spent explaining complex processes to anxious people is a stronger trust signal
-   than any award badge.
+   Lake Wylie, Waxhaw. 12 closings in the Fort Mill corridor.
+   *The table:* two states, two tax regimes, two sets of rules.
+4. **Sellers** — the Stone Selling System (reference by name; see Compliance).
+   *The table:* the buyer's agent and the inspector both work for the buyer.
 
-**Supporting proof points** (use sparingly, never as a wall of stats):
+**Supporting proof** (use sparingly, never as a stat wall):
 73+ career transactions · $30.9M career volume · 98.84% list-to-sale ratio ·
 23 transactions / $9.9M in 2024 · top-5 producer at SRG in 2023 and 2024 ·
 105 five-star reviews (42 Zillow, 62 Google) · Zillow Premier Agent
@@ -94,30 +117,20 @@ LoSo, Uptown, Pineville (NC) · Fort Mill, Tega Cay, Indian Land, Lake Wylie, Wa
 
 ---
 
-## 5. Voice
+## 6. Voice
 
-- Direct, concrete, specific. Numbers over adjectives.
-- Warm but not saccharine. She is a mother of twins and an HOA board president — competent
-  and human, not luxury-aloof.
-- Short sentences. No stacked superlatives. No "nestled," "boasts," "dream home," "passionate
-  about helping."
-- Never claim credentials, awards, designations, or statistics that are not in Section 4.
-  If copy needs a number you do not have, insert `TODO(verify)` and leave it.
+Full rules and banned language in `docs/BRAND-VOICE.md`. The short version:
 
-### Brand & voice references
-Use these to calibrate voice and brand direction. Do not lift stats or claims from
-them without verifying against Section 4.
+Her own writing is the model. Short declarative sentences. A reframe, then proof.
+No adjectives doing work that numbers should do. Warm, direct, unshowy.
 
-- **Instagram (business):** [@myrealtorjasmine](https://www.instagram.com/myrealtorjasmine)
-- **Instagram (personal/public):** [@iheartjasz](https://www.instagram.com/iheartjasz)
-- **Zillow profile:** https://www.zillow.com/profile/myrealtorjasmine (source of the 42 Zillow reviews)
-- **Bio video:** "Meet Jasmine Garcia – Stone Realty Group" — https://youtu.be/J6T4pmDWQ6M
-- **Placester site content:** available from Bill on request, for sitemap/content indexing
-  before that site is retired
+Never claim credentials, awards, designations, or statistics not documented in Section 5
+or `docs/CASE-STUDIES.md`. If copy needs a number you don't have, insert `TODO(verify)`
+and leave it.
 
 ---
 
-## 6. Compliance — non-negotiable
+## 7. Compliance — non-negotiable
 
 Advertising rules apply to every page. Treat violations as build-breaking.
 
@@ -126,18 +139,22 @@ Advertising rules apply to every page. Treat violations as build-breaking.
   North Carolina requires brokerage identification in a broker's advertising; South
   Carolina has an equivalent requirement. She may not present as an independent firm.
 - **Brokerage address:** 2459 Wilkinson Blvd, Suite 310, Charlotte, NC 28208
-- **License numbers:** NC 334700 · SC 125546
+- **License numbers, NC and SC** — `TODO(verify)`, obtain from Jasmine
 - **Equal Housing Opportunity logo** in the footer
 - **Privacy policy** page, linked from footer and every form
+- **Results disclaimer** adjacent to every page displaying specific dollar outcomes —
+  exact wording in `docs/CASE-STUDIES.md`. Required by the BIC.
 - **REALTOR® / MLS trademark usage** — correct symbols, correct capitalization
 
 ### Must not appear
 - Any implication that jasminegarcia.com is a brokerage or that she operates independently
 - Stone Realty Group's registered marks used decoratively. "Stone Selling System," "Stone
-  Realty Group," and the stylized hexagon "O" are registered trademarks of Stone Realty Group.
-  Reference by name where accurate; do not restyle, recolor, or incorporate the logos into
-  her brand system.
+  Realty Group," and the stylized hexagon "O" are registered trademarks of Stone Realty
+  Group. Reference by name where accurate; do not restyle, recolor, or incorporate the
+  logos into her brand system.
 - MLS listing data of any kind (see Locked Decision #1)
+- Guarantees or implied guarantees of outcome. The case studies are *what happened*, never
+  *what will happen*. Ban "I'll get you," "I always," "guaranteed," "every client saves."
 - Fair-housing-adjacent language: no references to the racial, religious, ethnic, familial,
   or disability makeup of neighborhoods; no "safe neighborhood," "good schools for families
   like yours," "up-and-coming area." Describe housing stock, amenities, commute, and price.
@@ -151,28 +168,31 @@ Every lead form carries this consent text verbatim, with the Privacy Policy link
 > You can also click the unsubscribe link in the emails. Message and data rates may apply.
 > Message frequency may vary.
 
-This is TCPA consent language carried over from the team site. Do not reword, shorten, or
-pre-check the associated checkbox.
+TCPA consent language carried over from the team site. Do not reword, shorten, or pre-check
+the associated checkbox.
 
 ### Approvals
 The Broker-in-Charge at Stone Realty Group must approve this site in writing before it goes
 live, and must approve material changes after. Do not deploy to the production domain until
 that approval is confirmed.
 
+**Client permission for the three case studies has been obtained.** Names remain omitted.
+
 ---
 
-## 7. Sitemap
+## 8. Sitemap
 
 ```
-/                       Home — positioning, proof, primary CTA (call)
-/about                  Her story: special ed → real estate, twins, HOA presidency
+/                       Home — USP hero, three case studies, phone CTA
+/about                  Her story (see BRAND-VOICE.md — handle with care)
 /buyers                 Buyer process
-/new-construction       PILLAR — builder negotiation + guide download
-/relocation             PILLAR — out-of-state buyer guide download
+/new-construction       PILLAR — anchored by the $50K builder incentive case
+/relocation             PILLAR — out-of-state buyer guide
 /carolinas-border       PILLAR — NC vs SC: taxes, schools, commute
-/sellers                Seller process, references Stone Selling System by name
+/sellers                PILLAR — references Stone Selling System by name
+/negotiation            The lead magnet landing page (see CONTENT-PLAN.md)
 /home-value             Valuation request form → FUB (manual CMA, not an automated AVM)
-/areas/[slug]           Neighborhood pages, one per market in Section 4
+/areas/[slug]           Neighborhood pages, one per market in Section 5
 /reviews                Testimonials, unedited
 /blog                   CMS-driven
 /contact                Phone-first, form secondary
@@ -181,7 +201,7 @@ that approval is confirmed.
 
 ---
 
-## 8. Follow Up Boss integration
+## 9. Follow Up Boss integration
 
 - Single server-side handler at `app/api/lead/route.ts`; all forms POST to it
 - FUB API key in Vercel env vars only — never in client code, never committed
@@ -192,9 +212,9 @@ that approval is confirmed.
 
 ---
 
-## 9. Accessibility & performance
+## 10. Accessibility & performance
 
-Real estate sites are a common target for ADA demand letters. This is a legal risk, not a nicety.
+Real estate sites are a common target for ADA demand letters. Legal risk, not a nicety.
 
 - WCAG 2.1 AA: 4.5:1 text contrast, visible focus states, full keyboard navigation
 - Semantic HTML, one `<h1>` per page, logical heading order
@@ -203,27 +223,26 @@ Real estate sites are a common target for ADA demand letters. This is a legal ri
 
 ---
 
-## 10. SEO
+## 11. SEO
 
 - `RealEstateAgent` + `Person` JSON-LD on the homepage; `LocalBusiness` with the brokerage address
 - Unique title + meta description per page; no templated boilerplate across area pages
-- Area pages must carry genuinely distinct content — thin duplicated pages will be ignored or penalized
+- Area pages must carry genuinely distinct content — thin duplicated pages will be ignored
 - Canonical tags, sitemap.xml, robots.txt
 - 301 redirects from any indexed Placester URLs once that site is retired
 
 ---
 
-## 11. Open items
+## 12. Open items
 
+- [ ] **Confirm Jasmine's comfort with the candid origin story** — see `docs/BRAND-VOICE.md`
+      §3. This gates the About page. Do not write it either way until she has answered.
 - [ ] Brand identity: palette, typography, logo — **not yet decided.** Do not invent one.
-      Her brand must be visually distinct from Stone Realty Group's black/hexagon system.
-      Being decided in the Lovable sessions; decisions get logged to
-      `docs/brand-decisions.md`, then translated into `tailwind.config.ts` tokens.
-- [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch
-- [x] NC and SC license numbers — NC 334700, SC 125546 (in Section 6)
-- [ ] Broker-in-Charge written approval
+      Must be visually distinct from Stone Realty Group's black/hexagon system.
+- [ ] CMS final pick: Sanity vs Payload
+- [ ] NC and SC license numbers
+- [ ] Broker-in-Charge written approval (site + results disclaimer wording)
 - [ ] Confirm Placester contract term, auto-renewal date, and content/domain ownership
       before giving notice
-- [ ] Follow Up Boss API credentials (call-tracking number confirmed: (704) 200-9360)
-- [ ] USP final wording — decide with Jasmine from the candidate angles in `docs/lovable-brief.md`
+- [ ] Follow Up Boss API credentials + confirm the call-tracking number to display
 - [ ] Professional photography and any brand video
