@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/*
+  Design tokens. Every color, font, and spacing value in the app resolves through
+  these — components must never hardcode a hex value. See CLAUDE.md §4.
+
+  Palette is the ivory / charcoal-navy / antique-gold system settled in the Lovable
+  session; see docs/brand-decisions.md. PENDING JASMINE'S APPROVAL — these values are
+  proposed, not final. Because everything resolves through these tokens, a palette
+  change is an edit to this file, not a rebuild of the components.
+
+  Values match the reviewed Lovable draft. That draft used a `@theme inline` block
+  indirecting through `:root` custom properties; the indirection bought nothing here,
+  so the values are declared directly.
+*/
+@theme {
+  /* Ink */
+  --color-ink: #1b2230;
+  --color-ink-muted: #4e5768;
+
+  /* Primary — deep navy, used for solid buttons */
+  --color-primary: #232c3d;
+  --color-primary-deep: #10161f;
+  --color-primary-foreground: #fcfaf6;
+
+  /* Accent — antique gold. Hairlines, small-caps labels, rules. Never a fill. */
+  --color-accent: #8a6a2f;
+  --color-accent-soft: #c9a96a;
+  --color-accent-foreground: #fcfaf6;
+
+  /* Surfaces */
+  --color-surface: #fcfaf6;
+  --color-surface-sunken: #f4efe6;
+  --color-surface-raised: #ffffff;
+
+  /* Lines */
+  --color-border: #e5dfd3;
+  --color-border-strong: #1b2230;
+
+  /* Type */
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-libre-franklin), system-ui, sans-serif;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  /* Small-screen step. At 56px the hero headline runs eight lines on a 375px
+     viewport and pushes the subhead and both CTAs below the fold. */
+  --text-display-sm: 2.5rem;
+  --text-display-sm--line-height: 1.1;
+  --text-display-sm--letter-spacing: -0.015em;
+
+  --text-display: 3.5rem;
+  --text-display--line-height: 1.06;
+  --text-display--letter-spacing: -0.015em;
+
+  --text-display-lg: 4.75rem;
+  --text-display-lg--line-height: 1.02;
+  --text-display-lg--letter-spacing: -0.02em;
+
+  /* Rhythm */
+  --spacing-gutter: 1.75rem;
+  --spacing-section: 7rem;
+
+  /* Corners stay nearly square. The brokerage's system is fully square; ours is
+     softened by 2px, which reads as considered rather than as a different brand. */
+  --radius-sm: 0.125rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    font-synthesis-weight: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  /* WCAG 2.1 AA: a visible focus state on everything interactive. CLAUDE.md §10. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+/*
+  Declared with @utility rather than @layer components so they compose with
+  variants (md:, hover:) the way Tailwind utilities do.
+*/
+
+/* Hairline rules doing structural work instead of boxes and cards. */
+@utility rule-top {
+  border-top: 1px solid var(--color-border);
+}
+
+/* Gold hairline: dividers and section openings only, never behind text. */
+@utility rule-gold {
+  border-top: 1px solid var(--color-accent-soft);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/*
+  Transaction figures. Tabular so columns align like a ledger — these read as
+  evidence, not marketing. docs/CASE-STUDIES.md forbids amplifying them.
+*/
+@utility figure-plain {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--color-ink);
+}

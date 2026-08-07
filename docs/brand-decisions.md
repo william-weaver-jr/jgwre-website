@@ -100,24 +100,88 @@ can sit below the footer on the home page. No duplicate footer.
 
 ---
 
-## Day 2 — pending
+## Day 2 — 2026-08-07, in Claude Code
 
-Credits exhausted 2026-08-07. Resume next session.
+**Generation in Lovable has stopped.** Credits ran out the same day, but the decision is
+not about credits: the brand-discovery job it was scoped for is finished, and everything
+remaining is either Next.js work Lovable cannot do (it builds TanStack) or copy governed by
+`BRAND-VOICE.md` and §7, where its tendency to invent is a liability. See
+`docs/competitive-landscape.md` §3.
 
-**Carry into the Day 2 prompt (batch, do not send separately):**
+The project is **kept, not deleted**, as the fallback if Jasmine rejects the palette — a
+fast visual re-roll is the one thing it is still better at than hand-coding.
 
-- Whatever Jasmine says to the four open questions above
-- Mobile layout review — never checked at any breakpoint
-- Confirm the real Stone Realty Group IDX URL and replace the `SEARCH_HOMES_URL` TODO
+### Ported out of Lovable (read-only via MCP, no credits spent)
 
-## Fix list — handle in Claude Code after export
+Source: project `389f0bc8`, commit `bced1f5b`.
 
-1. **The EHO and REALTOR® marks are hand-drawn SVG approximations, not the official
-   artwork.** Both are registered marks and must be replaced with the real files before
-   launch. Trademark exposure, not a design preference.
-2. Style-tile swatches use inline `style={{ backgroundColor }}`, against project
-   convention. Acceptable in a demo block; remove if the tile ships.
-3. `/negotiation` and `/privacy-policy` don't exist yet, so those links 404.
+| Lovable | Repo |
+|---|---|
+| `src/components/ui/button.tsx` | `components/ui/button.tsx` — variants `phone` / `outlineInk` / `gold` kept |
+| `src/routes/index.tsx` | `app/page.tsx` — hero, three case studies, four specialty cards, trust strip, testimonial placeholders, contact |
+| `src/routes/negotiation.tsx` | `app/negotiation/page.tsx` — the 19-item list |
+| `StyleTile` (below the footer on `/`) | `app/style-tile/page.tsx` — its own route, `robots: noindex`, out of the sitemap |
+| `src/styles.css` | `app/globals.css` — token values reconciled |
+
+Conversions: TanStack `createFileRoute` → Next.js route segments and `export const
+metadata`; `<a href>` → `next/link` for internal routes; `<main>` and `<SiteFooter>` dropped
+from pages since `app/layout.tsx` already provides both.
+
+### Changed during the port, deliberately
+
+- **Token drift resolved toward Lovable**, which is the version that was visually reviewed:
+  `border` `#E5DDD0` → `#E5DFD3`, `border-strong` `#C9A96A` → `#1B2230`, `spacing-section`
+  6rem → 7rem, `spacing-gutter` 1.5rem → 1.75rem. Display sizes gained their reviewed
+  line-height and letter-spacing pairs.
+- `eyebrow` / `figure-plain` / `rule-gold` moved from `@layer components` to `@utility` so
+  they compose with variants. `rule-top` was missing entirely and is now added.
+- The header phone CTA now renders through `Button` instead of duplicating its classes, so
+  it cannot drift from the hero CTA.
+- `lib/schema.ts` → `lib/schema.tsx`. It contained JSX under a `.ts` extension and **broke
+  `npm run build`** — pre-existing, unrelated to the port.
+- The style tile is a separate noindexed route rather than a block on the public home page.
+
+### Mobile review — done, and it found a real bug
+
+Never checked at any breakpoint before now.
+
+1. **91px of horizontal overflow at 375px.** `whitespace-nowrap` in the Button base, which
+   is a shadcn default that assumes short labels, forced "The 19 Things Besides Price You
+   Can Negotiate" to 438px. Fixed at the source: no `whitespace-nowrap`, and the size
+   variants set `min-h-*` with vertical padding instead of a fixed height, so any long
+   label wraps instead of breaking the page.
+2. **The 56px headline ran eight lines** and pushed the subhead and both CTAs below the
+   fold. Added a `--text-display-sm` step (2.5rem) for small screens.
+
+All four routes verified clean at 375px; headline, subhead, and both CTAs are above the
+fold. `npm run build` and `npm run typecheck` pass.
+
+### Still open
+
+- The four questions above — **unanswered, and they gate nothing structural.** Because every
+  value resolves through tokens, a palette change is an edit to `app/globals.css`, not a
+  rebuild.
+- **Question 2 deserves real pressure.** The brief banned "the gold-serif luxury agent
+  cliché," and the direction landed on antique gold plus Cormorant Garamond. Gold is confined
+  to hairlines so it is not the worst version, but Cormorant is formal before it is warm, and
+  it is the register `mackenziesiek.com` reaches for. See `docs/competitive-landscape.md` §3.
+- Confirm the real Stone Realty Group IDX URL for the `SEARCH_HOMES_URL` TODO in
+  `lib/site.ts`. Mackenzie's site points at `mackenzie.mattstoneteam.com`, so a
+  per-agent subdomain likely exists — ask SRG.
+
+## Fix list — still outstanding
+
+1. **The EHO and REALTOR® marks in `components/site-footer.tsx` are hand-drawn SVG
+   approximations, not the official artwork.** Both are registered marks and must be
+   replaced with the real files before launch. Trademark exposure, not a design preference.
+2. Two real client reviews to replace the `[REAL CLIENT REVIEW — DO NOT FABRICATE]`
+   placeholders, quoted verbatim. Candidates are archived in
+   `docs/placester-archive/text/`.
+3. Photography. Both hero and contact blocks carry labeled placeholders.
+
+~~Style-tile swatches use inline styles~~ — fixed during the port; they use token-backed
+utility classes.
+~~`/negotiation` and `/privacy-policy` 404~~ — both routes now exist.
 
 ---
 
