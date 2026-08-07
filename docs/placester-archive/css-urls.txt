@@ -1,0 +1,3 @@
+//static.myrealestateplatform.com/Valhalla/assets/dist/valhalla-vendor-styles.css?v=d06e760a8e8eda296f26
+https://static.myrealestateplatform.com/Valhalla/assets/dist/valhalla-styles.css?v=ce2a6a4f7439aaaadde7
+https://static.myrealestateplatform.com/Valhalla/assets/dist/valhalla-tailwind-styles.css?v=5e25d2c5ad03cd2c7b3a
