@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { PhotoPlaceholder } from "@/components/brand-photo";
 import { ClosingCta } from "@/components/phone-cta";
 import { SectionHeading } from "@/components/page-hero";
 import { BROKERAGE, PILLARS } from "@/lib/site";
@@ -81,15 +82,17 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div
-            role="img"
-            aria-label="Placeholder for photography: Jasmine, vertical portrait"
-            className="flex min-h-[22rem] flex-col items-start justify-end gap-1 border border-accent-soft/70 bg-surface-sunken p-6 md:min-h-[30rem]"
-          >
-            <span className="eyebrow">Photo placeholder</span>
-            <span className="text-sm font-medium text-ink">Jasmine — vertical portrait</span>
-            <span className="text-sm text-ink-muted">Working, not posed. 4:5 crop.</span>
-          </div>
+          {/*
+            Deliberately NOT the home page portrait. Two large frames of the same
+            photograph, one click apart and in the same grid position, reads as a
+            stock template. This slot wants the darker, more composed frame — see
+            `assets/images/README.md`.
+          */}
+          <PhotoPlaceholder
+            label="Jasmine — vertical portrait, studio"
+            note="The composed frame, not the warm one. 4:5 crop. Awaiting file."
+            className="min-h-[22rem] md:min-h-[30rem]"
+          />
         </div>
       </section>
 

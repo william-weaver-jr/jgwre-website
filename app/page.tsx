@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { BrandPhoto, PhotoPlaceholder } from "@/components/brand-photo";
 import {
   CaseLedger,
   CASE_CONDITION,
@@ -9,6 +10,7 @@ import {
 } from "@/components/case-ledger";
 import { PhoneCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
+import { PHOTOS } from "@/lib/images";
 import { JsonLd, realEstateAgentSchema } from "@/lib/schema";
 import { AGENT, PILLARS } from "@/lib/site";
 
@@ -31,28 +33,6 @@ export const metadata: Metadata = {
       "Negotiation is not just price. Documented outcomes across Charlotte and the NC/SC border.",
   },
 };
-
-function PhotoPlaceholder({
-  label,
-  note,
-  className = "",
-}: {
-  label: string;
-  note?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      role="img"
-      aria-label={`Placeholder for photography: ${label}`}
-      className={`flex flex-col items-start justify-end gap-1 border border-accent-soft/70 bg-surface-sunken p-6 ${className}`}
-    >
-      <span className="eyebrow">Photo placeholder</span>
-      <span className="text-sm font-medium text-ink">{label}</span>
-      {note ? <span className="text-sm text-ink-muted">{note}</span> : null}
-    </div>
-  );
-}
 
 const RECORD = [
   { value: "98.84%", label: "List-to-sale ratio" },
@@ -91,10 +71,16 @@ export default function HomePage() {
             />
           </div>
 
-          <PhotoPlaceholder
-            label="Jasmine — vertical portrait"
-            note="Working, not posed. 4:5 crop."
-            className="min-h-[24rem] md:min-h-[32rem]"
+          {/*
+            The only `priority` image on the page: on a desktop viewport this is
+            the LCP element. `sizes` is set slightly generous against the measured
+            column (~445px inside the 72rem container) rather than exact, so a
+            wide monitor never lands on an undersized candidate.
+          */}
+          <BrandPhoto
+            photo={PHOTOS.portraitWarm}
+            priority
+            sizes="(min-width: 768px) 34vw, calc(100vw - 3.5rem)"
           />
         </div>
       </section>
