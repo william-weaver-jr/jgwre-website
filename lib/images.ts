@@ -2,6 +2,8 @@ import type { StaticImageData } from "next/image";
 
 import { AGENT, BROKERAGE } from "@/lib/site";
 
+import jasmineEnvironmental from "@/assets/images/jasmine-environmental.jpg";
+import jasminePortraitStudio from "@/assets/images/jasmine-portrait-studio.jpg";
 import jasminePortraitWarm from "@/assets/images/jasmine-portrait-warm.jpg";
 
 /**
@@ -39,5 +41,26 @@ export const PHOTOS = {
   portraitWarm: {
     src: jasminePortraitWarm,
     alt: PORTRAIT_ALT,
+  },
+
+  /**
+   * Dark backdrop, black blazer, 4:5. The composed frame. It goes on `/about`,
+   * which is the page that has to carry the record — and it is deliberately not
+   * the home page portrait, because two large frames of one photograph a single
+   * click apart is what makes a personal-brand site read as a template.
+   */
+  portraitStudio: {
+    src: jasminePortraitStudio,
+    alt: PORTRAIT_ALT,
+  },
+
+  /**
+   * Landscape, 3:2, in a room rather than against a backdrop. Used in the home
+   * page closing block, where the ask is to pick up a phone: a person is a better
+   * argument for calling someone than a photograph of a building is.
+   */
+  environmental: {
+    src: jasmineEnvironmental,
+    alt: `${AGENT.name} at work. ${AGENT.title} with ${BROKERAGE.name}.`,
   },
 } as const satisfies Record<string, BrandImage>;

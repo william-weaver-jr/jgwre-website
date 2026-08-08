@@ -47,29 +47,33 @@ Two things to check on anything coming off a phone:
 
 ## Inventory
 
-| File | Crop | Used by | Status |
+| File | Crop | Used by | Note |
 |---|---|---|---|
-| `jasmine-portrait-warm.jpg` | 4:5, 1600×2000 | Home hero | ✅ Live |
-| `jasmine-portrait-studio.jpg` | 4:5 | About hero | ⬜ Awaiting file |
-| `jasmine-environmental.jpg` | 3:2 | Home closing CTA | ⬜ Awaiting file |
+| `jasmine-portrait-warm.jpg` | 4:5, 1600×2000 | Home hero | Warm interior, camel blazer |
+| `jasmine-portrait-studio.jpg` | 4:5, 1600×2000 | About hero | Dark backdrop, black blazer |
+| `jasmine-environmental.jpg` | 4:3, 1800×1350 | Home closing CTA | In a room, not against a backdrop |
 
-### The two open slots
+Three photographs, three registers, and that is the point. The warm frame opens the
+site; the composed frame carries the page that has to hold the record; the
+environmental frame sits where the ask is to pick up a phone. Do not swap one for
+another to fill a new slot — two large frames of the same photograph on two pages is
+what makes a personal-brand site read as a template.
 
-**`jasmine-portrait-studio.jpg`** — the darker, more composed frame: black blazer,
-deep green backdrop. It goes on `/about`, which is the page that has to carry the
-record. It must not be the same photograph as the home page hero; two large frames
-of one photo, one click apart and in the same grid position, is the thing that makes
-a personal-brand site read as a template.
+`jasmine-environmental.jpg` is a centred 4:3 crop of a 3:2 original. The full frame
+put too much window on one side and too much brick on the other, and at ~520px of
+column the subject read small. The uncropped file is not in the repo; re-crop from
+the original if the slot ever changes shape.
 
-**`jasmine-environmental.jpg`** — the landscape frame: her in a room, brick and
-window light behind her. This one replaces the *brief* currently sitting in the home
-page closing block, not just the box. That slot is briefed as "Charlotte housing
-stock — exterior," and an exterior streetscape is the weaker choice there: the
-section says *call before you write an offer*, and a person is a better argument for
-picking up a phone than a building is. Re-brief the slot when the file lands.
+That slot was briefed as "Charlotte housing stock — exterior." It was re-briefed
+deliberately: the section says *call before you write an offer*, and a person is a
+better argument for calling someone than a streetscape is.
 
-Neither is a blocker for the pillar pages, which have no photography at all yet and
-need their own brief — see CLAUDE.md §12.
+### Still unphotographed
+
+The four pillar pages have no imagery at all and no slots cut for any. They need
+their own brief before a shoot, not a leftover from this one — see CLAUDE.md §12.
+There is no placeholder component any more; every slot that existed has a photo in
+it, so the next one gets built alongside its brief.
 
 ## Adding one
 

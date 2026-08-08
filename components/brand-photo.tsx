@@ -42,33 +42,3 @@ export function BrandPhoto({
     />
   );
 }
-
-/**
- * Stands in for a photograph that has not been taken yet, and states the brief so
- * the slot is a commission rather than a hole. Shared by every page so the boxes
- * cannot drift apart while they wait.
- *
- * Delete a usage the moment its photo lands in `lib/images.ts` — a placeholder
- * that survives to production is worse than no image at all.
- */
-export function PhotoPlaceholder({
-  label,
-  note,
-  className = "",
-}: {
-  label: string;
-  note?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      role="img"
-      aria-label={`Placeholder for photography: ${label}`}
-      className={`flex flex-col items-start justify-end gap-1 border border-accent-soft/70 bg-surface-sunken p-6 ${className}`}
-    >
-      <span className="eyebrow">Photo placeholder</span>
-      <span className="text-sm font-medium text-ink">{label}</span>
-      {note ? <span className="text-sm text-ink-muted">{note}</span> : null}
-    </div>
-  );
-}

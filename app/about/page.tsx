@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
-import { PhotoPlaceholder } from "@/components/brand-photo";
+import { BrandPhoto } from "@/components/brand-photo";
 import { ClosingCta } from "@/components/phone-cta";
 import { SectionHeading } from "@/components/page-hero";
+import { PHOTOS } from "@/lib/images";
 import { BROKERAGE, PILLARS } from "@/lib/site";
 import Link from "next/link";
 
@@ -85,13 +86,12 @@ export default function AboutPage() {
           {/*
             Deliberately NOT the home page portrait. Two large frames of the same
             photograph, one click apart and in the same grid position, reads as a
-            stock template. This slot wants the darker, more composed frame — see
-            `assets/images/README.md`.
+            stock template.
           */}
-          <PhotoPlaceholder
-            label="Jasmine — vertical portrait, studio"
-            note="The composed frame, not the warm one. 4:5 crop. Awaiting file."
-            className="min-h-[22rem] md:min-h-[30rem]"
+          <BrandPhoto
+            photo={PHOTOS.portraitStudio}
+            priority
+            sizes="(min-width: 768px) 38vw, calc(100vw - 3.5rem)"
           />
         </div>
       </section>

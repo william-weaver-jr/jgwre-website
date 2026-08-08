@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { BrandPhoto, PhotoPlaceholder } from "@/components/brand-photo";
+import { BrandPhoto } from "@/components/brand-photo";
 import {
   CaseLedger,
   CASE_CONDITION,
@@ -253,10 +253,15 @@ export default function HomePage() {
               secondary={{ href: "/negotiation", label: "See the 19 things" }}
             />
           </div>
-          <PhotoPlaceholder
-            label="Charlotte housing stock — exterior"
-            note="Streetscape or new-construction site. 3:2 crop."
-            className="min-h-[18rem]"
+          {/*
+            Re-briefed from "Charlotte housing stock — exterior". The section asks
+            the reader to pick up a phone, and a person is a better argument for
+            calling someone than a streetscape is. No `priority`: this is four
+            screens down.
+          */}
+          <BrandPhoto
+            photo={PHOTOS.environmental}
+            sizes="(min-width: 768px) 46vw, calc(100vw - 3.5rem)"
           />
         </div>
       </section>
