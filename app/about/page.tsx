@@ -120,6 +120,17 @@ export default function AboutPage() {
             asymmetry, different room. Once you have sat on the outnumbered side of that table
             for ten years, you stop being able to unsee it.
           </p>
+
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-muted">
+            So I explain things. This is the largest purchase most people will ever make, and
+            most people make it once or twice in a lifetime. Being nervous about that is the
+            correct response. Not understanding what you are signing doesn&rsquo;t have to be
+            part of it.
+          </p>
+
+          <p className="mt-8 max-w-2xl font-display text-xl leading-snug italic md:text-2xl">
+            You should be able to explain your own contract back to me. That is the bar.
+          </p>
         </div>
       </section>
 
@@ -203,7 +214,12 @@ export default function AboutPage() {
             next to each other after the meeting ends. It is good practice.
           </p>
           <p>
-            I started a mastermind book club in 2018 and still lead it.
+            I started a mastermind book club in 2018 and still lead it. It reads
+            self-development. I read well past what the club assigns.
+          </p>
+          <p>
+            My husband and I travel when the calendar allows it. The gym is not optional. Neither
+            is the first walk of the day with my dog, Layla.
           </p>
           <p>I have twin daughters. I buy and sell in the market I live in.</p>
         </div>
