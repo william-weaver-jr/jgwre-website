@@ -9,15 +9,33 @@ export const metadata: Metadata = {
 };
 
 /*
-  TODO(legal): this is a working draft, not reviewed counsel language. The
-  Broker-in-Charge must approve it before launch, and it must be accurate about
-  what Follow Up Boss and Resend actually do with submitted data. CLAUDE.md §7.
+  TODO(legal): still a working draft, and still not reviewed counsel language.
+
+  The BIC approved the site on 2026-08-10 (CLAUDE.md §7). That does not close
+  this out: a Broker-in-Charge supervises brokerage advertising, and a privacy
+  policy is a lawyer's document. What is written here about Follow Up Boss and
+  Resend also has to be accurate about what those vendors actually do with
+  submitted data — nobody has verified that against their terms yet.
+
+  TODO(legal): the Analytics section below describes the site as it is today —
+  no provider loaded, no cookies set by our own code. CLAUDE.md §4 plans Vercel
+  Analytics and GA4. Whether enabling them requires a consent mechanism is a
+  question for counsel, not an assumption to bake into this page; settle it and
+  rewrite that section at the same commit that adds the tag.
 */
+
+/**
+ * Rendered as the page's "Last updated". Bump it whenever the wording below
+ * changes — a privacy policy dated earlier than its own text is worse than one
+ * with no date at all.
+ */
+const LAST_UPDATED = "August 10, 2026";
+
 export default function PrivacyPolicyPage() {
   return (
     <article className="mx-auto max-w-3xl px-gutter py-section">
       <h1 className="font-display text-4xl leading-tight md:text-5xl">Privacy Policy</h1>
-      <p className="mt-4 text-sm text-ink-muted">Last updated: TODO(verify)</p>
+      <p className="mt-4 text-sm text-ink-muted">Last updated: {LAST_UPDATED}</p>
 
       <div className="mt-10 space-y-8 text-base leading-relaxed">
         <section>
@@ -63,8 +81,11 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="font-display text-2xl">Analytics</h2>
           <p className="mt-3">
-            We use analytics to understand which pages are useful. TODO(verify): confirm the
-            exact providers and whether any cookie consent mechanism is required.
+            We record which pages are visited and when someone taps a phone number or
+            submits a form, so we can tell what is useful. No analytics provider is
+            connected to this site today, and we set no advertising or tracking cookies of
+            our own. If that changes, this section will name the provider and describe any
+            choices available to you before it is turned on.
           </p>
         </section>
 

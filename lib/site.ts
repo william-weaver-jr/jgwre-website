@@ -139,7 +139,8 @@ export const RECOGNITION: readonly Recognition[] = [
 /**
  * Required adjacent to any page showing specific dollar outcomes. Body-text
  * weight and color — never a footnote, never small gray type.
- * Exact wording from docs/CASE-STUDIES.md. BIC must approve before launch.
+ * Exact wording from docs/CASE-STUDIES.md, approved by the BIC 2026-08-10. Changing
+ * a character of it is a material change and goes back to the BIC first.
  */
 export const RESULTS_DISCLAIMER =
   "Results vary by property, seller, and market conditions. Past transaction outcomes are not a prediction or guarantee of results in any future transaction.";

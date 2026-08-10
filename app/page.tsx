@@ -16,6 +16,7 @@ import { PHOTOS } from "@/lib/images";
 import { dedupeByTransaction, publishableReviews, reviewById } from "@/lib/reviews";
 import { JsonLd, realEstateAgentSchema } from "@/lib/schema";
 import { AGENT, PILLARS } from "@/lib/site";
+import { GUIDE_TITLE, ITEM_COUNT } from "@/lib/intake";
 
 /*
   The case-study-led home page specified in docs/CONTENT-PLAN.md, ported from the
@@ -95,7 +96,7 @@ export default function HomePage() {
               placement="home-hero"
               secondary={{
                 href: "/negotiation",
-                label: "The 19 Things Besides Price You Can Negotiate",
+                label: GUIDE_TITLE,
               }}
             />
           </div>
@@ -290,7 +291,7 @@ export default function HomePage() {
             <PhoneCta
               className="mt-9"
               placement="home-closing"
-              secondary={{ href: "/negotiation", label: "See the 19 things" }}
+              secondary={{ href: "/negotiation", label: `See the ${ITEM_COUNT} things` }}
             />
           </div>
           {/*

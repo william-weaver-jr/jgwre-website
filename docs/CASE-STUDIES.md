@@ -76,7 +76,10 @@ the footer, not in 9px gray:
 > Results vary by property, seller, and market conditions. Past transaction outcomes are
 > not a prediction or guarantee of results in any future transaction.
 
-**BIC must approve the final wording before launch.** See `CLAUDE.md` §12.
+**Approved by the BIC 2026-08-10**, in this wording. It lives in `lib/site.ts` as
+`RESULTS_DISCLAIMER` and is asserted verbatim by `tests/compliance.test.tsx`, which also
+fails any page that shows a dollar figure without it. Rewording it is a material change and
+goes back to the BIC first. See `CLAUDE.md` §7.
 
 ---
 

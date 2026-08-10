@@ -90,7 +90,33 @@ Settled. Do not re-litigate or propose alternatives unless explicitly asked.
 - No inline styles — Tailwind utilities and design tokens only
 - Design tokens live in `tailwind.config.ts`; never hardcode hex values in components
 - Commit after each completed page or feature, with a descriptive message
-- Run `npm run build` before declaring any task done
+- Run `npm run verify` before declaring any task done — lint, typecheck, test, build
+
+### Testing
+
+`npm run verify` is the gate. CI runs the same four steps on every push and pull
+request (`.github/workflows/ci.yml`).
+
+| Suite | Covers |
+|---|---|
+| `lib/**/*.test.ts` | Pure logic and the datasets: the lead schema, the FUB payload, intake formatting and lever selection, review and transaction queries. Includes integrity checks over the real `REVIEWS` and `TRANSACTIONS` data. |
+| `app/api/lead/route.test.ts` | The §9 contract end to end with FUB and Resend mocked — honeypot, rate limiting, and every failure combination. A lead is never silently dropped. |
+| `tests/compliance.test.tsx` | **§7, mechanically.** Renders every page and checks brokerage identification, license numbers, the EHO and REALTOR® marks, verbatim TCPA consent, the results disclaimer beside any dollar figure, banned language, fair-housing framing, guarantee language, and undocumented claims. |
+| `tests/accessibility.test.tsx` | §10. axe-core at WCAG 2.1 AA over every page, plus landmark and link-name checks. Contrast still needs Lighthouse — jsdom computes no colours. |
+| `components/contact-intake.test.tsx` | The conversion path. The consent box is never pre-checked, no visitor is trapped behind the qualifying questions, and a failed submission always surfaces the phone number. |
+
+Two things follow from this:
+
+- **§7 violations now break the build.** That sentence used to be aspirational.
+  Adding a page means adding it to the `PAGES` list in both `tests/` suites, or it
+  ships unchecked.
+- **Verbatim testimonials are exempt from our own styleguide**, and the suites
+  model that: banned language and the negotiation-queen ban are checked against
+  copy outside `<blockquote>`. A client's words are not the site making a claim.
+
+Not covered, deliberately: no browser-level end-to-end suite yet. Worth adding
+(Playwright) once the CMS lands and pages stop being static — today the compliance
+and a11y suites render the same trees a browser would.
 
 ---
 
@@ -206,8 +232,32 @@ the associated checkbox.
 
 ### Approvals
 The Broker-in-Charge at Stone Realty Group must approve this site in writing before it goes
-live, and must approve material changes after. Do not deploy to the production domain until
-that approval is confirmed.
+live, and must approve material changes after.
+
+**APPROVED 2026-08-10** — reported by Bill. Covers the site as it stands and the results
+disclaimer wording. This clears the production-deploy gate.
+
+**Footer marks, text-only — APPROVED 2026-08-10.** The BIC confirmed a text treatment of the
+Equal Housing Opportunity and REALTOR® marks is acceptable; he uses the same on his own site.
+So the current footer is an approved state, not a stopgap waiting on artwork. Dropping the
+licensed NAR logos in later is an upgrade we may choose, not a defect we must fix — and
+because it changes a compliance surface, it goes back to the BIC when it happens.
+
+Two things it does not clear, because neither was in front of the BIC and neither is the
+BIC's call to make alone:
+
+- **The privacy policy still needs counsel.** A Broker-in-Charge supervises brokerage
+  advertising; they are not the lawyer who signs off on a privacy policy. The page is still
+  the working draft flagged in `app/privacy-policy/page.tsx`, including the open question of
+  whether enabling analytics requires a consent mechanism.
+- **The transactions pipeline states are still blocked.** Active / pending / coming-soon
+  need their own written BIC approval — `docs/TRANSACTIONS-SPEC.md` §2 and §12 below. A
+  general site approval is not that approval. Do not build them on request without it.
+
+"Material changes after" now applies. Anything that alters a compliance surface — the
+disclaimer, the consent text, brokerage identification, a new claim or statistic — goes back
+to the BIC before it ships. The suite in `tests/compliance.test.tsx` guards the wording that
+was approved; it cannot tell you when something new needs approving.
 
 **Client permission for the three case studies has been obtained.** Names remain omitted.
 
@@ -300,7 +350,10 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       before anyone builds them — do not implement on request without it.
 - [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch
 - [x] NC and SC license numbers — NC 334700, SC 125546 (§7)
-- [ ] Broker-in-Charge written approval (site + results disclaimer wording)
+- [x] **Broker-in-Charge approval (site + results disclaimer wording) — RECEIVED 2026-08-10.**
+      See §7 Approvals for what it covers and the two things it does not. §7 asks for written
+      approval: file the written record if it is not already filed. Material changes from here
+      go back to the BIC.
 - [ ] Confirm Placester contract term, auto-renewal date, and content/domain ownership
       before giving notice
 - [ ] Confirm the Stone Realty Group IDX search URL (the "Search Homes" destination)

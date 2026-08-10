@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # tests/compliance.test.tsx is the gate CLAUDE.md §7 describes: an
+      # advertising violation fails the build rather than reaching the BIC.
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+        env:
+          # Placeholders. The real values live in Vercel's environment and are
+          # never needed to build — the lead handler reads them at request time.
+          FUB_API_KEY: build-placeholder
+          RESEND_API_KEY: build-placeholder

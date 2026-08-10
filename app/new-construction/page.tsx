@@ -4,6 +4,7 @@ import { CaseLedger, CASE_NEW_CONSTRUCTION } from "@/components/case-ledger";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
+import { GUIDE_TITLE } from "@/lib/intake";
 
 /*
   PILLAR — the strongest of the four and the one with the best case study.
@@ -145,7 +146,7 @@ export default function NewConstructionPage() {
       <ClosingCta
         heading="Call before you walk into a model home."
         body="Representation has to be in place before your first visit at most builders. Ten minutes on the phone first is the whole difference."
-        secondary={{ href: "/negotiation", label: "The 19 Things Besides Price You Can Negotiate" }}
+        secondary={{ href: "/negotiation", label: GUIDE_TITLE }}
         placement="closing-new-construction"
         intake={{
           source: "/new-construction",
