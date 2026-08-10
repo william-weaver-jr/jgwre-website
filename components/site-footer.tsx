@@ -52,6 +52,11 @@ export function SiteFooter() {
                   About Jasmine
                 </Link>
               </li>
+              <li>
+                <Link href="/buyers" className="underline-offset-4 hover:underline">
+                  Buyers
+                </Link>
+              </li>
               {PILLARS.map((pillar) => (
                 <li key={pillar.href}>
                   <Link href={pillar.href} className="underline-offset-4 hover:underline">
@@ -59,6 +64,11 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/home-value" className="underline-offset-4 hover:underline">
+                  What your home is worth
+                </Link>
+              </li>
               <li>
                 <Link href="/reviews" className="underline-offset-4 hover:underline">
                   Reviews

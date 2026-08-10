@@ -30,6 +30,7 @@ const PAGES: [route: string, load: () => Promise<{ default: ComponentType<never>
   ["/relocation", () => import("@/app/relocation/page")],
   ["/carolinas-border", () => import("@/app/carolinas-border/page")],
   ["/negotiation", () => import("@/app/negotiation/page")],
+  ["/buyers", () => import("@/app/buyers/page")],
   ["/home-value", () => import("@/app/home-value/page")],
   ["/reviews", () => import("@/app/reviews/page")],
   ["/contact", () => import("@/app/contact/page")],

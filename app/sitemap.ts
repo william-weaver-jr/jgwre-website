@@ -17,6 +17,7 @@ const routes = [
   "/about",
   "/negotiation",
   ...PILLARS.map((p) => p.href),
+  "/buyers",
   "/home-value",
   "/reviews",
   "/contact",
