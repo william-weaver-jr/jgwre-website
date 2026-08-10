@@ -250,8 +250,7 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Thank you, Jasmine Garcia, for doing all of the virtual tours for us while we were trying to find a house from afar. You were sure to promptly schedule for us and then went above and beyond by taking videos for us and posting them as well. Purchasing a house long distance is quite trying, but we made it work! Please send our many thanks to Andy Wilfong for his thorough communication, quick responses, and steady support as well. We couldn't have done it without you!",
     statesDollarOutcome: false,
-    openQuestion:
-      "TODO(verify): names a third party (Andy Wilfong) who has not agreed to appear on this site. Confirm he is fine with it, or run this only where the reference reads as team credit.",
+    note: "Names Andy Wilfong, a member of the team. He approved the usage 2026-08-10. Cleared to run.",
   },
   {
     id: "zillow-jennifer-garcia",
@@ -269,8 +268,9 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Jasmine Garcia was a phenomenal realtor who helped us every step of the way. Helped sell our home fairly quickly but also helped us find our new home. Keep up the great work. Thanks for all your help.",
     statesDollarOutcome: false,
-    openQuestion:
-      "TODO(verify): shares Jasmine's surname. Garcia is common and this is probably coincidence, but her brother also reviewed her, and unlike his this review discloses nothing. Confirm the relationship. If they are related it needs a disclosure the client's own words do not provide — which likely means not running it.",
+    materialConnection: "Her mother. Confirmed 2026-08-10. The review itself discloses nothing.",
+    withheld:
+      "Her mother, and unlike her brother's review this one does not say so. The FTC endorsement guides want that connection disclosed, and §7 means we cannot add the words to the client's text. A disclosure printed beside the quote would be legal — the disclosure does not have to live inside the testimonial — but it is not worth it here: the review is four generic sentences that prove nothing the other 30 don't, and a second undisclosed-family review turns one warm gesture into a pattern a competitor could screenshot. Reverse it if she wants it and is willing to run “Jasmine's mother” beside it.",
   },
   {
     /**
@@ -564,7 +564,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine Weaver was excellent to work with in the sale of her first home. In a weird market she was able to get us a closer deal with no seller concessions were under contract in under three weeks with no home warranty given and no transaction complications with a seamless process. To top it all off she negotiated for best deal that allowed us to close quickly. 10/10 recommend working with Jasmine!",
     statesDollarOutcome: true,
     sameTransactionAs: ["zillow-cristina-lopez"],
-    note: "Real name confirmed 2026-08-10; posted under the username cbob93. Cleared to run.\n\nThe body calls her Jasmine WEAVER, not Garcia, and it stays that way — §7 admits no exception for a client misremembering a surname, and a testimonial we corrected is a testimonial we altered. Nothing rides on it: the reviewer is plainly describing Jasmine, and readers do not audit surnames. If the discrepancy ever bothers the BIC, the remedy is to pull the review, not to edit it.",
+    note: "Real name confirmed 2026-08-10; posted under the username cbob93. Cleared to run.\n\nThe body calls her Jasmine WEAVER because Weaver is her married name — not an error, and not a discrepancy to resolve. It stays as written. She is licensed and advertises as Jasmine Garcia (NC 334700, SC 125546), so the surname appears nowhere else on this site.",
   },
   {
     id: "zillow-cristina-lopez",

@@ -85,6 +85,12 @@ export type Review = {
    * out, so an unresolved review sits in the dataset without risk of shipping.
    */
   openQuestion?: string;
+  /**
+   * Also blocks publication, but for a settled reason rather than an open one:
+   * the question was asked, answered, and the answer was don't run it. Kept in
+   * the dataset so nobody re-adds it later thinking it was an oversight.
+   */
+  withheld?: string;
   /** TODO(verify): permalink to the review. Wanted before launch. */
   sourceUrl?: string;
   /**

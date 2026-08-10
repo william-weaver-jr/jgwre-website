@@ -47,9 +47,14 @@ export function displayName(review: Review): string {
   return `${titled} ${initial}.`;
 }
 
-/** Everything cleared to appear on the site. Start here. */
+/**
+ * Everything cleared to appear on the site. Start here.
+ *
+ * Two gates: `openQuestion` (unresolved) and `withheld` (resolved, and the
+ * answer was no). Both keep a review in the dataset and off the site.
+ */
 export function publishableReviews(reviews: readonly Review[] = REVIEWS): Review[] {
-  return reviews.filter((review) => !review.openQuestion);
+  return reviews.filter((review) => !review.openQuestion && !review.withheld);
 }
 
 /** True when any review in the set requires the results disclaimer beside it. */
