@@ -90,7 +90,33 @@ Settled. Do not re-litigate or propose alternatives unless explicitly asked.
 - No inline styles — Tailwind utilities and design tokens only
 - Design tokens live in `tailwind.config.ts`; never hardcode hex values in components
 - Commit after each completed page or feature, with a descriptive message
-- Run `npm run build` before declaring any task done
+- Run `npm run verify` before declaring any task done — lint, typecheck, test, build
+
+### Testing
+
+`npm run verify` is the gate. CI runs the same four steps on every push and pull
+request (`.github/workflows/ci.yml`).
+
+| Suite | Covers |
+|---|---|
+| `lib/**/*.test.ts` | Pure logic and the datasets: the lead schema, the FUB payload, intake formatting and lever selection, review and transaction queries. Includes integrity checks over the real `REVIEWS` and `TRANSACTIONS` data. |
+| `app/api/lead/route.test.ts` | The §9 contract end to end with FUB and Resend mocked — honeypot, rate limiting, and every failure combination. A lead is never silently dropped. |
+| `tests/compliance.test.tsx` | **§7, mechanically.** Renders every page and checks brokerage identification, license numbers, the EHO and REALTOR® marks, verbatim TCPA consent, the results disclaimer beside any dollar figure, banned language, fair-housing framing, guarantee language, and undocumented claims. |
+| `tests/accessibility.test.tsx` | §10. axe-core at WCAG 2.1 AA over every page, plus landmark and link-name checks. Contrast still needs Lighthouse — jsdom computes no colours. |
+| `components/contact-intake.test.tsx` | The conversion path. The consent box is never pre-checked, no visitor is trapped behind the qualifying questions, and a failed submission always surfaces the phone number. |
+
+Two things follow from this:
+
+- **§7 violations now break the build.** That sentence used to be aspirational.
+  Adding a page means adding it to the `PAGES` list in both `tests/` suites, or it
+  ships unchecked.
+- **Verbatim testimonials are exempt from our own styleguide**, and the suites
+  model that: banned language and the negotiation-queen ban are checked against
+  copy outside `<blockquote>`. A client's words are not the site making a claim.
+
+Not covered, deliberately: no browser-level end-to-end suite yet. Worth adding
+(Playwright) once the CMS lands and pages stop being static — today the compliance
+and a11y suites render the same trees a browser would.
 
 ---
 
