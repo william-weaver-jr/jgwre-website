@@ -123,15 +123,12 @@ export default function SellersPage() {
         </p>
       </section>
 
-      {/*
-        TODO(route): docs/CONTENT-PLAN.md specifies the CTA here as /home-value, a
-        manual CMA request. That route has not shipped, so the secondary CTA is
-        omitted rather than pointing at a 404. Wire it when /home-value lands.
-      */}
+      {/* CONTENT-PLAN.md specifies the secondary CTA here as /home-value. */}
       <ClosingCta
         heading="Call before you set a price."
         body="Pricing is the one negotiation you cannot redo. Ten minutes on the phone before the listing goes live is worth more than any adjustment after it does."
         placement="closing-sellers"
+        secondary={{ href: "/home-value", label: "What is your home worth?" }}
         intake={{
           source: "/sellers",
           heading: "Three questions before you price it.",

@@ -17,6 +17,7 @@ const routes = [
   "/about",
   "/negotiation",
   ...PILLARS.map((p) => p.href),
+  "/home-value",
   "/reviews",
   "/contact",
   /* Listed only once it has rows. The route resolves either way, but an empty
