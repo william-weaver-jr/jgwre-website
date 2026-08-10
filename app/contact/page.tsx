@@ -1,0 +1,80 @@
+import type { Metadata } from "next";
+
+import { ContactIntake } from "@/components/contact-intake";
+import { PageHero } from "@/components/page-hero";
+import { Button } from "@/components/ui/button";
+import { AGENT, BROKERAGE } from "@/lib/site";
+
+/*
+  docs/CONTENT-PLAN.md: "Phone first, large. Form secondary."
+
+  That still holds, and it is why the number sits in the hero above everything
+  else. What changed is that the form is no longer only here —
+  docs/CONTACT-STRATEGY.md §2 moves the intake onto every page that does the
+  persuading, because a visitor who has just read a pillar page should not have to
+  navigate anywhere to act. This page is the destination for nav traffic and the
+  people who arrive already looking for a way to reach her, not the only door.
+*/
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: `Call ${AGENT.name}, ${AGENT.title} with ${BROKERAGE.name}, at ${AGENT.phoneDisplay}. Serving Charlotte, the surrounding North Carolina counties, and across the South Carolina line.`,
+  alternates: { canonical: "/contact" },
+};
+
+export default function ContactPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Reach her directly"
+        title="The number goes to her."
+        lede="Not a call center, not an assistant, and not a form that disappears into a queue. Calls and texts both work."
+      >
+        <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <Button asChild variant="phone" size="xl" className="w-full sm:w-auto">
+            <a href={AGENT.phoneHref} data-cta-placement="contact-hero">
+              <span className="sr-only">Call {AGENT.name} at </span>
+              {AGENT.phoneDisplay}
+            </a>
+          </Button>
+          <Button asChild variant="outlineInk" size="xl" className="w-full sm:w-auto">
+            <a href="#start">Rather not call? Start here</a>
+          </Button>
+        </div>
+
+        {/*
+          No stated hours. mackenziesiek.com publishes "Available 7 days a week";
+          we don't publish anything we haven't confirmed with her, and an
+          availability claim she can't meet is worse than none.
+          Tracked in docs/CONTACT-STRATEGY.md §6.
+        */}
+      </PageHero>
+
+      <ContactIntake
+        source="/contact"
+        heading="Or tell her what you’re working on."
+        body="A few taps, then your details. It takes about a minute and it means the call starts somewhere useful."
+        hairline={false}
+      />
+
+      <section aria-labelledby="brokerage" className="mx-auto max-w-6xl px-gutter py-section">
+        <p className="eyebrow">Brokerage</p>
+        <h2 id="brokerage" className="mt-4 font-display text-4xl leading-tight">
+          {BROKERAGE.name}
+        </h2>
+        <address className="mt-6 text-base leading-relaxed not-italic">
+          {BROKERAGE.street}
+          <br />
+          {BROKERAGE.city}, {BROKERAGE.state} {BROKERAGE.zip}
+          <p className="mt-4 tabular-nums text-ink-muted">
+            {BROKERAGE.licenses.map((l) => `License ${l.state} ${l.number}`).join(" · ")}
+          </p>
+        </address>
+        <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-muted">
+          {AGENT.name} is a licensed real estate broker affiliated with {BROKERAGE.name}. All real
+          estate services are provided through {BROKERAGE.name}.
+        </p>
+      </section>
+    </>
+  );
+}

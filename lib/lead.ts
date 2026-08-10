@@ -16,6 +16,21 @@ export const leadSchema = z.object({
   source: z.string().trim().max(120),
   leadType: z.enum(["buyer", "seller", "valuation", "guide", "relocation", "general"]),
 
+  /** Step 1 of the intake, in the visitor's own framing. See lib/intake. */
+  side: z.enum(["buying", "selling", "both", "relocating", "deciding"]).optional(),
+
+  /**
+   * Step 2 answers, keyed by question id. Structured rather than flattened into
+   * `message` so Follow Up Boss gets fields it can filter and segment on —
+   * docs/CONTACT-STRATEGY.md §6. Every question is skippable, so this may be empty.
+   */
+  intake: z
+    .record(
+      z.string().max(60),
+      z.union([z.string().trim().max(200), z.array(z.string().max(60)).max(12)]),
+    )
+    .optional(),
+
   /** TCPA consent. Must be explicitly true — never pre-checked in the UI. */
   consent: z.literal(true, {
     errorMap: () => ({ message: "Consent is required to submit this form." }),

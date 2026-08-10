@@ -175,6 +175,13 @@ export default function CarolinasBorderPage() {
         heading="Call before you narrow it to one state."
         body="The comparison is worth running on the specific homes you are weighing, not in the abstract. It usually takes one phone call and it changes what people shortlist."
         secondary={{ href: "/relocation", label: "Moving from out of state" }}
+        placement="closing-carolinas-border"
+        intake={{
+          source: "/carolinas-border",
+          heading: "Run the comparison on your actual shortlist.",
+          body: "A few questions about what you are weighing, then your details. The state line changes different things depending on which of them you are answering.",
+          prefill: { side: "buying", answers: { markets: ["carolinas-border"] } },
+        }}
       />
     </>
   );

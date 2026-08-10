@@ -8,6 +8,7 @@ import {
   CASE_NEW_CONSTRUCTION,
   CASE_RESALE,
 } from "@/components/case-ledger";
+import { ContactIntake } from "@/components/contact-intake";
 import { PhoneCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { ReviewCard } from "@/components/review-card";
@@ -91,6 +92,7 @@ export default function HomePage() {
 
             <PhoneCta
               className="mt-10"
+              placement="home-hero"
               secondary={{
                 href: "/negotiation",
                 label: "The 19 Things Besides Price You Can Negotiate",
@@ -287,6 +289,7 @@ export default function HomePage() {
             </p>
             <PhoneCta
               className="mt-9"
+              placement="home-closing"
               secondary={{ href: "/negotiation", label: "See the 19 things" }}
             />
           </div>
@@ -302,6 +305,18 @@ export default function HomePage() {
           />
         </div>
       </section>
+
+      {/*
+        The intake sits below the phone block, not instead of it. docs/CONTACT-STRATEGY.md
+        §2: the two capture different people, and the home page is the one page where
+        both audiences arrive in volume. Nothing is prefilled — the home page does not
+        know which table the reader is at, which is exactly what step 1 asks.
+      */}
+      <ContactIntake
+        source="/"
+        heading="What’s on the table for you?"
+        body="Five taps and your details. You’ll get the questions worth asking about your own situation before anyone calls you back."
+      />
     </>
   );
 }

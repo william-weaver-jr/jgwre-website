@@ -146,6 +146,15 @@ export default function NewConstructionPage() {
         heading="Call before you walk into a model home."
         body="Representation has to be in place before your first visit at most builders. Ten minutes on the phone first is the whole difference."
         secondary={{ href: "/negotiation", label: "The 19 Things Besides Price You Can Negotiate" }}
+        placement="closing-new-construction"
+        intake={{
+          source: "/new-construction",
+          heading: "Which builder are you looking at?",
+          body: "Four questions, then your details. The answers decide which incentives are even on the table before you walk into the sales office.",
+          // The page is about one table. Nobody who read it should have to tell us
+          // they are buying new construction — they just did, by reading it.
+          prefill: { side: "buying", answers: { propertyType: "new-construction" } },
+        }}
       />
     </>
   );

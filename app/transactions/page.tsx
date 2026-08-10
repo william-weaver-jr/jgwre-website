@@ -196,6 +196,12 @@ export default async function TransactionsPage({
         heading="Ask what moved on a house like yours."
         body={`Every one of these started with a call. ${AGENT.phoneDisplay} reaches her directly, and ten minutes is usually enough to know which levers exist on the house you are looking at.`}
         secondary={{ href: "/reviews", label: "What those clients said" }}
+        placement="closing-transactions"
+        intake={{
+          source: "/transactions",
+          heading: "Ask about the house you are actually looking at.",
+          body: "A few taps, then your details. The levers above existed because someone asked about that specific property — yours will be different.",
+        }}
       />
     </>
   );

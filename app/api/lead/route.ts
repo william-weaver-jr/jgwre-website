@@ -3,6 +3,7 @@ import { Resend } from "resend";
 
 import { leadSchema, type Lead } from "@/lib/lead";
 import { sendToFollowUpBoss } from "@/lib/fub";
+import { formatIntake } from "@/lib/intake";
 import { AGENT } from "@/lib/site";
 
 /**
@@ -85,7 +86,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           ok: false,
-          error: `We couldn't submit your request. Please call ${AGENT.phoneDisplay}.`,
+          error: `We couldn’t submit your request. Please call ${AGENT.phoneDisplay}.`,
         },
         { status: 502 },
       );
@@ -106,6 +107,8 @@ async function sendNotificationEmail(lead: Lead, fubError: unknown): Promise<voi
 
   const resend = new Resend(apiKey);
 
+  const intake = formatIntake(lead.side, lead.intake);
+
   const warning = fubError
     ? "WARNING: this lead did NOT reach Follow Up Boss. Add it manually.\n\n"
     : "";
@@ -122,6 +125,7 @@ async function sendNotificationEmail(lead: Lead, fubError: unknown): Promise<voi
       `Phone: ${lead.phone}`,
       `Type:  ${lead.leadType}`,
       `Page:  ${lead.source}`,
+      intake.length ? `\n${intake.join("\n")}` : "",
       lead.message ? `\nMessage:\n${lead.message}` : "",
       `\nTCPA consent accepted at submission.`,
     ].join("\n"),

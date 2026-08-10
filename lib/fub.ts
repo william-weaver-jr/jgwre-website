@@ -1,3 +1,4 @@
+import { formatIntake } from "@/lib/intake";
 import type { Lead } from "@/lib/lead";
 
 const FUB_ENDPOINT = "https://api.followupboss.com/v1/events";
@@ -50,6 +51,9 @@ function buildMessage(lead: Lead): string {
   const lines = [
     `Lead type: ${lead.leadType}`,
     `Page: ${lead.source}`,
+    // The intake answers are the reason to call this lead prepared. They go above
+    // the free-text message, which is optional and usually empty.
+    ...formatIntake(lead.side, lead.intake),
     lead.message ? `Message: ${lead.message}` : null,
     lead.utm
       ? `UTM: ${Object.entries(lead.utm)

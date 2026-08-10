@@ -131,6 +131,13 @@ export default function SellersPage() {
       <ClosingCta
         heading="Call before you set a price."
         body="Pricing is the one negotiation you cannot redo. Ten minutes on the phone before the listing goes live is worth more than any adjustment after it does."
+        placement="closing-sellers"
+        intake={{
+          source: "/sellers",
+          heading: "Three questions before you price it.",
+          body: "Where, when, and whether anyone has valued it yet. Then your details. That is enough to know which conversation to have.",
+          prefill: { side: "selling" },
+        }}
       />
     </>
   );

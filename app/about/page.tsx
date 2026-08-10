@@ -229,6 +229,12 @@ export default function AboutPage() {
         heading="Call me before you need me."
         body="The most useful conversations happen months before anyone writes an offer, when there is still time to change the plan. Ten minutes is usually enough to know what you’re walking into."
         secondary={{ href: "/negotiation", label: "The 19 Things Besides Price You Can Negotiate" }}
+        placement="closing-about"
+        intake={{
+          source: "/about",
+          heading: "Start the conversation early.",
+          body: "A few taps about where you are, then your details. No side of the table is prefilled here — this page is not about one of them.",
+        }}
       />
     </>
   );

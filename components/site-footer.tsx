@@ -12,13 +12,17 @@ import { TRANSACTIONS } from "@/lib/transactions";
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-surface-sunken">
-      <div className="mx-auto max-w-6xl px-gutter py-14">
+      {/* Extra bottom padding on mobile clears the sticky contact bar, so the
+          license numbers and the Equal Housing mark are never sitting under it
+          at the end of the document. CLAUDE.md §7. */}
+      <div className="mx-auto max-w-6xl px-gutter py-14 pb-28 md:pb-14">
         <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <p className="font-display text-2xl leading-tight font-medium">{AGENT.name}</p>
             <p className="eyebrow mt-1">{AGENT.title}</p>
             <a
               href={AGENT.phoneHref}
+              data-cta-placement="footer"
               className="mt-5 inline-block text-2xl font-medium tracking-tight tabular-nums underline decoration-accent-soft decoration-1 underline-offset-4 hover:decoration-accent"
             >
               <span className="sr-only">Call {AGENT.name} at </span>
@@ -82,6 +86,11 @@ export function SiteFooter() {
                   Search Homes
                   <span className="sr-only"> (opens an external site)</span>
                 </a>
+              </li>
+              <li>
+                <Link href="/contact" className="underline-offset-4 hover:underline">
+                  Contact
+                </Link>
               </li>
               <li>
                 <Link href="/privacy-policy" className="underline-offset-4 hover:underline">

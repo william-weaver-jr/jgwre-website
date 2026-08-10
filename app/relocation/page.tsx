@@ -138,6 +138,13 @@ export default function RelocationPage() {
         heading="Call from wherever you are."
         body="Most relocation calls start months before the move. Earlier is better — the questions that matter are the ones asked before a neighborhood is chosen."
         secondary={{ href: "/carolinas-border", label: "NC or SC: what changes" }}
+        placement="closing-relocation"
+        intake={{
+          source: "/relocation",
+          heading: "Tell me where you are moving from.",
+          body: "Four questions, then your details. Which parts of this process will feel unfamiliar depends almost entirely on where you have bought before.",
+          prefill: { side: "relocating" },
+        }}
       />
     </>
   );

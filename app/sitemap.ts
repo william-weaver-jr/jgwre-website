@@ -18,6 +18,7 @@ const routes = [
   "/negotiation",
   ...PILLARS.map((p) => p.href),
   "/reviews",
+  "/contact",
   /* Listed only once it has rows. The route resolves either way, but an empty
      one is a thin page and /transactions carries noindex until data.ts fills. */
   ...(TRANSACTIONS.length > 0 ? ["/transactions"] : []),

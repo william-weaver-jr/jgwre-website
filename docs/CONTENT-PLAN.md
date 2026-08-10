@@ -175,6 +175,11 @@ Avoid market-stat posts. They date instantly and every agent publishes them.
 Phone first, large. Form secondary. Brokerage name, address, both license numbers, Equal
 Housing logo.
 
+Still true, with one change: the form is no longer only here. `docs/CONTACT-STRATEGY.md`
+puts the intake at the foot of every page that does the persuading, because a reader who
+has just finished a pillar page should not have to navigate anywhere to act. This page is
+the destination for nav traffic, not the only door.
+
 ---
 
 ## Build order

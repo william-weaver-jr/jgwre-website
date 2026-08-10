@@ -31,6 +31,12 @@ export function SiteHeader() {
           >
             Negotiation
           </Link>
+          <Link
+            href="/contact"
+            className="text-sm decoration-accent-soft decoration-1 underline-offset-[6px] hover:underline"
+          >
+            Contact
+          </Link>
           <a
             href={SEARCH_HOMES_URL}
             target="_blank"
@@ -44,7 +50,7 @@ export function SiteHeader() {
 
         {/* Shares the Button so the header CTA cannot drift from the hero CTA. */}
         <Button asChild variant="phone" className="ml-2">
-          <a href={AGENT.phoneHref}>
+          <a href={AGENT.phoneHref} data-cta-placement="header">
             <span className="sr-only">Call {AGENT.name} at </span>
             {AGENT.phoneDisplay}
           </a>

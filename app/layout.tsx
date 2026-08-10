@@ -3,6 +3,8 @@ import { Cormorant_Garamond, Libre_Franklin } from "next/font/google";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { StickyContactBar } from "@/components/sticky-contact-bar";
+import { TelTracking } from "@/components/tel-tracking";
 import { SITE_URL, AGENT, BROKERAGE } from "@/lib/site";
 
 import "./globals.css";
@@ -52,6 +54,8 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <StickyContactBar />
+        <TelTracking />
       </body>
     </html>
   );
