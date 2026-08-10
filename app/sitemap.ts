@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { PILLARS, SITE_URL } from "@/lib/site";
+import { TRANSACTIONS } from "@/lib/transactions";
 
 /*
   Add routes here as pages ship. See the build order in docs/CONTENT-PLAN.md.
@@ -17,6 +18,9 @@ const routes = [
   "/negotiation",
   ...PILLARS.map((p) => p.href),
   "/reviews",
+  /* Listed only once it has rows. The route resolves either way, but an empty
+     one is a thin page and /transactions carries noindex until data.ts fills. */
+  ...(TRANSACTIONS.length > 0 ? ["/transactions"] : []),
   "/privacy-policy",
 ];
 

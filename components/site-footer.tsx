@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
+import { TRANSACTIONS } from "@/lib/transactions";
 
 /**
  * Required on every page. Carries brokerage identification, both license
@@ -57,6 +58,15 @@ export function SiteFooter() {
                   Reviews
                 </Link>
               </li>
+              {/* Appears when lib/transactions/data.ts has rows. Linking an empty
+                  page from every page on the site advertises the gap. */}
+              {TRANSACTIONS.length > 0 ? (
+                <li>
+                  <Link href="/transactions" className="underline-offset-4 hover:underline">
+                    Transactions
+                  </Link>
+                </li>
+              ) : null}
               <li>
                 <Link href="/negotiation" className="underline-offset-4 hover:underline">
                   The 19 Things Besides Price You Can Negotiate
