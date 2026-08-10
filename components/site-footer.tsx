@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { EqualHousingMark, RealtorMark } from "@/components/compliance-marks";
+import { publishedAreas, sortAreas } from "@/lib/areas";
 import { GUIDE_TITLE } from "@/lib/intake";
 import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
 import { TRANSACTIONS } from "@/lib/transactions";
@@ -69,6 +70,18 @@ export function SiteFooter() {
                   What your home is worth
                 </Link>
               </li>
+              {/* Appears per market once lib/areas/data.ts has content. An
+                  unwritten market has no page, so it gets no link. */}
+              {sortAreas(publishedAreas()).map((area) => (
+                <li key={area.slug}>
+                  <Link
+                    href={`/areas/${area.slug}`}
+                    className="underline-offset-4 hover:underline"
+                  >
+                    {area.name}
+                  </Link>
+                </li>
+              ))}
               <li>
                 <Link href="/reviews" className="underline-offset-4 hover:underline">
                   Reviews

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { publishedAreas, sortAreas } from "@/lib/areas";
 import { PILLARS, SITE_URL } from "@/lib/site";
 import { TRANSACTIONS } from "@/lib/transactions";
 
@@ -24,6 +25,10 @@ const routes = [
   /* Listed only once it has rows. The route resolves either way, but an empty
      one is a thin page and /transactions carries noindex until data.ts fills. */
   ...(TRANSACTIONS.length > 0 ? ["/transactions"] : []),
+  /* Only markets with authored content in lib/areas/data.ts. An unwritten
+     market has no page at all, so listing it would advertise a 404 — the exact
+     mistake noted above about mackenziesiek.com. */
+  ...sortAreas(publishedAreas()).map((area) => `/areas/${area.slug}`),
   "/privacy-policy",
 ];
 
