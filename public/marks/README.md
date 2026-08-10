@@ -2,11 +2,16 @@
 
 This directory holds the licensed Equal Housing Opportunity and REALTOR® logos.
 
-**It is empty on purpose.** The footer renders compliant text marks until the real
-files are here. Do not fill this directory with artwork that was drawn, traced,
-generated, or pulled from an image search — an unauthorized mark that *looks*
-official is a worse problem than no logo at all, which is why the earlier
-hand-drawn SVGs were removed.
+**It is empty on purpose, and that is an approved state.** The footer renders
+compliant text marks. The BIC approved that treatment on 2026-08-10 — he uses the
+same on his own site — so nothing here is blocking launch.
+
+Do not fill this directory with artwork that was drawn, traced, generated, or
+pulled from an image search. An unauthorized mark that *looks* official is a worse
+problem than no logo at all, which is why the earlier hand-drawn SVGs were removed.
+
+Adding the real logos is an optional upgrade. It changes a compliance surface, so
+it goes back to the BIC when it happens.
 
 ## Where the files come from
 

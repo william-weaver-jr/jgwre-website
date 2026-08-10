@@ -237,6 +237,12 @@ live, and must approve material changes after.
 **APPROVED 2026-08-10** — reported by Bill. Covers the site as it stands and the results
 disclaimer wording. This clears the production-deploy gate.
 
+**Footer marks, text-only — APPROVED 2026-08-10.** The BIC confirmed a text treatment of the
+Equal Housing Opportunity and REALTOR® marks is acceptable; he uses the same on his own site.
+So the current footer is an approved state, not a stopgap waiting on artwork. Dropping the
+licensed NAR logos in later is an upgrade we may choose, not a defect we must fix — and
+because it changes a compliance surface, it goes back to the BIC when it happens.
+
 Two things it does not clear, because neither was in front of the BIC and neither is the
 BIC's call to make alone:
 

@@ -14,13 +14,18 @@ import { OFFICIAL_MARKS } from "@/lib/marks";
  * one of them.
  *
  * The word REALTOR® with the registered symbol is itself a proper use of the
- * mark, so the text treatment is defensible on its own. It is still an interim
- * state, not the destination.
+ * mark, so the text treatment is defensible on its own.
  *
- * To finish this: download both logos from https://www.nar.realtor/logos-and-trademark-rules
- * using Jasmine's member login, drop them in public/marks/ under the filenames
- * in lib/marks.ts, and fill in the dimensions there. Nothing else changes —
- * these components switch to the artwork automatically. See public/marks/README.md.
+ * The BIC approved this text treatment on 2026-08-10 — he uses the same on his
+ * own site. This is therefore a finished, approved state, not a stopgap. Do not
+ * treat the null asset entries below as a bug to be closed before launch.
+ *
+ * Adding the licensed artwork later is optional: download both logos from
+ * https://www.nar.realtor/logos-and-trademark-rules using Jasmine's member
+ * login, drop them in public/marks/ under the filenames in lib/marks.ts, and
+ * fill in the dimensions. These components switch over automatically. Because
+ * it changes a compliance surface, that change goes back to the BIC.
+ * See public/marks/README.md.
  */
 
 export function EqualHousingMark() {
