@@ -232,8 +232,26 @@ the associated checkbox.
 
 ### Approvals
 The Broker-in-Charge at Stone Realty Group must approve this site in writing before it goes
-live, and must approve material changes after. Do not deploy to the production domain until
-that approval is confirmed.
+live, and must approve material changes after.
+
+**APPROVED 2026-08-10** — reported by Bill. Covers the site as it stands and the results
+disclaimer wording. This clears the production-deploy gate.
+
+Two things it does not clear, because neither was in front of the BIC and neither is the
+BIC's call to make alone:
+
+- **The privacy policy still needs counsel.** A Broker-in-Charge supervises brokerage
+  advertising; they are not the lawyer who signs off on a privacy policy. The page is still
+  the working draft flagged in `app/privacy-policy/page.tsx`, including the open question of
+  whether enabling analytics requires a consent mechanism.
+- **The transactions pipeline states are still blocked.** Active / pending / coming-soon
+  need their own written BIC approval — `docs/TRANSACTIONS-SPEC.md` §2 and §12 below. A
+  general site approval is not that approval. Do not build them on request without it.
+
+"Material changes after" now applies. Anything that alters a compliance surface — the
+disclaimer, the consent text, brokerage identification, a new claim or statistic — goes back
+to the BIC before it ships. The suite in `tests/compliance.test.tsx` guards the wording that
+was approved; it cannot tell you when something new needs approving.
 
 **Client permission for the three case studies has been obtained.** Names remain omitted.
 
@@ -326,7 +344,10 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       before anyone builds them — do not implement on request without it.
 - [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch
 - [x] NC and SC license numbers — NC 334700, SC 125546 (§7)
-- [ ] Broker-in-Charge written approval (site + results disclaimer wording)
+- [x] **Broker-in-Charge approval (site + results disclaimer wording) — RECEIVED 2026-08-10.**
+      See §7 Approvals for what it covers and the two things it does not. §7 asks for written
+      approval: file the written record if it is not already filed. Material changes from here
+      go back to the BIC.
 - [ ] Confirm Placester contract term, auto-renewal date, and content/domain ownership
       before giving notice
 - [ ] Confirm the Stone Realty Group IDX search URL (the "Search Homes" destination)

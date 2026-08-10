@@ -5,7 +5,7 @@ import { RESULTS_DISCLAIMER } from "@/lib/site";
  * docs/CASE-STUDIES.md. Body weight, body color, immediately below the figures.
  * Never a footnote, never small gray type, never in the footer.
  *
- * The BIC must approve the final wording before launch.
+ * Wording approved by the BIC 2026-08-10 and pinned by tests/compliance.test.tsx.
  */
 export function ResultsDisclaimer({ className = "" }: { className?: string }) {
   return (

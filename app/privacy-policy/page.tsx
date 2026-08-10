@@ -9,9 +9,13 @@ export const metadata: Metadata = {
 };
 
 /*
-  TODO(legal): this is a working draft, not reviewed counsel language. The
-  Broker-in-Charge must approve it before launch, and it must be accurate about
-  what Follow Up Boss and Resend actually do with submitted data. CLAUDE.md §7.
+  TODO(legal): still a working draft, and still not reviewed counsel language.
+
+  The BIC approved the site on 2026-08-10 (CLAUDE.md §7). That does not close
+  this out: a Broker-in-Charge supervises brokerage advertising, and a privacy
+  policy is a lawyer's document. What is written here about Follow Up Boss and
+  Resend also has to be accurate about what those vendors actually do with
+  submitted data — nobody has verified that against their terms yet.
 
   TODO(legal): the Analytics section below describes the site as it is today —
   no provider loaded, no cookies set by our own code. CLAUDE.md §4 plans Vercel
