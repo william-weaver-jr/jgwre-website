@@ -280,30 +280,16 @@ describe("banned language (BRAND-VOICE.md §2)", () => {
 describe("undocumented claims (§6)", () => {
   /**
    * §6 says to leave `TODO(verify)` in place rather than invent a number. It is
-   * a marker for the author, not copy — none of it may reach a visitor.
-   *
-   * `/privacy-policy` currently renders two, including its "Last updated" date.
-   * It is listed here so the gap is visible and counted rather than silently
-   * skipped; delete the entry when the page is finished and this suite will hold
-   * the line from then on. Tracked with the open legal review in CLAUDE.md §12.
+   * a marker for the author, not copy — none of it may reach a visitor. An open
+   * question belongs in a source comment, where `/privacy-policy` now keeps its
+   * remaining one.
    */
-  const PLACEHOLDERS_STILL_VISIBLE = ["/privacy-policy"];
-
-  it.each(PAGES.map(([route]) => route).filter((r) => !PLACEHOLDERS_STILL_VISIBLE.includes(r)))(
-    "%s ships no TODO(verify) placeholder to the visitor",
+  it.each(PAGES.map(([route]) => route))(
+    "%s ships no TODO placeholder to the visitor",
     async (route) => {
-      expect(text(await page(route))).not.toContain("TODO(verify)");
+      expect(text(await page(route))).not.toContain("TODO(");
     },
   );
-
-  it("has a shrinking list of pages still showing placeholders", async () => {
-    for (const route of PLACEHOLDERS_STILL_VISIBLE) {
-      expect(
-        text(await page(route)),
-        `${route} is clean — remove it from PLACEHOLDERS_STILL_VISIBLE`,
-      ).toContain("TODO(verify)");
-    }
-  });
 
   /**
    * §5 documents the recognition and its scope. Two of the three are internal
