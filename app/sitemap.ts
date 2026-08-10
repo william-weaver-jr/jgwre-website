@@ -11,7 +11,14 @@ import { PILLARS, SITE_URL } from "@/lib/site";
   /style-tile is deliberately absent: it is an internal review page and carries
   robots noindex.
 */
-const routes = ["", "/about", "/negotiation", ...PILLARS.map((p) => p.href), "/privacy-policy"];
+const routes = [
+  "",
+  "/about",
+  "/negotiation",
+  ...PILLARS.map((p) => p.href),
+  "/reviews",
+  "/privacy-policy",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({

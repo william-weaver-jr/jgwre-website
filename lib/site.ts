@@ -88,23 +88,36 @@ export const PILLARS = [
  *
  * Never on the home page. Never above a case study.
  */
-export const RECOGNITION = [
+export type Recognition = {
+  year: number;
+  label: string;
+  /** Who granted it. Required — an award with no issuer reads as an industry award. */
+  issuer: string;
+  /** How far the claim reaches. Rendered, not decorative. */
+  scope: string;
+  /** Not yet decided. Forces the "Nominated" framing and a stated announcement date. */
+  pending?: boolean;
+  detail?: string;
+};
+
+export const RECOGNITION: readonly Recognition[] = [
   {
     year: 2023,
-    label: "Top 3, most Google reviews",
-    // TODO(verify): issuer and scope. Her own caption says "the most 5-star
-    // Google reviews," which is a different and much broader claim than "top 3
-    // within Stone Realty Group." Ship the narrow one, attributed, or not at all.
-    issuer: "TODO(verify)",
-    scope: "TODO(verify)",
+    /**
+     * Confirmed 2026-08-10: top 3 WITHIN the brokerage. The wording is fixed at
+     * that scope. Her Instagram caption claims "the most 5-star Google reviews
+     * for my real estate business," which is an unbounded superlative and a
+     * different claim entirely — it does not go on this site.
+     */
+    label: "Top 3 for most Google reviews",
+    issuer: "Stone Realty Group",
+    scope: "Among agents at the brokerage",
   },
   {
     year: 2024,
     label: "Excellence in Client Satisfaction",
-    // TODO(verify): who grants this? Brokerage, board, or vendor. An award with
-    // no named issuer cannot appear under §6.
-    issuer: "TODO(verify)",
-    scope: "TODO(verify)",
+    issuer: "Stone Realty Group",
+    scope: "Brokerage award",
   },
   {
     year: 2026,
@@ -117,6 +130,7 @@ export const RECOGNITION = [
      * Public voting ran July 6–24, 2026; winners announced October 2026.
      */
     pending: true,
+    detail: "Winners announced October 2026.",
     // TODO: revisit after the October 2026 announcement. If she wins, this line
     // changes. If she doesn't, a stale "nominated" badge ages badly and comes down.
   },

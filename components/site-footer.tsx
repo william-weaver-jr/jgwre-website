@@ -53,6 +53,11 @@ export function SiteFooter() {
                 </li>
               ))}
               <li>
+                <Link href="/reviews" className="underline-offset-4 hover:underline">
+                  Reviews
+                </Link>
+              </li>
+              <li>
                 <Link href="/negotiation" className="underline-offset-4 hover:underline">
                   The 19 Things Besides Price You Can Negotiate
                 </Link>

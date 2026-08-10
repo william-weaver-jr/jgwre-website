@@ -118,11 +118,15 @@ Four pillars. Each gets a dedicated page, and each is the USP applied to a speci
 (`RECOGNITION`). No `/awards` page: these live at the foot of `/reviews` and
 nowhere else. Each still needs its issuer and scope confirmed before it ships.
 
-| Year | Recognition | Status |
-|---|---|---|
-| 2023 | Top 3, most Google reviews | Issuer and scope `TODO(verify)`. Her caption claims "the most," which is broader than "top 3 at SRG" — ship the narrow, attributed version or nothing |
-| 2024 | Excellence in Client Satisfaction | Granting body `TODO(verify)`. An award with no named issuer cannot appear |
-| 2026 | **Nominated**, Charlotte's Best Real Estate Broker — The Charlotte Observer | Public vote ran July 6–24, 2026; winners announced October 2026. Say "Nominated," never anything warmer. Revisit after the announcement |
+| Year | Recognition | Issuer | Scope |
+|---|---|---|---|
+| 2023 | Top 3 for most Google reviews | Stone Realty Group | Among agents at the brokerage. Always state the scope — her caption's "the most 5-star Google reviews" is an unbounded superlative and does not ship |
+| 2024 | Excellence in Client Satisfaction | Stone Realty Group | Brokerage award |
+| 2026 | **Nominated**, Charlotte's Best Real Estate Broker | The Charlotte Observer, Charlotte's Best Awards | Public vote ran July 6–24, 2026; winners announced October 2026. Say "Nominated," never anything warmer. Revisit after the announcement |
+
+Two of the three are internal brokerage awards and must always name Stone Realty
+Group as the issuer. An unattributed "Excellence in Client Satisfaction" reads as
+an industry award, which it is not.
 
 The Instagram captions announcing these are not copy. "Turning dreams into
 reality" is the exact register `BRAND-VOICE.md` bans, and the useful line in the
