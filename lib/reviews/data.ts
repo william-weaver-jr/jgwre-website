@@ -548,8 +548,8 @@ export const REVIEWS: readonly Review[] = [
     note: "Buy-and-sell-at-once, which is the hardest thing a client ever asks for. Archived on the old site as testimonial_a-true-asset-to-anyone-navigating-the-real-estate-market.",
   },
   {
-    id: "zillow-cbob93",
-    author: "cbob93",
+    id: "zillow-cedric-brown",
+    author: "Cedric Brown",
     rating: 5,
     platform: "zillow",
     postedOn: "Zillow profile",
@@ -564,8 +564,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine Weaver was excellent to work with in the sale of her first home. In a weird market she was able to get us a closer deal with no seller concessions were under contract in under three weeks with no home warranty given and no transaction complications with a seamless process. To top it all off she negotiated for best deal that allowed us to close quickly. 10/10 recommend working with Jasmine!",
     statesDollarOutcome: true,
     sameTransactionAs: ["zillow-cristina-lopez"],
-    openQuestion:
-      "TODO(verify): TWO problems. (1) Generic username, needs a real name. (2) It calls her Jasmine WEAVER, not Garcia. She advertises under the name she is licensed under — NC 334700, SC 125546 — so a testimonial on her own site naming a different surname needs an answer before it runs, even though the wording itself cannot be changed.",
+    note: "Real name confirmed 2026-08-10; posted under the username cbob93. Cleared to run.\n\nThe body calls her Jasmine WEAVER, not Garcia, and it stays that way — §7 admits no exception for a client misremembering a surname, and a testimonial we corrected is a testimonial we altered. Nothing rides on it: the reviewer is plainly describing Jasmine, and readers do not audit surnames. If the discrepancy ever bothers the BIC, the remedy is to pull the review, not to edit it.",
   },
   {
     id: "zillow-cristina-lopez",
@@ -583,8 +582,8 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "We had an incredible experience working with Jasmine Garcia. Even though we were living out of state, Jasmine made the entire home-selling process smooth and stress-free. She strategically listed our Charlotte home to attract serious buyers and helped us sell it in under three weeks—without offering any seller concessions or a home warranty. Thanks to her expert negotiation skills and deep knowledge of the local real estate market, we walked away with a fantastic deal and more money in our pockets. Jasmine kept us informed every step of the way, providing outstanding communication and support. If you’re looking to sell your home in Charlotte, we highly recommend choosing Jasmine as your trusted listing agent.",
     statesDollarOutcome: true,
-    sameTransactionAs: ["zillow-cbob93"],
-    note: "The publishable account of the Druid Hills North sale, and a remote seller — rare and useful for /sellers and /relocation both. Archived as testimonial_cristinamaria-lopez5.",
+    sameTransactionAs: ["zillow-cedric-brown"],
+    note: "The second account of the Druid Hills North sale, and a remote seller — rare and useful for /sellers and /relocation both. Archived as testimonial_cristinamaria-lopez5.",
   },
   {
     id: "zillow-humberto-zambrano",
@@ -699,8 +698,8 @@ export const REVIEWS: readonly Review[] = [
     note: "Three separate dollar figures in one review, and the client himself adds 'it's also up to market condition' — the disclaimer in a buyer's own voice. Requires ResultsDisclaimer adjacent regardless.",
   },
   {
-    id: "zillow-sharee",
-    author: "Sharee",
+    id: "zillow-sharee-khaldi",
+    author: "Sharee Khaldi",
     rating: 5,
     platform: "zillow",
     postedOn: "Zillow profile",
@@ -714,8 +713,7 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "I don’t have enough words to express how grateful I am to Jasmine. After almost 2 years of trials with selling my home Jasmine finally closed the deal. From the very beginning, they she was on it, I had some repairs that were needed (ok, a few more than some), and she connected me with a contractor right away to get the house ready to list. When things popped up as time went on she was there to fix things within hours. I don’t live in the state anymore, and she was my eyes and ears the whole time. No panic, just handled. She hosted open houses, checked in on the house regularly, and kept me in the loop the whole time. On top of everything else, when it comes to negotiations she’s the best of the best. She was able to get me $20k more than the initial offer, pushed for a higher due diligence amount, and even negotiated the repair agreement so I didn’t get stuck with a bunch of costs. I ended up saving (and making!) thousands. Also, my house sold faster than anything else in the neighborhood. Honestly, if you want someone who’s caring, responsive, and genuinely has your back, this is the agent you want. I couldn’t have asked for a better experience. Thank you for everything Jasmine!",
     statesDollarOutcome: true,
-    openQuestion: "TODO(verify): first name only. Awaiting last initial.",
-    note: "The review docs/CONTENT-PLAN.md flags as the strongest match for the site's whole argument — 'when it comes to negotiations she's the best of the best,' plus a seller who lives out of state and a home that took two years. Worth chasing the last initial.",
+    note: "Surname confirmed 2026-08-10. The review docs/CONTENT-PLAN.md flags as the strongest match for the site's whole argument — 'when it comes to negotiations she's the best of the best,' plus a seller who lives out of state and a home that took two years. Worth chasing the last initial.",
   },
   {
     id: "zillow-shay-t",
@@ -792,9 +790,9 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "My husband and I worked with Jasmine for nearly two years while searching for our first home, and we couldn't be more grateful for her guidance throughout the process. What stood out most was her patience. At no point did she ever pressure us to make an offer or settle for a home that wasn't 100% right for us. She understood that buying a home is one of the biggest decisions a family can make and always respected our timeline, priorities, and budget. We looked at countless homes over the years, and she remained supportive, responsive, and encouraging every step of the way. And when it came time to negotiate—Jasmine is truly the Queen of Negotiations. Her expertise, strategy, and advocacy were invaluable throughout the process. She helped us navigate a competitive situation, protected our interests every step of the way, and ultimately helped us secure a home that we absolutely love. We always felt like she was in our corner and fighting for the best possible outcome for our future. What started as a professional relationship also turned into a friendship. Over the past two years, Jasmine has been there through so many milestones—she saw us get married, cheered us on through life changes, and was right there celebrating with us when we finally found and purchased our first home. Having someone genuinely invested in your happiness makes all the difference, and we always knew she wanted what was best for us. Buying a home can be stressful, but having someone we trusted made the experience so much easier. We are incredibly thankful for Jasmine's dedication, professionalism, patience, and expertise throughout our home-buying journey. After working with her for two years, we can confidently say she was worth the wait, and we would highly recommend her to anyone looking to buy or sell a home.",
     statesDollarOutcome: false,
-    openQuestion:
-      "DECISION NEEDED, not a fact to look up. This review contains “Jasmine is truly the Queen of Negotiations.” CLAUDE.md §2 rejects that title for the site and says not to reintroduce it in any form; §12 confirms she keeps using it on Instagram and it simply never appears here. But §7 forbids altering testimonial wording, so the phrase cannot be edited out and the review cannot be excerpted around it — the sentence sits in the middle. Run it whole or not at all. See the note field for the argument.",
-    note: "The case for running it: §2's objection is to a SELF-applied title reading as arrogance. A client applying it is the pattern the whole brand rests on — the case studies say she is a negotiator, she never does. The case against: §2 said 'in any form,' and one client's word choice would put the phrase on the site anyway. Bill and Jasmine decide, not us. Also note the disclosed friendship, which needs the materialConnection treatment if it does run. Separately: Zillow labels this 'Sold' but they are first-time buyers throughout — do not trust `role` here.",
+    materialConnection:
+      "A friendship that grew out of the transaction — she says so herself, and describes Jasmine attending their wedding. Disclosed in the client's own words, so this runs whole or not at all.",
+    note: "Contains “Jasmine is truly the Queen of Negotiations.” CLEARED TO RUN, 2026-08-10, by Bill.\n\nThis is the one place that phrase may appear on the site, and only because a client put it there. CLAUDE.md §2's rejection stands for anything in her voice or ours: she does not call herself that here, in copy, in headings, in alt text, or in metadata. A client's verbatim words are not the site making the claim — same logic that lets the case studies say what she cannot.\n\nDo not excerpt this review. Between the title and the disclosed friendship, cropping it either strips a disclosure or turns a client's word choice into a pull quote in our own voice. Whole or not at all.\n\nSeparately: Zillow labels this 'Sold' but they are first-time buyers throughout — do not trust `role` here.",
   },
   {
     id: "zillow-brittany-turner-2026",
