@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/page-hero";
 import { PHOTOS } from "@/lib/images";
 import { BROKERAGE, PILLARS } from "@/lib/site";
 import Link from "next/link";
+import { GUIDE_TITLE } from "@/lib/intake";
 
 /*
   /about — unblocked 2026-08-07.
@@ -228,7 +229,7 @@ export default function AboutPage() {
       <ClosingCta
         heading="Call me before you need me."
         body="The most useful conversations happen months before anyone writes an offer, when there is still time to change the plan. Ten minutes is usually enough to know what you’re walking into."
-        secondary={{ href: "/negotiation", label: "The 19 Things Besides Price You Can Negotiate" }}
+        secondary={{ href: "/negotiation", label: GUIDE_TITLE }}
         placement="closing-about"
         intake={{
           source: "/about",

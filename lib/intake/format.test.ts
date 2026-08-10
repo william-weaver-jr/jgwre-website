@@ -5,7 +5,8 @@ import { describe, expect, it } from "vitest";
 
 import { formatIntake } from "./format";
 import { BRANCHES, SIDE_TO_LEAD_TYPE, SIDES, labelFor } from "./questions";
-import { selectLevers } from "./levers";
+import { LEVERS, selectLevers } from "./levers";
+import { GUIDE_TITLE, GUIDE_TITLE_SHORT, ITEM_COUNT_WORD, NEGOTIABLE_ITEMS } from "./guide";
 import type { Side } from "./types";
 
 const ALL_SIDES = SIDES.map((s) => s.value);
@@ -175,5 +176,26 @@ describe("selectLevers", () => {
     for (const lever of selectLevers(side, {}, 99)) {
       expect(lever.text).not.toMatch(/\bI(’|')ll get you\b|\bI always\b|guarantee|\bwill save you\b/i);
     }
+  });
+});
+
+describe("guide title", () => {
+  it("states the number of items the page actually lists", () => {
+    expect(GUIDE_TITLE).toContain(String(NEGOTIABLE_ITEMS.length));
+    expect(GUIDE_TITLE_SHORT).toContain(String(NEGOTIABLE_ITEMS.length));
+  });
+
+  /**
+   * LEVERS is the intake rule engine, not the published list — several entries
+   * are branch-specific variants of the same item, so it is longer. Titling the
+   * guide from it would claim a number the page does not deliver.
+   */
+  it("does not count LEVERS", () => {
+    expect(LEVERS.length).toBeGreaterThan(NEGOTIABLE_ITEMS.length);
+    expect(GUIDE_TITLE).not.toContain(String(LEVERS.length));
+  });
+
+  it("spells the count in words for prose", () => {
+    expect(ITEM_COUNT_WORD).toBe("nineteen");
   });
 });

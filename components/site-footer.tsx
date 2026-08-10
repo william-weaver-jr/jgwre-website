@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { EqualHousingMark, RealtorMark } from "@/components/compliance-marks";
+import { GUIDE_TITLE } from "@/lib/intake";
 import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
 import { TRANSACTIONS } from "@/lib/transactions";
 
@@ -74,7 +75,7 @@ export function SiteFooter() {
               ) : null}
               <li>
                 <Link href="/negotiation" className="underline-offset-4 hover:underline">
-                  The 19 Things Besides Price You Can Negotiate
+                  {GUIDE_TITLE}
                 </Link>
               </li>
               <li>

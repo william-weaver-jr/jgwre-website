@@ -6,6 +6,7 @@ import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { ReviewCard } from "@/components/review-card";
 import { publishableReviews } from "@/lib/reviews";
 import { RECOGNITION } from "@/lib/site";
+import { GUIDE_TITLE } from "@/lib/intake";
 
 /*
   /reviews — the archive.
@@ -145,7 +146,7 @@ export default function ReviewsPage() {
       <ClosingCta
         heading="Ask them what they asked for."
         body="Most of the people above did not know what was negotiable when they started. That is the normal place to begin. Ten minutes on the phone is usually enough to know what is on the table for your house."
-        secondary={{ href: "/negotiation", label: "The 19 Things Besides Price You Can Negotiate" }}
+        secondary={{ href: "/negotiation", label: GUIDE_TITLE }}
         placement="closing-reviews"
         intake={{
           source: "/reviews",

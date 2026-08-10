@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ContactIntake } from "@/components/contact-intake";
+import { GUIDE_TITLE, GUIDE_TITLE_SHORT, ITEM_COUNT_WORD, NEGOTIABLE_ITEMS } from "@/lib/intake";
 import { AGENT } from "@/lib/site";
 
 /*
@@ -16,37 +17,18 @@ import { AGENT } from "@/lib/site";
 */
 
 export const metadata: Metadata = {
-  title: "The 19 Things Besides Price You Can Negotiate",
+  title: GUIDE_TITLE,
   description:
     "Price is one line in the contract. Here is the list of everything else on the table in a Charlotte, NC or South Carolina purchase.",
   alternates: { canonical: "/negotiation" },
   openGraph: {
-    title: "19 Things Besides Price You Can Negotiate",
+    title: GUIDE_TITLE_SHORT,
     description: "Price is one line in the contract. Here is the list of everything else.",
   },
 };
 
-const ITEMS = [
-  "Roof replacement",
-  "HVAC service or replacement",
-  "Home warranty",
-  "Appliances, including the refrigerator",
-  "Seller-paid closing costs",
-  "Interest rate buydown",
-  "Repair credits in lieu of repairs",
-  "Inspection and due diligence timelines",
-  "Due diligence fee amount",
-  "Earnest money amount and terms",
-  "Closing date",
-  "Possession date and post-closing occupancy",
-  "Rent-back terms",
-  "Survey and its cost",
-  "Termite and wood-infestation report",
-  "Septic, well, and water testing",
-  "Title and attorney fee allocation",
-  "Builder incentives and upgrade allowances",
-  "Which lender or title company is used",
-];
+/* The list itself lives in lib/intake/guide.ts, which derives the title from it. */
+const ITEMS = NEGOTIABLE_ITEMS;
 
 export default function NegotiationPage() {
   return (
@@ -54,7 +36,7 @@ export default function NegotiationPage() {
       <div className="mx-auto max-w-3xl px-gutter py-20">
         <p className="eyebrow">The list</p>
         <h1 className="mt-3 font-display text-display-sm text-balance sm:text-display">
-          The 19 Things Besides Price You Can Negotiate
+          {GUIDE_TITLE}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-ink-muted">
           Price is one line in the contract. Everything below is also on the table. What matters is
@@ -94,7 +76,7 @@ export default function NegotiationPage() {
 
       {/*
         The list stays ungated. What the intake adds is the part the list can't do —
-        which of the nineteen are worth asking for on one specific house. That is a
+        which of them are worth asking for on one specific house. That is a
         better reason to submit than a download gate, and it doesn't take the useful
         thing away from someone who won't.
 
@@ -104,7 +86,7 @@ export default function NegotiationPage() {
       <ContactIntake
         source="/negotiation"
         leadType="guide"
-        heading="Which of the nineteen apply to your house?"
+        heading={`Which of the ${ITEM_COUNT_WORD} apply to your house?`}
         body="A few taps about what you’re looking at, then your details. The list above is everything that can be asked for; this narrows it to what’s plausibly on your table."
       />
     </>
