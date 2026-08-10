@@ -10,7 +10,9 @@ import {
 } from "@/components/case-ledger";
 import { PhoneCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
+import { ReviewCard } from "@/components/review-card";
 import { PHOTOS } from "@/lib/images";
+import { dedupeByTransaction, publishableReviews, reviewById } from "@/lib/reviews";
 import { JsonLd, realEstateAgentSchema } from "@/lib/schema";
 import { AGENT, PILLARS } from "@/lib/site";
 
@@ -39,6 +41,31 @@ const RECORD = [
   { value: "73+", label: "Transactions" },
   { value: "105", label: "Five-star reviews" },
 ];
+
+/**
+ * The two reviews below the case studies. One buyer, one seller, chosen because
+ * both are specific about what was actually asked for rather than how nice she
+ * was to work with.
+ *
+ * Emily C. itemizes a new-construction negotiation — $12,000 in closing costs, a
+ * 2-1 buydown, appliances, blinds — which is the lead magnet demonstrated by a
+ * buyer instead of claimed by us. Sharee K. is the seller half: out of state,
+ * two years on the market, $20k over the initial offer.
+ *
+ * Named by id, then put through the same gates as every other surface.
+ * `publishableReviews()` means a review later marked `withheld` cannot survive
+ * here by virtue of being hardcoded, and `dedupeByTransaction()` means a future
+ * edit cannot accidentally seat both halves of a couple side by side — Emily's
+ * husband reviewed the same purchase. Never bypass these by reaching into
+ * REVIEWS directly.
+ */
+const HOME_REVIEWS = dedupeByTransaction(
+  publishableReviews(
+    ["zillow-emily-corbin", "zillow-sharee-khaldi"]
+      .map(reviewById)
+      .filter((review) => review !== undefined),
+  ),
+);
 
 export default function HomePage() {
   return (
@@ -210,29 +237,39 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-gutter">
           <p className="eyebrow">In their words</p>
           <h2 id="reviews" className="mt-4 font-display text-4xl leading-tight md:text-5xl">
-            Client reviews
+            One buyer, one seller.
           </h2>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
+            Both reproduced exactly as they were posted. Emily itemizes what a builder gave up.
+            Sharee sold from another state.
+          </p>
 
           {/*
-            TODO(content): replace with two real reviews, quoted verbatim. CLAUDE.md
-            §7 forbids altering testimonial wording. docs/placester-archive/text/
-            holds the 14 indexed reviews from the old site as candidates — the
-            Zillow review titled "when it comes to negotiations she's the best of
-            the best" is the strongest match for this page's argument.
+            Whole reviews, not pull quotes. Both are `quotable` — neither carries a
+            material connection — so an excerpt would be permitted here, and the
+            answer is still no: these two earn their place by being specific, and
+            specificity is the first thing a pull quote cuts.
+
+            Both name dollar figures, so this section carries its own
+            <ResultsDisclaimer />. The one in the case-study section above is too
+            far up the page to be adjacent to anything down here. CLAUDE.md §7.
           */}
           <div className="mt-12 grid gap-10 md:grid-cols-2">
-            {[1, 2].map((i) => (
-              <figure key={i} className="border-t border-accent-soft pt-6">
-                <blockquote className="font-display text-2xl leading-snug italic">
-                  [REAL CLIENT REVIEW &mdash; DO NOT FABRICATE]
-                </blockquote>
-                <figcaption className="mt-5 text-sm text-ink-muted">
-                  Placeholder {i} of 2 &middot; name, city, and transaction type to be added from a
-                  verified review.
-                </figcaption>
-              </figure>
+            {HOME_REVIEWS.map((review) => (
+              <ReviewCard key={review.id} review={review} />
             ))}
           </div>
+
+          <ResultsDisclaimer className="mt-12" />
+
+          <p className="mt-10 text-base">
+            <Link
+              href="/reviews"
+              className="decoration-accent-soft decoration-1 underline-offset-[6px] hover:underline"
+            >
+              Read the rest, unedited
+            </Link>
+          </p>
         </div>
       </section>
 
