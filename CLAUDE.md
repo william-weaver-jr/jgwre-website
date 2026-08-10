@@ -114,6 +114,21 @@ Four pillars. Each gets a dedicated page, and each is the USP applied to a speci
 23 transactions / $9.9M in 2024 · top-5 producer at SRG in 2023 and 2024 ·
 105 five-star reviews (42 Zillow, 62 Google) · Zillow Premier Agent
 
+**Recognition** — documented here so §6 permits its use. Data in `lib/site.ts`
+(`RECOGNITION`). No `/awards` page: these live at the foot of `/reviews` and
+nowhere else. Each still needs its issuer and scope confirmed before it ships.
+
+| Year | Recognition | Status |
+|---|---|---|
+| 2023 | Top 3, most Google reviews | Issuer and scope `TODO(verify)`. Her caption claims "the most," which is broader than "top 3 at SRG" — ship the narrow, attributed version or nothing |
+| 2024 | Excellence in Client Satisfaction | Granting body `TODO(verify)`. An award with no named issuer cannot appear |
+| 2026 | **Nominated**, Charlotte's Best Real Estate Broker — The Charlotte Observer | Public vote ran July 6–24, 2026; winners announced October 2026. Say "Nominated," never anything warmer. Revisit after the announcement |
+
+The Instagram captions announcing these are not copy. "Turning dreams into
+reality" is the exact register `BRAND-VOICE.md` bans, and the useful line in the
+2024 caption — that teaching taught her to lead and educate — is already on
+`/about` in better words.
+
 **Markets served:** Ballantyne, SouthPark, Steele Creek, Myers Park, Dilworth, South End,
 LoSo, Uptown, Pineville (NC) · Fort Mill, Tega Cay, Indian Land, Lake Wylie, Waxhaw (SC)
 

@@ -75,6 +75,54 @@ export const PILLARS = [
 ] as const;
 
 /**
+ * Recognition. Documented per CLAUDE.md §6 — nothing here may ship until its
+ * `issuer` and `scope` are confirmed, because an unscoped superlative is the
+ * easiest advertising violation on a real estate site to commit by accident.
+ *
+ * There is deliberately no /awards page. §5 says use supporting proof sparingly
+ * and never as a stat wall, and BRAND-VOICE.md §1 is blunt that copy listing
+ * awards does not convert. These belong at the foot of /reviews, where a reader
+ * has already come to judge her and the 105 reviews are the actual argument —
+ * two of the three are client-satisfaction measures, so they read there as
+ * context for the corpus rather than as a trophy case.
+ *
+ * Never on the home page. Never above a case study.
+ */
+export const RECOGNITION = [
+  {
+    year: 2023,
+    label: "Top 3, most Google reviews",
+    // TODO(verify): issuer and scope. Her own caption says "the most 5-star
+    // Google reviews," which is a different and much broader claim than "top 3
+    // within Stone Realty Group." Ship the narrow one, attributed, or not at all.
+    issuer: "TODO(verify)",
+    scope: "TODO(verify)",
+  },
+  {
+    year: 2024,
+    label: "Excellence in Client Satisfaction",
+    // TODO(verify): who grants this? Brokerage, board, or vendor. An award with
+    // no named issuer cannot appear under §6.
+    issuer: "TODO(verify)",
+    scope: "TODO(verify)",
+  },
+  {
+    year: 2026,
+    label: "Nominated, Charlotte’s Best Real Estate Broker",
+    issuer: "The Charlotte Observer, Charlotte’s Best Awards",
+    scope: "Charlotte",
+    /**
+     * A nomination, not a win. Say "Nominated" and nothing warmer — implying
+     * an award she has not received is a straightforward advertising problem.
+     * Public voting ran July 6–24, 2026; winners announced October 2026.
+     */
+    pending: true,
+    // TODO: revisit after the October 2026 announcement. If she wins, this line
+    // changes. If she doesn't, a stale "nominated" badge ages badly and comes down.
+  },
+] as const;
+
+/**
  * Required adjacent to any page showing specific dollar outcomes. Body-text
  * weight and color — never a footnote, never small gray type.
  * Exact wording from docs/CASE-STUDIES.md. BIC must approve before launch.
