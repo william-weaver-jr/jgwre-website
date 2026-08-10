@@ -105,13 +105,26 @@ describe("brokerage identification (§7)", () => {
   });
 
   it("carries the Equal Housing Opportunity mark", () => {
-    const html = renderToStaticMarkup(<SiteFooter />);
-    expect(html).toContain("Equal Housing Opportunity");
-    expect(html).toMatch(/aria-label="Equal Housing Opportunity"/);
+    expect(text(renderToStaticMarkup(<SiteFooter />))).toContain("Equal Housing Opportunity");
   });
 
   it("carries the REALTOR® mark with the registered symbol", () => {
     expect(text(renderToStaticMarkup(<SiteFooter />))).toContain("REALTOR®");
+  });
+
+  /**
+   * The footer once shipped hand-drawn SVG approximations of both marks. An
+   * invented block "R" reads as authoritative while being an unauthorized use
+   * of a registered mark — worse than showing no logo. The marks are text until
+   * the licensed files from NAR are in public/marks/.
+   *
+   * This asserts the shape of the fix, not the destination: inline <svg> in the
+   * footer means someone has drawn a mark again. Real artwork arrives as a file
+   * through lib/marks.ts and renders via next/image, which trips neither branch.
+   * See public/marks/README.md.
+   */
+  it("draws no trademark artwork of its own", () => {
+    expect(renderToStaticMarkup(<SiteFooter />)).not.toContain("<svg");
   });
 
   it("links the privacy policy", () => {

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { EqualHousingMark, RealtorMark } from "@/components/compliance-marks";
 import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
 import { TRANSACTIONS } from "@/lib/transactions";
 
@@ -117,55 +118,7 @@ export function SiteFooter() {
 }
 
 /*
-  TODO(assets): both marks below are placeholder line art, NOT the official
-  registered artwork. Replace with the licensed EHO logo and the NAR REALTOR®
-  mark before launch. Trademark exposure, not a design preference.
-  Tracked in docs/brand-decisions.md.
+  The marks live in components/compliance-marks.tsx. They render as text until
+  the licensed artwork is in public/marks/ — see that file and
+  public/marks/README.md for why, and for how to turn the artwork on.
 */
-
-function EqualHousingMark() {
-  return (
-    <div className="flex items-center gap-2">
-      <svg
-        role="img"
-        aria-label="Equal Housing Opportunity"
-        viewBox="0 0 48 48"
-        className="h-10 w-10 shrink-0"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      >
-        <title>Equal Housing Opportunity</title>
-        <path d="M4 22 24 7l20 15" strokeLinejoin="round" />
-        <path d="M9 22v19h30V22" strokeLinejoin="round" />
-        <path d="M17 27h14M17 34h14" />
-      </svg>
-      <span className="max-w-[7rem] text-[0.6875rem] leading-tight font-semibold tracking-wide uppercase">
-        Equal Housing Opportunity
-      </span>
-    </div>
-  );
-}
-
-function RealtorMark() {
-  return (
-    <div className="flex items-center gap-2">
-      <svg
-        role="img"
-        aria-label="REALTOR® mark"
-        viewBox="0 0 48 48"
-        className="h-10 w-10 shrink-0"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      >
-        <title>REALTOR®</title>
-        <rect x="5" y="5" width="38" height="38" rx="3" />
-        <path d="M15 34V15h8a5.5 5.5 0 0 1 0 11h-8l10 8" strokeLinejoin="round" />
-      </svg>
-      <span className="text-[0.6875rem] leading-tight font-semibold tracking-wide uppercase">
-        REALTOR&reg;
-      </span>
-    </div>
-  );
-}
