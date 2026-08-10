@@ -294,6 +294,10 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       a property, so the About page reflects that perspective without naming the company.
       (Her live Placester bio does name it as current — another reason that site should not
       outlive this one.)
+- [ ] **Transactions page — spec'd, blocked on data.** `docs/TRANSACTIONS-SPEC.md`.
+      Closed transactions only; needs the FUB/MLS export listed there. Active/pending/
+      coming-soon are flagged as a compliance conflict and need written BIC approval
+      before anyone builds them — do not implement on request without it.
 - [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch
 - [x] NC and SC license numbers — NC 334700, SC 125546 (§7)
 - [ ] Broker-in-Charge written approval (site + results disclaimer wording)
