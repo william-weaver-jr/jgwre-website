@@ -1,3 +1,4 @@
+import mdx from "@mdx-js/rollup";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
@@ -10,7 +11,19 @@ import { defineConfig } from "vitest/config";
  * - Anything that renders runs in the default `jsdom`.
  */
 export default defineConfig({
-  plugins: [react()],
+  /*
+    Post bodies are MDX, and tests/compliance.test.tsx renders them. Without this
+    the suite could not see a single word of blog copy, which would make the
+    §7 checks over posts silently vacuous — the one failure mode that matters
+    most here. `enforce: "pre"` compiles MDX to JSX before the React plugin
+    transforms it.
+
+    No `providerImportSource`: mdx-components.tsx resolves through a Next-only
+    virtual module. Posts therefore render as plain HTML elements here, which is
+    what these suites assert on anyway — heading order, link names, and copy,
+    never class names.
+  */
+  plugins: [{ enforce: "pre", ...mdx() }, react({ include: /\.(mdx|ts|tsx)$/ })],
   /** Resolves the `@/*` alias straight from tsconfig.json. */
   resolve: { tsconfigPaths: true },
   test: {

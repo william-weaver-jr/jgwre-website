@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { publishedPosts } from "@/lib/blog";
 
 /**
  * CLAUDE.md §10: real estate sites are a common target for ADA demand letters,
@@ -22,7 +23,24 @@ vi.mock("next/image", async () => ({
   default: (await import("./next-image-stub")).NextImageStub,
 }));
 
-const PAGES: [route: string, load: () => Promise<{ default: ComponentType<never> }>][] = [
+type PageEntry = [
+  route: string,
+  load: () => Promise<{ default: ComponentType<never> }>,
+  params?: Record<string, string>,
+];
+
+/**
+ * Every published post, expanded. Generated for the same reason as in
+ * tests/compliance.test.tsx: the blog is the one page type that grows on a
+ * cadence, and an unlisted page is an unaudited page.
+ */
+const POST_PAGES: PageEntry[] = publishedPosts().map((post) => [
+  `/blog/${post.slug}`,
+  () => import("@/app/blog/[slug]/page"),
+  { slug: post.slug },
+]);
+
+const PAGES: PageEntry[] = [
   ["/", () => import("@/app/page")],
   ["/about", () => import("@/app/about/page")],
   ["/new-construction", () => import("@/app/new-construction/page")],
@@ -34,7 +52,9 @@ const PAGES: [route: string, load: () => Promise<{ default: ComponentType<never>
   ["/home-value", () => import("@/app/home-value/page")],
   ["/reviews", () => import("@/app/reviews/page")],
   ["/contact", () => import("@/app/contact/page")],
+  ["/blog", () => import("@/app/blog/page")],
   ["/privacy-policy", () => import("@/app/privacy-policy/page")],
+  ...POST_PAGES,
 ];
 
 /**
@@ -47,11 +67,14 @@ const NOT_MEANINGFUL_IN_JSDOM = {
   "target-size": { enabled: false },
 };
 
-async function auditPage(load: () => Promise<{ default: ComponentType<never> }>) {
+async function auditPage(
+  load: () => Promise<{ default: ComponentType<never> }>,
+  params: Record<string, string> = {},
+) {
   const { default: Page } = await load();
   const element = await (Page as unknown as (props: unknown) => unknown)({
     searchParams: Promise.resolve({}),
-    params: Promise.resolve({}),
+    params: Promise.resolve(params),
   });
 
   // The real landmark structure the root layout provides. A page audited outside
@@ -80,8 +103,8 @@ afterEach(() => {
 });
 
 describe("WCAG 2.1 AA (§10)", () => {
-  it.each(PAGES)("%s has no axe violations", async (_route, load) => {
-    const results = await auditPage(load);
+  it.each(PAGES)("%s has no axe violations", async (_route, load, params) => {
+    const results = await auditPage(load, params);
     expect(report(results.violations)).toBe("");
   });
 });
@@ -95,14 +118,14 @@ describe("keyboard and landmark structure (§10)", () => {
     expect(document.querySelector("main#main")).not.toBeNull();
   });
 
-  it.each(PAGES)("%s exposes one main landmark and one contentinfo", async (_route, load) => {
-    await auditPage(load);
+  it.each(PAGES)("%s exposes one main landmark and one contentinfo", async (_route, load, params) => {
+    await auditPage(load, params);
     expect(document.querySelectorAll("main")).toHaveLength(1);
     expect(document.querySelectorAll("footer")).toHaveLength(1);
   });
 
-  it.each(PAGES)("%s gives every link a discernible name", async (_route, load) => {
-    await auditPage(load);
+  it.each(PAGES)("%s gives every link a discernible name", async (_route, load, params) => {
+    await auditPage(load, params);
 
     for (const link of document.querySelectorAll("a")) {
       const name = (link.textContent ?? "").trim() || link.getAttribute("aria-label") || "";
@@ -110,8 +133,8 @@ describe("keyboard and landmark structure (§10)", () => {
     }
   });
 
-  it.each(PAGES)("%s marks external links as opening elsewhere", async (_route, load) => {
-    await auditPage(load);
+  it.each(PAGES)("%s marks external links as opening elsewhere", async (_route, load, params) => {
+    await auditPage(load, params);
 
     for (const link of document.querySelectorAll('a[target="_blank"]')) {
       expect(link.getAttribute("rel") ?? "").toContain("noopener");

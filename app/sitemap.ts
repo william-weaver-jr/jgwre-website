@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { publishedAreas, sortAreas } from "@/lib/areas";
+import { lastModified, publishedPosts } from "@/lib/blog";
 import { PILLARS, SITE_URL } from "@/lib/site";
 import { isTransactionsPageIndexable } from "@/lib/transactions";
 
@@ -30,12 +31,35 @@ const routes = [
      market has no page at all, so listing it would advertise a 404 — the exact
      mistake noted above about mackenziesiek.com. */
   ...sortAreas(publishedAreas()).map((area) => `/areas/${area.slug}`),
+  /* The listing is worth crawling once there is something on it, not before. */
+  ...(publishedPosts().length > 0 ? ["/blog"] : []),
   "/privacy-policy",
 ];
 
+/**
+ * Regenerated hourly, on the same clock as /blog and /blog/[slug].
+ *
+ * Without this the sitemap is baked at build time, and a post scheduled for next
+ * Tuesday would go live on a route that resolves while the sitemap kept claiming
+ * it does not exist. docs/CONTENT-MARKETING.md.
+ */
+export const revalidate = 3600;
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((route) => ({
-    url: `${SITE_URL}${route}`,
-    lastModified: new Date(),
-  }));
+  return [
+    ...routes.map((route) => ({
+      url: `${SITE_URL}${route}`,
+      lastModified: new Date(),
+    })),
+    /*
+      Posts carry their own date rather than the build's. A future-dated post is
+      absent entirely — publishedPosts() is the same gate the router uses, so the
+      sitemap can never advertise a URL that is not live yet. That is the mistake
+      noted above about mackenziesiek.com, in its other direction.
+    */
+    ...publishedPosts().map((post) => ({
+      url: `${SITE_URL}/blog/${post.slug}`,
+      lastModified: new Date(`${lastModified(post)}T00:00:00Z`),
+    })),
+  ];
 }

@@ -8,6 +8,8 @@ stop and flag it rather than complying.
 - `docs/BRAND-VOICE.md` — USP, voice rules, origin story, banned language
 - `docs/CASE-STUDIES.md` — the three negotiation case studies + required disclaimer
 - `docs/CONTENT-PLAN.md` — page-by-page content direction and the lead magnet spec
+- `docs/CONTENT-MARKETING.md` — the blog pipeline: the documented-facts allowlist, AEO post
+  structure, the publishing cadence, and what may not be a post
 
 ---
 
@@ -100,6 +102,7 @@ request (`.github/workflows/ci.yml`).
 | Suite | Covers |
 |---|---|
 | `lib/**/*.test.ts` | Pure logic and the datasets: the lead schema, the FUB payload, intake formatting and lever selection, review and transaction queries. Includes integrity checks over the real `REVIEWS` and `TRANSACTIONS` data. |
+| `lib/blog/index.test.ts` | The blog registry and the publishing gate. Notably it is the **only** thing that checks a *scheduled* post — one dated forward is invisible to the suites below, which render published pages, so its metadata and raw MDX are scanned here at merge time instead of publishing themselves unwatched. |
 | `app/api/lead/route.test.ts` | The §9 contract end to end with FUB and Resend mocked — honeypot, rate limiting, and every failure combination. A lead is never silently dropped. |
 | `tests/compliance.test.tsx` | **§7, mechanically.** Renders every page and checks brokerage identification, license numbers, the EHO and REALTOR® marks, verbatim TCPA consent, the results disclaimer beside any dollar figure, banned language, fair-housing framing, guarantee language, and undocumented claims. |
 | `tests/accessibility.test.tsx` | §10. axe-core at WCAG 2.1 AA over every page, plus landmark and link-name checks. Contrast still needs Lighthouse — jsdom computes no colours. |
@@ -109,7 +112,9 @@ Two things follow from this:
 
 - **§7 violations now break the build.** That sentence used to be aspirational.
   Adding a page means adding it to the `PAGES` list in both `tests/` suites, or it
-  ships unchecked.
+  ships unchecked. Blog posts are the exception and are expanded into both lists
+  automatically from `publishedPosts()` — the blog grows on a cadence, and a
+  hand-maintained list is one someone eventually forgets to add to.
 - **Verbatim testimonials are exempt from our own styleguide**, and the suites
   model that: banned language and the negotiation-queen ban are checked against
   copy outside `<blockquote>`. A client's words are not the site making a claim.
@@ -277,7 +282,8 @@ was approved; it cannot tell you when something new needs approving.
 /home-value             Valuation request form → FUB (manual CMA, not an automated AVM)
 /areas/[slug]           Neighborhood pages, one per market in Section 5
 /reviews                Testimonials, unedited
-/blog                   CMS-driven
+/blog                   Evergreen posts. MDX in-repo until the CMS lands.
+/blog/[slug]            One post. See docs/CONTENT-MARKETING.md
 /contact                Phone-first, form secondary
 /privacy-policy
 ```
@@ -348,7 +354,15 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       Closed transactions only; needs the FUB/MLS export listed there. Active/pending/
       coming-soon are flagged as a compliance conflict and need written BIC approval
       before anyone builds them — do not implement on request without it.
-- [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch
+- [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch.
+      `/blog` ships without it: posts are MDX in `content/blog` with typed metadata in
+      `lib/blog/data.ts`, which means a developer publishes for now. The `Post` type is
+      shaped to map onto CMS document fields so the migration is mechanical. Whatever
+      replaces it must keep `lib/blog/validate.ts` — moving copy into a CMS is how the §6
+      discipline gets lost.
+- [ ] **First blog batch.** The pipeline is built and one draft post proves it end to end.
+      `docs/CONTENT-MARKETING.md` §8 has the state. The draft has not been read by Jasmine
+      and does not go out with launch until it has.
 - [x] NC and SC license numbers — NC 334700, SC 125546 (§7)
 - [x] **Broker-in-Charge approval (site + results disclaimer wording) — RECEIVED 2026-08-10.**
       See §7 Approvals for what it covers and the two things it does not. §7 asks for written

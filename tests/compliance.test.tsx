@@ -3,6 +3,7 @@ import type { ComponentType } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { SiteFooter } from "@/components/site-footer";
+import { publishedPosts } from "@/lib/blog";
 import { AGENT, BROKERAGE, RESULTS_DISCLAIMER, SOCIAL, TCPA_CONSENT } from "@/lib/site";
 
 /** See tests/next-image-stub.tsx. `alt` survives, which is what §10 asserts here. */
@@ -21,8 +22,31 @@ vi.mock("next/image", async () => ({
  * the layout is what puts it on every route.
  */
 
+type PageEntry = [
+  route: string,
+  load: () => Promise<{ default: ComponentType<never> }>,
+  /** Route params, for dynamic segments. Static routes take none. */
+  params?: Record<string, string>,
+];
+
+/**
+ * Every blog post, expanded into a page entry.
+ *
+ * Generated rather than listed. The blog is the one page type that grows on a
+ * schedule — a batch of posts every few weeks, some of them dated forward — and
+ * a hand-maintained list is a list someone forgets to add to. Forgetting here
+ * would not fail; it would silently skip §7 on the newest copy on the site,
+ * which is the worst available outcome. lib/blog/index.test.ts covers the
+ * scheduled ones that this cannot see.
+ */
+const POST_PAGES: PageEntry[] = publishedPosts().map((post) => [
+  `/blog/${post.slug}`,
+  () => import("@/app/blog/[slug]/page"),
+  { slug: post.slug },
+]);
+
 /* Every route with a page, so a new page cannot be added without appearing here. */
-const PAGES: [route: string, load: () => Promise<{ default: ComponentType<never> }>][] = [
+const PAGES: PageEntry[] = [
   ["/", () => import("@/app/page")],
   ["/about", () => import("@/app/about/page")],
   ["/new-construction", () => import("@/app/new-construction/page")],
@@ -34,15 +58,20 @@ const PAGES: [route: string, load: () => Promise<{ default: ComponentType<never>
   ["/home-value", () => import("@/app/home-value/page")],
   ["/reviews", () => import("@/app/reviews/page")],
   ["/contact", () => import("@/app/contact/page")],
+  ["/blog", () => import("@/app/blog/page")],
   ["/privacy-policy", () => import("@/app/privacy-policy/page")],
+  ...POST_PAGES,
 ];
 
 /** Async pages take props; they are rendered through their own resolved element. */
-async function renderPage(load: () => Promise<{ default: ComponentType<never> }>) {
+async function renderPage(
+  load: () => Promise<{ default: ComponentType<never> }>,
+  params: Record<string, string> = {},
+) {
   const { default: Page } = await load();
   const element = await (Page as unknown as (props: unknown) => unknown)({
     searchParams: Promise.resolve({}),
-    params: Promise.resolve({}),
+    params: Promise.resolve(params),
   });
   return renderToStaticMarkup(element as React.ReactElement);
 }
@@ -74,11 +103,32 @@ function ourCopy(html: string): string {
   );
 }
 
+/**
+ * A page's metadata, however it produces it.
+ *
+ * Static routes export a `metadata` object; dynamic ones export
+ * `generateMetadata`. §11 asks for a unique title and description per page, and
+ * that obligation does not change with which of the two a route happens to use.
+ */
+async function resolveMetadata(
+  load: () => Promise<{ default: ComponentType<never> }>,
+  params: Record<string, string> = {},
+): Promise<{ title?: unknown; description?: unknown } | undefined> {
+  const mod = (await load()) as unknown as {
+    metadata?: { title?: unknown; description?: unknown };
+    generateMetadata?: (props: unknown) => Promise<{ title?: unknown; description?: unknown }>;
+  };
+  if (mod.generateMetadata) {
+    return mod.generateMetadata({ params: Promise.resolve(params) });
+  }
+  return mod.metadata;
+}
+
 const rendered = new Map<string, string>();
 async function page(route: string): Promise<string> {
   if (!rendered.has(route)) {
     const entry = PAGES.find(([r]) => r === route)!;
-    rendered.set(route, await renderPage(entry[1]));
+    rendered.set(route, await renderPage(entry[1], entry[2]));
   }
   return rendered.get(route)!;
 }
@@ -367,10 +417,8 @@ describe("SEO metadata (§11)", () => {
    * its `%s — Jasmine Garcia` template.
    */
   it("gives every page a title and a description", async () => {
-    for (const [route, load] of PAGES) {
-      const { metadata } = (await load()) as unknown as {
-        metadata?: { title?: unknown; description?: unknown };
-      };
+    for (const [route, load, params] of PAGES) {
+      const metadata = await resolveMetadata(load, params);
       expect(metadata, `${route} exports no metadata`).toBeDefined();
       expect(metadata!.description, `${route} has no description`).toBeTruthy();
       if (route !== "/") {
@@ -383,10 +431,8 @@ describe("SEO metadata (§11)", () => {
     const titles: string[] = [];
     const descriptions: string[] = [];
 
-    for (const [route, load] of PAGES) {
-      const { metadata } = (await load()) as unknown as {
-        metadata: { title?: string; description: string };
-      };
+    for (const [route, load, params] of PAGES) {
+      const metadata = (await resolveMetadata(load, params))!;
       if (metadata.title) titles.push(String(metadata.title));
       descriptions.push(String(metadata.description));
       expect(String(metadata.description).length, `${route} has a stub description`).toBeGreaterThan(
