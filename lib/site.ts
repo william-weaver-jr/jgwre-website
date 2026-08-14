@@ -17,6 +17,27 @@ export const AGENT = {
 } as const;
 
 /**
+ * Her own accounts. One link out per surface and `sameAs` in the JSON-LD —
+ * nothing embedded, deliberately.
+ *
+ * A live Instagram feed would put copy on a BIC-approved page that nobody
+ * reviews and that tests/compliance.test.tsx cannot see, because the suite
+ * renders the repo and an embed renders whatever Meta returns that day. Her
+ * captions use the register docs/BRAND-VOICE.md bans, carry the unbounded
+ * "most 5-star Google reviews" superlative §5 keeps off the site, and use the
+ * nickname §12 resolved as hers on Instagram and never here. A link carries
+ * none of that: the visitor crosses a boundary they can see.
+ *
+ * The trailing underscore is part of the handle. CLAUDE.md §6.
+ */
+export const SOCIAL = {
+  instagram: {
+    handle: "@myrealtorjasmine_",
+    url: "https://www.instagram.com/myrealtorjasmine_",
+  },
+} as const;
+
+/**
  * Brokerage identification. North Carolina requires this in a broker's
  * advertising and South Carolina has an equivalent rule. It must appear on
  * every page, and nothing may imply she operates independently.

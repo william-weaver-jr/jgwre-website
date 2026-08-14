@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ContactIntake } from "@/components/contact-intake";
+import { InstagramLink } from "@/components/instagram-link";
 import { PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
 import { AGENT, BROKERAGE } from "@/lib/site";
@@ -74,6 +75,13 @@ export default function ContactPage() {
           {AGENT.name} is a licensed real estate broker affiliated with {BROKERAGE.name}. All real
           estate services are provided through {BROKERAGE.name}.
         </p>
+
+        {/*
+          Below the number and below the form, on purpose. Social is where someone
+          decides whether they like her; the phone is where they hire her, and
+          docs/CONTENT-PLAN.md puts that first. Link only — lib/site.ts SOCIAL.
+        */}
+        <InstagramLink className="mt-10 text-base leading-relaxed" />
       </section>
     </>
   );

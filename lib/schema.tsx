@@ -1,4 +1,4 @@
-import { AGENT, BROKERAGE, SITE_URL } from "@/lib/site";
+import { AGENT, BROKERAGE, SITE_URL, SOCIAL } from "@/lib/site";
 
 /**
  * JSON-LD for the homepage. RealEstateAgent + the brokerage as the parent
@@ -13,6 +13,10 @@ export function realEstateAgentSchema() {
     jobTitle: AGENT.title,
     telephone: AGENT.phoneDisplay,
     url: SITE_URL,
+    /* Ties this domain to the profile she has actually been posting from, which
+       is what sameAs is for. Zillow belongs here too once §5's review counts are
+       re-pulled and the profile URL is confirmed against CLAUDE.md §6. */
+    sameAs: [SOCIAL.instagram.url],
     areaServed: [
       "Charlotte, NC",
       "Ballantyne, NC",

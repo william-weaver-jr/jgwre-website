@@ -3,7 +3,7 @@ import type { ComponentType } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { SiteFooter } from "@/components/site-footer";
-import { AGENT, BROKERAGE, RESULTS_DISCLAIMER, TCPA_CONSENT } from "@/lib/site";
+import { AGENT, BROKERAGE, RESULTS_DISCLAIMER, SOCIAL, TCPA_CONSENT } from "@/lib/site";
 
 /** See tests/next-image-stub.tsx. `alt` survives, which is what §10 asserts here. */
 vi.mock("next/image", async () => ({
@@ -137,6 +137,33 @@ describe("brokerage identification (§7)", () => {
     expect(text(renderToStaticMarkup(<SiteFooter />))).toMatch(
       /licensed real estate broker affiliated with Stone Realty Group/i,
     );
+  });
+});
+
+/**
+ * §7 makes every page brokerage advertising, and this suite is what reviews it.
+ * An embedded Instagram feed would render whatever Meta returned that morning —
+ * copy on approved advertising that no reviewer and no test ever sees. Her own
+ * captions are the reason that matters: the register BRAND-VOICE.md bans, the
+ * unbounded superlative §5 keeps off the site, dollar figures with no disclaimer
+ * beside them, and the nickname §12 resolved as hers on Instagram and never here.
+ *
+ * So the feed is a link out. This asserts the shape of that decision — the
+ * profile is reachable, and nothing on the page pulls from Meta at runtime.
+ * lib/site.ts SOCIAL carries the reasoning; a curated strip of images committed
+ * to the repo would be reviewable and trips neither branch.
+ */
+describe("Instagram is linked, never embedded (§7)", () => {
+  it("links her profile from the footer that ships on every page", () => {
+    const html = renderToStaticMarkup(<SiteFooter />);
+    expect(html).toContain(`href="${SOCIAL.instagram.url}"`);
+    expect(text(html)).toContain(SOCIAL.instagram.handle);
+  });
+
+  it.each(PAGES.map(([route]) => route))("%s embeds no feed", async (route) => {
+    const html = await page(route);
+    expect(html).not.toMatch(/instagram\.com\/(embed|p\/|reel\/)/);
+    expect(html).not.toMatch(/<(iframe|script)[^>]+(instagram|cdninstagram|elfsight|snapwidget)/i);
   });
 });
 

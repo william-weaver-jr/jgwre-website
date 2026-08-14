@@ -1,10 +1,11 @@
 import Link from "next/link";
 
 import { EqualHousingMark, RealtorMark } from "@/components/compliance-marks";
+import { InstagramLink } from "@/components/instagram-link";
 import { publishedAreas, sortAreas } from "@/lib/areas";
 import { GUIDE_TITLE } from "@/lib/intake";
 import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
-import { TRANSACTIONS } from "@/lib/transactions";
+import { isTransactionsPageIndexable } from "@/lib/transactions";
 
 /**
  * Required on every page. Carries brokerage identification, both license
@@ -31,6 +32,7 @@ export function SiteFooter() {
               <span className="sr-only">Call {AGENT.name} at </span>
               {AGENT.phoneDisplay}
             </a>
+            <InstagramLink className="mt-6 text-sm leading-relaxed" />
           </div>
 
           <address className="text-sm leading-relaxed not-italic">
@@ -87,9 +89,10 @@ export function SiteFooter() {
                   Reviews
                 </Link>
               </li>
-              {/* Appears when lib/transactions/data.ts has rows. Linking an empty
-                  page from every page on the site advertises the gap. */}
-              {TRANSACTIONS.length > 0 ? (
+              {/* Appears once the ledger clears TRANSACTIONS_INDEX_THRESHOLD.
+                  Linking a two-row page from every page on the site advertises
+                  the gap as loudly as linking an empty one. */}
+              {isTransactionsPageIndexable() ? (
                 <li>
                   <Link href="/transactions" className="underline-offset-4 hover:underline">
                     Transactions
