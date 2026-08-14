@@ -6,8 +6,10 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { SAMPLE_TRANSACTIONS } from "./sample";
 import {
   TRANSACTIONS,
+  TRANSACTIONS_INDEX_THRESHOLD,
   filterByPillar,
   groupByYear,
+  isTransactionsPageIndexable,
   locationLabel,
   sideLabel,
   sortTransactions,
@@ -36,26 +38,61 @@ describe("visibleTransactions", () => {
    * The gate that matters: sample rows are fabricated transactions on a licensed
    * broker's site. They may never reach production. lib/transactions/index.ts
    * and docs/TRANSACTIONS-SPEC.md.
+   *
+   * These assertions are written against the BEHAVIOUR, not against the size of
+   * the dataset, so that populating data.ts row by row does not turn the gate
+   * red and tempt someone into deleting it.
    */
-  it("returns nothing and flags nothing in production while the export is missing", () => {
+  it("returns only real rows in production, never a placeholder", () => {
     vi.stubEnv("NODE_ENV", "production");
-    expect(visibleTransactions()).toEqual({ rows: [], isSample: false });
+    const { rows, isSample } = visibleTransactions();
+    expect(isSample).toBe(false);
+    expect(rows).toEqual(TRANSACTIONS);
+    for (const row of rows) expect(row.isSample).toBeUndefined();
   });
 
-  it("returns the placeholders in development, always marked as samples", () => {
+  it("prefers real rows over the placeholders in development once any exist", () => {
     vi.stubEnv("NODE_ENV", "development");
     const { rows, isSample } = visibleTransactions();
-    expect(isSample).toBe(true);
     expect(rows.length).toBeGreaterThan(0);
+    expect(isSample).toBe(TRANSACTIONS.length === 0);
+    if (isSample) expect(rows).toEqual(SAMPLE_TRANSACTIONS);
+    else expect(rows).toEqual(TRANSACTIONS);
   });
 
   it("marks every placeholder row isSample in the data itself", () => {
     for (const row of SAMPLE_TRANSACTIONS) expect(row.isSample).toBe(true);
   });
 
-  it("still returns nothing in test, which is neither development nor a real export", () => {
-    vi.stubEnv("NODE_ENV", "test");
-    expect(visibleTransactions().rows).toEqual([]);
+  it("never serves placeholders outside development", () => {
+    for (const env of ["production", "test"]) {
+      vi.stubEnv("NODE_ENV", env);
+      const { rows, isSample } = visibleTransactions();
+      expect(isSample).toBe(false);
+      expect(rows).toEqual(TRANSACTIONS);
+    }
+  });
+});
+
+describe("isTransactionsPageIndexable", () => {
+  const rows = (n: number) => Array.from({ length: n }, (_, i) => transaction({ id: `t${i}` }));
+
+  it("keeps a thin ledger out of the index", () => {
+    expect(isTransactionsPageIndexable([])).toBe(false);
+    expect(isTransactionsPageIndexable(rows(TRANSACTIONS_INDEX_THRESHOLD - 1))).toBe(false);
+  });
+
+  it("opens up at the threshold and above", () => {
+    expect(isTransactionsPageIndexable(rows(TRANSACTIONS_INDEX_THRESHOLD))).toBe(true);
+    expect(isTransactionsPageIndexable(rows(TRANSACTIONS_INDEX_THRESHOLD + 5))).toBe(true);
+  });
+
+  /* The robots tag, the sitemap entry, and the footer link must agree. They do
+     by construction — all three call this — and this is the reminder why. */
+  it("defaults to the real dataset", () => {
+    expect(isTransactionsPageIndexable()).toBe(
+      TRANSACTIONS.length >= TRANSACTIONS_INDEX_THRESHOLD,
+    );
   });
 });
 

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { publishedAreas, sortAreas } from "@/lib/areas";
 import { PILLARS, SITE_URL } from "@/lib/site";
-import { TRANSACTIONS } from "@/lib/transactions";
+import { isTransactionsPageIndexable } from "@/lib/transactions";
 
 /*
   Add routes here as pages ship. See the build order in docs/CONTENT-PLAN.md.
@@ -22,9 +22,10 @@ const routes = [
   "/home-value",
   "/reviews",
   "/contact",
-  /* Listed only once it has rows. The route resolves either way, but an empty
-     one is a thin page and /transactions carries noindex until data.ts fills. */
-  ...(TRANSACTIONS.length > 0 ? ["/transactions"] : []),
+  /* Listed only once the ledger is substantial. The route resolves either way,
+     but a two-row ledger is a thin page, so /transactions carries noindex until
+     data.ts passes TRANSACTIONS_INDEX_THRESHOLD. */
+  ...(isTransactionsPageIndexable() ? ["/transactions"] : []),
   /* Only markets with authored content in lib/areas/data.ts. An unwritten
      market has no page at all, so listing it would advertise a 404 — the exact
      mistake noted above about mackenziesiek.com. */

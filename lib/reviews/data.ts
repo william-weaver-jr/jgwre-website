@@ -67,11 +67,16 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "I am glad we crossed paths with Jasmine. She helped me and my husband find our first brand new home!! Promised to help us find a home and she did. Kept a open line of communication and checked in often. I would recommend her to anyone who is looking for their dream home.",
     statesDollarOutcome: false,
-    note: "Zillow labels this 'Sold' but the client describes buying their first home. The label is Zillow's, not hers — do not surface this one on /sellers on the strength of `role`.",
+    crossPostedTo:
+      "Google, posted as “S Carter” (Local Guide). Opens “Jasmine Garcia was my realtor and I am glad we crossed paths.” — otherwise the same text. Do not add a second entry.",
+    note: "Zillow labels this 'Sold' but the client describes buying their first home. The label is Zillow's, not hers — do not surface this one on /sellers on the strength of `role`. Settled: the transaction record (2022-aveline-at-coulwood-01) is buyer-side new construction, so the client's own account is the accurate one.",
   },
   {
     id: "zillow-harrist245034",
-    author: "harrist245034",
+    /* Posted under the generated Zillow handle "harrist245034"; the id keeps it
+       so the review stays findable on the platform. The real name is confirmed,
+       so the byline is the name — `displayName()` renders "Trevor H." */
+    author: "Trevor Harris",
     rating: 5,
     platform: "zillow",
     postedOn: "Zillow profile",
@@ -85,7 +90,7 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Jasmine was amazing throughout our entire home buying process. Our closing process was extended due to the home being new construction but Jasmine and her team did such a great job keeping us up to date with all necessary information at all times. There was a minor issue towards closing that was handled very well by Jasmine and the rest of the Matt Stone team that we are very appreciative for. We would 100% recommend Jasmine for your home buying process!",
     statesDollarOutcome: false,
-    openQuestion: "TODO(verify): generic Zillow username. Needs the client's real name.",
+    note: "Resolved 2026-08-14: the handle is Trevor Harris. A separate Aveline at Coulwood buyer, not the same closing as zillow-saquanna-carter — two different clients in one community.",
   },
   {
     id: "zillow-steven-holt",

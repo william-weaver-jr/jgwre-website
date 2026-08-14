@@ -13,6 +13,26 @@ export { TRANSACTIONS } from "./data";
 export type { Transaction, TransactionPillar } from "./types";
 
 /**
+ * How many closed transactions the ledger needs before it is worth indexing.
+ *
+ * The route always resolves and always renders whatever rows exist — this gates
+ * search visibility only. A ledger of one or two rows is a thin page arguing
+ * against her: docs/TRANSACTIONS-SPEC.md warns about exactly that, and the fix
+ * is to let the dataset fill up out of sight rather than to hide the route.
+ *
+ * Eight is a judgement call, not a rule from anywhere. Raise or lower it freely;
+ * both the sitemap and the page's robots tag read this one constant.
+ */
+export const TRANSACTIONS_INDEX_THRESHOLD = 8;
+
+/** True when the ledger is substantial enough to index and to list in the sitemap. */
+export function isTransactionsPageIndexable(
+  rows: readonly Transaction[] = TRANSACTIONS,
+): boolean {
+  return rows.length >= TRANSACTIONS_INDEX_THRESHOLD;
+}
+
+/**
  * The only function a page should call.
  *
  * Returns the real rows. When there are none AND this is a development build,

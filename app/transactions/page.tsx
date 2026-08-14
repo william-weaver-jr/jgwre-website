@@ -8,7 +8,7 @@ import { AGENT, PILLARS } from "@/lib/site";
 import {
   filterByPillar,
   groupByYear,
-  TRANSACTIONS,
+  isTransactionsPageIndexable,
   visibleTransactions,
   type TransactionPillar,
 } from "@/lib/transactions";
@@ -45,12 +45,13 @@ export const metadata: Metadata = {
     "Closed transactions for Jasmine Garcia, Broker/REALTOR® with Stone Realty Group — new construction, relocation, and both sides of the NC/SC line.",
   alternates: { canonical: "/transactions" },
   /*
-    Noindex while the dataset is empty, and only while it is empty. An indexed
-    page whose entire content is "this page is being built" is a thin page
-    competing with her own real ones. Populating data.ts removes the tag, adds
-    the sitemap entry, and reveals the footer link — one edit, three effects.
+    Noindex until the ledger is substantial — TRANSACTIONS_INDEX_THRESHOLD, not
+    merely non-empty. A page carrying two closings is as thin as one carrying
+    none, and it competes with her real pages while making a weaker version of
+    their argument. Crossing the threshold removes the tag, adds the sitemap
+    entry, and reveals the footer link — one dataset, three effects.
   */
-  ...(TRANSACTIONS.length === 0 ? { robots: { index: false, follow: true } } : {}),
+  ...(isTransactionsPageIndexable() ? {} : { robots: { index: false, follow: true } }),
 };
 
 export default async function TransactionsPage({
