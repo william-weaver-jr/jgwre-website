@@ -135,7 +135,10 @@ Four pillars. Each gets a dedicated page, and each is the USP applied to a speci
 2. **Relocation** — 18 relocation transactions.
    *The table:* everyone in the transaction is local except the client.
 3. **The NC/SC border** — licensed in both states. Fort Mill, Tega Cay, Indian Land,
-   Lake Wylie, Waxhaw. 12 closings in the Fort Mill corridor.
+   Clover / Lake Wylie, Rock Hill (SC) and Waxhaw (NC). 12 closings in the Fort Mill
+   corridor.
+   The corridor spans the line, which is the point of the pillar — Waxhaw is a North
+   Carolina town in Union County and was listed under SC here in error until 2026-08-17.
    *The table:* two states, two tax regimes, two sets of rules.
 4. **Sellers** — the Stone Selling System (reference by name; see Compliance).
    *The table:* the buyer's agent and the inspector both work for the buyer.
@@ -165,7 +168,13 @@ reality" is the exact register `BRAND-VOICE.md` bans, and the useful line in the
 `/about` in better words.
 
 **Markets served:** Ballantyne, SouthPark, Steele Creek, Myers Park, Dilworth, South End,
-LoSo, Uptown, Pineville (NC) · Fort Mill, Tega Cay, Indian Land, Lake Wylie, Waxhaw (SC)
+LoSo, Uptown, Pineville, Waxhaw (NC) · Fort Mill, Tega Cay, Indian Land, Clover /
+Lake Wylie, Rock Hill (SC)
+
+Confirmed 2026-08-17. Lake Wylie is the unincorporated area; Clover is the town, so
+both names appear. Closings outside this list happen and belong in the transactions
+ledger when they do — Dallas NC is already there. "Markets served" is where she is
+positioned and where area pages get built, not a boundary on what she has closed.
 
 ---
 
@@ -241,6 +250,17 @@ live, and must approve material changes after.
 
 **APPROVED 2026-08-10** — reported by Bill. Covers the site as it stands and the results
 disclaimer wording. This clears the production-deploy gate.
+
+**Transactions page going public — APPROVED 2026-08-17.** Reported by Bill. `/transactions`
+was noindexed and unlinked while its dataset was empty; it now carries closed transactions
+from the 2022 workbook and is indexed, linked in the footer, and in the sitemap. Approval
+covers the ledger as specified in `docs/TRANSACTIONS-SPEC.md` §1 — neighborhood-level
+locations, side always stated, no prices, no client names, no addresses.
+
+It does **not** extend to the pipeline states, which remain blocked (§2 of that spec and
+the open item in §12). Nor to displaying dollar figures on the page: closing prices live
+in `lib/transactions/internal-metrics.ts`, which no page may import, and putting any of
+them on screen is a fresh decision for the BIC.
 
 **Footer marks, text-only — APPROVED 2026-08-10.** The BIC confirmed a text treatment of the
 Equal Housing Opportunity and REALTOR® marks is acceptable; he uses the same on his own site.
@@ -350,10 +370,23 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       a property, so the About page reflects that perspective without naming the company.
       (Her live Placester bio does name it as current — another reason that site should not
       outlive this one.)
-- [ ] **Transactions page — spec'd, blocked on data.** `docs/TRANSACTIONS-SPEC.md`.
-      Closed transactions only; needs the FUB/MLS export listed there. Active/pending/
-      coming-soon are flagged as a compliance conflict and need written BIC approval
-      before anyone builds them — do not implement on request without it.
+- [x] **Transactions page — SHIPPED 2026-08-17.** `docs/TRANSACTIONS-SPEC.md`. Ten closed
+      transactions, all 2022, from the closed-transactions workbook. Public, indexed, and
+      BIC-approved (§7). Active/pending/coming-soon remain a compliance conflict needing
+      separate written approval — do not implement on request without it.
+- [ ] **Backfill 2023–2026 into the ledger.** The workbook covered 2022 only, so the page
+      currently argues that she stopped closing in 2022. This is the single highest-value
+      follow-up on the page and wants the same fields: closing month, neighborhood, city,
+      state, side, property type, builder on new construction, and the lever.
+- [ ] **Price bands on the transactions ledger — parked idea, not approved.** Deliberately
+      not built now. The question it would answer is a real one ("does she work in my
+      range?"), and the compliant shape is a coarse band as a filter or a single §5 line,
+      never a per-row figure. Blockers to clear first: SC is a non-disclosure state, so no
+      SC row may contribute a figure without written per-transaction permission; §7 pulls
+      the results disclaimer in alongside any dollar outcome; and it is a material change,
+      so it goes to the BIC. The underlying numbers are already recorded in
+      `lib/transactions/internal-metrics.ts`, which a test keeps out of `app/` and
+      `components/`.
 - [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch.
       `/blog` ships without it: posts are MDX in `content/blog` with typed metadata in
       `lib/blog/data.ts`, which means a developer publishes for now. The `Post` type is

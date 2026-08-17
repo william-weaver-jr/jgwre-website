@@ -69,7 +69,7 @@ export const REVIEWS: readonly Review[] = [
     statesDollarOutcome: false,
     crossPostedTo:
       "Google, posted as “S Carter” (Local Guide). Opens “Jasmine Garcia was my realtor and I am glad we crossed paths.” — otherwise the same text. Do not add a second entry.",
-    note: "Zillow labels this 'Sold' but the client describes buying their first home. The label is Zillow's, not hers — do not surface this one on /sellers on the strength of `role`. Settled: the transaction record (2022-aveline-at-coulwood-01) is buyer-side new construction, so the client's own account is the accurate one.",
+    note: "Zillow labels this 'Sold' but the client describes buying their first home. The label is Zillow's, not hers — do not surface this one on /sellers on the strength of `role`. Settled 2026-08-17: the transaction record (2022-aveline-at-coulwood-01) is buyer-side new construction, so the client's own account is the accurate one.",
   },
   {
     id: "zillow-harrist245034",
@@ -90,7 +90,9 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Jasmine was amazing throughout our entire home buying process. Our closing process was extended due to the home being new construction but Jasmine and her team did such a great job keeping us up to date with all necessary information at all times. There was a minor issue towards closing that was handled very well by Jasmine and the rest of the Matt Stone team that we are very appreciative for. We would 100% recommend Jasmine for your home buying process!",
     statesDollarOutcome: false,
-    note: "Resolved 2026-08-14: the handle is Trevor Harris. A separate Aveline at Coulwood buyer, not the same closing as zillow-saquanna-carter — two different clients in one community.",
+    crossPostedTo:
+      "A second review by the same client, different wording, recorded in the closed-transactions workbook: “The entire home buying process with the Matt Stone team was very stress-free and very well managed. Our agent Jasmine Garcia was amazing to work with and was willing to help out in any way possible. Our closing process was extended due to the home being under construction and Jasmine and the rest of the Matt Stone team did a great job in keeping us up to date and ensuring we knew everything we needed to know at all times. I would 100% recommend this team, especially Jasmine, for finding your new home!” Platform unconfirmed, presumed Google. Do not add a second entry.",
+    note: "Resolved 2026-08-17: the handle is Trevor Harris. A separate Aveline at Coulwood buyer, not the same closing as zillow-saquanna-carter — two different clients in one community. His transaction row is 2022-aveline-at-coulwood-02.",
   },
   {
     id: "zillow-steven-holt",
@@ -108,6 +110,8 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Jasmine got me more than I could ask for. Very quick on questions I had through the process. We closed faster than expected. We told Jasmine what we were looking for and within a week we were putting in an offer. Ty",
     statesDollarOutcome: false,
+    crossPostedTo:
+      "A second review by the same client, different wording, recorded in the closed-transactions workbook: “Jasmine Garcia was great to us. She found a home that we wanted very quickly and answered any questions I had through the house buying process. I highly recommend her. We got more than we asked for. 😊” Platform unconfirmed, presumed Google. Do not add a second entry, and do not merge the two texts — the body above is the verbatim Zillow one.",
   },
   {
     id: "zillow-sms2rcks",
@@ -126,6 +130,33 @@ export const REVIEWS: readonly Review[] = [
     body: "Was a pleasure to work with Jasmine! She helped me through the process and was very responsive! The closing was very straightforward & she had many resources we used during the due diligence period!",
     statesDollarOutcome: false,
     openQuestion: "TODO(verify): generic Zillow username. Needs the client's real name.",
+  },
+  {
+    /*
+      From the closed-transactions workbook, not from a platform scrape — which
+      is why every field about the POSTING is unconfirmed while the words
+      themselves are solid. The openQuestion below is the publication gate: the
+      review sits in the dataset, joins to its transaction, and stays off the
+      site until someone finds the original.
+    */
+    id: "unverified-harold-cathy-phillips",
+    author: "Harold & Cathy Phillips",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed. Not among the Zillow reviews already recorded here, so Google is the assumption, not a finding.",
+    /* Placeholder: the closing month, NOT the posting date, which nobody has. */
+    date: "2022-08-01",
+    datePrecision: "month",
+    transaction: {
+      role: "bought",
+      propertyType: "Single Family",
+      year: 2022,
+      location: "Oakwood Acres, Rock Hill, SC",
+    },
+    body: "It was such a pleasure working with Jasmine Garcia. She understood what we were looking for in a home as well as the current market. She was very attentive to getting answers to questions we had and never left us hanging. We have worked with over 6 realators over the years and Jasmine was by far the best realtor we have worked with. We would highly recommend her to anyone looking to buy or sell a home!",
+    statesDollarOutcome: false,
+    openQuestion:
+      "TODO(verify): platform, posting date, and permalink are all unconfirmed — transcribed from the closed-transactions workbook. The text is quoted as supplied and has not been tidied ('realators' is as written). Confirm against the live review before this publishes, and fix the id once the platform is known. Its transaction row is 2022-oakwood-acres-01.",
   },
   {
     id: "zillow-user3842511",

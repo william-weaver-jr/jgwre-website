@@ -91,3 +91,17 @@ export function dedupeByTransaction(reviews: readonly Review[]): Review[] {
 export function reviewById(id: string): Review | undefined {
   return REVIEWS.find((review) => review.id === id);
 }
+
+/**
+ * Look one up by id, but only if it is cleared to appear on the site.
+ *
+ * Use this anywhere the result drives something a visitor can see. A review
+ * held behind `openQuestion` or `withheld` still exists in the dataset and
+ * still answers `reviewById`, so a caller that renders a link on the strength
+ * of "the id resolves" will point at a review /reviews does not show. The
+ * transactions ledger is exactly that caller.
+ */
+export function publishableReviewById(id: string): Review | undefined {
+  const review = reviewById(id);
+  return review && !review.openQuestion && !review.withheld ? review : undefined;
+}

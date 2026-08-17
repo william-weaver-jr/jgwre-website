@@ -1,8 +1,12 @@
 /**
  * @vitest-environment node
  */
+import { readFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
+
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { TRANSACTION_METRICS } from "./internal-metrics";
 import { SAMPLE_TRANSACTIONS } from "./sample";
 import {
   TRANSACTIONS,
@@ -192,6 +196,40 @@ describe("locationLabel", () => {
     expect(
       locationLabel(transaction({ id: "a", city: "Tega Cay", neighborhood: "tega cay" })),
     ).toBe("Tega Cay, SC");
+  });
+});
+
+/**
+ * The containment test for lib/transactions/internal-metrics.ts.
+ *
+ * That module holds real closing prices, including a South Carolina one that is
+ * not public record. It exists for internal reference and must never become
+ * something a page can render, so this greps the rendered tree rather than
+ * trusting the comment at the top of the file.
+ */
+describe("closing prices stay out of the rendered tree", () => {
+  const roots = ["app", "components"];
+
+  function walk(dir: string): string[] {
+    return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+      const full = join(dir, entry.name);
+      if (entry.isDirectory()) return walk(full);
+      return /\.tsx?$/.test(entry.name) ? [full] : [];
+    });
+  }
+
+  it("is imported by nothing under app/ or components/", () => {
+    const offenders = roots
+      .flatMap((root) => walk(join(process.cwd(), root)))
+      .filter((file) => readFileSync(file, "utf8").includes("internal-metrics"));
+
+    expect(offenders).toEqual([]);
+  });
+
+  /** Every metrics row must point at a transaction that exists. */
+  it("joins cleanly to the ledger", () => {
+    const ids = new Set(TRANSACTIONS.map((row) => row.id));
+    for (const row of TRANSACTION_METRICS) expect(ids.has(row.transactionId)).toBe(true);
   });
 });
 

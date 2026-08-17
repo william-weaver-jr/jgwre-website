@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { locationLabel, sideLabel, type Transaction } from "@/lib/transactions";
-import { reviewById } from "@/lib/reviews";
+import { publishableReviewById } from "@/lib/reviews";
 
 /**
  * One closed transaction, as a ledger row rather than a listing card.
@@ -16,7 +16,10 @@ import { reviewById } from "@/lib/reviews";
  * by the page, not here.
  */
 export function TransactionRow({ transaction }: { transaction: Transaction }) {
-  const review = transaction.reviewId ? reviewById(transaction.reviewId) : undefined;
+  /* publishable-, not plain reviewById: a review still behind an openQuestion
+     resolves fine but is not rendered on /reviews, and linking to it would
+     promise the visitor something that page does not show. */
+  const review = transaction.reviewId ? publishableReviewById(transaction.reviewId) : undefined;
   const meta = [
     transaction.propertyType,
     transaction.builder,
