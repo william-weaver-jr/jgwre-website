@@ -380,11 +380,14 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       the closing record and outranks Zillow's generated location line where they differ.
 - [ ] **Seven `unverified-*` reviews need their platform, date, and permalink.** Recorded
       from the workbook and gated behind `openQuestion` so they cannot publish: Harold &
-      Cathy Phillips, Seth Kuhnau, Vicki White, Cha'Ray & Calvin Bland, Adams, Amy Hood,
-      Tim & Julie Counterman. Working through the list is the cheapest way to add seven
-      review cross-links to the ledger. The Adams one also needs a byline — the review was
-      posted by the client's wife. Jonathan Fitch is marked as having reviewed with no
-      text recorded anywhere, so there is nothing to record yet.
+      Cathy Phillips, Seth Kuhnau, Vicki White, Cha'Ray & Calvin Bland, Nuraini Adams,
+      Amy Hood, Tim & Julie Counterman. Working through the list is the cheapest way to
+      add seven review cross-links to the ledger. Jonathan Fitch is marked as having
+      reviewed with no text recorded anywhere, so there is nothing to record yet.
+- [ ] **Brittany Haney's 2026 sale is not in the ledger.** Her review says "the first
+      house we've sold with her" and Zillow records the transaction as bought and sold,
+      but the workbook carries only the Fort Mill purchase (2026-english-trails-01). Bill
+      is adding the sell side later; it would be the ledger's sixth seller-side closing.
 - [ ] **Do not publish the Vicki White review as written.** It is a strong five-star
       review, but it attacks the opposing agent at length ("the poster child for giving
       realtors a bad name") and states the client believes she was mistreated because she

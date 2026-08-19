@@ -230,14 +230,14 @@ export const REVIEWS: readonly Review[] = [
       "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2023-shopton-point-01.",
   },
   {
-    id: "unverified-adams",
-    /* The closing is Paul Adams Jr's; the review was posted by his wife, whose
-       byline nobody has recorded. Left as the family name until someone reads
-       the live review. */
-    author: "Adams",
+    id: "unverified-nuraini-adams",
+    /* The closing is recorded under Paul Adams Jr; the review was posted by his
+       wife, Nuraini Adams, confirmed 2026-08-19. displayName() renders
+       "Nuraini A." */
+    author: "Nuraini Adams",
     rating: 5,
     platform: "google",
-    postedOn: "TODO(verify): Google, per Bill. Byline unconfirmed.",
+    postedOn: "TODO(verify): Google, per Bill.",
     date: "2023-09-01",
     datePrecision: "month",
     transaction: {
@@ -249,7 +249,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine Garcia picked up the phone when we called the agency, as recommended by a friend and since then, she became our realtor. We found 5-6 houses that we wanted to view on the same day since we are from out of state and Jasmine helped us to arrange it. She’s very responsive, very helpful and she even helped keep an eye on our toddler when we were touring the houses. We have signed the deed and she’s going to help us with an errand since we have not moved there. That’s definitely above and beyond her job scope and we really appreciate the assistance from her in our house search. Thank you Jasmine!",
     statesDollarOutcome: false,
     openQuestion:
-      "TODO(verify): posted on Google by the client's wife (confirmed by Bill 2026-08-17), but her byline, the posting date, and the permalink are all unrecorded. The byline matters here more than usual — `displayName()` currently renders just 'Adams'. Transaction row 2023-preston-park-01.",
+      "TODO(verify): posting date and permalink unrecorded. Posted on Google by Nuraini Adams, wife of the client the closing is recorded under (both confirmed by Bill). Transaction row 2023-preston-park-01.",
   },
   {
     id: "unverified-amy-hood",
