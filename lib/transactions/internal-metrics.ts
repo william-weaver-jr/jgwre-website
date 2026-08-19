@@ -11,12 +11,12 @@
  * the rendered schema is a field someone eventually renders, and three separate
  * rules say it should not be:
  *
- *   1. SOUTH CAROLINA IS A NON-DISCLOSURE STATE. The Rock Hill figure below is
- *      not public record. Publishing it discloses a client's private financial
- *      information without written per-transaction permission. It is here as
- *      her own business record; that is the only reason it may exist at all.
+ *   1. SOUTH CAROLINA IS A NON-DISCLOSURE STATE. The SC rows marked below are
+ *      not public record. Publishing one discloses a client's private financial
+ *      information without written per-transaction permission. They are here as
+ *      her own business record; that is the only reason they may exist at all.
  *   2. CLAUDE.md §7 requires <ResultsDisclaimer /> adjacent to every displayed
- *      dollar outcome. Eight rows of prices is a stat wall wearing a disclaimer.
+ *      dollar outcome. Thirty-odd rows of prices is a stat wall wearing a disclaimer.
  *   3. docs/TRANSACTIONS-SPEC.md §1 settles the default as no prices, with
  *      dollar figures confined to the case studies and reviews where they are
  *      documented and disclaimed.
@@ -36,17 +36,64 @@ export type TransactionMetrics = {
   closingPrice: number;
   concessions?: number;
   belowList?: number;
+  /** Anything else the workbook recorded that has no column of its own. */
+  note?: string;
 };
 
 export const TRANSACTION_METRICS: readonly TransactionMetrics[] = [
-  { transactionId: "2022-dilworth-01", closingPrice: 260000, concessions: 3000, belowList: 38500 },
-  { transactionId: "2022-montclaire-01", closingPrice: 460000, concessions: 4500 },
-  { transactionId: "2022-aveline-at-coulwood-02", closingPrice: 351000 },
-  { transactionId: "2022-dallas-01", closingPrice: 327000, concessions: 8000 },
-  { transactionId: "2022-shannon-park-01", closingPrice: 375000, concessions: 2500 },
+  /* 2026 */
+  {
+    transactionId: "2026-annsborough-park-01",
+    closingPrice: 707990,
+    concessions: 21929.7,
+    belowList: 27000,
+    /* Seller-funded 2-1 buydown: 2.87% year one, 3.87% year two, 4.87% for the
+       remainder. Recorded here because it is the substance of that row's lever
+       and nowhere else keeps the numbers. */
+    note: "2-1 rate buydown at 2.87 / 3.87 / 4.87 percent, seller paid.",
+  },
+
+  { transactionId: "2026-english-trails-01", closingPrice: 485000, concessions: 10500 },
+
+  /* 2024 */
   /* SOUTH CAROLINA — non-disclosure. Internal reference only. */
-  { transactionId: "2022-oakwood-acres-01", closingPrice: 330000 },
-  { transactionId: "2022-southpark-01", closingPrice: 280000, belowList: 15000 },
-  { transactionId: "2022-prosperity-village-01", closingPrice: 400000, concessions: 3500, belowList: 15000 },
+  { transactionId: "2024-patriots-crossing-01", closingPrice: 519000 },
+  { transactionId: "2024-loso-terraces-01", closingPrice: 740000 },
+  { transactionId: "2024-cresswind-01", closingPrice: 500000 },
+
+  /* 2023 */
+  { transactionId: "2023-the-providence-01", closingPrice: 745000 },
+  { transactionId: "2023-moores-chapel-village-01", closingPrice: 380000 },
+  { transactionId: "2023-brownes-ferry-01", closingPrice: 396000 },
+  { transactionId: "2023-preston-park-01", closingPrice: 455000, concessions: 11950, belowList: 14540 },
+  /* SOUTH CAROLINA — non-disclosure. */
+  { transactionId: "2023-lancaster-01", closingPrice: 267200 },
+  { transactionId: "2023-riverfront-01", closingPrice: 540000, concessions: 10000, belowList: 9900 },
+  { transactionId: "2023-waterlyn-01", closingPrice: 370000 },
+  /* SOUTH CAROLINA — non-disclosure. */
+  { transactionId: "2023-walnut-creek-01", closingPrice: 535100 },
+  { transactionId: "2023-concord-01", closingPrice: 355000 },
+  { transactionId: "2023-shopton-point-01", closingPrice: 399550, concessions: 15013 },
+  { transactionId: "2023-mountainbrook-01", closingPrice: 600000, concessions: 11250 },
+  /* SOUTH CAROLINA — non-disclosure. */
+  { transactionId: "2023-lexington-commons-01", closingPrice: 259900, concessions: 5000 },
+  { transactionId: "2023-easthaven-01", closingPrice: 385000, belowList: 14900 },
+
+  /* 2022 */
   { transactionId: "2022-carlton-hills-01", closingPrice: 340000, belowList: 12800 },
+  { transactionId: "2022-easthaven-01", closingPrice: 350000, concessions: 7000, belowList: 10000 },
+  { transactionId: "2022-katelyn-moors-01", closingPrice: 400000, concessions: 3500, belowList: 15000 },
+  { transactionId: "2022-southpark-01", closingPrice: 280000, belowList: 15000 },
+  { transactionId: "2022-park-place-01", closingPrice: 202000 },
+  /* SOUTH CAROLINA — non-disclosure. */
+  { transactionId: "2022-midbrook-01", closingPrice: 330000 },
+  { transactionId: "2022-fieldlark-trails-01", closingPrice: 275000 },
+  { transactionId: "2022-aveline-at-coulwood-01", closingPrice: 300000 },
+  { transactionId: "2022-aveline-at-coulwood-02", closingPrice: 351000 },
+  { transactionId: "2022-hunters-pointe-01", closingPrice: 327000, concessions: 8000 },
+  { transactionId: "2022-shannon-park-01", closingPrice: 375000, concessions: 2500 },
+  { transactionId: "2022-belle-vista-01", closingPrice: 330000 },
+  { transactionId: "2022-oakwood-acres-01", closingPrice: 460000, concessions: 4500 },
+  { transactionId: "2022-dilworth-01", closingPrice: 260000, concessions: 3000, belowList: 38500 },
+  { transactionId: "2022-beverly-crest-01", closingPrice: 295000, concessions: 2500 },
 ];

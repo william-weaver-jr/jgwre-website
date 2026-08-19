@@ -374,10 +374,24 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       transactions, all 2022, from the closed-transactions workbook. Public, indexed, and
       BIC-approved (§7). Active/pending/coming-soon remain a compliance conflict needing
       separate written approval — do not implement on request without it.
-- [ ] **Backfill 2023–2026 into the ledger.** The workbook covered 2022 only, so the page
-      currently argues that she stopped closing in 2022. This is the single highest-value
-      follow-up on the page and wants the same fields: closing month, neighborhood, city,
-      state, side, property type, builder on new construction, and the lever.
+- [x] **Backfill 2023–2026 into the ledger — DONE 2026-08-17.** The workbook grew to 32
+      closings spanning 2022–2026, including the first seller-side rows and the first
+      2026 closing. Neighborhood and property type now come from the workbook, which is
+      the closing record and outranks Zillow's generated location line where they differ.
+- [ ] **Seven `unverified-*` reviews need their platform, date, and permalink.** Recorded
+      from the workbook and gated behind `openQuestion` so they cannot publish: Harold &
+      Cathy Phillips, Seth Kuhnau, Vicki White, Cha'Ray & Calvin Bland, Adams, Amy Hood,
+      Tim & Julie Counterman. Working through the list is the cheapest way to add seven
+      review cross-links to the ledger. The Adams one also needs a byline — the review was
+      posted by the client's wife. Jonathan Fitch is marked as having reviewed with no
+      text recorded anywhere, so there is nothing to record yet.
+- [ ] **Do not publish the Vicki White review as written.** It is a strong five-star
+      review, but it attacks the opposing agent at length ("the poster child for giving
+      realtors a bad name") and states the client believes she was mistreated because she
+      is a military veteran. Republishing it puts a disparaging claim about an identifiable
+      third party on the brokerage's advertising and drags a protected characteristic into
+      copy §7 keeps clear of. Her closing is in the ledger; the words need the BIC and
+      probably counsel.
 - [ ] **Price bands on the transactions ledger — parked idea, not approved.** Deliberately
       not built now. The question it would answer is a real one ("does she work in my
       range?"), and the compliant shape is a coarse band as a filter or a single §5 line,

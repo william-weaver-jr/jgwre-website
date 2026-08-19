@@ -156,8 +156,140 @@ export const REVIEWS: readonly Review[] = [
     body: "It was such a pleasure working with Jasmine Garcia. She understood what we were looking for in a home as well as the current market. She was very attentive to getting answers to questions we had and never left us hanging. We have worked with over 6 realators over the years and Jasmine was by far the best realtor we have worked with. We would highly recommend her to anyone looking to buy or sell a home!",
     statesDollarOutcome: false,
     openQuestion:
-      "TODO(verify): platform, posting date, and permalink are all unconfirmed — transcribed from the closed-transactions workbook. The text is quoted as supplied and has not been tidied ('realators' is as written). Confirm against the live review before this publishes, and fix the id once the platform is known. Its transaction row is 2022-oakwood-acres-01.",
+      "TODO(verify): platform, posting date, and permalink are all unconfirmed — transcribed from the closed-transactions workbook. The text is quoted as supplied and has not been tidied ('realators' is as written). Confirm against the live review before this publishes, and fix the id once the platform is known. Its transaction row is 2022-midbrook-01.",
   },
+
+  /* ==========================================================================
+     TRANSCRIBED FROM THE CLOSED-TRANSACTIONS WORKBOOK, NOT FROM A PLATFORM.
+
+     Every entry below is gated by `openQuestion` for the same reason: the words
+     are the client's and are quoted as supplied, but the platform, posting
+     date, and permalink are unconfirmed, so nothing here is verifiable against
+     a live review yet. `publishableReviews()` filters them out, and the
+     transactions ledger will not render a link to one — so they can sit here
+     safely until someone works through the list.
+
+     Dates are the CLOSING month as a placeholder, never a known posting date.
+     Fix the id prefix once each platform is confirmed.
+     ========================================================================== */
+  {
+    id: "unverified-seth-kuhnau",
+    author: "Seth Kuhnau",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed.",
+    date: "2022-07-01",
+    datePrecision: "month",
+    transaction: {
+      role: "bought",
+      propertyType: "Single Family",
+      year: 2022,
+      location: "Fieldlark Trails, Charlotte, NC",
+    },
+    body: "Jasmine was so great to work with! We found the right property for my budget! Would recommend again and again!",
+    statesDollarOutcome: false,
+    openQuestion:
+      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2022-fieldlark-trails-01.",
+  },
+  {
+    id: "unverified-vicki-white",
+    author: "Vicki White",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed.",
+    date: "2022-09-01",
+    datePrecision: "month",
+    transaction: {
+      role: "bought",
+      propertyType: "Townhouse",
+      year: 2022,
+      location: "Park Place, Dallas, NC",
+    },
+    body: "Jasmine is absolutely wonderful! She was my buyers agent and is so response--her patience is absolutely amazing. We looked at several properties and finally found something suitable, but the listing agent was HORRIFIC (she is the poster child for giving realtors a bad name). Jasmine was so professional and patient--she was the calm voice of reason despite that listing agent's constant drama. I would have walked away from the deal were it not for Jasmine because I can't stand drama. I know that dreadful woman upset Jasmine, she upset everyone so needlessly and treated us like dirt--primarily because I'm a military veteran. Jasmine is a superb realtor who is very knowledgeable and treats people with kindness and respect. She genuinely cares and she gets the job done with zero emotional turmoil. To have handled that outrageous joke of realtor so calmly--I could not have done that! Jasmine is AWESOME and I cannot recommend her enough for all your real estate needs! Retirement is just down the road--and you can bet Jasmine will be selling my property when the time comes!",
+    statesDollarOutcome: false,
+    openQuestion:
+      "DO NOT PUBLISH AS WRITTEN — this is a stronger gate than the transcription problem it shares with its neighbours. The review attacks the opposing agent at length and in identifiable terms ('the poster child for giving realtors a bad name', 'that dreadful woman'), and states the client believes she was mistreated because she is a military veteran. Running it puts a disparaging claim about a real third party into brokerage advertising and pulls a protected characteristic into copy §7 keeps clear of. §7 also forbids altering a testimonial, so it cannot be trimmed into shape — it runs whole or not at all. Needs the BIC and probably counsel. Her closing is in the ledger regardless: transaction row 2022-park-place-01.",
+  },
+  {
+    id: "unverified-cha-ray-calvin-bland",
+    author: "Cha'Ray & Calvin Bland",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed.",
+    date: "2023-05-01",
+    datePrecision: "month",
+    transaction: {
+      role: "bought",
+      propertyType: "Single Family",
+      year: 2023,
+      location: "Shopton Point, Charlotte, NC",
+    },
+    body: "Jasmine was our realtor and provided such professionalism and knowledge on the home buying process. She is super sweet and kind and most definitely works in the best interest of the client. She was supportive on our decisions and made the process smooth and worry free.",
+    statesDollarOutcome: false,
+    openQuestion:
+      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2023-shopton-point-01.",
+  },
+  {
+    id: "unverified-adams",
+    /* The closing is Paul Adams Jr's; the review was posted by his wife, whose
+       byline nobody has recorded. Left as the family name until someone reads
+       the live review. */
+    author: "Adams",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): Google, per Bill. Byline unconfirmed.",
+    date: "2023-09-01",
+    datePrecision: "month",
+    transaction: {
+      role: "bought",
+      propertyType: "Single Family",
+      year: 2023,
+      location: "Preston Park, Pineville, NC",
+    },
+    body: "Jasmine Garcia picked up the phone when we called the agency, as recommended by a friend and since then, she became our realtor. We found 5-6 houses that we wanted to view on the same day since we are from out of state and Jasmine helped us to arrange it. She’s very responsive, very helpful and she even helped keep an eye on our toddler when we were touring the houses. We have signed the deed and she’s going to help us with an errand since we have not moved there. That’s definitely above and beyond her job scope and we really appreciate the assistance from her in our house search. Thank you Jasmine!",
+    statesDollarOutcome: false,
+    openQuestion:
+      "TODO(verify): posted on Google by the client's wife (confirmed by Bill 2026-08-17), but her byline, the posting date, and the permalink are all unrecorded. The byline matters here more than usual — `displayName()` currently renders just 'Adams'. Transaction row 2023-preston-park-01.",
+  },
+  {
+    id: "unverified-amy-hood",
+    author: "Amy Hood",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed.",
+    date: "2023-09-01",
+    datePrecision: "month",
+    transaction: {
+      role: "bought",
+      propertyType: "Single Family",
+      year: 2023,
+      location: "Lancaster, SC",
+    },
+    body: "Jasmine made the home buying process a positive experience. She was dedicated to helping me find the perfect home to meet all my needs. Questions were answered in a timely manner and requests to tour homes were scheduled almost immediately. Jasmine will definitely be my realtor for any future property purchases.",
+    statesDollarOutcome: false,
+    openQuestion:
+      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2023-lancaster-01.",
+  },
+  {
+    id: "unverified-tim-julie-counterman",
+    author: "Tim & Julie Counterman",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed.",
+    date: "2024-03-01",
+    datePrecision: "month",
+    transaction: {
+      role: "bought",
+      propertyType: "Single Family",
+      year: 2024,
+      location: "Cresswind, Mint Hill, NC",
+    },
+    body: "Jasmine Garcia is the best! She took the time to really get to know us and what we were looking for in a home. By house #3, she walked in and said, nope, this isn’t for them! She was easy to work with, took our concerns seriously, and landed us our new home! Jasmine was with us every step of the way and helped us when things seemed out of whack with our builder. We would recommend her to anyone without hesitation!!",
+    statesDollarOutcome: false,
+    openQuestion:
+      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2024-cresswind-01. Worth prioritising: 'helped us when things seemed out of whack with our builder' is new-construction evidence in a client's own words.",
+  },
+
   {
     id: "zillow-user3842511",
     author: "user3842511",
@@ -272,7 +404,9 @@ export const REVIEWS: readonly Review[] = [
   },
   {
     id: "zillow-maggie-jean",
-    author: "Maggie Jean",
+    /* Posted as "Maggie Jean" — first and middle name. Surname confirmed
+       2026-08-17 from the workbook, so displayName() renders "Maggie B." */
+    author: "Maggie Jean Brewer",
     rating: 5,
     platform: "zillow",
     postedOn: "Zillow profile",
@@ -382,7 +516,10 @@ export const REVIEWS: readonly Review[] = [
   },
   {
     id: "zillow-zuser20161017085123818",
-    author: "zuser20161017085123818",
+    /* Posted under the generated Zillow handle "zuser20161017085123818"; the id
+       keeps it so the review stays findable. Real name confirmed 2026-08-17
+       from the closed-transactions workbook. */
+    author: "Jeremy Holzwarth",
     rating: 5,
     platform: "zillow",
     postedOn: "Zillow profile",
@@ -397,8 +534,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine Garcia was FANTASTIC to work with. My fiancée and I were first time buyers moving from Chicago to Charlotte and Jasmine made the process so much easier than I was anticipating. She was responsive, handled my dumb questions with grace, and held our hands through the entire process. Ultimately, she was able to help us find the perfect place, and that's what counts the most! She supported us when interacting with the builder, she was there during the walkthrough to provide an extra pair of trained eyes (and caught things we didn't), and was there to celebrate with us at the closing (with a bottle of champagne!). The experience Jasmine provided us as buyers was wonderful and if you're looking for an agent to partner with you to find what you're looking for, I couldn't recommend her more!",
     statesDollarOutcome: false,
     sameTransactionAs: ["zillow-danielle-bonaccorso"],
-    openQuestion: "TODO(verify): generic Zillow username. Needs the client's real name.",
-    note: "Chicago relocation AND new construction — the walkthrough paragraph is unusually specific about what an agent catches that a buyer doesn't. Worth resolving the name for.",
+    note: "Name resolved 2026-08-17: Jeremy Holzwarth, the other half of the LoSo Terraces purchase (transaction row 2024-loso-terraces-01). Chicago relocation AND new construction — the walkthrough paragraph is unusually specific about what an agent catches that a buyer doesn't. Worth resolving the name for.",
   },
   {
     id: "zillow-danielle-bonaccorso",
