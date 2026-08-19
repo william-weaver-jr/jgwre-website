@@ -401,9 +401,7 @@ export const TRANSACTIONS: readonly Transaction[] = [
        a real concession and a good example of a lever that is not price at all.
        No figure involved, which keeps it clear of SC non-disclosure too. */
     lever: "Possession granted to the buyer before closing.",
-    /* No reviewId: the client's review is recorded at
-       unverified-harold-cathy-phillips and is gated behind an openQuestion, so
-       linking it would point at a review /reviews does not show. */
+    reviewId: "google-cathy-phillips",
   },
   {
     id: "2022-fieldlark-trails-01",

@@ -132,21 +132,17 @@ export const REVIEWS: readonly Review[] = [
     openQuestion: "TODO(verify): generic Zillow username. Needs the client's real name.",
   },
   {
-    /*
-      From the closed-transactions workbook, not from a platform scrape — which
-      is why every field about the POSTING is unconfirmed while the words
-      themselves are solid. The openQuestion below is the publication gate: the
-      review sits in the dataset, joins to its transaction, and stays off the
-      site until someone finds the original.
-    */
-    id: "unverified-harold-cathy-phillips",
-    author: "Harold & Cathy Phillips",
+    id: "google-cathy-phillips",
+    /* The workbook records the buyers as Harold & Cathy Phillips; the review is
+       bylined Cathy Phillips alone, and the byline is what is recorded. */
+    author: "Cathy Phillips",
     rating: 5,
     platform: "google",
-    postedOn: "TODO(verify): unconfirmed. Not among the Zillow reviews already recorded here, so Google is the assumption, not a finding.",
-    /* Placeholder: the closing month, NOT the posting date, which nobody has. */
+    postedOn: "Stone Realty Group Google listing",
+    /* "3 years ago" as of 2026-08-19 — three-to-four years, which brackets the
+       August 2022 closing. Trust the year only. */
     date: "2022-08-01",
-    datePrecision: "month",
+    datePrecision: "year",
     transaction: {
       role: "bought",
       propertyType: "Single Family",
@@ -155,8 +151,9 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "It was such a pleasure working with Jasmine Garcia. She understood what we were looking for in a home as well as the current market. She was very attentive to getting answers to questions we had and never left us hanging. We have worked with over 6 realators over the years and Jasmine was by far the best realtor we have worked with. We would highly recommend her to anyone looking to buy or sell a home!",
     statesDollarOutcome: false,
-    openQuestion:
-      "TODO(verify): platform, posting date, and permalink are all unconfirmed — transcribed from the closed-transactions workbook. The text is quoted as supplied and has not been tidied ('realators' is as written). Confirm against the live review before this publishes, and fix the id once the platform is known. Its transaction row is 2022-midbrook-01.",
+    sourceUrl:
+      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUR1emZLdXZnRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+    note: "Verified against the live review 2026-08-19; the workbook transcription matched it exactly, 'realators' included. Transaction row 2022-midbrook-01.",
   },
 
   /* ==========================================================================

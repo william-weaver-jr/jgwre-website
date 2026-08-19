@@ -378,15 +378,17 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       closings spanning 2022–2026, including the first seller-side rows and the first
       2026 closing. Neighborhood and property type now come from the workbook, which is
       the closing record and outranks Zillow's generated location line where they differ.
-- [x] **Six workbook reviews verified 2026-08-19.** Seth Kuhnau, ChaRay Bland, Aini A
-      (Nuraini Adams), Amy Hood, Julie Counterman, and Vicki White are all on the **Stone
-      Realty Group** Google listing, not her own profile — more evidence the §5 count of
-      62 Google reviews undercounts her. Five are now published and linked from the
-      ledger; Vicki White's remains gated on content (below).
-- [ ] **`unverified-harold-cathy-phillips` is the last unverified review.** Platform,
-      date, and permalink still unknown. Verifying it would link the Rock Hill row
-      (2022-midbrook-01). Jonathan Fitch is marked as having reviewed with no text
-      recorded anywhere, so there is nothing to record for him yet.
+- [x] **All seven workbook reviews verified 2026-08-19.** Seth Kuhnau, ChaRay Bland,
+      Aini A (Nuraini Adams), Amy Hood, Julie Counterman, Cathy Phillips, and Vicki White
+      are all on the **Stone Realty Group** Google listing rather than her own profile —
+      more evidence the §5 count of 62 Google reviews undercounts her. Six are published
+      and linked from the ledger. No `unverified-*` entries remain. Jonathan Fitch left no
+      review; the sheet was corrected.
+- [ ] **Vicki White's review is verified and deliberately unpublished** — `google-vicki-white`.
+      Not a data gap: it attacks the opposing agent in identifiable terms and states the
+      client believes she was mistreated because she is a military veteran. §7 forbids
+      trimming a testimonial into shape, so it runs whole or not at all. Needs the BIC and
+      probably counsel. Her closing stays in the ledger regardless (2022-park-place-01).
 - [ ] **Brittany Haney's 2026 sale is not in the ledger.** Her review says "the first
       house we've sold with her" and Zillow records the transaction as bought and sold,
       but the workbook carries only the Fort Mill purchase (2026-english-trails-01). Bill
