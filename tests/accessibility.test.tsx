@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { publishedAreas } from "@/lib/areas";
 import { publishedPosts } from "@/lib/blog";
 
 /**
@@ -40,6 +41,13 @@ const POST_PAGES: PageEntry[] = publishedPosts().map((post) => [
   { slug: post.slug },
 ]);
 
+/** Every published area, expanded. Same cadence argument as the posts above. */
+const AREA_PAGES: PageEntry[] = publishedAreas().map((area) => [
+  `/areas/${area.slug}`,
+  () => import("@/app/areas/[slug]/page"),
+  { slug: area.slug },
+]);
+
 const PAGES: PageEntry[] = [
   ["/", () => import("@/app/page")],
   ["/about", () => import("@/app/about/page")],
@@ -55,6 +63,7 @@ const PAGES: PageEntry[] = [
   ["/blog", () => import("@/app/blog/page")],
   ["/privacy-policy", () => import("@/app/privacy-policy/page")],
   ...POST_PAGES,
+  ...AREA_PAGES,
 ];
 
 /**

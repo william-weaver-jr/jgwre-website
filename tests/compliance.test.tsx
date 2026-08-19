@@ -3,6 +3,7 @@ import type { ComponentType } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { SiteFooter } from "@/components/site-footer";
+import { publishedAreas } from "@/lib/areas";
 import { publishedPosts } from "@/lib/blog";
 import { AGENT, BROKERAGE, RESULTS_DISCLAIMER, SOCIAL, TCPA_CONSENT } from "@/lib/site";
 
@@ -45,6 +46,25 @@ const POST_PAGES: PageEntry[] = publishedPosts().map((post) => [
   { slug: post.slug },
 ]);
 
+/**
+ * Every published area, expanded, for the same reason as the posts above.
+ *
+ * Areas grow one market at a time out of `lib/areas/data.ts` — fourteen are
+ * rostered and they land whenever Jasmine has something real to say about the
+ * next one. That is a cadence, so the list is generated.
+ *
+ * These carry more §7 risk than any other page type, not less: neighbourhood
+ * copy is where fair-housing language actually shows up. `lib/areas/validate.ts`
+ * scans the dataset and is the first line, but it reads the authored strings
+ * only. It cannot see the rendered page, so brokerage identification, the
+ * disclaimer beside a dollar figure, and the marks are checked here.
+ */
+const AREA_PAGES: PageEntry[] = publishedAreas().map((area) => [
+  `/areas/${area.slug}`,
+  () => import("@/app/areas/[slug]/page"),
+  { slug: area.slug },
+]);
+
 /* Every route with a page, so a new page cannot be added without appearing here. */
 const PAGES: PageEntry[] = [
   ["/", () => import("@/app/page")],
@@ -61,6 +81,7 @@ const PAGES: PageEntry[] = [
   ["/blog", () => import("@/app/blog/page")],
   ["/privacy-policy", () => import("@/app/privacy-policy/page")],
   ...POST_PAGES,
+  ...AREA_PAGES,
 ];
 
 /** Async pages take props; they are rendered through their own resolved element. */
