@@ -116,6 +116,7 @@ export const TRANSACTIONS: readonly Transaction[] = [
     propertyType: "Single Family",
     builder: "Kolter Homes",
     pillars: ["new-construction"],
+    reviewId: "google-julie-counterman",
   },
 
   /* ------------------------------------------------------------------ 2023 */
@@ -172,6 +173,7 @@ export const TRANSACTIONS: readonly Transaction[] = [
        five or six houses toured in a single day because of it. */
     pillars: ["new-construction", "relocation"],
     lever: "Out-of-state buyers touring in a single day. Builder concessions, and a price under list.",
+    reviewId: "google-nuraini-adams",
   },
   {
     id: "2023-lancaster-01",
@@ -184,6 +186,7 @@ export const TRANSACTIONS: readonly Transaction[] = [
     propertyType: "Single Family",
     pillars: ["carolinas-border"],
     lever: "Won in a multiple-offer situation.",
+    reviewId: "google-amy-hood",
   },
   {
     id: "2023-riverfront-01",
@@ -259,6 +262,7 @@ export const TRANSACTIONS: readonly Transaction[] = [
     builder: "Meritage Homes",
     pillars: ["new-construction"],
     lever: "Builder concessions at closing.",
+    reviewId: "google-charay-bland",
   },
   {
     id: "2023-mountainbrook-01",
@@ -375,6 +379,10 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Townhouse",
     pillars: [],
+    /* No reviewId deliberately. Her review is verified and real
+       (google-vicki-white) but gated on content, not provenance — it attacks
+       the opposing agent and raises the client's veteran status. Linking it
+       would point at something /reviews does not show. */
   },
   {
     id: "2022-midbrook-01",
@@ -407,6 +415,7 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: [],
+    reviewId: "google-seth-kuhnau",
   },
   {
     id: "2022-aveline-at-coulwood-01",

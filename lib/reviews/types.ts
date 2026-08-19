@@ -48,8 +48,21 @@ export type Review = {
   postedOn: string;
   /** ISO date. Zillow prints exact dates; Google shows relative times. */
   date: string;
-  /** `month` means the day is inferred from a relative timestamp. */
-  datePrecision: "day" | "month";
+  /**
+   * How much of `date` is actually known. Zillow prints exact dates, so most
+   * entries are `day`. Google prints only a relative age, and how coarse that
+   * is depends on how old the review is:
+   *
+   *   `month` — pinned to a month, e.g. a recent "2 weeks ago".
+   *   `year`  — all Google offered was "3 years ago". `date` is then the first
+   *             of the closing month, and only its YEAR should be trusted.
+   *
+   * Google floors that label, so "3 years ago" means three-to-four years
+   * elapsed — which is what lets a closing year be reconciled against it
+   * rather than guessed. Nothing renders a review date today; this exists so a
+   * later caller can tell precision from false precision.
+   */
+  datePrecision: "day" | "month" | "year";
   transaction?: ReviewTransaction;
   /**
    * Verbatim. Typos, capitalization, and the occasional phrase our own

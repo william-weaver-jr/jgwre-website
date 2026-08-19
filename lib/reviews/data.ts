@@ -173,13 +173,16 @@ export const REVIEWS: readonly Review[] = [
      Fix the id prefix once each platform is confirmed.
      ========================================================================== */
   {
-    id: "unverified-seth-kuhnau",
+    id: "google-seth-kuhnau",
     author: "Seth Kuhnau",
     rating: 5,
     platform: "google",
-    postedOn: "TODO(verify): unconfirmed.",
+    postedOn: "Stone Realty Group Google listing",
+    /* Google showed only "4 years ago" — four-to-five years before 2026-08-19,
+       which brackets the July 2022 closing. Year is sound; the month here is
+       the closing month, so trust the year only. */
     date: "2022-07-01",
-    datePrecision: "month",
+    datePrecision: "year",
     transaction: {
       role: "bought",
       propertyType: "Single Family",
@@ -188,17 +191,20 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Jasmine was so great to work with! We found the right property for my budget! Would recommend again and again!",
     statesDollarOutcome: false,
-    openQuestion:
-      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2022-fieldlark-trails-01.",
+    sourceUrl:
+      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURPbmJ6anF3RRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+    note: "Verified against the live review 2026-08-19. Transaction row 2022-fieldlark-trails-01.",
   },
   {
-    id: "unverified-vicki-white",
+    id: "google-vicki-white",
     author: "Vicki White",
     rating: 5,
     platform: "google",
-    postedOn: "TODO(verify): unconfirmed.",
+    postedOn: "Stone Realty Group Google listing",
+    /* "3 years ago" as of 2026-08-19, which brackets the September 2022
+       closing. Year only. */
     date: "2022-09-01",
-    datePrecision: "month",
+    datePrecision: "year",
     transaction: {
       role: "bought",
       propertyType: "Townhouse",
@@ -208,16 +214,22 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine is absolutely wonderful! She was my buyers agent and is so response--her patience is absolutely amazing. We looked at several properties and finally found something suitable, but the listing agent was HORRIFIC (she is the poster child for giving realtors a bad name). Jasmine was so professional and patient--she was the calm voice of reason despite that listing agent's constant drama. I would have walked away from the deal were it not for Jasmine because I can't stand drama. I know that dreadful woman upset Jasmine, she upset everyone so needlessly and treated us like dirt--primarily because I'm a military veteran. Jasmine is a superb realtor who is very knowledgeable and treats people with kindness and respect. She genuinely cares and she gets the job done with zero emotional turmoil. To have handled that outrageous joke of realtor so calmly--I could not have done that! Jasmine is AWESOME and I cannot recommend her enough for all your real estate needs! Retirement is just down the road--and you can bet Jasmine will be selling my property when the time comes!",
     statesDollarOutcome: false,
     openQuestion:
-      "DO NOT PUBLISH AS WRITTEN — this is a stronger gate than the transcription problem it shares with its neighbours. The review attacks the opposing agent at length and in identifiable terms ('the poster child for giving realtors a bad name', 'that dreadful woman'), and states the client believes she was mistreated because she is a military veteran. Running it puts a disparaging claim about a real third party into brokerage advertising and pulls a protected characteristic into copy §7 keeps clear of. §7 also forbids altering a testimonial, so it cannot be trimmed into shape — it runs whole or not at all. Needs the BIC and probably counsel. Her closing is in the ledger regardless: transaction row 2022-park-place-01.",
+      "DO NOT PUBLISH AS WRITTEN. Verified against the live review 2026-08-19, so nothing about its provenance is open any more — what remains open is whether it may run at all, and that is not a developer's call. The review attacks the opposing agent at length and in identifiable terms ('the poster child for giving realtors a bad name', 'that dreadful woman'), and states the client believes she was mistreated because she is a military veteran. Running it puts a disparaging claim about a real third party into brokerage advertising and pulls a protected characteristic into copy §7 keeps clear of. §7 also forbids altering a testimonial, so it cannot be trimmed into shape — it runs whole or not at all. Needs the BIC and probably counsel. Her closing is in the ledger regardless: transaction row 2022-park-place-01, which carries no reviewId for exactly this reason.",
+    sourceUrl:
+      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUNlamZUYnlBRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
   },
   {
-    id: "unverified-cha-ray-calvin-bland",
-    author: "Cha'Ray & Calvin Bland",
+    id: "google-charay-bland",
+    /* The workbook records the buyers as Cha'Ray & Calvin Bland; the review is
+       posted by one of them, bylined "ChaRay Bland". The byline is what is
+       recorded — displayName() renders "ChaRay B." */
+    author: "ChaRay Bland",
     rating: 5,
     platform: "google",
-    postedOn: "TODO(verify): unconfirmed.",
+    postedOn: "Stone Realty Group Google listing",
+    /* "3 years ago" as of 2026-08-19, bracketing the May 2023 closing. */
     date: "2023-05-01",
-    datePrecision: "month",
+    datePrecision: "year",
     transaction: {
       role: "bought",
       propertyType: "Single Family",
@@ -226,20 +238,31 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Jasmine was our realtor and provided such professionalism and knowledge on the home buying process. She is super sweet and kind and most definitely works in the best interest of the client. She was supportive on our decisions and made the process smooth and worry free.",
     statesDollarOutcome: false,
-    openQuestion:
-      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2023-shopton-point-01.",
+    sourceUrl:
+      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUN4MGZIeTNnRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+    note: "Verified against the live review 2026-08-19. Transaction row 2023-shopton-point-01.",
   },
   {
-    id: "unverified-nuraini-adams",
-    /* The closing is recorded under Paul Adams Jr; the review was posted by his
-       wife, Nuraini Adams, confirmed 2026-08-19. displayName() renders
-       "Nuraini A." */
-    author: "Nuraini Adams",
+    id: "google-nuraini-adams",
+    /*
+      The closing is recorded under Paul Adams Jr; his wife Nuraini Adams wrote
+      the review. She posted it as "Aini A", and THAT is what is recorded here.
+
+      Her full name is known — the owner reply on the listing opens "Hi
+      Nuraini!" — but she chose a shortened byline, and displayName() would
+      turn the full name into "Nuraini A.", publishing more of it than she did.
+      Resolving an auto-generated handle like harrist245034 restores a name the
+      platform took away; expanding a deliberately shortened one takes a
+      decision away from the reviewer. Not the same act.
+    */
+    author: "Aini A",
     rating: 5,
     platform: "google",
-    postedOn: "TODO(verify): Google, per Bill.",
+    postedOn: "Stone Realty Group Google listing",
+    /* "2 years ago" as of 2026-08-19 — two-to-three years, which brackets the
+       September 2023 closing. */
     date: "2023-09-01",
-    datePrecision: "month",
+    datePrecision: "year",
     transaction: {
       role: "bought",
       propertyType: "Single Family",
@@ -248,17 +271,19 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Jasmine Garcia picked up the phone when we called the agency, as recommended by a friend and since then, she became our realtor. We found 5-6 houses that we wanted to view on the same day since we are from out of state and Jasmine helped us to arrange it. She’s very responsive, very helpful and she even helped keep an eye on our toddler when we were touring the houses. We have signed the deed and she’s going to help us with an errand since we have not moved there. That’s definitely above and beyond her job scope and we really appreciate the assistance from her in our house search. Thank you Jasmine!",
     statesDollarOutcome: false,
-    openQuestion:
-      "TODO(verify): posting date and permalink unrecorded. Posted on Google by Nuraini Adams, wife of the client the closing is recorded under (both confirmed by Bill). Transaction row 2023-preston-park-01.",
+    sourceUrl:
+      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURaM3RTVXVBRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+    note: "Verified against the live review 2026-08-19. Transaction row 2023-preston-park-01. Do not expand the byline — see above.",
   },
   {
-    id: "unverified-amy-hood",
+    id: "google-amy-hood",
     author: "Amy Hood",
     rating: 5,
     platform: "google",
-    postedOn: "TODO(verify): unconfirmed.",
+    postedOn: "Stone Realty Group Google listing",
+    /* "2 years ago" as of 2026-08-19, bracketing the September 2023 closing. */
     date: "2023-09-01",
-    datePrecision: "month",
+    datePrecision: "year",
     transaction: {
       role: "bought",
       propertyType: "Single Family",
@@ -267,17 +292,21 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Jasmine made the home buying process a positive experience. She was dedicated to helping me find the perfect home to meet all my needs. Questions were answered in a timely manner and requests to tour homes were scheduled almost immediately. Jasmine will definitely be my realtor for any future property purchases.",
     statesDollarOutcome: false,
-    openQuestion:
-      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2023-lancaster-01.",
+    sourceUrl:
+      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUMxcm95RjRRRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+    note: "Verified against the live review 2026-08-19. Transaction row 2023-lancaster-01.",
   },
   {
-    id: "unverified-tim-julie-counterman",
-    author: "Tim & Julie Counterman",
+    id: "google-julie-counterman",
+    /* The workbook records the buyers as Tim & Julie Counterman; the review is
+       bylined Julie Counterman alone, and the byline is what is recorded. */
+    author: "Julie Counterman",
     rating: 5,
     platform: "google",
-    postedOn: "TODO(verify): unconfirmed.",
+    postedOn: "Stone Realty Group Google listing",
+    /* "2 years ago" as of 2026-08-19, bracketing the March 2024 closing. */
     date: "2024-03-01",
-    datePrecision: "month",
+    datePrecision: "year",
     transaction: {
       role: "bought",
       propertyType: "Single Family",
@@ -286,8 +315,9 @@ export const REVIEWS: readonly Review[] = [
     },
     body: "Jasmine Garcia is the best! She took the time to really get to know us and what we were looking for in a home. By house #3, she walked in and said, nope, this isn’t for them! She was easy to work with, took our concerns seriously, and landed us our new home! Jasmine was with us every step of the way and helped us when things seemed out of whack with our builder. We would recommend her to anyone without hesitation!!",
     statesDollarOutcome: false,
-    openQuestion:
-      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2024-cresswind-01. Worth prioritising: 'helped us when things seemed out of whack with our builder' is new-construction evidence in a client's own words.",
+    sourceUrl:
+      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChZDSUhNMG9nS0VJQ0FnSUNqN0xqVkpREAE!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+    note: "Verified against the live review 2026-08-19. Transaction row 2024-cresswind-01. 'Helped us when things seemed out of whack with our builder' is new-construction evidence in a client's own words — one of the better pulls for /new-construction.",
   },
 
   {

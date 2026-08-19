@@ -378,12 +378,15 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       closings spanning 2022–2026, including the first seller-side rows and the first
       2026 closing. Neighborhood and property type now come from the workbook, which is
       the closing record and outranks Zillow's generated location line where they differ.
-- [ ] **Seven `unverified-*` reviews need their platform, date, and permalink.** Recorded
-      from the workbook and gated behind `openQuestion` so they cannot publish: Harold &
-      Cathy Phillips, Seth Kuhnau, Vicki White, Cha'Ray & Calvin Bland, Nuraini Adams,
-      Amy Hood, Tim & Julie Counterman. Working through the list is the cheapest way to
-      add seven review cross-links to the ledger. Jonathan Fitch is marked as having
-      reviewed with no text recorded anywhere, so there is nothing to record yet.
+- [x] **Six workbook reviews verified 2026-08-19.** Seth Kuhnau, ChaRay Bland, Aini A
+      (Nuraini Adams), Amy Hood, Julie Counterman, and Vicki White are all on the **Stone
+      Realty Group** Google listing, not her own profile — more evidence the §5 count of
+      62 Google reviews undercounts her. Five are now published and linked from the
+      ledger; Vicki White's remains gated on content (below).
+- [ ] **`unverified-harold-cathy-phillips` is the last unverified review.** Platform,
+      date, and permalink still unknown. Verifying it would link the Rock Hill row
+      (2022-midbrook-01). Jonathan Fitch is marked as having reviewed with no text
+      recorded anywhere, so there is nothing to record for him yet.
 - [ ] **Brittany Haney's 2026 sale is not in the ledger.** Her review says "the first
       house we've sold with her" and Zillow records the transaction as bought and sold,
       but the workbook carries only the Fort Mill purchase (2026-english-trails-01). Bill
