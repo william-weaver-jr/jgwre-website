@@ -165,6 +165,25 @@ who must keep living next to each other. About page only.
 **Twin daughters, homeowner in Charlotte, five years in the market, dual NC/SC licensure** —
 use where relevant, never as a stat block.
 
+**Where she lives — Ayrsley, in Steele Creek, since June 2021.** Reported by Bill
+2026-08-19, and recorded here so §6 permits its use. Ayrsley is a mixed-use development in
+southwest Charlotte off I-485 and South Tryon — five apartment and townhome communities
+alongside restaurants, offices, hotels, and Ayrsley Grand Cinemas 14, close to Charlotte
+Douglas. The HOA presidency above is one of those communities.
+
+This is the strongest thing available for `/areas/steele-creek`, because residency is
+first-person knowledge of the commute and the housing stock rather than a data pull.
+`docs/AREAS-SPEC.md` §10 has the application.
+
+**Two limits.** Say Ayrsley and say Steele Creek; do **not** name which of the five
+communities she presided over, and do not run the "105-unit" count next to the residency
+claim on a public page. Named community plus unit count plus tenure narrows to a household,
+and this is a woman who meets strangers at vacant properties for a living. The About page
+keeps the presidency as it is; the area page states residency and stops.
+
+Not a §7 rule — no advertising regulation is at stake. A safety default, and hers to
+overrule if she wants to.
+
 ---
 
 ## 5. Application by pillar
