@@ -34,6 +34,47 @@ import type { Transaction } from "./types";
 export const TRANSACTIONS: readonly Transaction[] = [
   /* ------------------------------------------------------------------ 2026 */
   {
+    id: "2026-turtle-rock-01",
+    side: "seller",
+    year: 2026,
+    month: 8,
+    neighborhood: "Turtle Rock",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: ["sellers"],
+    /* Workbook: "Helped an estate sale." Kept plain. An estate sale means
+       someone is selling a house after a death, and the ledger should not
+       dress that up. */
+    lever: "An estate sale.",
+  },
+  {
+    id: "2026-trinity-park-01",
+    side: "seller",
+    year: 2026,
+    month: 8,
+    neighborhood: "Trinity Park",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: ["sellers"],
+  },
+  {
+    id: "2026-edgewater-01",
+    side: "buyer",
+    year: 2026,
+    month: 8,
+    neighborhood: "Edgewater",
+    city: "Lancaster",
+    state: "SC",
+    propertyType: "Single Family",
+    builder: "True Homes",
+    /* Relocating from New York — the workbook's new Relocation column, which
+       is the first time that pillar has had a source other than a review. */
+    pillars: ["new-construction", "relocation", "carolinas-border"],
+    lever: "Out-of-state buyers. Builder concessions at closing.",
+  },
+  {
     id: "2026-annsborough-park-01",
     side: "buyer",
     year: 2026,
@@ -70,6 +111,139 @@ export const TRANSACTIONS: readonly Transaction[] = [
     /* Her second purchase with Jasmine, four years after 2022-beverly-crest-01.
        The repeat is the argument; see that row and this review's pair. */
     reviewId: "zillow-brittany-turner-2026",
+  },
+
+  {
+    id: "2026-windsor-park-01",
+    side: "buyer",
+    year: 2026,
+    month: 7,
+    neighborhood: "Windsor Park",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    /* Relocating from Florida. */
+    pillars: ["relocation"],
+    /* Workbook: under list, plus concessions. The client's own review adds
+       what the concessions were FOR — foundation work the house needed — which
+       is the part worth having, and it carries no figure. */
+    lever: "Purchased under list price, with concessions covering foundation work the house needed.",
+    reviewId: "google-matthew-swecker",
+  },
+  {
+    id: "2026-charlotte-01",
+    side: "seller",
+    year: 2026,
+    month: 6,
+    /* Workbook records no neighborhood; locationLabel degrades to city, state. */
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: ["sellers"],
+    /* An estate sale run for a client living in another state — two things at
+       once that put distance between the seller and the house. */
+    lever: "An estate sale, run for a client living out of state.",
+    /* No reviewId: his review is recorded at unverified-john-white and is
+       gated until someone finds the original. */
+  },
+  {
+    id: "2026-providence-plantation-01",
+    side: "buyer",
+    year: 2026,
+    month: 6,
+    neighborhood: "Providence Plantation",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    /* Relocating from Florida. */
+    pillars: ["relocation"],
+    /* The lever continues AFTER closing: repairs negotiated at inspection, then
+       coordinated with the contractors once the clients were mid-move. Most
+       buyers do not know that table exists. */
+    lever:
+      "Purchased under list price with seller concessions, and the negotiated repairs were coordinated with contractors after closing.",
+    reviewId: "google-lee-cottrell",
+  },
+  {
+    id: "2026-wynfield-forest-01",
+    side: "buyer",
+    year: 2026,
+    month: 6,
+    neighborhood: "Wynfield Forest",
+    city: "Huntersville",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: [],
+    /* The clearest lever on the page: three separate items conceded, none of
+       them price. Exactly the §2 argument. */
+    lever: "A full roof replacement, HVAC servicing, and the refrigerator, all conceded by the seller.",
+    reviewId: "zillow-chandler-cordes",
+  },
+  {
+    id: "2026-masons-bend-01",
+    side: "seller",
+    year: 2026,
+    month: 5,
+    neighborhood: "Masons Bend",
+    city: "Fort Mill",
+    state: "SC",
+    propertyType: "Single Family",
+    pillars: ["sellers", "carolinas-border"],
+    /* Workbook: multiple offers inside 48 hours, closed above list. The client's
+       review is explicit that the winning offer was chosen on TERMS rather than
+       the top number, which is the seller-side version of the whole argument. */
+    lever:
+      "Multiple offers inside 48 hours. The one accepted was chosen on its terms, not its number, and it closed above list price.",
+    reviewId: "zillow-sophie-fox",
+  },
+  {
+    id: "2026-sloan-station-01",
+    side: "buyer",
+    year: 2026,
+    month: 5,
+    neighborhood: "Sloan Station",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Townhouse",
+    builder: "Mungo Homes",
+    pillars: ["new-construction"],
+    /* Workbook: "Showed up to the closing table with no money down and a
+       refund." No figure attached, so it ships as stated. */
+    lever: "First-time buyers who brought no money to the closing table and left with a refund.",
+    /* Her brother. He discloses it in his own first sentence, which is why the
+       review is publishable at all — see lib/reviews. */
+    reviewId: "google-josh-garcia",
+  },
+  {
+    id: "2026-beverly-crest-02",
+    side: "seller",
+    year: 2026,
+    month: 4,
+    neighborhood: "Beverly Crest",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Townhouse",
+    pillars: ["sellers"],
+    lever: "On the market sixteen days.",
+    /* THE SAME TOWNHOUSE AS 2022-beverly-crest-01, sold four years after she
+       helped them buy it — and in the same month she got them under contract in
+       Fort Mill (2026-english-trails-01). One client, three rows, four years.
+       That arc is the strongest retention evidence in the dataset.
+
+       The review covers the purchase and the sale together, so it is linked
+       from both rows deliberately. */
+    reviewId: "zillow-brittany-turner-2026",
+  },
+  {
+    id: "2026-shannon-park-02",
+    side: "seller",
+    year: 2026,
+    month: 3,
+    neighborhood: "Shannon Park",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: ["sellers"],
   },
 
   /* ------------------------------------------------------------------ 2024 */
@@ -115,7 +289,9 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     builder: "Kolter Homes",
-    pillars: ["new-construction"],
+    /* Relocating from Tennessee — from the workbook's Relocation column, which
+       documents it where the review does not mention it. */
+    pillars: ["new-construction", "relocation"],
     reviewId: "google-julie-counterman",
   },
 
@@ -298,7 +474,9 @@ export const TRANSACTIONS: readonly Transaction[] = [
     city: "Charlotte",
     state: "NC",
     propertyType: "Single Family",
-    pillars: [],
+    /* Relocating from South Carolina — a short move, but a state line and two
+       sets of rules, which is what the pillar is about. */
+    pillars: ["relocation"],
     lever: "Purchased under list price.",
   },
 

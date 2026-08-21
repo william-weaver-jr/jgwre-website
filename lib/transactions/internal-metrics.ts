@@ -53,6 +53,24 @@ export const TRANSACTION_METRICS: readonly TransactionMetrics[] = [
     note: "2-1 rate buydown at 2.87 / 3.87 / 4.87 percent, seller paid.",
   },
 
+  { transactionId: "2026-turtle-rock-01", closingPrice: 345000 },
+  { transactionId: "2026-trinity-park-01", closingPrice: 250000 },
+  /* SOUTH CAROLINA — non-disclosure. */
+  { transactionId: "2026-edgewater-01", closingPrice: 360000, concessions: 5000 },
+  { transactionId: "2026-windsor-park-01", closingPrice: 309900, concessions: 15066.91, belowList: 15100 },
+  { transactionId: "2026-charlotte-01", closingPrice: 400000 },
+  { transactionId: "2026-providence-plantation-01", closingPrice: 895000, concessions: 20477.46, belowList: 5000 },
+  { transactionId: "2026-wynfield-forest-01", closingPrice: 582500 },
+  /* SOUTH CAROLINA — non-disclosure. */
+  {
+    transactionId: "2026-masons-bend-01",
+    closingPrice: 901000,
+    note: "Closed 2,000 ABOVE list — the only over-list figure in the set, and a seller-side one, so belowList would be the wrong field.",
+  },
+  { transactionId: "2026-sloan-station-01", closingPrice: 264000 },
+  { transactionId: "2026-beverly-crest-02", closingPrice: 380000 },
+  { transactionId: "2026-shannon-park-02", closingPrice: 305000 },
+  /* SOUTH CAROLINA — non-disclosure. */
   { transactionId: "2026-english-trails-01", closingPrice: 485000, concessions: 10500 },
 
   /* 2024 */

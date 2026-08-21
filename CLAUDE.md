@@ -389,10 +389,17 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       client believes she was mistreated because she is a military veteran. §7 forbids
       trimming a testimonial into shape, so it runs whole or not at all. Needs the BIC and
       probably counsel. Her closing stays in the ledger regardless (2022-park-place-01).
-- [ ] **Brittany Haney's 2026 sale is not in the ledger.** Her review says "the first
-      house we've sold with her" and Zillow records the transaction as bought and sold,
-      but the workbook carries only the Fort Mill purchase (2026-english-trails-01). Bill
-      is adding the sell side later; it would be the ledger's sixth seller-side closing.
+- [x] **Brittany Haney's 2026 sale — ADDED 2026-08-20.** `2026-beverly-crest-02`. It is
+      the same townhouse as `2022-beverly-crest-01`, sold in the same month she got them
+      under contract in Fort Mill. One client, three rows, four years — the strongest
+      retention evidence in the dataset.
+- [ ] **Humberto Zambrano has a 2025 purchase with no ledger row.** `zillow-humberto-zambrano`
+      records a 2025 Rock Hill BUY; the workbook has only his August 2026 Charlotte sale
+      (`2026-trinity-park-01`). Either the purchase is missing from the workbook or the
+      review's metadata is wrong. It would be the ledger's only 2025 row.
+- [ ] **`unverified-john-white` needs a permalink.** Seller side, an estate sale run for an
+      out-of-state client — one of very few seller reviews on file, so worth chasing. Its
+      row (`2026-charlotte-01`) carries no review link until it clears.
 - [ ] **Do not publish the Vicki White review as written.** It is a strong five-star
       review, but it attacks the opposing agent at length ("the poster child for giving
       realtors a bad name") and states the client believes she was mistreated because she

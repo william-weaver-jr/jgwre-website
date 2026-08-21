@@ -132,6 +132,30 @@ export const REVIEWS: readonly Review[] = [
     openQuestion: "TODO(verify): generic Zillow username. Needs the client's real name.",
   },
   {
+    /* Transcribed from the closed-transactions workbook; no permalink supplied,
+       so platform, date, and byline are unconfirmed and this cannot publish.
+       Same gate the other workbook transcriptions carried until their links
+       arrived. Transaction row 2026-charlotte-01. */
+    id: "unverified-john-white",
+    author: "John White",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed.",
+    /* Placeholder: the closing month, not a known posting date. */
+    date: "2026-06-01",
+    datePrecision: "year",
+    transaction: {
+      role: "sold",
+      propertyType: "Single Family",
+      year: 2026,
+      location: "Charlotte, NC",
+    },
+    body: "Jasmine Garcia did an incredible job. Her knowledge of the real estate market in the Charlotte area was invaluable. She communicated extremely well, listed my home at the perfect price, provided timely updates, and made my overall home selling experience headache free! I highly recommend her!!!",
+    statesDollarOutcome: false,
+    openQuestion:
+      "TODO(verify): platform, posting date, permalink, and byline all unconfirmed — transcribed from the workbook. Seller side, and an estate sale run for an out-of-state client, which makes it one of the few seller reviews on file. Worth chasing. Transaction row 2026-charlotte-01.",
+  },
+  {
     id: "google-cathy-phillips",
     /* The workbook records the buyers as Harold & Cathy Phillips; the review is
        bylined Cathy Phillips alone, and the byline is what is recorded. */
@@ -974,6 +998,10 @@ export const REVIEWS: readonly Review[] = [
     note: "The best evidence on the site for /carolinas-border: a client volunteering that she understands South Carolina contracts specifically. Also a strong /sellers review — 'the offer with the most favorable terms' is the whole thesis that price is not the only variable.",
   },
   {
+    /* Zillow labels this 'Sold'; the workbook records a June 2026 PURCHASE in
+       Wynfield Forest, Huntersville, and the review describes searching for and
+       buying a first home. The label is Zillow's and is wrong — same failure as
+       zillow-saquanna-carter. Transaction row 2026-wynfield-forest-01. */
     id: "zillow-chandler-cordes",
     author: "Chandler Cordes",
     rating: 5,
@@ -1052,9 +1080,15 @@ export const REVIEWS: readonly Review[] = [
     postedOn: "Stone Realty Group",
     date: "2026-08-18",
     datePrecision: "day",
+    transaction: {
+      role: "bought",
+      propertyType: "Single Family",
+      year: 2026,
+      location: "Providence Plantation, Charlotte, NC",
+    },
     body: "Jasmine did an exceptional job not only in helping us find our “forever home” but in all of the process that followed. Even after closing, Jasmine helped coordinate repairs that were negotiated and liaised with the contractors to ensure everything went as smoothly as possible for us during a very busy time of moving. We truly appreciate all the care and effort shown.",
     statesDollarOutcome: false,
-    note: "Buyer side. Google gives no transaction line and the review names no year, neighborhood, or property type, so no `transaction` is recorded rather than inferred — the closing is not yet matched to a row in the ledger. Worth matching when the workbook is next reconciled.\n\nThe useful specific here is post-closing work: repairs negotiated at inspection, then coordinated with contractors after the keys changed hands. That is the §2 argument on a table most buyers do not know exists.",
+    note: "MATCHED 2026-08-20 to transaction row 2026-providence-plantation-01: a June 2026 Providence Plantation purchase, relocating from Florida. Google gives no transaction line, so the metadata above comes from the workbook rather than the platform.\n\nThe useful specific here is post-closing work: repairs negotiated at inspection, then coordinated with contractors after the keys changed hands. That is the §2 argument on a table most buyers do not know exists.",
     sourceUrl:
       "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2kxb1pVOXVVbkEwVW5wZlJTMXBORWR0VDJ0d2JVRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
   },
