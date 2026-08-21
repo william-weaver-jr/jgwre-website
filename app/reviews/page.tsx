@@ -5,7 +5,7 @@ import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { ReviewCard } from "@/components/review-card";
 import { publishableReviews } from "@/lib/reviews";
-import { RECOGNITION } from "@/lib/site";
+import { RECOGNITION, SOCIAL } from "@/lib/site";
 import { GUIDE_TITLE } from "@/lib/intake";
 
 /*
@@ -14,7 +14,7 @@ import { GUIDE_TITLE } from "@/lib/intake";
   Reproduced verbatim, per docs/CONTENT-PLAN.md and CLAUDE.md §7. Nothing here
   is trimmed, tidied, or excerpted. Typos stay.
 
-  THREE decisions worth knowing before editing this page:
+  FOUR decisions worth knowing before editing this page:
 
   1. Reviews naming a dollar figure are grouped first, which is what
      CONTENT-PLAN.md asks for, and <ResultsDisclaimer /> sits directly under
@@ -32,6 +32,12 @@ import { GUIDE_TITLE } from "@/lib/intake";
      marking these up would be exactly that. The reviews earn trust by being
      readable, not by being markup. CLAUDE.md §11 scopes schema to
      RealEstateAgent + Person on the home page, and that stays true.
+
+  4. The page links out, which a conversion-minded reading would call a leak.
+     It is the opposite: the claim above is that nothing here is trimmed or
+     arranged, and a claim a reader cannot check is just a louder claim. The
+     links sit in the lede and on the attribution line under each review —
+     after the quote, never beside a CTA. See components/review-card.tsx.
 
   Nothing on this page is filtered by hand. `publishableReviews()` is the gate:
   it drops anything carrying an unresolved `openQuestion` or a settled
@@ -62,9 +68,31 @@ export default function ReviewsPage() {
         }
         lede={
           <>
-            Every review below is reproduced exactly as it was posted to Zillow or Google —
-            spelling, punctuation, and all. Nothing is shortened, and nothing is arranged to say
-            something the client didn’t. All of them are five stars.
+            Every review below is reproduced exactly as it was posted to{" "}
+            {/*
+              Zillow is linked; Google is not, and that asymmetry is correct.
+              Most of these were posted to her Zillow profile, so there is a
+              single place a reader can go and see the whole set in its
+              original form. Her Google reviews sit on the Stone Realty Group
+              listing rather than a profile of her own (`postedOn` in
+              lib/reviews/data.ts records which), so there is nothing
+              equivalent to point at — and linking the brokerage listing here
+              would read as her profile, which §7 does not allow.
+
+              This is the only link to the profile as a profile. The platform
+              labels under each review below go to individual reviews.
+            */}
+            <a
+              href={SOCIAL.zillow.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-accent-soft decoration-1 underline-offset-4 hover:decoration-accent"
+            >
+              Zillow
+              <span className="sr-only"> (her profile, opens an external site)</span>
+            </a>{" "}
+            or Google — spelling, punctuation, and all. Nothing is shortened, and nothing is
+            arranged to say something the client didn’t. All of them are five stars.
           </>
         }
       />
