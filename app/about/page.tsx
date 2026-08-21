@@ -38,7 +38,7 @@ import { GUIDE_TITLE } from "@/lib/intake";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Ten years teaching special education, then real estate. Same job: make sure the person with the most at stake isn’t the least prepared. Jasmine Garcia, Broker/REALTOR® in Charlotte, NC.",
+    "Ten years teaching special education, then real estate. Same job: make sure the person with the most at stake isn’t the least prepared. Charlotte, NC.",
   alternates: { canonical: "/about" },
 };
 
@@ -73,8 +73,8 @@ export default function AboutPage() {
                 What I left was the job. I didn&rsquo;t leave the work.
               </p>
               <p>
-                I spent those ten years in rooms where one parent — frightened, outnumbered,
-                and there for the first time — sat across from a table of people who did this
+                I spent those ten years in rooms where one parent, frightened and outnumbered
+                and there for the first time, sat across from a table of people who did this
                 every week and spoke a language nobody had taught them. My job was to make sure
                 the person with the most at stake wasn&rsquo;t the least prepared.
               </p>
@@ -144,19 +144,19 @@ export default function AboutPage() {
         <div className="mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-ink-muted">
           <p>
             It isn&rsquo;t. Sometimes the biggest savings come from things buyers don&rsquo;t
-            even know to ask for — a roof, a rate buydown, a closing date that lets you move
+            even know to ask for: a roof, a rate buydown, a closing date that lets you move
             once instead of twice. Which of those exist depends entirely on the house and the
             seller in front of you.
           </p>
           <p>
-            I have also owned and evaluated property as an investor, not only as an agent.
+            I have owned and evaluated property as an investor, not just as an agent.
             That is a different way of looking at a house: what it will cost to hold, what the
             repairs actually run, what the number needs to be for it to make sense.
           </p>
           <p>
-            I am licensed in both North Carolina and South Carolina, which in this market
-            matters more than it sounds like it should — the state line runs through your
-            monthly payment.
+            I am licensed in both North Carolina and South Carolina, which matters more in this
+            market than it sounds like it should. The state line runs through your monthly
+            payment.
           </p>
         </div>
 
@@ -228,13 +228,13 @@ export default function AboutPage() {
 
       <ClosingCta
         heading="Call me before you need me."
-        body="The most useful conversations happen months before anyone writes an offer, when there is still time to change the plan. Ten minutes is usually enough to know what you’re walking into."
+        body="The most useful conversations happen months before anyone writes an offer, when there is still time to change the plan. You don’t need a house picked out to have one."
         secondary={{ href: "/negotiation", label: GUIDE_TITLE }}
         placement="closing-about"
         intake={{
           source: "/about",
           heading: "Start the conversation early.",
-          body: "A few taps about where you are, then your details. No side of the table is prefilled here — this page is not about one of them.",
+          body: "Nothing here is prefilled. This page isn’t about one side of the table, so the first question is which one you’re on.",
         }}
       />
     </>

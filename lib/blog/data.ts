@@ -61,7 +61,7 @@ export const POSTS: readonly Post[] = [
     category: "negotiation",
     targetQuery: "what can you negotiate when buying a house besides the price",
     answer:
-      "Almost every term in a purchase contract is negotiable, not just the price. Condition and repairs, closing costs and concessions, the closing and possession dates, which appliances and fixtures stay, which contingencies you keep, and — on new construction — what the builder is willing to put toward incentives. Which of these are available depends on the seller, which is why the useful question is what this seller is protecting rather than whether they will come down.",
+      "Almost every term in a purchase contract is negotiable, not just the price. Condition and repairs, closing costs and concessions, the closing and possession dates, which appliances and fixtures stay, which contingencies you keep, and on new construction, what the builder is willing to put toward incentives. Which of these are available depends on the seller, which is why the useful question is what this seller is protecting rather than whether they will come down.",
     publishedAt: "2026-08-14",
     /* Case 2, quoted for what it was: a negotiation with no price reduction in it.
        No dollar figure appears, so no disclaimer is triggered — see citesResults
@@ -86,7 +86,7 @@ export const POSTS: readonly Post[] = [
     ],
     cta: {
       heading: "Which of these exist in your transaction?",
-      body: "That depends on the house and on who is selling it. Ten minutes on the phone is usually enough to sort the levers that are there from the ones that are not.",
+      body: "That depends on the house and on who is selling it. A phone call is usually enough to sort the levers that are there from the ones that are not.",
     },
     body: () => import("@/content/blog/what-you-can-negotiate-besides-price.mdx"),
   },

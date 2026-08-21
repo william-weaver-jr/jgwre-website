@@ -47,7 +47,7 @@ import { GUIDE_TITLE } from "@/lib/intake";
 export const metadata: Metadata = {
   title: "Reviews",
   description:
-    "Client reviews for Jasmine Garcia, Broker/REALTOR® with Stone Realty Group in Charlotte, NC — reproduced exactly as they were posted to Zillow and Google.",
+    "Client reviews for Jasmine Garcia, Broker/REALTOR® with Stone Realty Group in Charlotte, NC. Reproduced exactly as they were posted to Zillow and Google.",
   alternates: { canonical: "/reviews" },
 };
 
@@ -91,7 +91,7 @@ export default function ReviewsPage() {
               Zillow
               <span className="sr-only"> (her profile, opens an external site)</span>
             </a>{" "}
-            or Google — spelling, punctuation, and all. Nothing is shortened, and nothing is
+            or Google, spelling and punctuation and all. Nothing is shortened, and nothing is
             arranged to say something the client didn’t. All of them are five stars.
           </>
         }
@@ -173,13 +173,13 @@ export default function ReviewsPage() {
 
       <ClosingCta
         heading="Ask them what they asked for."
-        body="Most of the people above did not know what was negotiable when they started. That is the normal place to begin. Ten minutes on the phone is usually enough to know what is on the table for your house."
+        body="Most of the people above did not know what was negotiable when they started. That is the normal place to begin. One call is usually enough to find out what is on the table for your house."
         secondary={{ href: "/negotiation", label: GUIDE_TITLE }}
         placement="closing-reviews"
         intake={{
           source: "/reviews",
           heading: "Find out what is on the table for you.",
-          body: "A few taps about your situation, then your details. You get the questions worth asking either way.",
+          body: "A few taps about your situation, and you get the questions worth asking back. That happens whether or not you ever call.",
         }}
       />
     </>

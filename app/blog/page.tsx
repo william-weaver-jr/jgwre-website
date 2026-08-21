@@ -46,7 +46,7 @@ export default function BlogIndexPage() {
             <span className="block italic">has read all of this already.</span>
           </>
         }
-        lede="Short pieces on what is negotiable, when it is negotiable, and how a transaction actually runs. No market roundups — those date in a month and every agent publishes them."
+        lede="Short pieces on what is negotiable, when it is negotiable, and how a transaction actually runs. No market roundups. Those date in a month, and every agent publishes them."
       />
 
       {posts.length === 0 ? (
@@ -107,13 +107,13 @@ export default function BlogIndexPage() {
       )}
 
       <ClosingCta
-        heading="A question these do not answer?"
-        body="The specific one about your specific house is the one worth asking out loud. Ten minutes on the phone covers more than any post can."
+        heading="The one about your own house isn’t here."
+        body="That is the one worth asking out loud, and a phone call covers more of it than any post can."
         placement="closing-blog"
         intake={{
           source: "/blog",
           heading: "Ask it here instead.",
-          body: "What you are looking at, and whether you are buying or selling. Then your details.",
+          body: "What you’re looking at, and which side of it you’re on. That’s the whole form.",
         }}
       />
     </>

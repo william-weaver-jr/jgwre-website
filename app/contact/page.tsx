@@ -19,7 +19,7 @@ import { AGENT, BROKERAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Call ${AGENT.name}, ${AGENT.title} with ${BROKERAGE.name}, at ${AGENT.phoneDisplay}. Serving Charlotte, the surrounding North Carolina counties, and across the South Carolina line.`,
+  description: `Call ${AGENT.name}, ${AGENT.title} with ${BROKERAGE.name}, at ${AGENT.phoneDisplay}. Serving Charlotte, the surrounding NC counties, and across the SC line.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -54,7 +54,7 @@ export default function ContactPage() {
       <ContactIntake
         source="/contact"
         heading="Or tell her what you’re working on."
-        body="A few taps, then your details. It takes about a minute and it means the call starts somewhere useful."
+        body="It takes about a minute, and it means the call starts somewhere useful."
         hairline={false}
       />
 

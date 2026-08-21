@@ -138,12 +138,12 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
 
       <ClosingCta
         heading={`Thinking about ${area.name}?`}
-        body="Ten minutes on the phone is enough to tell you which of these apply to the specific house you are looking at, and which do not."
+        body="One call is enough to tell you which of these apply to the specific house you are looking at, and which do not."
         placement={`closing-area-${area.slug}`}
         intake={{
           source: `/areas/${area.slug}`,
           heading: "Tell me what you are looking at.",
-          body: "Property type, timing, and whether you are buying or selling. Then your details.",
+          body: "Property type, timing, and which side of the table you’re on.",
         }}
       />
     </>

@@ -181,7 +181,7 @@ export function ContactIntake({
           </h2>
           <p className="mt-5 text-base leading-relaxed text-ink-muted">
             {step === "done"
-              ? "Nothing here is a prediction. These are the questions worth putting to the other side of your particular table — and they’re the ones we’ll start with."
+              ? "Nothing here is a prediction. These are the questions worth putting to the other side of your particular table, and they’re the ones we’ll start with."
               : body}
           </p>
         </div>
@@ -300,7 +300,7 @@ function DetailsStep({
           onClick={onContinue}
           className="text-sm text-ink-muted underline decoration-accent-soft underline-offset-4 hover:text-ink"
         >
-          Skip these — just take my details
+          Skip these and just take my details
         </button>
         {!lockedSide ? (
           <button
@@ -535,8 +535,8 @@ function Confirmation({ levers }: { levers: readonly string[] }) {
       </ol>
 
       <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-muted">
-        Your details are with Jasmine. She’ll call you from {AGENT.phoneDisplay} — and if
-        you’d rather not wait, that number takes calls and texts.
+        Your details are with Jasmine. She’ll call you from {AGENT.phoneDisplay}. If you’d
+        rather not wait, that number takes calls and texts.
       </p>
 
       <div className="mt-8">

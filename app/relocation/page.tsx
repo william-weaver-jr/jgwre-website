@@ -27,7 +27,7 @@ import { ClosingCta } from "@/components/phone-cta";
 export const metadata: Metadata = {
   title: "Relocation",
   description:
-    "Moving to Charlotte from out of state? Everyone else in the transaction is local except you. 18 relocation transactions across the Charlotte metro and into South Carolina.",
+    "Moving to Charlotte from out of state? Everyone in the transaction is local except you. 18 relocation transactions across the Charlotte metro and into SC.",
   alternates: { canonical: "/relocation" },
 };
 
@@ -40,7 +40,7 @@ const GAPS = [
   {
     n: "02",
     title: "The state line is a real decision",
-    body: "Part of this metro is in South Carolina. That changes your tax picture, your vehicle registration, and your closing process — not just your address.",
+    body: "Part of this metro is in South Carolina. That changes your tax picture, your vehicle registration, and your closing process, not just your address.",
   },
   {
     n: "03",
@@ -75,7 +75,7 @@ export default function RelocationPage() {
         }
         lede={
           <>
-            The listing agent, the seller, the inspector, the appraiser, the attorney — all local,
+            The listing agent, the seller, the inspector, the appraiser, the attorney: all local,
             all fluent in a market you are reading about on a screen. That gap is the thing to
             close first.
           </>
@@ -136,13 +136,13 @@ export default function RelocationPage() {
 
       <ClosingCta
         heading="Call from wherever you are."
-        body="Most relocation calls start months before the move. Earlier is better — the questions that matter are the ones asked before a neighborhood is chosen."
+        body="Most relocation calls start months before the move. Earlier is better. The questions that matter get asked before a neighborhood is chosen."
         secondary={{ href: "/carolinas-border", label: "NC or SC: what changes" }}
         placement="closing-relocation"
         intake={{
           source: "/relocation",
           heading: "Tell me where you are moving from.",
-          body: "Four questions, then your details. Which parts of this process will feel unfamiliar depends almost entirely on where you have bought before.",
+          body: "Four questions, starting with that one. Which parts of this process feel unfamiliar depends almost entirely on where you’ve bought before.",
           prefill: { side: "relocating" },
         }}
       />

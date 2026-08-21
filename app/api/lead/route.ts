@@ -117,7 +117,7 @@ async function sendNotificationEmail(lead: Lead, fubError: unknown): Promise<voi
     from,
     to,
     replyTo: lead.email,
-    subject: `${warning ? "[FUB FAILED] " : ""}New ${lead.leadType} lead — ${lead.name}`,
+    subject: `${warning ? "[FUB FAILED] " : ""}New ${lead.leadType} lead: ${lead.name}`,
     text: [
       warning,
       `Name:  ${lead.name}`,

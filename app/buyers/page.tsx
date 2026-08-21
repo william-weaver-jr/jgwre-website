@@ -26,7 +26,7 @@ import { GUIDE_TITLE } from "@/lib/intake";
 export const metadata: Metadata = {
   title: "Buyers",
   description:
-    "The listing agent works for the seller. A buyer's leverage is real but perishable — where it exists at each stage of a Charlotte, NC or South Carolina purchase, and when it expires.",
+    "The listing agent works for the seller. Where a buyer's leverage actually sits at each stage of a Charlotte or South Carolina purchase, and when it expires.",
   alternates: { canonical: "/buyers" },
 };
 
@@ -35,7 +35,7 @@ const STAGES = [
   {
     n: "01",
     title: "Before you look at anything",
-    body: "A fully underwritten pre-approval is worth more than a pre-qualification letter, and it costs the same. It is what lets a seller take a slightly lower number from you over a higher one from someone who might not close.",
+    body: "A fully underwritten pre-approval beats a pre-qualification letter, and it costs the same. It is what lets a seller take a slightly lower number from you over a higher one from someone who might not close.",
     expires: "Once you are writing an offer, this is already fixed.",
   },
   {
@@ -47,13 +47,13 @@ const STAGES = [
   {
     n: "03",
     title: "Writing the offer",
-    body: "Price is one line. Closing date, possession, what conveys, who pays for the survey, how much due diligence money is at risk and for how long — every one of those is negotiable, and several of them are worth more than a price reduction.",
+    body: "Price is one line. Closing date, possession, what conveys, who pays for the survey, how much due diligence money is at risk and for how long: every one of those is negotiable. Several are worth more than a price reduction.",
     expires: "This is the widest the table ever gets. It narrows from here.",
   },
   {
     n: "04",
     title: "Due diligence",
-    body: "The inspection is the second negotiation, and it is not one question. A repair list can be repaired, credited, declined, or split line by line — and a credit at closing is often worth more to a buyer than the repair itself.",
+    body: "The inspection is the second negotiation, and it is rarely one question. A repair list can be repaired, credited, declined, or split line by line. A credit at closing is often worth more to a buyer than the repair itself.",
     expires: "When the due diligence period ends, so does this.",
   },
   {
@@ -77,9 +77,9 @@ export default function BuyersPage() {
         }
         lede={
           <>
-            That asymmetry is not a reason to be anxious. It is a reason to know where a
-            buyer actually has leverage — and to use it in the window where it exists,
-            because most of it expires quietly.
+            That asymmetry isn&rsquo;t a reason to be anxious. It&rsquo;s a reason to know
+            where a buyer actually has leverage, and to use it while the window is still
+            open. Most of it closes quietly.
           </>
         }
       />
@@ -145,19 +145,19 @@ export default function BuyersPage() {
           >
             {GUIDE_TITLE}
           </Link>
-          , ungated — read it before you write an offer rather than after.
+          , ungated. Read it before you write an offer rather than after.
         </p>
       </section>
 
       <ClosingCta
         heading="Call before you write the offer."
-        body="The offer is the widest the table ever gets. Ten minutes beforehand is worth more than any conversation after it is signed."
+        body="The offer is the widest the table ever gets. Talking it through beforehand does more than any conversation after it is signed."
         placement="closing-buyers"
         secondary={{ href: "/negotiation", label: GUIDE_TITLE }}
         intake={{
           source: "/buyers",
           heading: "A few things about what you are looking at.",
-          body: "Property type, where, and roughly when. Then your details. Enough to know which levers are plausibly on your table.",
+          body: "Property type, where, and roughly when. That’s enough to tell which levers are plausibly on your table.",
           prefill: { side: "buying" },
         }}
       />

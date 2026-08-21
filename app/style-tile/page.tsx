@@ -20,14 +20,14 @@ export const metadata: Metadata = {
 };
 
 const SWATCHES = [
-  ["ink", "#1B2230", "Charcoal-navy — headings and body", "bg-ink"],
+  ["ink", "#1B2230", "Charcoal-navy: headings and body", "bg-ink"],
   ["ink-muted", "#4E5768", "Secondary text (AA on ivory)", "bg-ink-muted"],
-  ["primary", "#232C3D", "Deep navy — primary buttons", "bg-primary"],
+  ["primary", "#232C3D", "Deep navy: primary buttons", "bg-primary"],
   ["primary-deep", "#10161F", "Primary pressed / hover", "bg-primary-deep"],
-  ["accent", "#8A6A2F", "Antique gold — labels, links, rules", "bg-accent"],
-  ["accent-soft", "#C9A96A", "Champagne — hairlines and dividers", "bg-accent-soft"],
-  ["surface", "#FCFAF6", "Ivory — page ground", "bg-surface"],
-  ["surface-sunken", "#F4EFE6", "Cream — banded sections", "bg-surface-sunken"],
+  ["accent", "#8A6A2F", "Antique gold: labels, links, rules", "bg-accent"],
+  ["accent-soft", "#C9A96A", "Champagne: hairlines and dividers", "bg-accent-soft"],
+  ["surface", "#FCFAF6", "Ivory: page ground", "bg-surface"],
+  ["surface-sunken", "#F4EFE6", "Cream: banded sections", "bg-surface-sunken"],
   ["surface-raised", "#FFFFFF", "Raised plate (Case 01)", "bg-surface-raised"],
 ] as const;
 
@@ -51,8 +51,8 @@ export default function StyleTilePage() {
       </h1>
       <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-muted">
         Ivory and cream grounds, charcoal-navy ink, one antique-gold accent used only as hairlines,
-        small-caps labels, and underlines. No gradients, no metallic fills, no flat black fields —
-        the brokerage owns black.
+        small-caps labels, and underlines. No gradients, no metallic fills, no flat black fields.
+        The brokerage owns black.
       </p>
       <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-muted">
         Proposed, not approved. Four open questions about this direction are recorded in

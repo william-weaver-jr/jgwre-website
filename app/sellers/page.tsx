@@ -21,7 +21,7 @@ import { BROKERAGE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Sellers",
   description:
-    "The buyer’s agent works for the buyer. So does the inspector. Pricing strategy, inspection-response negotiation, and a 98.84% list-to-sale ratio in Charlotte, NC.",
+    "The buyer’s agent works for the buyer. So does the inspector. Pricing strategy, inspection negotiation, and a 98.84% list-to-sale ratio in Charlotte, NC.",
   alternates: { canonical: "/sellers" },
 };
 
@@ -34,7 +34,7 @@ const STAGES = [
   {
     n: "02",
     title: "The inspection response is the second one",
-    body: "This is where most seller money is lost, and it is almost never about the price. A repair request is a list, and lists are negotiable line by line — repair, credit, decline, or split.",
+    body: "This is where most seller money is lost, and it is almost never about the price. A repair request is a list, and lists are negotiable line by line: repair, credit, decline, or split.",
   },
   {
     n: "03",
@@ -73,8 +73,8 @@ export default function SellersPage() {
           Listings have closed at 98.84% of list price.
         </SectionHeading>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
-          That figure is a career average across 73+ transactions. It is not a promise about your
-          house — no one can make that promise honestly — but it is what the record shows.
+          That figure is a career average across 73+ transactions. It is what the record shows,
+          not a promise about your house. No one can make that promise honestly.
         </p>
 
         <ResultsDisclaimer className="mt-8" />
@@ -126,13 +126,13 @@ export default function SellersPage() {
       {/* CONTENT-PLAN.md specifies the secondary CTA here as /home-value. */}
       <ClosingCta
         heading="Call before you set a price."
-        body="Pricing is the one negotiation you cannot redo. Ten minutes on the phone before the listing goes live is worth more than any adjustment after it does."
+        body="Pricing is the one negotiation you cannot redo. A call before the listing goes live is worth more than any adjustment after it does."
         placement="closing-sellers"
         secondary={{ href: "/home-value", label: "What is your home worth?" }}
         intake={{
           source: "/sellers",
           heading: "Three questions before you price it.",
-          body: "Where, when, and whether anyone has valued it yet. Then your details. That is enough to know which conversation to have.",
+          body: "Where it is, when you want it listed, and whether anyone has valued it yet. That is enough to know which conversation to have.",
           prefill: { side: "selling" },
         }}
       />

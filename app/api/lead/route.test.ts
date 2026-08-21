@@ -98,7 +98,7 @@ describe("POST /api/lead — the happy path", () => {
 
     const email = emailsSend.mock.calls[0][0];
     expect(email.replyTo).toBe("dana@example.com");
-    expect(email.subject).toContain("New buyer lead — Dana Ruiz");
+    expect(email.subject).toContain("New buyer lead: Dana Ruiz");
     expect(email.text).toContain("New construction");
     expect(email.text).toContain("TCPA consent accepted at submission");
   });

@@ -140,7 +140,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         intake={{
           source: `/blog/${post.slug}`,
           heading: "Ask about your own situation.",
-          body: "What you are looking at, and whether you are buying or selling. Then your details.",
+          body: "What you’re looking at, and which side of it you’re on. She’ll take it from there.",
         }}
       />
     </>

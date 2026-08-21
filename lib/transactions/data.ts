@@ -432,7 +432,7 @@ export const TRANSACTIONS: readonly Transaction[] = [
        marketed: it is a dollar outcome, and "paid more than asking" is not a
        lever that recommends her. */
     lever:
-      "The client would consider no other community. Multiple offers on the homesite; this one was accepted.",
+      "The client would consider no other community. Multiple offers came in on the homesite. Theirs was the one accepted.",
     reviewId: "zillow-saquanna-carter",
   },
   {

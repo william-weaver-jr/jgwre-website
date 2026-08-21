@@ -52,7 +52,7 @@ export const SAMPLE_TRANSACTIONS: readonly Transaction[] = [
     state: "SC",
     propertyType: "Single Family",
     pillars: ["sellers", "carolinas-border"],
-    lever: "Multiple offers inside 48 hours; chose the one with the better terms, not the top number.",
+    lever: "Multiple offers inside 48 hours. The one that won had better terms, not the top number.",
     reviewId: "zillow-sophie-fox",
   },
   {
@@ -102,6 +102,6 @@ export const SAMPLE_TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: ["sellers"],
-    lever: "Inspection response negotiated line by line — repairs, credits, and declines.",
+    lever: "Inspection response negotiated line by line: repairs, credits, and declines.",
   },
 ];

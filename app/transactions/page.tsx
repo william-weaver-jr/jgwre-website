@@ -42,7 +42,7 @@ function isPillar(value: string | undefined): value is TransactionPillar {
 export const metadata: Metadata = {
   title: "Transactions",
   description:
-    "Closed transactions for Jasmine Garcia, Broker/REALTOR® with Stone Realty Group — new construction, relocation, and both sides of the NC/SC line.",
+    "Closed transactions for Jasmine Garcia, Broker/REALTOR® with Stone Realty Group: new construction, relocation, and both sides of the NC/SC line.",
   alternates: { canonical: "/transactions" },
   /*
     Noindex until the ledger is substantial — TRANSACTIONS_INDEX_THRESHOLD, not
@@ -79,7 +79,7 @@ export default async function TransactionsPage({
         lede={
           <>
             Closed transactions, both sides, grouped by year. Where something other than price
-            moved, it says so — that is usually where the money was.
+            moved, it says so. That is usually where the money was.
           </>
         }
       />
@@ -176,8 +176,7 @@ export default async function TransactionsPage({
                 >
                   {group.year}
                   <span className="sr-only">
-                    {" "}
-                    — {group.rows.length} transaction{group.rows.length === 1 ? "" : "s"}
+                    , {group.rows.length} transaction{group.rows.length === 1 ? "" : "s"}
                   </span>
                 </h3>
 
@@ -195,13 +194,13 @@ export default async function TransactionsPage({
 
       <ClosingCta
         heading="Ask what moved on a house like yours."
-        body={`Every one of these started with a call. ${AGENT.phoneDisplay} reaches her directly, and ten minutes is usually enough to know which levers exist on the house you are looking at.`}
+        body={`Every one of these started with a call. ${AGENT.phoneDisplay} reaches her directly, and one conversation is usually enough to know which levers exist on the house you are looking at.`}
         secondary={{ href: "/reviews", label: "What those clients said" }}
         placement="closing-transactions"
         intake={{
           source: "/transactions",
           heading: "Ask about the house you are actually looking at.",
-          body: "A few taps, then your details. The levers above existed because someone asked about that specific property — yours will be different.",
+          body: "The levers above existed because someone asked about that specific property. Yours will be different, which is what the questions are for.",
         }}
       />
     </>

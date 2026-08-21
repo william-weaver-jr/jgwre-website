@@ -26,8 +26,8 @@ const libreFranklin = Libre_Franklin({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${AGENT.name}, ${AGENT.title} — Charlotte, NC & SC`,
-    template: `%s — ${AGENT.name}`,
+    default: `${AGENT.name}, ${AGENT.title} · Charlotte, NC & SC`,
+    template: `%s · ${AGENT.name}`,
   },
   description: `${AGENT.name}, ${AGENT.title} with ${BROKERAGE.name}. Licensed in North Carolina and South Carolina.`,
   openGraph: {

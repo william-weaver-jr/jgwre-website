@@ -24,7 +24,7 @@ import { ClosingCta } from "@/components/phone-cta";
 export const metadata: Metadata = {
   title: "What is your home worth?",
   description:
-    "A written comparative market analysis from a broker who has seen the house — not an automated estimate. Charlotte, NC and across the South Carolina line.",
+    "A written comparative market analysis from a broker who has actually seen the house, not an automated estimate. Charlotte, NC and the South Carolina line.",
   alternates: { canonical: "/home-value" },
 };
 
@@ -40,7 +40,7 @@ const UNSEEN = [
   },
   {
     title: "Layout",
-    body: "Two houses with identical square footage can live very differently. A model counts the number; a person walks the floor plan.",
+    body: "Two houses with identical square footage can live very differently. A model counts the number. A person walks the floor plan.",
   },
   {
     title: "Unpermitted work",
@@ -139,7 +139,7 @@ export default function HomeValuePage() {
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
           A listing that starts too high goes stale, and a stale listing hands every later
           negotiation to the other side. The price you choose before anyone sees the house
-          shapes what you can ask for afterwards — which is the argument the{" "}
+          shapes what you can ask for afterwards, which is the argument the{" "}
           <Link
             href="/sellers"
             className="decoration-accent-soft decoration-1 underline-offset-4 hover:underline"
@@ -156,13 +156,13 @@ export default function HomeValuePage() {
 
       <ClosingCta
         heading="Ask what it is actually worth."
-        body="Send the address and what you have done to the house. You will get comparable sales, the adjustments behind them, and a range — not a number from a model that has never been inside."
+        body="Send the address and what you have done to the house. You will get comparable sales, the adjustments behind them, and a range rather than a single number from a model that has never been inside."
         placement="closing-home-value"
         intake={{
           source: "/home-value",
           leadType: "valuation",
           heading: "Start with the house.",
-          body: "Where it is, when you are thinking of moving, and whether anyone has valued it yet. Then your details.",
+          body: "The address, roughly when you’re thinking of moving, and whether it’s been valued before. She takes it from there.",
           prefill: { side: "selling" },
         }}
       />

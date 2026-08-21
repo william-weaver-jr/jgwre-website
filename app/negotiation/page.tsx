@@ -87,7 +87,7 @@ export default function NegotiationPage() {
         source="/negotiation"
         leadType="guide"
         heading={`Which of the ${ITEM_COUNT_WORD} apply to your house?`}
-        body="A few taps about what you’re looking at, then your details. The list above is everything that can be asked for; this narrows it to what’s plausibly on your table."
+        body="The list above is everything that can be asked for. A few taps narrows it to what’s plausibly on your table."
       />
     </>
   );

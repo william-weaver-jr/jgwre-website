@@ -29,10 +29,10 @@ import { GUIDE_TITLE, ITEM_COUNT } from "@/lib/intake";
 
 export const metadata: Metadata = {
   description:
-    "Negotiation is not just price. Documented outcomes on roofs, concessions, and builder incentives in Charlotte, NC and across the NC/SC border. Call (704) 200-9360.",
+    "Negotiation is not just price. Documented outcomes on roofs, concessions, and builder incentives across Charlotte, NC and the NC/SC line. Call (704) 200-9360.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: `${AGENT.name}, ${AGENT.title} — Charlotte, NC & SC`,
+    title: `${AGENT.name}, ${AGENT.title} · Charlotte, NC & SC`,
     description:
       "Negotiation is not just price. Documented outcomes across Charlotte and the NC/SC border.",
   },
@@ -282,10 +282,10 @@ export default function HomePage() {
           <div>
             <p className="eyebrow">Next step</p>
             <h2 id="contact" className="mt-4 font-display text-4xl leading-tight md:text-5xl">
-              Call before you write an offer.
+              Ten minutes, before anything is signed.
             </h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-ink-muted">
-              Ten minutes on the phone tells you which terms are worth asking for on your house.
+              That is usually enough to know which terms are worth asking for on your house.
               Charlotte, the surrounding NC counties, and across the South Carolina line.
             </p>
             <PhoneCta

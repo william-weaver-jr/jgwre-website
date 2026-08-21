@@ -47,7 +47,7 @@ const LEVERS = [
   {
     n: "02",
     title: "Incentives are rarely volunteered",
-    body: "Builders protect the published base price because it sets the comp for every remaining home in the community. They will often move on closing costs, upgrades, and rate buydowns instead — but usually only when asked, and usually only at certain points in the sales cycle.",
+    body: "Builders protect the published base price because it sets the comp for every remaining home in the community. They will often move on closing costs, upgrades, and rate buydowns instead, but usually only when asked, and usually only at certain points in the sales cycle.",
   },
   {
     n: "03",
@@ -57,12 +57,12 @@ const LEVERS = [
   {
     n: "04",
     title: "Upgrade pricing is not fixed",
-    body: "Design-center pricing, which upgrades are structural and must be decided early, and which can be done later for less — this is where a large share of the budget quietly goes.",
+    body: "The design center is where a large share of the budget quietly goes. Some upgrades are structural and have to be decided early. Others can wait, and waiting is usually cheaper.",
   },
   {
     n: "05",
     title: "Registration rules bind early",
-    body: "Most builders require your agent to be present the first time you walk in. Walk in alone and you can lose representation for that community entirely — before you have asked a single question.",
+    body: "Most builders require your agent to be present the first time you walk in. Walk in alone and you can lose representation for that community entirely, before you have asked a single question.",
   },
 ];
 
@@ -80,8 +80,8 @@ export default function NewConstructionPage() {
         lede={
           <>
             A builder’s sales office does this every day, with a contract they wrote, on terms
-            they set. Most buyers walk into that room once in their lives. That asymmetry is the
-            whole problem, and it is fixable.
+            they set. Most buyers walk into that room once in their lives. That gap is the whole
+            problem, and it is fixable.
           </>
         }
       />
@@ -144,14 +144,14 @@ export default function NewConstructionPage() {
       </section>
 
       <ClosingCta
-        heading="Call before you walk into a model home."
-        body="Representation has to be in place before your first visit at most builders. Ten minutes on the phone first is the whole difference."
+        heading="Your first visit is the one that counts."
+        body="Representation has to be in place before your first visit at most builders. One call first is the whole difference."
         secondary={{ href: "/negotiation", label: GUIDE_TITLE }}
         placement="closing-new-construction"
         intake={{
           source: "/new-construction",
           heading: "Which builder are you looking at?",
-          body: "Four questions, then your details. The answers decide which incentives are even on the table before you walk into the sales office.",
+          body: "Four questions about the community you’re considering. The answers decide which incentives are even on the table before you walk into the sales office.",
           // The page is about one table. Nobody who read it should have to tell us
           // they are buying new construction — they just did, by reading it.
           prefill: { side: "buying", answers: { propertyType: "new-construction" } },

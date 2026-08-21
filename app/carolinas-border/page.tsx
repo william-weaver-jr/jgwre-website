@@ -28,7 +28,7 @@ import { BROKERAGE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "The NC/SC Border",
   description:
-    "Fort Mill, Tega Cay, Indian Land, Lake Wylie, Waxhaw. Two states, two tax regimes, two rulebooks — and one state line running through your monthly payment.",
+    "Fort Mill, Tega Cay, Indian Land, Lake Wylie, Waxhaw. Two states, two tax regimes, two rulebooks, and a state line running through your monthly payment.",
   alternates: { canonical: "/carolinas-border" },
 };
 
@@ -46,7 +46,7 @@ const DIFFERENCES = [
   {
     n: "03",
     title: "Income tax is structured differently",
-    body: "North Carolina and South Carolina take different approaches to individual income tax — one flat, one graduated. Which one costs you more depends entirely on your income and your deductions, so it is worth an actual calculation rather than a rule of thumb.",
+    body: "North Carolina and South Carolina take different approaches to individual income tax, one flat and one graduated. Which costs you more depends entirely on your income and your deductions, so it is worth an actual calculation rather than a rule of thumb.",
   },
   {
     n: "04",
@@ -89,9 +89,9 @@ export default function CarolinasBorderPage() {
           Licensed in North Carolina and South Carolina.
         </SectionHeading>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
-          Most agents in this market hold one license and can only work one side of the line. That
-          means the comparison you most need — this house in NC against that house in SC — is one
-          they are not able to run for you.
+          Most agents in this market hold one license and can only work one side of the line. So
+          the comparison you most need, this house in NC against that house in SC, is the one
+          they cannot run for you.
         </p>
         <p className="mt-6 max-w-2xl tabular-nums text-base text-ink-muted">
           {BROKERAGE.licenses.map((l) => `License ${l.state} ${l.number}`).join(" · ")}
@@ -165,21 +165,21 @@ export default function CarolinasBorderPage() {
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
           Assignment is by address, and the two states organize their districts differently, so a
           move across the line changes which system an address falls under. This site does not
-          rate schools — that is not a real estate question and you should not take a broker’s
-          word for it. Ask the district for current assignment before you write an offer, and I
-          will point you at the right office.
+          rate schools. That is not a real estate question, and you should not take a
+          broker&rsquo;s word for it. Ask the district for current assignment before you write an
+          offer, and I will point you at the right office.
         </p>
       </section>
 
       <ClosingCta
-        heading="Call before you narrow it to one state."
+        heading="Run the numbers before you pick a side."
         body="The comparison is worth running on the specific homes you are weighing, not in the abstract. It usually takes one phone call and it changes what people shortlist."
         secondary={{ href: "/relocation", label: "Moving from out of state" }}
         placement="closing-carolinas-border"
         intake={{
           source: "/carolinas-border",
           heading: "Run the comparison on your actual shortlist.",
-          body: "A few questions about what you are weighing, then your details. The state line changes different things depending on which of them you are answering.",
+          body: "A few questions about what you’re weighing. What the state line changes depends on which of those you’re answering.",
           prefill: { side: "buying", answers: { markets: ["carolinas-border"] } },
         }}
       />

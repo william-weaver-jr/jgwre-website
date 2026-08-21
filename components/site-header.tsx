@@ -10,7 +10,7 @@ export function SiteHeader() {
         <Link
           href="/"
           className="mr-auto flex flex-col gap-1"
-          aria-label={`${AGENT.name}, ${AGENT.title} — home`}
+          aria-label={`${AGENT.name}, ${AGENT.title}, home`}
         >
           <span className="font-display text-2xl leading-none font-medium tracking-tight">
             {AGENT.name}

@@ -110,7 +110,7 @@ export function ReviewCard({ review }: { review: Review }) {
             className="underline decoration-accent-soft decoration-1 underline-offset-4 hover:decoration-accent"
           >
             {PLATFORM_LABEL[review.platform]}
-            <span className="sr-only"> — {destination.hint} (opens an external site)</span>
+            <span className="sr-only">, {destination.hint} (opens an external site)</span>
           </a>
         ) : (
           PLATFORM_LABEL[review.platform]

@@ -26,7 +26,7 @@ export const LEVERS: readonly LeverRule[] = [
     group: "new-construction",
     sides: ["buying", "both", "relocating"],
     requires: { question: "propertyType", value: "new-construction" },
-    text: "Whether the incentive is tied to using the builder’s lender — and what it’s still worth if you don’t.",
+    text: "Whether the incentive is tied to using the builder’s lender, and what it’s still worth if you don’t.",
   },
   {
     id: "nc-base-vs-design",
@@ -70,7 +70,7 @@ export const LEVERS: readonly LeverRule[] = [
     group: "resale",
     sides: ["buying", "both", "relocating"],
     requires: { question: "propertyType", value: "resale" },
-    text: "What conveys with the house that never made it into the listing — appliances, mounts, the things nobody thinks to write down.",
+    text: "What conveys with the house that never made it into the listing: appliances, mounts, the things nobody thinks to write down.",
   },
 
   // — Financing ————————————————————————————————————————————————————————
@@ -86,7 +86,7 @@ export const LEVERS: readonly LeverRule[] = [
     group: "financing",
     sides: ["buying", "both", "relocating", "deciding"],
     requires: { question: "lender", value: "not-yet" },
-    text: "What a pre-approval actually commits you to — worth knowing before it becomes the reason an offer isn’t taken seriously.",
+    text: "What a pre-approval actually commits you to, which is worth knowing before it becomes the reason an offer isn’t taken seriously.",
   },
   {
     id: "lender-cash",
@@ -119,7 +119,7 @@ export const LEVERS: readonly LeverRule[] = [
     id: "relo-in-person",
     group: "relocation",
     sides: ["relocating"],
-    text: "What has to happen in person and what doesn’t. Everyone else in the transaction is local; you’re the only one who isn’t.",
+    text: "What has to happen in person and what doesn’t. Everyone else in the transaction is local. You’re the only one who isn’t.",
   },
   {
     id: "relo-order",
@@ -146,7 +146,7 @@ export const LEVERS: readonly LeverRule[] = [
     id: "sell-terms-not-price",
     group: "selling",
     sides: ["selling", "both"],
-    text: "What an offer says about appraisal gap, financing, and possession — the terms that decide whether the price on the front page survives to closing.",
+    text: "What an offer says about appraisal gap, financing, and possession: the terms that decide whether the price on the front page survives to closing.",
   },
   {
     id: "sell-pricing-once",
@@ -172,7 +172,7 @@ export const LEVERS: readonly LeverRule[] = [
     id: "deciding-market-first",
     group: "general",
     sides: ["deciding"],
-    text: "What’s happening where you’re looking before it’s about any one house — inventory and days on market move which levers exist at all.",
+    text: "What’s happening where you’re looking before it’s about any one house. Inventory and days on market move which levers exist at all.",
   },
 ];
 
