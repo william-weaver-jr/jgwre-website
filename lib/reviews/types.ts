@@ -124,13 +124,17 @@ export type Review = {
    * strip it. The review resolves on the id alone, and coordinates in a stored
    * permalink are just something else that can be wrong later.
    *
-   * A `share.google/…` short link is also valid and one entry uses one, but do
-   * not convert to them wholesale: minting one needs a signed-in Google
-   * session, and Google shut goo.gl down in 2025, so a shortener is a redirect
-   * service that can be retired out from under these. The long form has no such
-   * dependency.
+   * Every entry uses that form, including the newest — there is deliberately no
+   * `share.google/…` short link left in the dataset. Those resolve fine, but
+   * minting one needs a signed-in Google session and Google shut goo.gl down in
+   * 2025, so a shortener adds a redirect service that can be retired out from
+   * under these. The long form depends on nothing.
    *
-   * All seven Google permalinks re-verified against the live reviews
+   * The review id has more than one shape — `Chd…`, `ChZ…`, and the longer
+   * `Ci9…` on the newest review. The trim is safe for all of them; each was
+   * loaded and checked rather than assumed.
+   *
+   * All eight Google permalinks re-verified against the live reviews
    * 2026-08-20 — right reviewer, right text, still resolving.
    */
   sourceUrl?: string;

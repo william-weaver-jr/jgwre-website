@@ -1055,6 +1055,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine did an exceptional job not only in helping us find our “forever home” but in all of the process that followed. Even after closing, Jasmine helped coordinate repairs that were negotiated and liaised with the contractors to ensure everything went as smoothly as possible for us during a very busy time of moving. We truly appreciate all the care and effort shown.",
     statesDollarOutcome: false,
     note: "Buyer side. Google gives no transaction line and the review names no year, neighborhood, or property type, so no `transaction` is recorded rather than inferred — the closing is not yet matched to a row in the ledger. Worth matching when the workbook is next reconciled.\n\nThe useful specific here is post-closing work: repairs negotiated at inspection, then coordinated with contractors after the keys changed hands. That is the §2 argument on a table most buyers do not know exists.",
-    sourceUrl: "https://share.google/plEj5gWYXK0kekw7g",
+    sourceUrl:
+      "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2kxb1pVOXVVbkEwVW5wZlJTMXBORWR0VDJ0d2JVRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
   },
 ];
