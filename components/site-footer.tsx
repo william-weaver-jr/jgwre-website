@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { EqualHousingMark, RealtorMark } from "@/components/compliance-marks";
 import { InstagramLink } from "@/components/instagram-link";
-import { publishedAreas, sortAreas } from "@/lib/areas";
+import { publishedAreas } from "@/lib/areas";
 import { GUIDE_TITLE } from "@/lib/intake";
 import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
 import { isTransactionsPageIndexable } from "@/lib/transactions";
@@ -72,18 +72,20 @@ export function SiteFooter() {
                   What your home is worth
                 </Link>
               </li>
-              {/* Appears per market once lib/areas/data.ts has content. An
-                  unwritten market has no page, so it gets no link. */}
-              {sortAreas(publishedAreas()).map((area) => (
-                <li key={area.slug}>
-                  <Link
-                    href={`/areas/${area.slug}`}
-                    className="underline-offset-4 hover:underline"
-                  >
-                    {area.name}
+              {/* One link to the hub rather than one per market. The hub is the
+                  canonical entry and enumerating fourteen markets here would
+                  crowd out everything else in this column as they land; the
+                  guides stay reachable from /areas and the sitemap. Gated the
+                  same way /transactions is — the route resolves either way for
+                  the 301s, but linking it sitewide before it lists anything
+                  advertises the gap. */}
+              {publishedAreas().length > 0 ? (
+                <li>
+                  <Link href="/areas" className="underline-offset-4 hover:underline">
+                    Areas
                   </Link>
                 </li>
-              ))}
+              ) : null}
               <li>
                 <Link href="/reviews" className="underline-offset-4 hover:underline">
                   Reviews

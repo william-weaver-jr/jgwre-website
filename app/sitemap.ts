@@ -27,6 +27,10 @@ const routes = [
      but a two-row ledger is a thin page, so /transactions carries noindex until
      data.ts passes TRANSACTIONS_INDEX_THRESHOLD. */
   ...(isTransactionsPageIndexable() ? ["/transactions"] : []),
+  /* The hub resolves always, because it is the redirect target for the old
+     site's /area-guide/ and for every retired /area/{slug}/. It is worth
+     crawling once it links something, which is the same rule /blog follows. */
+  ...(publishedAreas().length > 0 ? ["/areas"] : []),
   /* Only markets with authored content in lib/areas/data.ts. An unwritten
      market has no page at all, so listing it would advertise a 404 — the exact
      mistake noted above about mackenziesiek.com. */

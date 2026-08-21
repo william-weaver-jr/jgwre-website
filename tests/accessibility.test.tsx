@@ -61,6 +61,7 @@ const PAGES: PageEntry[] = [
   ["/reviews", () => import("@/app/reviews/page")],
   ["/contact", () => import("@/app/contact/page")],
   ["/blog", () => import("@/app/blog/page")],
+  ["/areas", () => import("@/app/areas/page")],
   ["/privacy-policy", () => import("@/app/privacy-policy/page")],
   ...POST_PAGES,
   ...AREA_PAGES,
