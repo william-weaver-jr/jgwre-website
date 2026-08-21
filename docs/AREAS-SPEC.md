@@ -396,6 +396,13 @@ for every remaining page.
 **Ship them one at a time.** A market with nothing real to say stays absent from `data.ts`
 and its URL 404s, which is the specified behaviour.
 
-**An `/areas` index page is not needed yet** and is deliberately not built. The footer lists
-published markets already. Revisit at three or more — an index over one entry is a thin page
-in its own right.
+**An `/areas` index page is needed at launch — this reverses an earlier call here.** The
+original reasoning was that an index over one entry is itself a thin page, and to revisit at
+three or more. That missed the migration: `placester-archive/INVENTORY.md` §6 maps the
+retiring site's `/area-guide/` to `/areas`, so the hub needs a live destination on the day
+the redirects go in, whatever the child count. With at most 14 of 22 old markets retained,
+most `/area/{slug}/` URLs also land there. See `docs/AREA-GUIDE-MIGRATION.md` §8.
+
+The hub must list only markets that have pages. `unwrittenMarkets()` stays out of the UI —
+a card linking to a 404, or a page rushed thin to satisfy a card, is the failure this whole
+document exists to prevent.
