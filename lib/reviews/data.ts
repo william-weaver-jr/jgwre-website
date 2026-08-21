@@ -152,7 +152,7 @@ export const REVIEWS: readonly Review[] = [
     body: "It was such a pleasure working with Jasmine Garcia. She understood what we were looking for in a home as well as the current market. She was very attentive to getting answers to questions we had and never left us hanging. We have worked with over 6 realators over the years and Jasmine was by far the best realtor we have worked with. We would highly recommend her to anyone looking to buy or sell a home!",
     statesDollarOutcome: false,
     sourceUrl:
-      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUR1emZLdXZnRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+      "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUR1emZLdXZnRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
     note: "Verified against the live review 2026-08-19; the workbook transcription matched it exactly, 'realators' included. Transaction row 2022-midbrook-01.",
   },
 
@@ -189,7 +189,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine was so great to work with! We found the right property for my budget! Would recommend again and again!",
     statesDollarOutcome: false,
     sourceUrl:
-      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURPbmJ6anF3RRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+      "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURPbmJ6anF3RRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
     note: "Verified against the live review 2026-08-19. Transaction row 2022-fieldlark-trails-01.",
   },
   {
@@ -213,7 +213,7 @@ export const REVIEWS: readonly Review[] = [
     openQuestion:
       "DO NOT PUBLISH AS WRITTEN. Verified against the live review 2026-08-19, so nothing about its provenance is open any more — what remains open is whether it may run at all, and that is not a developer's call. The review attacks the opposing agent at length and in identifiable terms ('the poster child for giving realtors a bad name', 'that dreadful woman'), and states the client believes she was mistreated because she is a military veteran. Running it puts a disparaging claim about a real third party into brokerage advertising and pulls a protected characteristic into copy §7 keeps clear of. §7 also forbids altering a testimonial, so it cannot be trimmed into shape — it runs whole or not at all. Needs the BIC and probably counsel. Her closing is in the ledger regardless: transaction row 2022-park-place-01, which carries no reviewId for exactly this reason.",
     sourceUrl:
-      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUNlamZUYnlBRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+      "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUNlamZUYnlBRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
   },
   {
     id: "google-charay-bland",
@@ -236,7 +236,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine was our realtor and provided such professionalism and knowledge on the home buying process. She is super sweet and kind and most definitely works in the best interest of the client. She was supportive on our decisions and made the process smooth and worry free.",
     statesDollarOutcome: false,
     sourceUrl:
-      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUN4MGZIeTNnRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+      "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUN4MGZIeTNnRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
     note: "Verified against the live review 2026-08-19. Transaction row 2023-shopton-point-01.",
   },
   {
@@ -269,7 +269,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine Garcia picked up the phone when we called the agency, as recommended by a friend and since then, she became our realtor. We found 5-6 houses that we wanted to view on the same day since we are from out of state and Jasmine helped us to arrange it. She’s very responsive, very helpful and she even helped keep an eye on our toddler when we were touring the houses. We have signed the deed and she’s going to help us with an errand since we have not moved there. That’s definitely above and beyond her job scope and we really appreciate the assistance from her in our house search. Thank you Jasmine!",
     statesDollarOutcome: false,
     sourceUrl:
-      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURaM3RTVXVBRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+      "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSURaM3RTVXVBRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
     note: "Verified against the live review 2026-08-19. Transaction row 2023-preston-park-01. Do not expand the byline — see above.",
   },
   {
@@ -290,7 +290,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine made the home buying process a positive experience. She was dedicated to helping me find the perfect home to meet all my needs. Questions were answered in a timely manner and requests to tour homes were scheduled almost immediately. Jasmine will definitely be my realtor for any future property purchases.",
     statesDollarOutcome: false,
     sourceUrl:
-      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUMxcm95RjRRRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+      "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VJQ0FnSUMxcm95RjRRRRAB!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
     note: "Verified against the live review 2026-08-19. Transaction row 2023-lancaster-01.",
   },
   {
@@ -313,7 +313,7 @@ export const REVIEWS: readonly Review[] = [
     body: "Jasmine Garcia is the best! She took the time to really get to know us and what we were looking for in a home. By house #3, she walked in and said, nope, this isn’t for them! She was easy to work with, took our concerns seriously, and landed us our new home! Jasmine was with us every step of the way and helped us when things seemed out of whack with our builder. We would recommend her to anyone without hesitation!!",
     statesDollarOutcome: false,
     sourceUrl:
-      "https://www.google.com/maps/reviews/@35.223068,-80.8819479,17z/data=!3m1!4b1!4m6!14m5!1m4!2m3!1sChZDSUhNMG9nS0VJQ0FnSUNqN0xqVkpREAE!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
+      "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChZDSUhNMG9nS0VJQ0FnSUNqN0xqVkpREAE!2m1!1s0x0:0xa3e85081798c89bc?hl=en-US",
     note: "Verified against the live review 2026-08-19. Transaction row 2024-cresswind-01. 'Helped us when things seemed out of whack with our builder' is new-construction evidence in a client's own words — one of the better pulls for /new-construction.",
   },
 

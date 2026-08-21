@@ -114,6 +114,24 @@ export type Review = {
    * SOCIAL.zillow — the profile the review sits on. Do not paste a profile URL
    * in here to fill the gap: this field means "this exact review", and the
    * fallback already handles the other case with honest wording.
+   *
+   * Google URLs are stored in this canonical form:
+   *
+   *   https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1s<REVIEW_ID>!2m1!1s<PLACE>?hl=en-US
+   *
+   * Copying a review link out of the Maps UI gives you a longer one carrying
+   * `@lat,lng,17z` and `!3m1!4b1`. That is map display state, not identity —
+   * strip it. The review resolves on the id alone, and coordinates in a stored
+   * permalink are just something else that can be wrong later.
+   *
+   * A `share.google/…` short link is also valid and one entry uses one, but do
+   * not convert to them wholesale: minting one needs a signed-in Google
+   * session, and Google shut goo.gl down in 2025, so a shortener is a redirect
+   * service that can be retired out from under these. The long form has no such
+   * dependency.
+   *
+   * All seven Google permalinks re-verified against the live reviews
+   * 2026-08-20 — right reviewer, right text, still resolving.
    */
   sourceUrl?: string;
   /**
