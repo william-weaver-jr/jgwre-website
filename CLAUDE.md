@@ -349,6 +349,39 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
 - [ ] Brand identity: palette, typography, logo — **proposed, pending her review.** Current
       direction and open questions in `docs/brand-decisions.md`. Do not invent an alternative.
       Must be visually distinct from Stone Realty Group's black/hexagon system.
+- [ ] **Area-page map options, tiers 2–3 — proposed, pending review after brand-identity
+      closure.** Three tiers were scoped for giving `/areas/[slug]` pages a visual sense of
+      where a market sits, not just prose. **Tier 1 shipped** — `components/area-locator.tsx`
+      + `lib/areas/locator.ts`, a schematic locator (Uptown, the I-485 loop, a highlighted
+      approximate position) that is explicitly not a surveyed boundary and says so in its own
+      caption. It renders on an area page only when that market has a point in
+      `lib/areas/locator.ts` — today just `steele-creek` — and is reviewable now on
+      `/style-tile` since `lib/areas/data.ts` has no published Steele Creek content yet for it
+      to appear on live. It was safe to build ahead of the brand decision because it's pure
+      geometry through the existing design tokens, not a style statement.
+
+      Tiers 2 and 3 are **not** approved and should wait on that decision:
+      - **Tier 2 — custom illustrated boundary outline per market.** A real traced
+        neighborhood shape (Steele Creek against the metro, Fort Mill against the SC line)
+        rather than a pin, giving each area page a genuinely distinct visual asset — which
+        also helps the §11 requirement that area pages carry "genuinely distinct content."
+        Most of these markets are not incorporated municipalities, so there is no single
+        legal boundary — source from Charlotte/Mecklenburg County's open GIS data
+        (Neighborhood Profile Areas or similar) and label it "approximate, for orientation,"
+        not a legal line. Needs a per-area illustration pass once there's an actual
+        illustration style to draw in.
+      - **Tier 3 — true interactive map with a real geographic contour** (Leaflet + OSM
+        tiles, or Mapbox). The most impressive version of "a true contour," and the biggest
+        step change: a new vendor dependency, tile-loading cost against the performance
+        budget (§10 requires Lighthouse ≥ 90 performance), and real accessibility work —
+        keyboard nav and a non-map fallback — to clear the WCAG 2.1 AA gate CI already
+        enforces mechanically. Doesn't touch MLS/IDX data, so Locked Decision #1 doesn't
+        block it, but it's the kind of scope a deliberately minimal, phone-first site (no
+        booking tool, no IDX) has so far avoided. Treat as a "does it earn its complexity"
+        call, not a default yes, and only after tier 2 is built and reviewed.
+
+      Both wait on the pending brand-identity decision above — committing to an illustration
+      style or a map skin now risks redoing it once that locks.
 - [x] **"Queen of Negotiations" — RESOLVED 2026-08-07.** It is a self-applied nickname she
       uses on Instagram and in a video, not an identity that competes with the site's
       positioning. **She keeps using it on Instagram; it simply never appears on this site.**

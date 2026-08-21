@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
+import { AreaLocator } from "@/components/area-locator";
 import { Button } from "@/components/ui/button";
+import { locatorPoint } from "@/lib/areas/locator";
 
 /*
   Internal review page for the brand system. Ported out of the Lovable home page,
@@ -30,6 +32,8 @@ const SWATCHES = [
   ["surface-sunken", "#F4EFE6", "Cream — banded sections", "bg-surface-sunken"],
   ["surface-raised", "#FFFFFF", "Raised plate (Case 01)", "bg-surface-raised"],
 ] as const;
+
+const STEELE_CREEK_LOCATOR_POINT = locatorPoint("steele-creek");
 
 const TYPE_SCALE = [
   ["text-display-lg", "Cormorant Garamond Medium 500 / 76px / -2%", "font-display text-display-lg"],
@@ -142,6 +146,22 @@ export default function StyleTilePage() {
         Focus state on every interactive element: 2px antique-gold outline, 3px offset. Text
         contrast is 4.5:1 or better on every pairing above.
       </p>
+
+      <h2 className="mt-16 text-eyebrow font-semibold tracking-[0.18em] text-ink uppercase">
+        Area locator (proposed)
+      </h2>
+      <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink-muted">
+        Tier 1 of the area-page map options — schematic, not a surveyed boundary. Built ahead
+        of the brand-identity decision because it&apos;s pure geometry through the tokens above,
+        not a style choice. Steele Creek is shown here because{" "}
+        <code className="text-xs">lib/areas/data.ts</code> has no published content yet; once
+        her real Steele Creek page ships, this renders there automatically.
+      </p>
+      <div className="mt-6">
+        {STEELE_CREEK_LOCATOR_POINT ? (
+          <AreaLocator name="Steele Creek" state="NC" point={STEELE_CREEK_LOCATOR_POINT} />
+        ) : null}
+      </div>
     </div>
   );
 }

@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { AreaLocator } from "@/components/area-locator";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { areaBySlug, publishedAreas } from "@/lib/areas";
+import { locatorPoint } from "@/lib/areas/locator";
 import { showsDollarFigure } from "@/lib/areas/validate";
 import { GUIDE_TITLE } from "@/lib/intake";
 
@@ -57,6 +59,8 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
   const area = areaBySlug(slug);
   if (!area) notFound();
 
+  const point = locatorPoint(area.slug);
+
   const sections = [
     { id: "housing-stock", eyebrow: "What is built here", body: area.housingStock },
     { id: "price", eyebrow: "How price behaves", body: area.priceContext },
@@ -81,6 +85,12 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
         <SectionHeading eyebrow="The market" id="market">
           What this one is actually like.
         </SectionHeading>
+
+        {point ? (
+          <div className="mt-10">
+            <AreaLocator name={area.name} state={area.state} point={point} />
+          </div>
+        ) : null}
 
         <div className="mt-14 grid gap-x-14 gap-y-12 sm:grid-cols-2">
           {sections.map((section) => (
