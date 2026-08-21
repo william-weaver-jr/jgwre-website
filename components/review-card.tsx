@@ -1,4 +1,5 @@
 import { displayName, type Review, type ReviewTransaction } from "@/lib/reviews";
+import { SOCIAL } from "@/lib/site";
 
 /**
  * One review, whole.
@@ -11,6 +12,12 @@ import { displayName, type Review, type ReviewTransaction } from "@/lib/reviews"
  *
  * The byline is `displayName()` — first name + last initial. A full name beside
  * a neighborhood and a purchase year identifies where a client lives.
+ *
+ * The platform label in the caption links out where there is somewhere honest
+ * to send the reader. That is the only outbound link on a review, and it sits
+ * after the quote rather than beside a CTA on purpose: this page's argument is
+ * that nothing here is trimmed or arranged, and a link is what makes that
+ * claim checkable. It is not a promo for the platform.
  */
 
 const PLATFORM_LABEL: Record<Review["platform"], string> = {
@@ -37,8 +44,44 @@ function transactionLine(transaction: ReviewTransaction): string {
   return `${role} ${what}${where}`;
 }
 
+/**
+ * Where "Zillow" or "Google" should point, and what a screen reader hears.
+ *
+ * Two different granularities, deliberately not smoothed over. Google gives a
+ * permalink to the individual review, so `sourceUrl` goes straight to it.
+ * Zillow publishes no per-review URL at all, so the best available destination
+ * is her profile — the hint says so rather than implying a permalink.
+ *
+ * The hint also carries the byline, because a page of fifty reviews otherwise
+ * ends up with fifty links whose accessible name is the word "Zillow", and it
+ * contains "external", which tests/accessibility.test.tsx requires of anything
+ * opening in a new tab.
+ */
+function platformDestination(
+  review: Review,
+): { href: string; hint: string } | null {
+  const platform = PLATFORM_LABEL[review.platform];
+
+  if (review.sourceUrl) {
+    return {
+      href: review.sourceUrl,
+      hint: `read ${displayName(review)}\u2019s review on ${platform}`,
+    };
+  }
+
+  if (review.platform === "zillow") {
+    return {
+      href: SOCIAL.zillow.url,
+      hint: `${displayName(review)}\u2019s review is on her Zillow profile`,
+    };
+  }
+
+  return null;
+}
+
 export function ReviewCard({ review }: { review: Review }) {
   const paragraphs = review.body.split("\n").filter(Boolean);
+  const destination = platformDestination(review);
 
   return (
     <figure className="rule-gold break-inside-avoid pt-6">
@@ -59,7 +102,19 @@ export function ReviewCard({ review }: { review: Review }) {
           </>
         ) : null}
         {" · "}
-        {PLATFORM_LABEL[review.platform]}
+        {destination ? (
+          <a
+            href={destination.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-accent-soft decoration-1 underline-offset-4 hover:decoration-accent"
+          >
+            {PLATFORM_LABEL[review.platform]}
+            <span className="sr-only"> — {destination.hint} (opens an external site)</span>
+          </a>
+        ) : (
+          PLATFORM_LABEL[review.platform]
+        )}
       </figcaption>
     </figure>
   );

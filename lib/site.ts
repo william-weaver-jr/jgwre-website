@@ -35,6 +35,26 @@ export const SOCIAL = {
     handle: "@myrealtorjasmine_",
     url: "https://www.instagram.com/myrealtorjasmine_",
   },
+  /**
+   * Her Zillow profile. Not a promotional surface — an attribution one.
+   *
+   * Most of the reviews on this site were posted here, and Zillow issues no
+   * per-review permalink, so the profile is the only place a reader can go to
+   * check that a review says what lib/reviews/data.ts says it says. That is the
+   * whole reason it is linked: components/review-card.tsx falls back to this
+   * URL for Zillow reviews, and lib/schema.tsx names it in `sameAs`.
+   *
+   * What does NOT ship off the back of this: no Zillow review widget (an embed
+   * puts copy on a BIC-approved page that tests/compliance.test.tsx cannot see,
+   * and Zillow's agent widgets carry listing data that Locked Decision #1 keeps
+   * off this domain), and no "Zillow Premier Agent" badge — that is a paid
+   * advertising tier, not a credential, and rendering it beside RECOGNITION
+   * would give it an issuer it does not have.
+   */
+  zillow: {
+    handle: "myrealtorjasmine",
+    url: "https://www.zillow.com/profile/myrealtorjasmine",
+  },
 } as const;
 
 /**

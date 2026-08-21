@@ -104,7 +104,17 @@ export type Review = {
    * the dataset so nobody re-adds it later thinking it was an oversight.
    */
   withheld?: string;
-  /** TODO(verify): permalink to the review. Wanted before launch. */
+  /**
+   * Permalink to the review, where the platform issues one. RENDERED — it is
+   * what the platform label in components/review-card.tsx links to, so a wrong
+   * URL here sends a reader to someone else's review.
+   *
+   * Google reviews have one. Zillow does not publish per-review URLs at all,
+   * so every Zillow entry leaves this unset and the card falls back to
+   * SOCIAL.zillow — the profile the review sits on. Do not paste a profile URL
+   * in here to fill the gap: this field means "this exact review", and the
+   * fallback already handles the other case with honest wording.
+   */
   sourceUrl?: string;
   /**
    * Reviewer-attached photo, recorded for provenance only. DO NOT RENDER.
