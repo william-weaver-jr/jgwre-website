@@ -1040,4 +1040,21 @@ export const REVIEWS: readonly Review[] = [
     photoSourceUrl:
       "https://lh3.googleusercontent.com/grass-cs/ACvplmMowkJslVxgFNWlRyrC8D-CdTNzJLRxypYpmjzdlKVxDvUCM99N6ZJYJdTRhOibfV2JQMDTb0aUxLW-psvLC7Yea46DK5IeHUm1KJrEbEfbUsfrmixoAxRKHHSLv-iMUxDniA14rn8-eHst=s3758-w3758-h1696-rw",
   },
+  {
+    id: "google-lee-cottrell",
+    /* Posted as “Lee Cottrell [Nerdski]” — the bracketed handle is part of the
+       Google display name, not part of the person's name. Recorded here as the
+       name so `displayName()` renders “Lee C.”; same treatment as
+       zillow-harrist245034. */
+    author: "Lee Cottrell",
+    rating: 5,
+    platform: "google",
+    postedOn: "Stone Realty Group",
+    date: "2026-08-18",
+    datePrecision: "day",
+    body: "Jasmine did an exceptional job not only in helping us find our “forever home” but in all of the process that followed. Even after closing, Jasmine helped coordinate repairs that were negotiated and liaised with the contractors to ensure everything went as smoothly as possible for us during a very busy time of moving. We truly appreciate all the care and effort shown.",
+    statesDollarOutcome: false,
+    note: "Buyer side. Google gives no transaction line and the review names no year, neighborhood, or property type, so no `transaction` is recorded rather than inferred — the closing is not yet matched to a row in the ledger. Worth matching when the workbook is next reconciled.\n\nThe useful specific here is post-closing work: repairs negotiated at inspection, then coordinated with contractors after the keys changed hands. That is the §2 argument on a table most buyers do not know exists.",
+    sourceUrl: "https://share.google/plEj5gWYXK0kekw7g",
+  },
 ];
