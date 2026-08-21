@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 
 import { MARKETS, areaBySlug, publishedAreas, sortAreas, unwrittenMarkets } from "./index";
 import { areaText, findIncompleteFields, findProhibitedLanguage, showsDollarFigure } from "./validate";
+import { FORT_MILL_DRAFT } from "./drafts/fort-mill";
 import type { Area } from "./types";
 
 /**
@@ -229,5 +230,59 @@ describe("dollar figures", () => {
     const text = areaText(GOOD);
     expect(text).toContain(GOOD.commute);
     expect(text).toContain(GOOD.levers[1].title);
+  });
+});
+
+describe("the Fort Mill draft", () => {
+  /**
+   * The draft is a real Area, typed and validated, that deliberately does not
+   * publish. Four of its six fields need Jasmine and carry TODO(verify) until
+   * they get her — see the header of drafts/fort-mill.ts.
+   *
+   * These tests exist so the draft cannot leak. A TODO reaching a rendered page
+   * already fails tests/compliance.test.tsx, but that fires late and explains
+   * nothing; this fires here and says why.
+   */
+  const hasTodo = (area: Area) => areaText(area).includes("TODO(");
+
+  it("is not published while it still carries a TODO", () => {
+    if (!hasTodo(FORT_MILL_DRAFT)) return;
+    expect(
+      publishedAreas().some((a) => a.slug === FORT_MILL_DRAFT.slug),
+      "the Fort Mill draft is published with TODO(verify) still in it",
+    ).toBe(false);
+  });
+
+  it("keeps its slug and state matched to the §5 roster", () => {
+    const market = MARKETS.find((m) => m.slug === FORT_MILL_DRAFT.slug);
+    expect(market, "the draft's slug is not a §5 market").toBeDefined();
+    expect(FORT_MILL_DRAFT.state).toBe(market?.state);
+    expect(FORT_MILL_DRAFT.name).toBe(market?.name);
+  });
+
+  /* The authored half is already held to §7. Waiting on her facts is not a
+     reason to let fair-housing language sit in a file for months. */
+  it("is already clean of fair-housing and banned language", () => {
+    expect(findProhibitedLanguage(FORT_MILL_DRAFT)).toEqual([]);
+  });
+
+  it("quotes no dollar figure, so no source is being invented", () => {
+    expect(showsDollarFigure(FORT_MILL_DRAFT)).toBe(false);
+  });
+
+  /* The levers are the part that justifies the page, and they are finished.
+     If this fails, the draft got thinner rather than closer to shipping. */
+  it("carries finished levers now, not placeholders", () => {
+    expect(FORT_MILL_DRAFT.levers.length).toBeGreaterThanOrEqual(3);
+    for (const lever of FORT_MILL_DRAFT.levers) {
+      expect(lever.body).not.toContain("TODO(");
+      expect(lever.body.trim().length).toBeGreaterThan(80);
+    }
+  });
+
+  /* The whole promise of the draft: answer the TODOs and it ships. If the rest
+     of the entry is malformed, that promise is false. */
+  it("is structurally complete apart from the TODOs", () => {
+    expect(findIncompleteFields(FORT_MILL_DRAFT)).toEqual([]);
   });
 });
