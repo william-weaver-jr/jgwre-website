@@ -81,7 +81,17 @@ export default function AreasIndexPage() {
               <h3 className="font-display text-2xl md:text-3xl">{STATE_LABEL[state]}</h3>
               <ul className="mt-4 space-y-1 text-base leading-relaxed text-ink-muted">
                 {MARKETS.filter((market) => market.state === state).map((market) => (
-                  <li key={market.slug}>{market.name}</li>
+                  <li key={market.slug}>
+                    {market.name}
+                    {/* Only Lake Wylie carries this today. A buyer who searched
+                        one name and is reading the other on a listing needs the
+                        two connected before anything else on the page helps. */}
+                    {market.postalCity ? (
+                      <span className="block text-sm">
+                        Addressed as {market.postalCity}, {market.state}
+                      </span>
+                    ) : null}
+                  </li>
                 ))}
               </ul>
             </article>

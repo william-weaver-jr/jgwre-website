@@ -5,6 +5,22 @@ export type Market = {
   slug: string;
   name: string;
   state: AreaState;
+  /**
+   * The city on the mailing address, when it is not the market's own name.
+   *
+   * Set only where the two genuinely differ. Lake Wylie is the case this exists
+   * for: it is a census-designated place, not a municipality, and it sits in ZIP
+   * 29710 whose only post office is Clover — so a house on the lake is addressed
+   * "Clover, SC" while the town of Clover is about ten miles west on SC 557.
+   *
+   * This is why CLAUDE.md §5 writes the market as "Clover / Lake Wylie". Both
+   * names are load-bearing: buyers search the one they have heard of, and read
+   * the other one on the paperwork. Stating it is orientation, not decoration.
+   *
+   * It is a postal fact and nothing more. It does not imply the market is part
+   * of that town, and it is not a listing or MLS field — Locked Decision #1.
+   */
+  postalCity?: string;
 };
 
 /**

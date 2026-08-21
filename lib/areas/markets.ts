@@ -23,5 +23,11 @@ export const MARKETS: readonly Market[] = [
   { slug: "fort-mill", name: "Fort Mill", state: "SC" },
   { slug: "tega-cay", name: "Tega Cay", state: "SC" },
   { slug: "indian-land", name: "Indian Land", state: "SC" },
-  { slug: "lake-wylie", name: "Lake Wylie", state: "SC" },
+  /* "Clover / Lake Wylie" in CLAUDE.md §5, and the slash is doing real work.
+     The market is the lake — the Lake Wylie CDP, unincorporated York County.
+     Clover is the postal city its addresses carry, not a second market and not
+     a parent of this one: the town itself is roughly ten miles west and is not
+     where she is positioned. Naming it here keeps the market findable under the
+     name that appears on the paperwork without claiming the town. */
+  { slug: "lake-wylie", name: "Lake Wylie", state: "SC", postalCity: "Clover" },
 ];

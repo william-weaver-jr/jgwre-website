@@ -61,6 +61,32 @@ describe("the market roster", () => {
   it("uses unique slugs", () => {
     expect(new Set(MARKETS.map((m) => m.slug)).size).toBe(MARKETS.length);
   });
+
+  /**
+   * CLAUDE.md §5 writes this market as "Clover / Lake Wylie". Lake Wylie is a
+   * census-designated place in ZIP 29710, whose only post office is Clover, so
+   * the addresses read "Clover, SC" while the town sits ten miles west.
+   *
+   * The failure this guards is someone tidying the roster by dropping one of
+   * the two names — either renaming the market to Clover, which claims a town
+   * she is not positioned in, or dropping postalCity, which leaves a buyer
+   * unable to reconcile the name they searched with the one on the paperwork.
+   */
+  it("keeps both names on Lake Wylie, and the market on the lake", () => {
+    const lakeWylie = MARKETS.find((m) => m.slug === "lake-wylie");
+    expect(lakeWylie).toBeDefined();
+    expect(lakeWylie?.name).toBe("Lake Wylie");
+    expect(lakeWylie?.postalCity).toBe("Clover");
+  });
+
+  it("sets a postal city only where it differs from the market name", () => {
+    for (const market of MARKETS) {
+      if (market.postalCity === undefined) continue;
+      expect(market.postalCity, `${market.slug} names itself as its postal city`).not.toBe(
+        market.name,
+      );
+    }
+  });
 });
 
 describe("publishing", () => {
