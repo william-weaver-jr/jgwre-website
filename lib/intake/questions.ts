@@ -41,7 +41,7 @@ const MARKET_OPTIONS = [
 ] as const;
 
 const MARKET_HELP =
-  "In-town: Uptown, South End, LoSo, Dilworth, Myers Park · South Charlotte: Ballantyne, SouthPark, Pineville, Steele Creek · Border: Fort Mill, Tega Cay, Indian Land, Lake Wylie, Waxhaw";
+  "In-town: Uptown, South End, LoSo, Dilworth, Myers Park · South Charlotte: Ballantyne, SouthPark, Pineville, Steele Creek · Border: Fort Mill, Tega Cay, Indian Land, Lake Wylie, Rock Hill, Waxhaw";
 
 const TIMELINE_OPTIONS = [
   { value: "30-days", label: "Within 30 days" },

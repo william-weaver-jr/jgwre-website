@@ -1,3 +1,4 @@
+import { MARKETS } from "@/lib/areas";
 import { lastModified } from "@/lib/blog";
 import type { Post } from "@/lib/blog";
 import { AGENT, BROKERAGE, SITE_URL, SOCIAL } from "@/lib/site";
@@ -24,20 +25,19 @@ export function realEstateAgentSchema() {
        The §5 review counts are a separate open item (§12) and are still
        believed low — adding the profile here does not settle them. */
     sameAs: [SOCIAL.instagram.url, SOCIAL.zillow.url],
+    /* Derived from the §5 roster rather than restated. The hand-written list
+       this replaces had already drifted — it was missing LoSo and Uptown, and
+       stayed missing Rock Hill after §5 gained it. Two copies of the same
+       facts is one copy too many.
+
+       Charlotte leads because it is the metro these sit inside, and is not a
+       market entry of its own. Lake Wylie's postal city is deliberately not
+       added: "Clover, SC" here would assert she serves that town, which she
+       does not — the note belongs on /areas, for a reader, not in structured
+       data as a coverage claim. */
     areaServed: [
       "Charlotte, NC",
-      "Ballantyne, NC",
-      "SouthPark, NC",
-      "Steele Creek, NC",
-      "Myers Park, NC",
-      "Dilworth, NC",
-      "South End, NC",
-      "Pineville, NC",
-      "Fort Mill, SC",
-      "Tega Cay, SC",
-      "Indian Land, SC",
-      "Lake Wylie, SC",
-      "Waxhaw, NC",
+      ...MARKETS.map((market) => `${market.name}, ${market.state}`),
     ],
     parentOrganization: {
       "@type": "RealEstateAgent",

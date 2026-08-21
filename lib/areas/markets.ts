@@ -30,4 +30,9 @@ export const MARKETS: readonly Market[] = [
      where she is positioned. Naming it here keeps the market findable under the
      name that appears on the paperwork without claiming the town. */
   { slug: "lake-wylie", name: "Lake Wylie", state: "SC", postalCity: "Clover" },
+  /* In §5's markets-served line since it was written, and missing here until
+     2026-08-21. Not a thin addition: two closings in the ledger
+     (2023-lexington-commons-01, 2022-midbrook-01) and four reviews, which is
+     more documented evidence than several markets that were already listed. */
+  { slug: "rock-hill", name: "Rock Hill", state: "SC" },
 ];
