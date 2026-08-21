@@ -86,6 +86,17 @@ Settled. Do not re-litigate or propose alternatives unless explicitly asked.
 - **Analytics:** Vercel Analytics + GA4
 - **Images:** `next/image`, AVIF/WebP, explicit width/height on everything
 
+### Importing transactions
+
+The closed-transactions workbook is the source of the ledger, and
+`npm run import:transactions -- <csv>` diffs it against what is shipped. It
+prints new rows ready to paste, flags where the sheet disagrees with the site,
+and runs the §7 checks before the code is written rather than after.
+
+It deliberately does **not** write `lib/transactions/data.ts`. The lever line and
+the compliance calls are editorial and stay with a person — see
+`docs/TRANSACTIONS-SPEC.md` §5.
+
 ### Conventions
 - Server Components by default; `"use client"` only where interactivity requires it
 - No `any` in TypeScript
@@ -106,6 +117,7 @@ request (`.github/workflows/ci.yml`).
 | `app/api/lead/route.test.ts` | The §9 contract end to end with FUB and Resend mocked — honeypot, rate limiting, and every failure combination. A lead is never silently dropped. |
 | `tests/compliance.test.tsx` | **§7, mechanically.** Renders every page and checks brokerage identification, license numbers, the EHO and REALTOR® marks, verbatim TCPA consent, the results disclaimer beside any dollar figure, banned language, fair-housing framing, guarantee language, and undocumented claims. |
 | `tests/accessibility.test.tsx` | §10. axe-core at WCAG 2.1 AA over every page, plus landmark and link-name checks. Contrast still needs Lighthouse — jsdom computes no colours. |
+| `scripts/lib/importer.test.ts` | The workbook importer. Its failure mode is not a crash but a plausible wrong import that reaches a licensed broker's advertising, so the tests lean on quiet corruption: a moved column, a review body full of commas, a corrected neighborhood that must read as a change rather than a delete plus an add. |
 | `components/contact-intake.test.tsx` | The conversion path. The consent box is never pre-checked, no visitor is trapped behind the qualifying questions, and a failed submission always surfaces the phone number. |
 
 Two things follow from this:

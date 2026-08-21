@@ -30,7 +30,7 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./tests/setup.ts"],
-    include: ["{app,lib,components,tests}/**/*.{test,spec}.{ts,tsx}"],
+    include: ["{app,lib,components,scripts,tests}/**/*.{test,spec}.{ts,tsx}"],
     exclude: ["node_modules/**", ".next/**"],
     coverage: {
       provider: "v8",

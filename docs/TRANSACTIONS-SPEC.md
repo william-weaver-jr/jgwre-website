@@ -82,12 +82,69 @@ adds the desktop.
 
 ## 4. Blocked on
 
-- [ ] Transaction export from Follow Up Boss or the MLS: closing year/month,
-  neighborhood, city, state, side represented, property type, builder (if new
-  construction), and the negotiation lever where she remembers it. This also feeds
-  the §12 open item about refreshing the §5 stat block.
+- [x] **Transaction export — RESOLVED.** The closed-transactions workbook (Google
+  Sheets) is the source, and it now carries every field the ledger needs. See §5.
 - [ ] Her own photography, if any entries should carry images.
 - [ ] BIC read on the pipeline-states question before that half is ever revisited.
 
-Until the export exists, nothing gets built — §6 forbids inventing entries, and a
-transactions page with three placeholder rows argues against her.
+## 5. Importing from the workbook
+
+The sheet is the business record and is **authoritative for neighborhood, property
+type, builder, side, and closing month** — including over Zillow, whose generated
+transaction line on a review is a platform approximation and has been wrong about
+a neighborhood six times and a property type once.
+
+```bash
+npm run import:transactions -- ~/Downloads/Closed\ Transactions.csv
+```
+
+Export with **File → Download → Comma-separated values**. A Markdown table also
+works, which is what the Google Drive connector returns when the sheet is fetched
+by a tool rather than downloaded.
+
+The script reports four things: rows that are **new**, rows where the sheet
+**disagrees** with what is shipped, rows in the dataset **absent** from the export,
+and everything **unchanged**. For new rows it prints ready-to-paste entries for
+`lib/transactions/data.ts` and matching lines for `internal-metrics.ts`.
+
+### What it will not do
+
+**It does not write `data.ts`.** Two parts of every row are editorial and stay
+with a person:
+
+- **The lever.** `"$15,100 below list price"` is a fact; *"Purchased under list
+  price, with concessions covering foundation work the house needed"* is the same
+  fact made to argue. Only the second belongs on the page. The importer emits the
+  raw Highlights and Concessions text as a `TODO(lever)` comment and leaves the
+  field off.
+- **The compliance calls.** Whether a review may run, whether a figure drags the
+  results disclaimer in, whether a neighborhood is too narrow. CLAUDE.md §7, read
+  by someone who has read it.
+
+Review matching is a **suggestion** only, emitted as `TODO(review)`. Bylines and
+workbook names disagree constantly and for good reasons: a couple buys and one of
+them writes, platforms generate handles, and one reviewer deliberately shortened
+her own name.
+
+### Why matching is not on id
+
+Ids are derived as `{year}-{slug(neighborhood ?? city)}-{nn}`, so a **corrected
+neighborhood produces a different id for the same closing**. That is not
+hypothetical — Montclaire became Oakwood Acres, Prosperity Village became Katelyn
+Moors, and Rock Hill's Oakwood Acres became Midbrook. Matching on id would report
+each as one deletion plus one addition, which is the report that gets a real
+correction thrown away. Rows are matched on year, month, side, and city instead,
+and a matched row **keeps its shipped id** so the `internal-metrics` join
+survives a rename.
+
+### Guardrails
+
+The importer refuses rather than guesses. An unrecognised column is an error, not
+a shrug — the sheet has been restructured twice and the silent failure mode both
+times would have been importing under a header nobody checked. A street address
+in the Neighborhood column is refused outright. Closing prices are routed to
+`internal-metrics.ts`; addresses and client names are used to derive a
+neighborhood and match a review, then discarded.
+
+Checks run against the dataset **as it would be after the import**, so a problem
+surfaces while it is still a line in a spreadsheet rather than a diff to unpick.
