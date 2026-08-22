@@ -394,12 +394,30 @@ describe("Steele Creek, the first published area", () => {
     expect(showsDollarFigure(steeleCreek()!)).toBe(false);
   });
 
+  /**
+   * The supplied housing data carried precise shares — 53.5% detached, 12.5%
+   * attached — and Bill's own caveat was not to quote them: "Steele Creek" has
+   * no agreed boundary, so a share is precise about the wrong thing. Ratios and
+   * "about 2006" survive that ambiguity. A decimal percentage does not.
+   *
+   * The failure this guards is a later edit deciding the page would look more
+   * authoritative with a number in it.
+   */
+  it("quotes no precise percentage, because the boundary is not agreed", () => {
+    expect(areaText(steeleCreek()!)).not.toMatch(/\d+(\.\d+)?\s?%/);
+  });
+
+  it("says out loud that the boundary is unsettled", () => {
+    expect(areaText(steeleCreek()!).toLowerCase()).toContain("no universally agreed boundary");
+  });
+
   it("keeps the residency claim inside the BRAND-VOICE §4 limits", () => {
     const text = areaText(steeleCreek()!);
-    expect(text).toContain("has lived in Steele Creek since 2021");
+    expect(text).toMatch(/has lived in Ayrsley, inside Steele Creek, since 2021/);
     /* Named community plus unit count plus tenure narrows to a household. The
        presidency and the 105-unit figure stay on /about. */
     expect(text).not.toContain("105");
     expect(text.toLowerCase()).not.toContain("hoa");
+    expect(text.toLowerCase()).not.toContain("board president");
   });
 });

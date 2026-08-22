@@ -72,6 +72,19 @@ export const AREAS: readonly Area[] = [
          is more durable and more useful, so the mechanism is what runs.
 
       Everything else is hers, close to her words.
+
+      SUPPLEMENTED 2026-08-21 with housing-stock data supplied by Bill: the
+      boom running late 1990s through the 2010s, a median construction year
+      near 2006, little stock predating 1980, and roughly four detached houses
+      for every attached one.
+
+      No percentage from that data appears on the page, on his own caveat:
+      "Steele Creek" has no agreed boundary, so the figures move depending on
+      whether a source means the neighborhood designation, the 28278 ZIP, or
+      the broader historic community. A precise-looking share would be precise
+      about the wrong thing. Ratios and "around 2006" survive that ambiguity;
+      53.5% does not. The ambiguity itself is on the page, because a reader
+      being quoted numbers about this market deserves to know they are soft.
     */
     slug: "steele-creek",
     name: "Steele Creek",
@@ -85,22 +98,22 @@ export const AREAS: readonly Area[] = [
        BRAND-VOICE.md §4 permits Ayrsley by name; her HOA and the unit count
        stay on /about. */
     answer:
-      "Steele Creek is southwest Charlotte, and most of it was built between about 2000 and the early 2010s on farmland that was sold off in pieces. The housing is newer than the rest of the city, which means slab foundations, almost no basements, and inspection findings that are predictable rather than surprising. Houses here sit on the market longer than they do in south Charlotte, and new construction is setting a ceiling that resale has to price under — both of which give a buyer room that does not exist further east. Jasmine Garcia has lived in Steele Creek since 2021 and works the market she lives in.",
+      "Steele Creek is southwest Charlotte, and it was mostly farmland until the late 1990s. The residential boom ran from then through the 2010s, which puts the middle of the housing stock around 2006 and leaves very little of it built before 1980. Newer stock means slab foundations, almost no basements, and inspection findings that are predictable rather than surprising. Houses here sit on the market longer than they do in south Charlotte, and new construction sets a ceiling that resale has to price under — both of which give a buyer room that does not exist further east. Jasmine Garcia has lived in Ayrsley, inside Steele Creek, since 2021.",
 
     lede:
-      "Most of Steele Creek was built between 2000 and the early 2010s, on land that was farms before that. Houses sit longer here than in south Charlotte, and that is leverage if you know what to do with it.",
+      "Steele Creek was farmland until the late 1990s, and most of what is here now went up after that. Houses sit longer than they do in south Charlotte, and that is leverage if you know what to do with it.",
 
     housingStock:
-      "It went up in bands rather than blending, because the farmland was sold off in pieces and each piece became a community with its own build year. Townhomes are scattered throughout instead of gathered in one place. The Palisades end holds the larger houses and the acreage, and the older houses on genuinely big lots sit closer to Lake Wylie. The ground is flat, so foundations are slabs and basements are rare — the lots that support a walkout are down by the water, and almost nowhere else.",
+      "It went up in bands rather than blending, because the farmland sold off in pieces and each piece became its own community with its own build year — Berewick, Palisades, Ayrsley, which is the one she lives in. The middle of the stock dates to about 2006, and almost nothing here predates 1980. Detached houses outnumber townhomes by something like four to one, and the townhomes are scattered through rather than gathered in one place. The Palisades end holds the larger houses and the acreage; the older houses on genuinely big lots sit closer to Lake Wylie. The ground is flat, so foundations are slabs and basements are rare — the lots that support a walkout are down by the water, and almost nowhere else.",
 
     priceContext:
-      "This is not a prestige market and it does not price like one. It is more affordable than SouthPark or Ballantyne and it behaves differently: houses sit longer here, and a seller who prices above the market does not get rescued by it. The ceiling is set by new construction rather than by resale — some townhome communities are selling now for less than they released for, which pulls the resale around them down with them.",
+      "This is not a prestige market and it does not price like one. It is more affordable than SouthPark or Ballantyne and it behaves differently: houses sit longer here, and a seller who prices above the market does not get rescued by it. The ceiling is set by new construction rather than by resale — some townhome communities are selling now for less than they released for, which pulls the resale around them down with them. Treat any single statistic you are quoted about this market carefully, including the ones here: nobody agrees where Steele Creek stops, so the numbers move depending on where the person quoting them drew the line.",
 
     commute:
       "I-77 is the route everyone knows and it is reliably congested; the toll lanes have been in the news for years. What Steele Creek has that much of the county does not is alternatives — I-485 loops around and is often faster than sitting on 77, and the side roads genuinely work. South Tryon is the exception, and it gets worse the further south you go on it. The drive is roughly symmetrical in and out, and like everywhere here it has been getting slower year over year.",
 
     whatTrades:
-      "Two things are on the market at once: builder inventory in the newer communities, and resale from the early-2000s stock that has usually turned over once or twice. The resale arrives with the list a twenty-year-old house arrives with, and the systems tend to reach the end of their first life together, because the houses around it were built within a few years of each other. What you do not get here is the surprise an older Charlotte neighborhood produces — the quirks of a 1930s house are not in play.",
+      "Two things are on the market at once: builder inventory in the newer communities, and resale from the early-2000s stock that has usually turned over once or twice. The resale arrives with the list a twenty-year-old house arrives with, and the systems tend to reach the end of their first life together, because the houses around it were built within a few years of each other. What you do not get here is the surprise an older Charlotte neighborhood produces — the quirks of a 1930s house are not in play. Worth knowing that a large share of the housing here is apartments, so the for-sale market is smaller than the number of roofs suggests.",
 
     levers: [
       {
@@ -143,6 +156,19 @@ export const AREAS: readonly Area[] = [
         question: "How is the commute from Steele Creek to Uptown Charlotte?",
         answer:
           "I-77 is the obvious route and it is reliably congested. Steele Creek's advantage is that it has alternatives: I-485 loops around and is often faster than sitting on 77, and the side roads work. South Tryon is the exception, and gets heavier the further south you go.",
+      },
+      {
+        question: "Is Steele Creek mostly townhomes or single-family homes?",
+        answer:
+          "Single-family, by a wide margin — roughly four detached houses for every attached one, and the townhomes are spread through the area rather than concentrated in one part of it. A large share of the housing overall is apartments, so the for-sale market is smaller than the total number of homes would suggest.",
+      },
+      {
+        /* The boundary problem is real, it is why no percentage appears
+           anywhere on this page, and it is genuinely useful to a reader who is
+           being shown confident-looking market statistics by someone else. */
+        question: "Where exactly are the boundaries of Steele Creek?",
+        answer:
+          "There is no universally agreed boundary. Some sources mean the smaller neighborhood designation, some mean the 28278 ZIP code, and some mean the broader historic Steele Creek community, which is larger than both. That is worth knowing before you rely on any statistic about the area, because the number changes depending on which of the three the person quoting it used.",
       },
       {
         question: "Is Steele Creek a buyer's market or a seller's market?",
