@@ -46,4 +46,109 @@
 
 import type { Area } from "./types";
 
-export const AREAS: readonly Area[] = [];
+export const AREAS: readonly Area[] = [
+  {
+    /*
+      Steele Creek — the first published area page.
+
+      SOURCE: an interview with Jasmine, 2026-08-21, recorded in Granola. She
+      has lived in Ayrsley, inside this market, since June 2021, which is why
+      it went first: docs/AREAS-SPEC.md §10.
+
+      TWO THINGS FROM THAT INTERVIEW ARE DELIBERATELY NOT HERE.
+
+      1. She named school ratings and crime as the factors suppressing demand.
+         Both are §7 fair-housing territory and lib/areas/validate.ts fails the
+         build on either word. They are not paraphrased into something softer
+         either — "demand is weaker than the location suggests" would be the
+         same argument wearing a coat. What ships is the price BEHAVIOUR, which
+         she also described and which is what a reader can actually act on.
+
+      2. Her figures — Ashley Park townhomes released in the low $400s now
+         pricing low-to-mid $300s, new single-family near Rivergate pushing mid
+         $500s. No area-level price is on the documented-facts allowlist in
+         docs/CONTENT-MARKETING.md §2, a figure would pull <ResultsDisclaimer />
+         onto the page, and a band like that dates within a year. The mechanism
+         is more durable and more useful, so the mechanism is what runs.
+
+      Everything else is hers, close to her words.
+    */
+    slug: "steele-creek",
+    name: "Steele Creek",
+    state: "NC",
+
+    targetQuery: "what should i know before buying a house in steele creek charlotte",
+
+    /* The AEO surface — what an answer engine lifts, quoted with nothing beside
+       it. Four sentences, each independently true, no figure, and her residency
+       named because it is the strongest trust signal on the page.
+       BRAND-VOICE.md §4 permits Ayrsley by name; her HOA and the unit count
+       stay on /about. */
+    answer:
+      "Steele Creek is southwest Charlotte, and most of it was built between about 2000 and the early 2010s on farmland that was sold off in pieces. The housing is newer than the rest of the city, which means slab foundations, almost no basements, and inspection findings that are predictable rather than surprising. Houses here sit on the market longer than they do in south Charlotte, and new construction is setting a ceiling that resale has to price under — both of which give a buyer room that does not exist further east. Jasmine Garcia has lived in Steele Creek since 2021 and works the market she lives in.",
+
+    lede:
+      "Most of Steele Creek was built between 2000 and the early 2010s, on land that was farms before that. Houses sit longer here than in south Charlotte, and that is leverage if you know what to do with it.",
+
+    housingStock:
+      "It went up in bands rather than blending, because the farmland was sold off in pieces and each piece became a community with its own build year. Townhomes are scattered throughout instead of gathered in one place. The Palisades end holds the larger houses and the acreage, and the older houses on genuinely big lots sit closer to Lake Wylie. The ground is flat, so foundations are slabs and basements are rare — the lots that support a walkout are down by the water, and almost nowhere else.",
+
+    priceContext:
+      "This is not a prestige market and it does not price like one. It is more affordable than SouthPark or Ballantyne and it behaves differently: houses sit longer here, and a seller who prices above the market does not get rescued by it. The ceiling is set by new construction rather than by resale — some townhome communities are selling now for less than they released for, which pulls the resale around them down with them.",
+
+    commute:
+      "I-77 is the route everyone knows and it is reliably congested; the toll lanes have been in the news for years. What Steele Creek has that much of the county does not is alternatives — I-485 loops around and is often faster than sitting on 77, and the side roads genuinely work. South Tryon is the exception, and it gets worse the further south you go on it. The drive is roughly symmetrical in and out, and like everywhere here it has been getting slower year over year.",
+
+    whatTrades:
+      "Two things are on the market at once: builder inventory in the newer communities, and resale from the early-2000s stock that has usually turned over once or twice. The resale arrives with the list a twenty-year-old house arrives with, and the systems tend to reach the end of their first life together, because the houses around it were built within a few years of each other. What you do not get here is the surprise an older Charlotte neighborhood produces — the quirks of a 1930s house are not in play.",
+
+    levers: [
+      {
+        /* The strongest lever here, and the one she was most specific about.
+           Grounded in the interview, and in 2023-shopton-point-01 — a Meritage
+           purchase in this market whose recorded lever is builder concessions
+           at closing. Distinct from the Fort Mill draft's builder lever, which
+           is about what a builder will INCLUDE; this is about a builder setting
+           the comp that a private seller has to live under. */
+        title: "The builder down the road is your comp",
+        body: "In most of Charlotte the house you are competing with is the one two streets over. Here it is often a builder, and a builder is a different opponent. It can move on price without feeling it, it can pay costs a private seller cannot, and it is releasing new phases while your seller waits. If you are buying resale, the builder's number and the builder's inclusions are the argument you bring to the table. If you are selling, that same builder is the competition you have to price against, whether or not anyone told you.",
+      },
+      {
+        /* From "homes sit longer here" and "no sellers successfully
+           overpricing", both hers. */
+        title: "Time on the market is information, and it is on your side",
+        body: "Houses take longer to sell here than they do in the faster parts of south Charlotte, and that is not a defect to be talked around — it is the shape of the negotiation. A listing that has been sitting has already told you what the seller has learned about their price. In a market where overpricing does not get rescued, patience is a position. The mistake is treating a Steele Creek listing the way you would treat one in a submarket where hesitating costs you the house.",
+      },
+      {
+        /* Inference from her two observations — dominant early-2000s era, and
+           inspections yielding typical maintenance items for that era. The
+           negotiation application is ours; the facts under it are hers. */
+        title: "Everything was built at once, so everything ages at once",
+        body: "A neighborhood built inside a few years reaches the end of its first mechanical life inside a few years. Water heaters, HVAC, roofs, and the rest arrive at the same conversation at roughly the same time, and across a whole street rather than one house. That makes the inspection response here more predictable than it is anywhere older, which cuts both ways: a buyer who knows the build year knows what is coming and can ask for it, and a seller who knows it can get ahead of it instead of negotiating from a report.",
+      },
+    ],
+
+    faq: [
+      {
+        question: "When was most of Steele Creek built?",
+        answer:
+          "Most of Steele Creek was built between about 2000 and the early 2010s, on farmland that was sold off in pieces over that period. The Palisades end has the larger houses and more acreage, and the older houses on big lots are closer to Lake Wylie.",
+      },
+      {
+        question: "Do houses in Steele Creek have basements?",
+        answer:
+          "Mostly not. The terrain is flat, so foundations are typically slabs and basements are rare. The exception is nearer Lake Wylie, where some lots fall away enough to support a walkout basement.",
+      },
+      {
+        question: "How is the commute from Steele Creek to Uptown Charlotte?",
+        answer:
+          "I-77 is the obvious route and it is reliably congested. Steele Creek's advantage is that it has alternatives: I-485 loops around and is often faster than sitting on 77, and the side roads work. South Tryon is the exception, and gets heavier the further south you go.",
+      },
+      {
+        question: "Is Steele Creek a buyer's market or a seller's market?",
+        answer:
+          "Houses in Steele Creek tend to sit on the market longer than they do in south Charlotte, and sellers who price above the market are not usually rescued by it. New construction also sets a ceiling that resale has to price under. Both give a buyer more room to negotiate than they would have further east.",
+      },
+    ],
+  },
+];

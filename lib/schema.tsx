@@ -111,13 +111,43 @@ export function blogPostingSchema(post: Post) {
  * licensed broker's site, an advertising claim nobody reviewed.
  */
 export function faqPageSchema(post: Post) {
+  return faqSchema(post.faq);
+}
+
+/**
+ * The same FAQPage, from any question/answer pair.
+ *
+ * Area pages carry an FAQ for the same reason posts do, and there is no reason
+ * for two implementations of one schema to drift apart.
+ */
+export function faqSchema(entries: readonly { question: string; answer: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: post.faq.map((entry) => ({
+    mainEntity: entries.map((entry) => ({
       "@type": "Question",
       name: entry.question,
       acceptedAnswer: { "@type": "Answer", text: entry.answer },
+    })),
+  };
+}
+
+/**
+ * BreadcrumbList for a page one level below a hub.
+ *
+ * Worth having now that /areas exists: it tells a crawler the hub is the parent
+ * of fifteen possible children rather than an unrelated page, and it is what
+ * produces the Home > Areas > Steele Creek trail in a result.
+ */
+export function breadcrumbSchema(trail: readonly { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((crumb, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: crumb.name,
+      item: `${SITE_URL}${crumb.path}`,
     })),
   };
 }

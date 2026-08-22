@@ -48,11 +48,17 @@ const BANNED_PHRASES = [
 export function areaText(area: Area): string {
   return [
     area.lede,
+    /* targetQuery is authoring discipline and never renders, but it is scanned
+       anyway: a page aiming at "safe neighborhoods in X" is one whose copy is
+       about to go the same way, and catching it here is catching it early. */
+    area.targetQuery,
+    area.answer,
     area.housingStock,
     area.priceContext,
     area.commute,
     area.whatTrades,
     ...area.levers.flatMap((lever) => [lever.title, lever.body]),
+    ...area.faq.flatMap((entry) => [entry.question, entry.answer]),
   ].join("\n");
 }
 
@@ -82,6 +88,7 @@ export function findIncompleteFields(area: Area): string[] {
   const problems: string[] = [];
   const prose: [keyof Area, string][] = [
     ["lede", area.lede],
+    ["answer", area.answer],
     ["housingStock", area.housingStock],
     ["priceContext", area.priceContext],
     ["commute", area.commute],
@@ -93,13 +100,38 @@ export function findIncompleteFields(area: Area): string[] {
     else if (value.trim().length < 80) problems.push(`${String(field)} is too short to be real`);
   }
 
+  if (!area.targetQuery?.trim()) problems.push("targetQuery is empty");
+
   if (area.levers.length < 2) problems.push("needs at least two local levers");
   for (const lever of area.levers) {
     if (!lever.title?.trim() || !lever.body?.trim()) problems.push("a lever is missing text");
     else if (lever.body.trim().length < 80) problems.push(`lever "${lever.title}" is too short`);
   }
 
+  if (area.faq.length < 2) problems.push("needs at least two FAQ entries");
+  for (const entry of area.faq) {
+    if (!entry.question?.trim() || !entry.answer?.trim()) {
+      problems.push("an FAQ entry is missing text");
+    } else if (entry.answer.trim().length < 80) {
+      problems.push(`FAQ "${entry.question}" is too short to stand alone`);
+    }
+  }
+
   return problems;
+}
+
+/**
+ * FAQ answers that quote a dollar figure. Must be empty.
+ *
+ * These get lifted and quoted with nothing beside them, so the §7 results
+ * disclaimer cannot travel with them. Same rule lib/blog/validate.ts applies to
+ * a post's FAQ, and for the same reason. Figures belong in the body, where the
+ * disclaimer is visible on the page.
+ */
+export function findDollarFiguresInFaq(area: Area): string[] {
+  return area.faq
+    .filter((entry) => /\$\s?[\d,]+/.test(entry.answer))
+    .map((entry) => entry.question);
 }
 
 /** True when the area quotes a dollar amount, which pulls in the §7 disclaimer. */

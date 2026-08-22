@@ -4,7 +4,13 @@
 import { describe, expect, it } from "vitest";
 
 import { MARKETS, areaBySlug, publishedAreas, sortAreas, unwrittenMarkets } from "./index";
-import { areaText, findIncompleteFields, findProhibitedLanguage, showsDollarFigure } from "./validate";
+import {
+  areaText,
+  findDollarFiguresInFaq,
+  findIncompleteFields,
+  findProhibitedLanguage,
+  showsDollarFigure,
+} from "./validate";
 import { FORT_MILL_DRAFT } from "./drafts/fort-mill";
 import type { Area } from "./types";
 
@@ -24,6 +30,9 @@ const GOOD: Area = {
   name: "Fixture",
   state: "SC",
   lede: "A fixture market used to prove the validators bite. It is long enough to clear the substance threshold that real entries have to clear.",
+  targetQuery: "what should i know before buying a house in fixture",
+  answer:
+    "A fixture answer, long enough to clear the substance threshold, standing on its own the way a real one has to because an answer engine will quote it with nothing beside it.",
   housingStock:
     "Brick ranches from the sixties on wide lots, with a band of two-story builder product from the last decade along the eastern edge of the township.",
   priceContext:
@@ -40,6 +49,18 @@ const GOOD: Area = {
     {
       title: "Phase-end builder inventory",
       body: "When a builder is closing out a phase they would rather move the last three houses than carry them, and that shows up as incentives instead of a lower price.",
+    },
+  ],
+  faq: [
+    {
+      question: "When was the fixture market built?",
+      answer:
+        "A fixture FAQ answer, written long enough to clear the eighty character floor that every entry has to clear so that it can be quoted on its own.",
+    },
+    {
+      question: "How is the fixture commute?",
+      answer:
+        "A second fixture FAQ answer, also long enough to clear the floor, because two entries are the minimum a published area is allowed to carry.",
     },
   ],
 };
@@ -284,5 +305,101 @@ describe("the Fort Mill draft", () => {
      of the entry is malformed, that promise is false. */
   it("is structurally complete apart from the TODOs", () => {
     expect(findIncompleteFields(FORT_MILL_DRAFT)).toEqual([]);
+  });
+});
+
+describe("the AEO surface", () => {
+  /**
+   * An answer engine quotes one FAQ entry with nothing beside it, so the §7
+   * results disclaimer cannot travel with it. Same rule lib/blog/validate.ts
+   * applies to a post's FAQ, enforced here for the same reason.
+   */
+  it("allows no dollar figure in an FAQ answer", () => {
+    expect(findDollarFiguresInFaq(GOOD)).toEqual([]);
+    const withPrice = withText({
+      faq: [{ question: "What do houses cost?", answer: `${GOOD.faq[0].answer} Around $450,000.` }, GOOD.faq[1]],
+    });
+    expect(findDollarFiguresInFaq(withPrice)).toEqual(["What do houses cost?"]);
+  });
+
+  it("scans the answer and the FAQ for prohibited language, not just the prose", () => {
+    expect(
+      findProhibitedLanguage(withText({ answer: `${GOOD.answer} The schools are good schools.` })).join(" "),
+    ).toContain("fair-housing");
+    expect(
+      findProhibitedLanguage(
+        withText({ faq: [{ ...GOOD.faq[0], answer: "Low crime, mostly." }, GOOD.faq[1]] }),
+      ).join(" "),
+    ).toContain("fair-housing");
+  });
+
+  /* targetQuery never renders, but a page aiming at "safe neighborhoods in X"
+     is one whose copy is about to go the same way. */
+  it("scans targetQuery even though it never renders", () => {
+    expect(
+      findProhibitedLanguage(withText({ targetQuery: "safest neighborhood in the area" })).join(" "),
+    ).toContain("fair-housing");
+  });
+
+  it("requires an answer and at least two FAQ entries", () => {
+    expect(findIncompleteFields(withText({ answer: "" })).join(" ")).toContain("answer");
+    expect(findIncompleteFields(withText({ faq: [GOOD.faq[0]] })).join(" ")).toContain("two FAQ");
+    expect(findIncompleteFields(withText({ targetQuery: "" })).join(" ")).toContain("targetQuery");
+  });
+
+  it("holds every published area to all of it", () => {
+    for (const area of publishedAreas()) {
+      expect(findDollarFiguresInFaq(area), `${area.slug} has a price in an FAQ`).toEqual([]);
+      expect(area.answer.trim().length, `${area.slug} has no answer`).toBeGreaterThan(80);
+      expect(area.faq.length, `${area.slug} has too few FAQ entries`).toBeGreaterThanOrEqual(2);
+    }
+  });
+});
+
+describe("Steele Creek, the first published area", () => {
+  const steeleCreek = () => publishedAreas().find((a) => a.slug === "steele-creek");
+
+  it("is published", () => {
+    expect(steeleCreek()).toBeDefined();
+  });
+
+  /**
+   * The interview named school ratings and crime as the factors suppressing
+   * demand here. Both are §7 fair-housing territory, and neither ships — not
+   * quoted, and not paraphrased into something softer, which would be the same
+   * argument wearing a coat.
+   *
+   * findProhibitedLanguage already covers the literal words. This asserts the
+   * softened forms stay out too, because those are what a well-meaning edit
+   * reaches for.
+   */
+  it("carries none of the interview's fair-housing material, in any form", () => {
+    const text = areaText(steeleCreek()!).toLowerCase();
+    for (const proxy of [
+      "school",
+      "crime",
+      "safe",
+      "reputation",
+      "demographic",
+      "suppress",
+      "undesirable",
+    ]) {
+      expect(text, `steele-creek copy contains "${proxy}"`).not.toContain(proxy);
+    }
+  });
+
+  /* Her figures were real and are deliberately absent — no area price is on the
+     documented-facts allowlist, and a band dates within a year. */
+  it("quotes none of the interview's price figures", () => {
+    expect(showsDollarFigure(steeleCreek()!)).toBe(false);
+  });
+
+  it("keeps the residency claim inside the BRAND-VOICE §4 limits", () => {
+    const text = areaText(steeleCreek()!);
+    expect(text).toContain("has lived in Steele Creek since 2021");
+    /* Named community plus unit count plus tenure narrows to a household. The
+       presidency and the 105-unit figure stay on /about. */
+    expect(text).not.toContain("105");
+    expect(text.toLowerCase()).not.toContain("hoa");
   });
 });

@@ -38,6 +38,13 @@ export const FORT_MILL_DRAFT: Area = {
   name: "Fort Mill",
   state: "SC",
 
+  targetQuery: "what should i know before buying a house in fort mill sc",
+
+  /* The AEO surface. Written as far as the sourced material allows; the rest
+     waits on the same four answers everything else here waits on. */
+  answer:
+    "Fort Mill is in York County, South Carolina, across the state line from Charlotte, which makes it a different transaction rather than just a different address — different forms, a different due-diligence structure, and different deadlines. Jasmine Garcia is licensed in both states and has closed twelve in this corridor. TODO(verify): add what the housing stock and the drive are actually like, once she has described them.",
+
   lede:
     "Fort Mill is in York County, South Carolina — across the state line from Charlotte, and a different transaction because of it. Twelve of her closings are in this corridor.",
 
@@ -61,6 +68,23 @@ export const FORT_MILL_DRAFT: Area = {
      something two rows can support. */
   whatTrades:
     "Both sides, and sometimes quickly: a 2026 listing in Masons Bend drew multiple offers inside forty-eight hours, and the one accepted was chosen on its terms rather than its number. TODO(verify): what typically comes to market here and in what condition, beyond her own book of business.",
+
+  /* Two entries is the floor and these clear it, but a page aiming at answer
+     engines wants four. The two missing ones are the two most-asked questions
+     about any market — what it costs and how long the drive is — and both are
+     blocked on her. */
+  faq: [
+    {
+      question: "Is buying in Fort Mill different from buying in Charlotte?",
+      answer:
+        "Yes, and not only because of the tax bill. Fort Mill is in South Carolina, so the contract forms differ from North Carolina's, the due-diligence structure differs, and what a given deadline obliges you to do differs. A buyer who does not know the timeline gives away options they were entitled to use.",
+    },
+    {
+      question: "Can one agent handle both sides of the North Carolina / South Carolina line?",
+      answer:
+        "Only if they are licensed in both states, and most Charlotte agents are licensed in North Carolina alone. Jasmine Garcia holds licenses in both — NC 334700 and SC 125546 — which is what makes it possible to shop Fort Mill and Ballantyne in the same search rather than choosing a side first.",
+    },
+  ],
 
   levers: [
     {

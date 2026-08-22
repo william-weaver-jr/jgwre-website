@@ -7,6 +7,7 @@ import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { areaBySlug, publishedAreas } from "@/lib/areas";
 import { showsDollarFigure } from "@/lib/areas/validate";
+import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { GUIDE_TITLE } from "@/lib/intake";
 
 /*
@@ -46,9 +47,18 @@ export async function generateMetadata({
   if (!area) return {};
 
   return {
-    title: `${area.name} real estate`,
+    /* The market name leads, because that is the word people search. The rest
+       states the angle so the result is not interchangeable with the dozen
+       other "{market} real estate" titles on the same page of results. */
+    title: `${area.name}, ${area.state} — what is negotiable here`,
     description: area.lede,
     alternates: { canonical: `/areas/${area.slug}` },
+    openGraph: {
+      title: `${area.name}, ${area.state} — what is negotiable here`,
+      description: area.lede,
+      url: `/areas/${area.slug}`,
+      type: "article",
+    },
   };
 }
 
@@ -75,7 +85,16 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
           </>
         }
         lede={area.lede}
-      />
+      >
+        {/* The AEO answer, directly under the h1 and before anything else.
+            docs/CONTENT-MARKETING.md §3: this is what an answer engine lifts,
+            and burying it under six paragraphs is why most agent pages are
+            never quoted. It is also just the courteous order to write in. */}
+        <div className="mt-10 max-w-2xl rule-gold pt-6">
+          <p className="eyebrow">The short answer</p>
+          <p className="mt-3 text-base leading-relaxed text-ink-muted">{area.answer}</p>
+        </div>
+      </PageHero>
 
       <section aria-labelledby="market" className="mx-auto max-w-6xl px-gutter py-section">
         <SectionHeading eyebrow="The market" id="market">
@@ -136,6 +155,24 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
+      {/* --------------------------------------------------------------- FAQ */}
+      <section aria-labelledby="faq" className="mx-auto max-w-6xl px-gutter py-section">
+        <SectionHeading eyebrow="Asked and answered" id="faq">
+          The questions that come up first.
+        </SectionHeading>
+
+        <dl className="mt-14 space-y-10">
+          {area.faq.map((entry) => (
+            <div key={entry.question} className="rule-top pt-8">
+              <dt className="font-display text-2xl leading-snug md:text-3xl">{entry.question}</dt>
+              <dd className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
+                {entry.answer}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <ClosingCta
         heading={`Thinking about ${area.name}?`}
         body="One call is enough to tell you which of these apply to the specific house you are looking at, and which do not."
@@ -145,6 +182,18 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
           heading: "Tell me what you are looking at.",
           body: "Property type, timing, and which side of the table you’re on.",
         }}
+      />
+
+      {/* Every answer below is rendered above in the same words. Emitting one a
+          visitor cannot see is a structured-data violation and, on a licensed
+          broker's site, an advertising claim nobody reviewed. */}
+      <JsonLd data={faqSchema(area.faq)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "" },
+          { name: "Areas", path: "/areas" },
+          { name: area.name, path: `/areas/${area.slug}` },
+        ])}
       />
     </>
   );

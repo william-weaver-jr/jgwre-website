@@ -37,6 +37,20 @@ export type AreaLever = {
 };
 
 /**
+ * One question and its answer, rendered on the page and emitted as FAQPage
+ * JSON-LD.
+ *
+ * The AEO surface, and the same contract the blog's PostFaq carries: an answer
+ * engine quoting this site quotes one of these with nothing beside it, so each
+ * answer stands alone and none may contain a dollar figure — the §7 results
+ * disclaimer cannot travel with a lifted snippet.
+ */
+export type AreaFaq = {
+  question: string;
+  answer: string;
+};
+
+/**
  * The authored content for one area page.
  *
  * Every field is required, and lib/areas/index.test.ts asserts each is present,
@@ -47,6 +61,22 @@ export type AreaLever = {
 export type Area = Market & {
   /** The lede under the h1. One or two sentences, specific to this market. */
   lede: string;
+
+  /**
+   * The query this page exists to answer, phrased the way someone would type it
+   * or say it aloud. Authoring discipline, never rendered — an area page that
+   * cannot name its query is a page built for a keyword rather than a reader.
+   */
+  targetQuery: string;
+
+  /**
+   * The self-contained answer to `targetQuery`, rendered directly under the h1.
+   *
+   * Highest-leverage field on the page for AEO: it is what an answer engine
+   * lifts. Three or four sentences that stand entirely on their own, because
+   * they will be read with nothing around them. docs/CONTENT-MARKETING.md §3.
+   */
+  answer: string;
   /** What is actually built here — eras, types, lot patterns, construction. */
   housingStock: string;
   /** How price behaves here relative to the metro. No invented figures. */
@@ -57,4 +87,7 @@ export type Area = Market & {
   whatTrades: string;
   /** Two or more levers that tend to exist here. */
   levers: readonly AreaLever[];
+
+  /** Two or more FAQ entries. Rendered, and emitted as FAQPage JSON-LD. */
+  faq: readonly AreaFaq[];
 };
