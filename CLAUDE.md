@@ -434,9 +434,11 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       shaped to map onto CMS document fields so the migration is mechanical. Whatever
       replaces it must keep `lib/blog/validate.ts` — moving copy into a CMS is how the §6
       discipline gets lost.
-- [ ] **First blog batch.** The pipeline is built and one draft post proves it end to end.
-      `docs/CONTENT-MARKETING.md` §8 has the state. The draft has not been read by Jasmine
-      and does not go out with launch until it has.
+- [ ] **First blog batch.** The pipeline is built and the first post is published-eligible:
+      `what-you-can-negotiate-besides-price` was read and **approved by Jasmine 2026-08-21**.
+      Her two corrections are recorded in `docs/CONTENT-MARKETING.md` §8 and both generalize
+      to every future post — the listing agent is the repeat player, not the seller, and
+      contract mechanics are named per state. Four or five more still to draft.
 - [x] NC and SC license numbers — NC 334700, SC 125546 (§7)
 - [x] **Broker-in-Charge approval (site + results disclaimer wording) — RECEIVED 2026-08-10.**
       See §7 Approvals for what it covers and the two things it does not. §7 asks for written

@@ -188,9 +188,30 @@ true, or whether it sounds like her.
 ## 8. Status
 
 - [x] Pipeline built: routes, MDX, scheduling, structured data, sitemap, test enrollment.
-- [ ] **`what-you-can-negotiate-besides-price` is a DRAFT.** It was written to prove the
-      pipeline renders and passes §7 end to end. Jasmine has not read it. It does not go out
-      with launch until she has.
+- [x] **`what-you-can-negotiate-besides-price` — APPROVED BY JASMINE 2026-08-21.** She read
+      the full post and signed off on the revision. Reported by Bill. It ships with launch.
+
+      Her review changed the copy in two ways worth keeping on record, because both are the
+      kind of thing the test suite cannot catch:
+
+      - **The draft was wrong about who holds the knowledge.** It said the seller "has usually
+        done this a few times." Her correction: someone selling their second house is as new
+        to it as someone buying their second. The asymmetry is the *listing agent*, not the
+        seller, and the post now says so. This sharpened the USP rather than softening it —
+        worth remembering when the next batch is drafted.
+      - **It got the contract mechanics wrong.** The draft listed inspection, appraisal, and
+        financing as contingencies in both states. North Carolina runs on a due diligence
+        period; South Carolina runs on three contingencies — financing, appraisal, and
+        wood-destroying insect. Fixed in the body and the FAQ, and the `answer` field now
+        avoids the word entirely, because that paragraph is quoted with no state attached to
+        it. **Any future post touching contract mechanics states which Carolina it means.**
+
+      Also from her review: the CTA offers a call, a Zoom, or a text, because she would rather
+      be texted. The Follow Up Boss tracking number was tested and receives SMS (2026-08-21).
+
+      The BIC was not re-consulted. The post states no figure and makes no claim about
+      results, which is the §7 case that does not need fresh approval. The NC/SC paragraph is
+      the one new factual statement in it.
 - [ ] First real batch — four or five posts, one per week. Draft, review with her, merge as
       one pull request with dates a week apart.
 - [ ] Fort Mill as the first `/areas` entry. §5 documents 12 closings in that corridor, so
