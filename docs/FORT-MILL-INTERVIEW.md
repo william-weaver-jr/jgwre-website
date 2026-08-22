@@ -30,6 +30,39 @@ Say this up front so she doesn't spend breath on it.
 What is always safe: **housing stock, amenities, commute, price behaviour.** Buildings,
 roads, shops, and how the market moves.
 
+### This already happened once — say it out loud before you start
+
+In the Steele Creek interview on 2026-08-21, asked why homes sit longer there, she answered:
+**school ratings and crime.**
+
+That is not a slip and it is not her being careless. It is very likely the correct market
+read, it is what a good agent tells a client across a kitchen table, and it is the honest
+answer to the question as asked. It is also the one answer that cannot go on the page in any
+form, and the whole exchange was unusable — the most concrete thing she said about pricing
+in that market, and none of it shipped.
+
+**Say this to her before the recorder starts**, roughly:
+
+> Advertising rules are stricter than conversation. Schools and crime are the two that will
+> come out naturally and neither can be published, even indirectly — so when I ask why
+> houses sit, I need the mechanics instead. Who the competition is, what the inventory is
+> doing, where sellers misprice.
+
+Two reasons this matters more than the rest of the list:
+
+- **It cannot be fixed in the edit.** Quoting it breaks §7; paraphrasing it to "demand is
+  weaker than the location would suggest" is the same argument wearing a coat, and the
+  Steele Creek entry has a test asserting the softened proxies — `school`, `crime`, `safe`,
+  `reputation`, `demographic`, `suppress` — stay out. Every one of those is a word a
+  well-meaning later edit reaches for.
+- **The reframe produces better copy anyway.** Pushed off that answer, she gave the builder
+  setting the ceiling, the compression running through the resale around it, and the fact
+  that overpricing does not get rescued here. Those are levers a reader can act on. "The
+  ratings are low" is not something anyone can do anything with.
+
+The same applies to anything about who lives somewhere, in any phrasing, however
+affectionate.
+
 ---
 
 ## 1. Housing stock — "drive me through it"
