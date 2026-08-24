@@ -183,20 +183,31 @@ at least two pillars**, behind an `isVideoPageIndexable()` mirroring
 
 ## 7. Open items
 
-- [ ] **The teaching years disagree.** `/about` says ten years of special education; the
-      bio video's own description says "six years as a teacher." The `/about` summary
-      deliberately states neither. Confirm the number with Jasmine, and if the video is
-      wrong decide whether it is re-recorded or the placement comes down. This is the one
-      thing on this list that is live on the site today.
+- [x] **The teaching years — RESOLVED 2026-08-20.** Ten years total: six in Charleston, SC
+      and four in Hampton, VA (Bill). `/about`'s "ten years" and the video's "six years" are
+      both true, and neither is corrected. The on-page summary continues to state neither,
+      because a reader who hears one number and reads the other cannot see the reconciliation
+      — repeating either would show them the seam twice. **Not a §6 problem.** Worth noting
+      separately that six years teaching in Charleston is a real South Carolina tie and is
+      documented nowhere in the site's copy; that is a `/carolinas-border` question, not a
+      video one.
 - [ ] **`CLAUDE.md` §6 lists a Stone Realty Group video as her bio video.** Corrected in §6
       as of 2026-08-20; noted here because the wrong one is still the one people find first.
-- [ ] **The third video.** YouTube reports 3 videos on the channel and lists 2. Confirm what
-      the third is and whether it should be public.
+- [ ] **The third video.** YouTube reports 3 videos on the channel and lists 2. Bill is
+      checking with Jasmine (2026-08-20) whether the third is unlisted, private, or something
+      else, and whether it should be public.
 - [ ] **The Palisades home tour is unplaced.** It needs `/areas/steele-creek` to exist, the
       property confirmed sold or expired, and its narration checked against §7.
-- [ ] **The BIC has not seen video on this site.** Adding it is a material change under §7.
+- [x] **BIC approval — RECEIVED 2026-08-20**, reported by Bill: the BIC funded this video
+      and distributes it on his own channels. See `CLAUDE.md` §7 Approvals for scope, and for
+      the one question it does not answer.
 - [ ] **No still is committed.** `assets/images/video/` is empty and the panel is
       typographic. See `assets/images/video/README.md`.
-- [ ] **Captions.** Neither existing video has corrected captions.
+- [ ] **Captions.** Neither existing video has corrected captions. Noted by Bill 2026-08-20.
+- [ ] **The channel cleanup is planned.** Bill confirmed 2026-08-20 that §3's YouTube-side
+      conventions — the title format, the description template with brokerage identification,
+      corrected captions, the category fix, custom thumbnails — will be implemented on the
+      channel. Nothing in this repo depends on it, but the two existing descriptions are the
+      first thing to fix: one carries no site URL, the other a broken email.
 - [ ] **Video 2's description carries a broken email** — `jasmine@.comattstoneteam.com`,
       public since June 2025. Nothing to do with this repo; worth fixing on YouTube.

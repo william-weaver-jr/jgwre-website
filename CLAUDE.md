@@ -290,6 +290,20 @@ the open item in §12). Nor to displaying dollar figures on the page: closing pr
 in `lib/transactions/internal-metrics.ts`, which no page may import, and putting any of
 them on screen is a fresh decision for the BIC.
 
+**The bio video on `/about` — APPROVED 2026-08-20.** Reported by Bill. The BIC funded this
+video and posts it on his own channels and Medium, so its use in her advertising is not in
+question. Covers `EpLuc5n6hHs` embedded on `/about`, the summary written beside it, and the
+`VideoObject` markup. `docs/VIDEO-SPEC.md`.
+
+It does **not** cover one thing nobody has put to him. **YouTube's auto-generated still for
+this video carries the stylized hexagon "O" burned into the frame** — the video is watermarked
+throughout, so every available frame has it. Committing that still as the player's poster
+would place a Stone Realty Group registered mark on her page as artwork, which is the exact
+use the "Must not appear" list above names. The player therefore ships with a typographic
+panel instead, and the still is not committed. If someone wants the photograph there, that is
+a separate question for the BIC — it is his mark, and the answer is probably yes, but it is
+his to give.
+
 **Footer marks, text-only — APPROVED 2026-08-10.** The BIC confirmed a text treatment of the
 Equal Housing Opportunity and REALTOR® marks is acceptable; he uses the same on his own site.
 So the current footer is an approved state, not a stopgap waiting on artwork. Dropping the
@@ -495,8 +509,15 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       click-to-load facade, the channel in `sameAs` and the footer, and `VideoObject` on
       `/about` only. The mechanism is a registry (`lib/video/data.ts`), so video three is
       one entry in one file. `docs/VIDEO-SPEC.md`.
-- [ ] **Video needs BIC sign-off.** Adding it is a material change under §7 and the BIC has
-      not seen it. The `/about` placement should not go to production until he has.
-- [ ] **Ten years or six?** `/about` says she taught special education for ten years; the
-      bio video's own description says "six years as a teacher." Both are advertising. The
-      video's on-page summary states neither pending an answer — `docs/VIDEO-SPEC.md` §7.
+- [x] **Video BIC sign-off — RECEIVED 2026-08-20.** See §7 Approvals, including the one
+      question it does not answer (the hexagon watermark in the thumbnail).
+- [x] **Ten years or six? — RESOLVED 2026-08-20.** Ten total: six in Charleston, SC and four
+      in Hampton, VA (Bill). `/about` and the video are both correct and neither changes. The
+      video's on-page summary states neither number, deliberately — `docs/VIDEO-SPEC.md` §7.
+- [ ] **Six years teaching in Charleston is an undisclosed SC tie.** It is documented nowhere
+      in the site's copy, and `/carolinas-border` argues she knows both sides of the line. Ask
+      whether she wants it used before anyone writes it in.
+- [ ] **The channel is being cleaned up.** Bill, 2026-08-20: the YouTube-side conventions in
+      `docs/VIDEO-SPEC.md` §3 will be implemented — titles, descriptions carrying brokerage
+      identification and the site URL, corrected captions, category, custom thumbnails. A
+      custom thumbnail is also what unblocks the poster question above.

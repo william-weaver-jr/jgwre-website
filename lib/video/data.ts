@@ -38,11 +38,14 @@ export const VIDEOS: readonly Video[] = [
       written for a viewer who has already pressed play, and it closes on a
       phone number this page already carries twice.
 
-      The teaching years are deliberately not stated. /about says ten; the
-      video's own description says six. Until that is reconciled, this summary
-      says neither rather than picking one.
-      TODO(verify): confirm the number with Jasmine and, if the video is wrong,
-      decide whether it is re-recorded or the placement waits.
+      The teaching years are deliberately not stated, and that stays true now
+      that the question is answered. Ten years total: six in Charleston, SC and
+      four in Hampton, VA (Bill, 2026-08-20). So /about's "ten years" and the
+      video's "six years" are both true, and neither needs correcting.
+
+      This summary still says neither, because a reader who hears one number and
+      reads the other has no way to know that. Restating either one here would
+      put the seam in front of them twice. Leave it.
     */
     summary:
       "A minute and a half of introduction, recorded in her own words: the classroom she came from, the HOA board she sits on, the property she has owned as an investor, and how she works with the people she represents.",
