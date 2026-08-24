@@ -36,6 +36,18 @@ export const SOCIAL = {
     url: "https://www.instagram.com/myrealtorjasmine_",
   },
   /**
+   * Her business page. Same rules as Instagram: linked, never embedded — a page
+   * plugin renders whatever Meta returns that morning onto BIC-approved
+   * advertising, and the reasoning above applies unchanged.
+   *
+   * The page name is jgwrealestate, not the handle her Instagram uses. Confirmed
+   * by Bill 2026-08-24.
+   */
+  facebook: {
+    handle: "jgwrealestate",
+    url: "https://www.facebook.com/jgwrealestate",
+  },
+  /**
    * Her Zillow profile. Not a promotional surface — an attribution one.
    *
    * Most of the reviews on this site were posted here, and Zillow issues no

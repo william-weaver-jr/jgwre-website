@@ -20,11 +20,11 @@ export function realEstateAgentSchema() {
        which is what sameAs is for. Zillow matters more than Instagram here:
        Locked Decision #1 keeps all MLS data off this domain, so the profile
        holding most of her reviews is one of the few strong external signals
-       the site can send. Both URLs are confirmed against CLAUDE.md §6.
+       the site can send. All three URLs are confirmed against CLAUDE.md §6.
 
        The §5 review counts are a separate open item (§12) and are still
        believed low — adding the profile here does not settle them. */
-    sameAs: [SOCIAL.instagram.url, SOCIAL.zillow.url],
+    sameAs: [SOCIAL.instagram.url, SOCIAL.facebook.url, SOCIAL.zillow.url],
     /* Derived from the §5 roster rather than restated. The hand-written list
        this replaces had already drifted — it was missing LoSo and Uptown, and
        stayed missing Rock Hill after §5 gained it. Two copies of the same

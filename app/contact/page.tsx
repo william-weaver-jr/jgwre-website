@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { ContactIntake } from "@/components/contact-intake";
-import { InstagramLink } from "@/components/instagram-link";
+import { SocialLinks } from "@/components/social-links";
 import { PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
 import { AGENT, BROKERAGE } from "@/lib/site";
@@ -81,7 +81,7 @@ export default function ContactPage() {
           decides whether they like her; the phone is where they hire her, and
           docs/CONTENT-PLAN.md puts that first. Link only — lib/site.ts SOCIAL.
         */}
-        <InstagramLink className="mt-10 text-base leading-relaxed" />
+        <SocialLinks className="mt-10 text-base leading-relaxed" />
       </section>
     </>
   );

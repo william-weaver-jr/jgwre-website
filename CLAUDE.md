@@ -208,6 +208,8 @@ without verifying against Section 5.
 - **Instagram (business):** [@myrealtorjasmine_](https://www.instagram.com/myrealtorjasmine_)
   — note the trailing underscore
 - **Instagram (personal):** [@iheartjasz](https://www.instagram.com/iheartjasz)
+- **Facebook (business page):** [jgwrealestate](https://www.facebook.com/jgwrealestate)
+  — confirmed 2026-08-24. Linked in the footer and on `/contact`, never embedded
 - **Zillow profile:** https://www.zillow.com/profile/myrealtorjasmine
 - **Bio video:** "Meet Jasmine Garcia – Stone Realty Group" — https://youtu.be/J6T4pmDWQ6M
 - **Placester site content:** available from Bill on request, needed for the 301 map

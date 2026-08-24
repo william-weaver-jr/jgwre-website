@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { EqualHousingMark, RealtorMark } from "@/components/compliance-marks";
-import { InstagramLink } from "@/components/instagram-link";
+import { SocialLinks } from "@/components/social-links";
 import { publishedAreas } from "@/lib/areas";
 import { GUIDE_TITLE } from "@/lib/intake";
 import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
@@ -32,7 +32,7 @@ export function SiteFooter() {
               <span className="sr-only">Call {AGENT.name} at </span>
               {AGENT.phoneDisplay}
             </a>
-            <InstagramLink className="mt-6 text-sm leading-relaxed" />
+            <SocialLinks className="mt-6 text-sm leading-relaxed" />
           </div>
 
           <address className="text-sm leading-relaxed not-italic">
