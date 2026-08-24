@@ -67,6 +67,26 @@ export const SOCIAL = {
     handle: "myrealtorjasmine",
     url: "https://www.zillow.com/profile/myrealtorjasmine",
   },
+  /**
+   * Her YouTube channel. The one surface here that is partly embedded, and the
+   * exception is narrow enough to state precisely.
+   *
+   * Instagram and Facebook are links because a feed renders whatever Meta
+   * returns that morning onto BIC-approved advertising. YouTube is different in
+   * the way that matters: a video is a fixed asset at a fixed ID. It does not
+   * change under the page, so a named video can be reviewed once and stay
+   * reviewed — which is why lib/video/data.ts registers videos individually and
+   * by ID, and why no channel feed, "latest upload" strip, or playlist embed
+   * ships. The moment a surface would pull whatever she posted last, it goes
+   * back to being a link.
+   *
+   * The channel is small (6 subscribers, two public videos as of 2026-08-20) and
+   * carries no custom description or links. Confirmed 2026-08-20.
+   */
+  youtube: {
+    handle: "@MyRealtorJasmine",
+    url: "https://www.youtube.com/@MyRealtorJasmine",
+  },
 } as const;
 
 /**

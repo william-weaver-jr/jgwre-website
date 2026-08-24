@@ -121,6 +121,7 @@ request (`.github/workflows/ci.yml`).
 | `tests/accessibility.test.tsx` | §10. axe-core at WCAG 2.1 AA over every page, plus landmark and link-name checks. Contrast still needs Lighthouse — jsdom computes no colours. |
 | `scripts/lib/importer.test.ts` | The workbook importer. Its failure mode is not a crash but a plausible wrong import that reaches a licensed broker's advertising, so the tests lean on quiet corruption: a moved column, a review body full of commas, a corrected neighborhood that must read as a change rather than a delete plus an add. |
 | `components/analytics-opt-out.test.tsx` + `lib/analytics-consent.test.ts` | The privacy promise. `/privacy-policy` says analytics can be switched off, and that sentence is why there is no consent banner — these keep the control honest, including in a browser that refuses localStorage. `lib/analytics.test.ts` also reads every `track()` call site so no personal field can become a GA4 parameter. |
+| `lib/video/index.test.ts` + `components/video-embed.test.tsx` | The video registry and the embed. The registry checks are aimed at a plausible-looking bad entry — a summary pasted from a YouTube description, a duration that disagrees with the asset, a second video on a page that already has one. The component asserts the two properties invisible in a screenshot: nothing is requested from YouTube until the visitor clicks, and the summary is on the page in words for anyone who never does. |
 | `components/contact-intake.test.tsx` | The conversion path. The consent box is never pre-checked, no visitor is trapped behind the qualifying questions, and a failed submission always surfaces the phone number. |
 
 Two things follow from this:
@@ -214,7 +215,17 @@ without verifying against Section 5.
 - **Facebook (business page):** [jgwrealestate](https://www.facebook.com/jgwrealestate)
   — confirmed 2026-08-24. Linked in the footer and on `/contact`, never embedded
 - **Zillow profile:** https://www.zillow.com/profile/myrealtorjasmine
-- **Bio video:** "Meet Jasmine Garcia – Stone Realty Group" — https://youtu.be/J6T4pmDWQ6M
+- **YouTube (her channel):** [@MyRealtorJasmine](https://www.youtube.com/@MyRealtorJasmine)
+  — confirmed 2026-08-20. Two public videos, no Shorts, no playlists, no channel
+  description. See `docs/VIDEO-SPEC.md` for how a video reaches the site.
+- **Bio video (hers):** "Meet Jasmine Garcia | Charlotte Realtor, Former Teacher & Mom of
+  Twins" — https://www.youtube.com/watch?v=EpLuc5n6hHs · 1:42 · published 2026-06-15.
+  This is the one that ships, on `/about`.
+- **Bio video (Stone Realty Group's):** "Meet Jasmine Garcia – Stone Realty Group" —
+  https://youtu.be/J6T4pmDWQ6M · 0:39. **Not on her channel** — it is published by
+  @StoneRealtyGroup, and its description carries Matt Stone Team links, a different phone
+  number, and a "#2 Agent in Charlotte" claim documented nowhere in §5. A voice reference
+  only. It is never embedded here. (This file listed it as her bio video until 2026-08-20.)
 - **Placester site content:** available from Bill on request, needed for the 301 map
   before that site is retired
 
@@ -480,3 +491,12 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       privacy policy's counsel review for this vendor is parked behind the same
       connection (§7).
 - [ ] Professional photography and any brand video
+- [x] **YouTube on the site — SHIPPED 2026-08-20.** The bio video on `/about` as a
+      click-to-load facade, the channel in `sameAs` and the footer, and `VideoObject` on
+      `/about` only. The mechanism is a registry (`lib/video/data.ts`), so video three is
+      one entry in one file. `docs/VIDEO-SPEC.md`.
+- [ ] **Video needs BIC sign-off.** Adding it is a material change under §7 and the BIC has
+      not seen it. The `/about` placement should not go to production until he has.
+- [ ] **Ten years or six?** `/about` says she taught special education for ten years; the
+      bio video's own description says "six years as a teacher." Both are advertising. The
+      video's on-page summary states neither pending an answer — `docs/VIDEO-SPEC.md` §7.

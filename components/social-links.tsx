@@ -22,7 +22,7 @@ export function SocialLinks({ className }: { className?: string }) {
         Instagram, {SOCIAL.instagram.handle}
         <span className="sr-only"> (opens an external site)</span>
       </a>
-      <span className="text-ink-muted"> or </span>
+      <span className="text-ink-muted">, </span>
       <a
         href={SOCIAL.facebook.url}
         target="_blank"
@@ -30,6 +30,16 @@ export function SocialLinks({ className }: { className?: string }) {
         className="underline decoration-accent-soft decoration-1 underline-offset-4 hover:decoration-accent"
       >
         Facebook
+        <span className="sr-only"> (opens an external site)</span>
+      </a>
+      <span className="text-ink-muted"> or </span>
+      <a
+        href={SOCIAL.youtube.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline decoration-accent-soft decoration-1 underline-offset-4 hover:decoration-accent"
+      >
+        YouTube
         <span className="sr-only"> (opens an external site)</span>
       </a>
       <span className="text-ink-muted">.</span>

@@ -2,6 +2,8 @@ import { MARKETS } from "@/lib/areas";
 import { lastModified } from "@/lib/blog";
 import type { Post } from "@/lib/blog";
 import { AGENT, BROKERAGE, SITE_URL, SOCIAL } from "@/lib/site";
+import { embedUrl, isoDuration, thumbnailUrl, watchUrl } from "@/lib/video";
+import type { Video } from "@/lib/video";
 
 /**
  * JSON-LD for the homepage. RealEstateAgent + the brokerage as the parent
@@ -24,7 +26,12 @@ export function realEstateAgentSchema() {
 
        The §5 review counts are a separate open item (§12) and are still
        believed low — adding the profile here does not settle them. */
-    sameAs: [SOCIAL.instagram.url, SOCIAL.facebook.url, SOCIAL.zillow.url],
+    sameAs: [
+      SOCIAL.instagram.url,
+      SOCIAL.facebook.url,
+      SOCIAL.zillow.url,
+      SOCIAL.youtube.url,
+    ],
     /* Derived from the §5 roster rather than restated. The hand-written list
        this replaces had already drifted — it was missing LoSo and Uptown, and
        stayed missing Rock Hill after §5 gained it. Two copies of the same
@@ -149,6 +156,63 @@ export function breadcrumbSchema(trail: readonly { name: string; path: string }[
       name: crumb.name,
       item: `${SITE_URL}${crumb.path}`,
     })),
+  };
+}
+
+/**
+ * VideoObject for one video, emitted on its primary placement only.
+ *
+ * Two rules travel with this, and both are the same rule the FAQ schema above
+ * states: what is declared here is rendered on the page in the same words, and
+ * it is emitted once.
+ *
+ * `description` is `video.summary` — the string components/video-embed.tsx puts
+ * on screen. Declaring a description a visitor cannot see is a structured-data
+ * violation, and on a licensed broker's site it is also an advertising claim
+ * nobody reviewed. The YouTube description is never used: it is written for a
+ * different reader and, on the home tour, opens with language
+ * docs/BRAND-VOICE.md bans outright.
+ *
+ * `author` is her as a Person and `publisher` is the brokerage, matching
+ * blogPostingSchema above. That split is the §7 requirement, not an SEO nicety —
+ * naming jasminegarcia.com as the publisher of its own video would assert this
+ * domain is a firm. The video is hosted on her channel; `publisher` describes
+ * who is advertising, which is Stone Realty Group either way.
+ *
+ * Only the placement marked `primary` in lib/video/data.ts calls this. The same
+ * VideoObject on two URLs invites a crawler to pick the wrong canonical, and the
+ * pages are not duplicates it could resolve between — they each host one asset.
+ */
+export function videoObjectSchema(video: Video) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.title,
+    description: video.summary,
+    thumbnailUrl: [thumbnailUrl(video, SITE_URL)],
+    uploadDate: video.publishedAt,
+    duration: isoDuration(video.durationSeconds),
+    embedUrl: embedUrl(video),
+    url: watchUrl(video),
+    author: {
+      "@type": "Person",
+      name: AGENT.name,
+      jobTitle: AGENT.title,
+      url: SITE_URL,
+      worksFor: { "@type": "RealEstateAgent", name: BROKERAGE.name },
+    },
+    publisher: {
+      "@type": "RealEstateAgent",
+      name: BROKERAGE.name,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: BROKERAGE.street,
+        addressLocality: BROKERAGE.city,
+        addressRegion: BROKERAGE.state,
+        postalCode: BROKERAGE.zip,
+        addressCountry: "US",
+      },
+    },
   };
 }
 

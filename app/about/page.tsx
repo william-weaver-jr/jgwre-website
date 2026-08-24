@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 
 import { BrandPhoto } from "@/components/brand-photo";
+import { VideoEmbed } from "@/components/video-embed";
 import { ClosingCta } from "@/components/phone-cta";
 import { SectionHeading } from "@/components/page-hero";
 import { PHOTOS } from "@/lib/images";
+import { JsonLd, videoObjectSchema } from "@/lib/schema";
+import { isPrimaryPlacement, videoForRoute } from "@/lib/video";
 import { BROKERAGE, PILLARS } from "@/lib/site";
 import Link from "next/link";
 import { GUIDE_TITLE } from "@/lib/intake";
@@ -50,8 +53,18 @@ const RECORD = [
 ];
 
 export default function AboutPage() {
+  /*
+    Registered in lib/video/data.ts, not hard-coded here. A second video, or a
+    different one, is an entry in that file — this page does not change again.
+  */
+  const featured = videoForRoute("/about");
+
   return (
     <>
+      {featured && isPrimaryPlacement(featured.placement) ? (
+        <JsonLd data={videoObjectSchema(featured.video)} />
+      ) : null}
+
       {/* ------------------------------------------------------------ THE STORY */}
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-6xl gap-14 px-gutter py-16 md:grid-cols-[1.3fr_1fr] md:py-24">
@@ -96,6 +109,23 @@ export default function AboutPage() {
           />
         </div>
       </section>
+
+      {/* --------------------------------------------------------------- VIDEO */}
+      {/*
+        Placed here on purpose: after the story, before the argument that follows
+        from it. The copy does the work and the video corroborates it — a reader
+        who arrives and presses play immediately has skipped the part of this
+        page that is actually persuasive.
+
+        One video per page, always. lib/video/index.ts returns at most one.
+      */}
+      {featured ? (
+        <VideoEmbed
+          video={featured.video}
+          placement={featured.placement}
+          className="border-b border-border"
+        />
+      ) : null}
 
       {/* --------------------------------------------------------- THE PARALLEL */}
       <section
