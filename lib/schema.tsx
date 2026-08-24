@@ -122,6 +122,10 @@ export function realEstateAgentSchema() {
       SOCIAL.facebook.url,
       SOCIAL.zillow.url,
       SOCIAL.youtube.url,
+      /* Named here and nowhere else on the site — it is corroboration, not a
+         surface. The display name differs there; lib/site.ts says why that is
+         not a problem and why `alternateName` is still not set. */
+      SOCIAL.linkedin.url,
     ],
     /* Derived from the §5 roster rather than restated. The hand-written list
        this replaces had already drifted — it was missing LoSo and Uptown, and

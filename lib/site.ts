@@ -87,6 +87,40 @@ export const SOCIAL = {
     handle: "@MyRealtorJasmine",
     url: "https://www.youtube.com/@MyRealtorJasmine",
   },
+  /**
+   * Her LinkedIn. Confirmed by Bill 2026-08-24 — the slug is generic enough
+   * that it needed confirming rather than inferring, and LinkedIn answers
+   * automated requests with a 999 so nothing here could check it.
+   *
+   * Never linked from a page, only named in `sameAs`. There is no LinkedIn
+   * audience to send anywhere and no surface on this site that wants one; its
+   * whole job is to corroborate the entity.
+   *
+   * THE NAME IS DIFFERENT THERE, AND THAT IS FINE. The profile displays
+   * "Jasmine Garcia Weaver" — Weaver is her married name. It is worth saying
+   * why that is not the misalignment it looks like:
+   *
+   * `sameAs` asserts that a URL refers to the same entity. It does not assert
+   * that the names match, and married, maiden, and professional name variants
+   * are ordinary enough that entity resolution expects them. The profile
+   * independently states Stone Realty Group, Charlotte, and Broker/REALTOR®,
+   * which is exactly the corroboration lib/schema.tsx wants — she is one of
+   * several public Jasmine Garcias and the only one at this brokerage.
+   *
+   * The variant exists in the index whether or not this file names it. Linking
+   * it does not create the inconsistency; it gives a consumer the means to
+   * resolve two records into one person instead of leaving them apart.
+   *
+   * `alternateName: "Jasmine Garcia Weaver"` is deliberately NOT added to the
+   * schema. It would put her married name into her own advertising, which is a
+   * branding decision that belongs to her and not one to infer from a
+   * third-party profile's display name. Everything under her licence says
+   * "Jasmine Garcia" and continues to.
+   */
+  linkedin: {
+    handle: "jasmine-garcia",
+    url: "https://www.linkedin.com/in/jasmine-garcia/",
+  },
 } as const;
 
 /**
