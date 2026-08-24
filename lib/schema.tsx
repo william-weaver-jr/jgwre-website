@@ -1,23 +1,114 @@
 import { MARKETS } from "@/lib/areas";
 import { lastModified } from "@/lib/blog";
 import type { Post } from "@/lib/blog";
+import { PHOTOS, imageObject } from "@/lib/images";
 import { AGENT, BROKERAGE, SITE_URL, SOCIAL } from "@/lib/site";
 import { embedUrl, isoDuration, thumbnailUrl, watchUrl } from "@/lib/video";
 import type { Video } from "@/lib/video";
 
 /**
- * JSON-LD for the homepage. RealEstateAgent + the brokerage as the parent
- * organization — the structured data must not imply she is an independent firm.
- * CLAUDE.md §11.
+ * Stable node identifiers.
+ *
+ * Without these, every schema on the site emits an anonymous node, and a
+ * consumer has no way to know that the author of a blog post, the author of the
+ * video, and the subject of the home page are one person rather than three
+ * people who share a name. Given how common her name is, that is not a
+ * theoretical concern — see the note on `personSchema()` below.
+ */
+export const PERSON_ID = `${SITE_URL}/#jasmine-garcia`;
+export const BROKERAGE_ID = `${SITE_URL}/#brokerage`;
+
+/**
+ * The brokerage, defined once.
+ *
+ * It was written out four times in this file and the copies had already begun
+ * to differ in shape. Now `parentOrganization`, `worksFor`, and `publisher` all
+ * name the same node, and a consumer resolving `@id` sees one organization
+ * rather than four that happen to share an address.
+ */
+function brokerageNode() {
+  return {
+    "@type": "RealEstateAgent",
+    "@id": BROKERAGE_ID,
+    name: BROKERAGE.name,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: BROKERAGE.street,
+      addressLocality: BROKERAGE.city,
+      addressRegion: BROKERAGE.state,
+      postalCode: BROKERAGE.zip,
+      addressCountry: "US",
+    },
+  };
+}
+
+/**
+ * JSON-LD for the homepage. Her, as one entity.
+ *
+ * ---------------------------------------------------------------------------
+ * Why this node carries two types
+ *
+ * It used to be `RealEstateAgent` alone, which describes a practice but never
+ * says a human being is involved. The obvious fix — a second `Person` node —
+ * is worse than it looks: two nodes carrying the same name and the same phone
+ * number assert that two entities exist, which is the opposite of what this
+ * markup is for. So there is one node, typed as both.
+ *
+ * The reason it matters here more than it would on most agent sites is that
+ * "Jasmine Garcia" is a heavily contested name. A search for it returns a
+ * dancer, an author, and a designer before it returns a Charlotte broker. An
+ * answer engine resolving the name has several well-linked candidates, and
+ * repeating her name in copy does nothing to help it choose — this is a graph
+ * problem, not a density problem. What actually disambiguates her is the pair
+ * of licence numbers in `hasCredential`, which are unique and publicly
+ * verifiable, plus `worksFor` and `sameAs`.
+ *
+ * `parentOrganization` and `worksFor` both point at the brokerage because each
+ * is the type-appropriate property for one of the two types. Neither is
+ * decoration: CLAUDE.md §7 forbids any implication that she operates
+ * independently, and adding `Person` makes this node read less like a firm than
+ * it did before, not more.
+ *
+ * DELIBERATELY ABSENT: `award`. §5 documents three recognitions, and none of
+ * them belongs here. Two are internal Stone Realty Group awards whose scope has
+ * to be stated in words to be honest, and schema.org `award` has nowhere to put
+ * a scope. The third is a *nomination*, and an `award` field asserting it would
+ * claim a win she has not been given. Structured data is advertising; the same
+ * rules apply. See RECOGNITION in lib/site.ts.
+ * ---------------------------------------------------------------------------
  */
 export function realEstateAgentSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "RealEstateAgent",
+    "@type": ["Person", "RealEstateAgent"],
+    "@id": PERSON_ID,
     name: AGENT.name,
     jobTitle: AGENT.title,
     telephone: AGENT.phoneDisplay,
     url: SITE_URL,
+    /* Factual and documented, in the register of BRAND-VOICE.md rather than the
+       register of a meta description. No statistic appears here on purpose:
+       every figure in §5 is a separate claim, they are already known to be out
+       of date (§12), and a number in structured data is a number nobody reviews
+       again. */
+    description: `${AGENT.name} is a ${AGENT.title} with ${BROKERAGE.name}, licensed in North Carolina and South Carolina, representing buyers and sellers across Charlotte and the NC/SC border.`,
+    /* The same photograph the home page hero shows. Dimensions come free from
+       the static import — the second reason lib/images.ts exists. */
+    image: { "@type": "ImageObject", ...imageObject(PHOTOS.portraitWarm, SITE_URL) },
+    /* Practice areas, not expertise claims. Every entry maps to a documented
+       pillar in §5 — new construction (17 closings), relocation (18), the
+       NC/SC border (12 in the Fort Mill corridor), and the seller side. Do not
+       add a topic here that §5 does not support; this is the same rule that
+       governs copy, and structured data is not exempt from it. */
+    knowsAbout: [
+      "Real estate negotiation",
+      "New construction representation",
+      "Relocation to Charlotte, North Carolina",
+      "North Carolina and South Carolina real estate",
+      "Seller representation",
+      "Buyer representation",
+    ],
+    worksFor: { "@id": BROKERAGE_ID },
     /* Ties this domain to the profiles she has actually been posting from,
        which is what sameAs is for. Zillow matters more than Instagram here:
        Locked Decision #1 keeps all MLS data off this domain, so the profile
@@ -46,18 +137,10 @@ export function realEstateAgentSchema() {
       "Charlotte, NC",
       ...MARKETS.map((market) => `${market.name}, ${market.state}`),
     ],
-    parentOrganization: {
-      "@type": "RealEstateAgent",
-      name: BROKERAGE.name,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: BROKERAGE.street,
-        addressLocality: BROKERAGE.city,
-        addressRegion: BROKERAGE.state,
-        postalCode: BROKERAGE.zip,
-        addressCountry: "US",
-      },
-    },
+    parentOrganization: brokerageNode(),
+    /* The strongest disambiguator on the page. A licence number is unique,
+       publicly checkable against the state commission, and belongs to exactly
+       one person — which is more than can be said for the name. */
     hasCredential: BROKERAGE.licenses.map((l) => ({
       "@type": "EducationalOccupationalCredential",
       credentialCategory: "Real Estate License",
@@ -88,25 +171,20 @@ export function blogPostingSchema(post: Post) {
     datePublished: post.publishedAt,
     dateModified: lastModified(post),
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/blog/${post.slug}` },
+    /* Carries `@id` so this is the same person the home page describes, rather
+       than a second Jasmine Garcia who happens to work at the same brokerage.
+       The descriptive fields stay: a consumer that reads only this page's
+       markup still gets a complete author, and one that reads both resolves
+       them into one node. */
     author: {
       "@type": "Person",
+      "@id": PERSON_ID,
       name: AGENT.name,
       jobTitle: AGENT.title,
       url: SITE_URL,
-      worksFor: { "@type": "RealEstateAgent", name: BROKERAGE.name },
+      worksFor: { "@id": BROKERAGE_ID },
     },
-    publisher: {
-      "@type": "RealEstateAgent",
-      name: BROKERAGE.name,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: BROKERAGE.street,
-        addressLocality: BROKERAGE.city,
-        addressRegion: BROKERAGE.state,
-        postalCode: BROKERAGE.zip,
-        addressCountry: "US",
-      },
-    },
+    publisher: brokerageNode(),
   };
 }
 
@@ -194,25 +272,20 @@ export function videoObjectSchema(video: Video) {
     duration: isoDuration(video.durationSeconds),
     embedUrl: embedUrl(video),
     url: watchUrl(video),
+    /* Carries `@id` so this is the same person the home page describes, rather
+       than a second Jasmine Garcia who happens to work at the same brokerage.
+       The descriptive fields stay: a consumer that reads only this page's
+       markup still gets a complete author, and one that reads both resolves
+       them into one node. */
     author: {
       "@type": "Person",
+      "@id": PERSON_ID,
       name: AGENT.name,
       jobTitle: AGENT.title,
       url: SITE_URL,
-      worksFor: { "@type": "RealEstateAgent", name: BROKERAGE.name },
+      worksFor: { "@id": BROKERAGE_ID },
     },
-    publisher: {
-      "@type": "RealEstateAgent",
-      name: BROKERAGE.name,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: BROKERAGE.street,
-        addressLocality: BROKERAGE.city,
-        addressRegion: BROKERAGE.state,
-        postalCode: BROKERAGE.zip,
-        addressCountry: "US",
-      },
-    },
+    publisher: brokerageNode(),
   };
 }
 

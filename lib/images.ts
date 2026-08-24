@@ -31,6 +31,36 @@ export type BrandImage = {
   alt: string;
 };
 
+/**
+ * The absolute URL and intrinsic size of a brand image, for structured data.
+ *
+ * Components never need this — `next/image` takes the static import directly.
+ * JSON-LD does, because a crawler needs an absolute URL and cannot follow a
+ * bundler path.
+ *
+ * The shape check is not defensive programming. A static import really is two
+ * different things depending on who compiled it: under Next it is a
+ * `StaticImageData` object carrying `src`, `width`, and `height`, and under
+ * Vite — which is what both test suites run on — it is a bare URL string. So
+ * `image.src.width` is a number in production and `undefined` in every test,
+ * which is precisely the kind of divergence that ships wrong and is never seen,
+ * because the assertion that would have caught it was written against the test
+ * environment's shape.
+ *
+ * Under Vite the returned URL is not meaningful and no test should assert on
+ * it. Under Next it is the real, hashed, immutable asset URL.
+ */
+export function imageObject(
+  image: BrandImage,
+  origin: string,
+): { url: string; width?: number; height?: number } {
+  const src = image.src as StaticImageData | string;
+
+  if (typeof src === "string") return { url: `${origin}${src}` };
+
+  return { url: `${origin}${src.src}`, width: src.width, height: src.height };
+}
+
 const PORTRAIT_ALT = `${AGENT.name}, ${AGENT.title} with ${BROKERAGE.name}.`;
 
 export const PHOTOS = {
