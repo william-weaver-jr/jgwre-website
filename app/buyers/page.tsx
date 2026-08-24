@@ -6,6 +6,7 @@ import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { GUIDE_TITLE } from "@/lib/intake";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   The buyer process end to end, framed as where the leverage points are —
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   title: "Buyers",
   description:
     "The listing agent works for the seller. Where a buyer's leverage actually sits at each stage of a Charlotte or South Carolina purchase, and when it expires.",
-  alternates: { canonical: "/buyers" },
+  ...routeMetadata({ path: "/buyers" }),
 };
 
 /** Each stage: where the leverage is, and the moment it stops being available. */

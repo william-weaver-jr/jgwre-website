@@ -7,6 +7,7 @@ import { VideoEmbed } from "@/components/video-embed";
 import { Button } from "@/components/ui/button";
 import { AGENT, BROKERAGE } from "@/lib/site";
 import { videoForRoute } from "@/lib/video";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   docs/CONTENT-PLAN.md: "Phone first, large. Form secondary."
@@ -22,7 +23,7 @@ import { videoForRoute } from "@/lib/video";
 export const metadata: Metadata = {
   title: "Contact",
   description: `Call ${AGENT.name}, ${AGENT.title} with ${BROKERAGE.name}, at ${AGENT.phoneDisplay}. Serving Charlotte, the surrounding NC counties, and across the SC line.`,
-  alternates: { canonical: "/contact" },
+  ...routeMetadata({ path: "/contact" }),
 };
 
 export default function ContactPage() {

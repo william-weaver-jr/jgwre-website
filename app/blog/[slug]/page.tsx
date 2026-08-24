@@ -15,6 +15,7 @@ import {
 import { postText, showsDollarFigure } from "@/lib/blog/validate";
 import { JsonLd, blogPostingSchema, faqPageSchema } from "@/lib/schema";
 import { PILLARS } from "@/lib/site";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   /blog/[slug] — one post.
@@ -53,14 +54,12 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.description,
-      publishedTime: post.publishedAt,
-      modifiedTime: lastModified(post),
-    },
+    ...routeMetadata({
+      path: `/blog/${post.slug}`,
+      ogTitle: post.title,
+      ogDescription: post.description,
+      article: { publishedTime: post.publishedAt, modifiedTime: lastModified(post) },
+    }),
   };
 }
 

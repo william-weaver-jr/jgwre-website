@@ -7,6 +7,7 @@ import { ReviewCard } from "@/components/review-card";
 import { publishableReviews } from "@/lib/reviews";
 import { RECOGNITION, SOCIAL } from "@/lib/site";
 import { GUIDE_TITLE } from "@/lib/intake";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   /reviews — the archive.
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
   title: "Reviews",
   description:
     "Client reviews for Jasmine Garcia, Broker/REALTOR® with Stone Realty Group in Charlotte, NC. Reproduced exactly as they were posted to Zillow and Google.",
-  alternates: { canonical: "/reviews" },
+  ...routeMetadata({ path: "/reviews" }),
 };
 
 export default function ReviewsPage() {

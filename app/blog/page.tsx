@@ -6,6 +6,7 @@ import { ClosingCta } from "@/components/phone-cta";
 import { POST_CATEGORIES, formatPostDate, publishedPosts } from "@/lib/blog";
 import type { PostCategory } from "@/lib/blog";
 import { GUIDE_TITLE } from "@/lib/intake";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   /blog — the listing.
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   title: "What's askable",
   description:
     "Notes on what is negotiable in a real estate transaction, and how the process actually works. Written for the person who has done this once.",
-  alternates: { canonical: "/blog" },
+  ...routeMetadata({ path: "/blog" }),
 };
 
 export default function BlogIndexPage() {

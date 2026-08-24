@@ -9,6 +9,7 @@ import { areaBySlug, publishedAreas } from "@/lib/areas";
 import { showsDollarFigure } from "@/lib/areas/validate";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { GUIDE_TITLE } from "@/lib/intake";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   /areas/[slug] — one page per market that has real content, and no page at all
@@ -52,13 +53,12 @@ export async function generateMetadata({
        other "{market} real estate" titles on the same page of results. */
     title: `${area.name}, ${area.state}: what is negotiable here`,
     description: area.metaDescription ?? area.lede,
-    alternates: { canonical: `/areas/${area.slug}` },
-    openGraph: {
-      title: `${area.name}, ${area.state}: what is negotiable here`,
-      description: area.metaDescription ?? area.lede,
-      url: `/areas/${area.slug}`,
-      type: "article",
-    },
+    ...routeMetadata({
+      path: `/areas/${area.slug}`,
+      ogTitle: `${area.name}, ${area.state}: what is negotiable here`,
+      ogDescription: area.metaDescription ?? area.lede,
+      article: {},
+    }),
   };
 }
 

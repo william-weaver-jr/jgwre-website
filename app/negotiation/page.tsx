@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ContactIntake } from "@/components/contact-intake";
 import { GUIDE_TITLE, GUIDE_TITLE_SHORT, ITEM_COUNT_WORD, NEGOTIABLE_ITEMS } from "@/lib/intake";
 import { AGENT } from "@/lib/site";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   The lead magnet landing page. Ported from the Lovable draft.
@@ -20,11 +21,11 @@ export const metadata: Metadata = {
   title: GUIDE_TITLE,
   description:
     "Price is one line in the contract. Here is the list of everything else on the table in a Charlotte, NC or South Carolina purchase.",
-  alternates: { canonical: "/negotiation" },
-  openGraph: {
-    title: GUIDE_TITLE_SHORT,
-    description: "Price is one line in the contract. Here is the list of everything else.",
-  },
+  ...routeMetadata({
+    path: "/negotiation",
+    ogTitle: GUIDE_TITLE_SHORT,
+    ogDescription: "Price is one line in the contract. Here is the list of everything else.",
+  }),
 };
 
 /* The list itself lives in lib/intake/guide.ts, which derives the title from it. */

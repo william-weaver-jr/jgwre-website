@@ -4,6 +4,7 @@ import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { BROKERAGE } from "@/lib/site";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   PILLAR — sellers.
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   title: "Sellers",
   description:
     "The buyer’s agent works for the buyer. So does the inspector. Pricing strategy, inspection negotiation, and a 98.84% list-to-sale ratio in Charlotte, NC.",
-  alternates: { canonical: "/sellers" },
+  ...routeMetadata({ path: "/sellers" }),
 };
 
 const STAGES = [

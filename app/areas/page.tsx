@@ -5,6 +5,7 @@ import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { MARKETS, publishedAreas, sortAreas } from "@/lib/areas";
 import type { AreaState } from "@/lib/areas";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   /areas — the hub.
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   title: "Areas",
   description:
     "Where Jasmine Garcia works across Charlotte and the South Carolina border, and what tends to be negotiable in each of them.",
-  alternates: { canonical: "/areas" },
+  ...routeMetadata({ path: "/areas" }),
 };
 
 const STATE_LABEL: Record<AreaState, string> = {

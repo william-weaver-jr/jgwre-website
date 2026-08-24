@@ -10,6 +10,7 @@ import { isPrimaryPlacement, videoForRoute } from "@/lib/video";
 import { BROKERAGE, PILLARS } from "@/lib/site";
 import Link from "next/link";
 import { GUIDE_TITLE } from "@/lib/intake";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   /about — unblocked 2026-08-07.
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Ten years teaching special education, then real estate. Same job: make sure the person with the most at stake isn’t the least prepared. Charlotte, NC.",
-  alternates: { canonical: "/about" },
+  ...routeMetadata({ path: "/about" }),
 };
 
 /** Documented in CLAUDE.md §5. See the open item there about refreshing these. */

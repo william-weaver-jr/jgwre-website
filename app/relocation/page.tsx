@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   PILLAR — relocation.
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   title: "Relocation",
   description:
     "Moving to Charlotte from out of state? Everyone in the transaction is local except you. 18 relocation transactions across the Charlotte metro and into SC.",
-  alternates: { canonical: "/relocation" },
+  ...routeMetadata({ path: "/relocation" }),
 };
 
 const GAPS = [

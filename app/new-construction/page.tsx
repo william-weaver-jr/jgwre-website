@@ -5,6 +5,7 @@ import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { GUIDE_TITLE } from "@/lib/intake";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   PILLAR — the strongest of the four and the one with the best case study.
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   title: "New Construction",
   description:
     "The builder’s sales office negotiates every day. Most buyers negotiate with one once. 17 new-construction closings across Charlotte and the NC/SC border.",
-  alternates: { canonical: "/new-construction" },
+  ...routeMetadata({ path: "/new-construction" }),
 };
 
 /** CLAUDE.md §5. Do not add a builder to this list without documentation. */

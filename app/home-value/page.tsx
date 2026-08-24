@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   Manual CMA request. CONTENT-PLAN.md: "a real person looking at real comps, not
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   title: "What is your home worth?",
   description:
     "A written comparative market analysis from a broker who has actually seen the house, not an automated estimate. Charlotte, NC and the South Carolina line.",
-  alternates: { canonical: "/home-value" },
+  ...routeMetadata({ path: "/home-value" }),
 };
 
 /** What an automated estimate cannot see, and a buyer's agent will. */

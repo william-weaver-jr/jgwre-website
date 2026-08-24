@@ -5,6 +5,7 @@ import { PageHero } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { TransactionRow } from "@/components/transaction-row";
 import { AGENT, PILLARS } from "@/lib/site";
+import { routeMetadata } from "@/lib/seo";
 import {
   filterByPillar,
   groupByYear,
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
   title: "Transactions",
   description:
     "Closed transactions for Jasmine Garcia, Broker/REALTOR® with Stone Realty Group: new construction, relocation, and both sides of the NC/SC line.",
-  alternates: { canonical: "/transactions" },
+  ...routeMetadata({ path: "/transactions" }),
   /*
     Noindex until the ledger is substantial — TRANSACTIONS_INDEX_THRESHOLD, not
     merely non-empty. A page carrying two closings is as thin as one carrying

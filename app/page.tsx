@@ -17,6 +17,7 @@ import { dedupeByTransaction, publishableReviews, reviewById } from "@/lib/revie
 import { JsonLd, realEstateAgentSchema } from "@/lib/schema";
 import { AGENT, PILLARS } from "@/lib/site";
 import { GUIDE_TITLE, ITEM_COUNT } from "@/lib/intake";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   The case-study-led home page specified in docs/CONTENT-PLAN.md, ported from the
@@ -30,12 +31,12 @@ import { GUIDE_TITLE, ITEM_COUNT } from "@/lib/intake";
 export const metadata: Metadata = {
   description:
     "Negotiation is not just price. Documented outcomes on roofs, concessions, and builder incentives across Charlotte, NC and the NC/SC line. Call (704) 200-9360.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: `${AGENT.name}, ${AGENT.title} · Charlotte, NC & SC`,
-    description:
+  ...routeMetadata({
+    path: "/",
+    ogTitle: `${AGENT.name}, ${AGENT.title} · Charlotte, NC & SC`,
+    ogDescription:
       "Negotiation is not just price. Documented outcomes across Charlotte and the NC/SC border.",
-  },
+  }),
 };
 
 const RECORD = [

@@ -32,12 +32,18 @@ export const metadata: Metadata = {
     template: `%s · ${AGENT.name}`,
   },
   description: `${AGENT.name}, ${AGENT.title} with ${BROKERAGE.name}. Licensed in North Carolina and South Carolina.`,
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: SITE_URL,
-    siteName: AGENT.name,
-  },
+  /*
+    Deliberately no `openGraph` here.
+
+    Next merges this object by replacement rather than by depth, so a layout
+    default is a trap: any page that sets openGraph silently drops everything
+    configured at this level, and any page that does not inherits a single
+    hardcoded `url` claiming the home page is its canonical. Both happened.
+
+    routeMetadata() in lib/seo.ts builds the whole block per route instead, from
+    the same path that produces the canonical. tests/metadata.test.ts asserts
+    every route has one and that the two agree.
+  */
   robots: { index: true, follow: true },
 };
 

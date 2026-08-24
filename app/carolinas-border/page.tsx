@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { BROKERAGE } from "@/lib/site";
+import { routeMetadata } from "@/lib/seo";
 
 /*
   PILLAR — the NC/SC border.
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   title: "The NC/SC Border",
   description:
     "Fort Mill, Tega Cay, Indian Land, Lake Wylie, Waxhaw. Two states, two tax regimes, two rulebooks, and a state line running through your monthly payment.",
-  alternates: { canonical: "/carolinas-border" },
+  ...routeMetadata({ path: "/carolinas-border" }),
 };
 
 const DIFFERENCES = [
