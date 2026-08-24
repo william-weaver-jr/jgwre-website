@@ -150,7 +150,7 @@ export function ContactIntake({
         return;
       }
 
-      track("intake_submit", { side: side ?? "unknown", leadType: payload.leadType, page: source });
+      track("intake_submit", { side: side ?? "unknown", lead_type: payload.leadType, page: source });
       setStep("done");
     } catch {
       setError(`We couldn’t send that. Please call ${AGENT.phoneDisplay}.`);

@@ -3,26 +3,44 @@
  * them are recoverable retroactively, so the events ship with the UI rather than
  * after it.
  *
- * GA4 is loaded via its dataLayer. If no tag is present — which is the case today,
- * and will be until the GA4 property exists — every call here is a no-op that costs
- * one property lookup. Nothing on the page depends on it.
+ * The site loads gtag.js directly (components/google-analytics.tsx), not Tag Manager,
+ * and the two read `dataLayer` differently. Tag Manager listens for plain objects
+ * carrying an `event` key. gtag.js ignores those completely; it acts only on
+ * argument-shaped commands — `["event", name, params]`. This file pushed the Tag
+ * Manager shape until 2026-08-24, so every call site below was firing into a void
+ * that looked, from the page, exactly like a working install.
+ *
+ * If the site ever moves to Tag Manager, this function is the only thing that changes.
  */
 
-export type AnalyticsEvent = {
-  event: string;
-  [key: string]: string | number | undefined;
-};
+type EventParams = Record<string, string | number | undefined>;
 
 declare global {
   interface Window {
-    dataLayer?: AnalyticsEvent[];
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
-export function track(event: string, params: Record<string, string | number | undefined> = {}): void {
+/**
+ * GA4 event names and parameter keys are snake_case by convention, and custom
+ * parameters need registering as custom dimensions in the GA4 admin before they
+ * show up in reports. They are collected either way, so an unregistered parameter
+ * is recoverable later; a parameter never sent is not.
+ */
+export function track(event: string, params: EventParams = {}): void {
   if (typeof window === "undefined") return;
+
+  /* The tag is loaded afterInteractive, so a fast click can land before gtag
+     exists. Queueing the same command shape on dataLayer covers that window —
+     gtag.js drains what it finds there once it loads. */
+  if (typeof window.gtag === "function") {
+    window.gtag("event", event, params);
+    return;
+  }
+
   window.dataLayer = window.dataLayer ?? [];
-  window.dataLayer.push({ event, ...params });
+  window.dataLayer.push(["event", event, params]);
 }
 
 /** UTM parameters off the current URL, for the lead payload. CLAUDE.md §9. */
