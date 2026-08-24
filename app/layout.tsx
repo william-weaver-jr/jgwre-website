@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyContactBar } from "@/components/sticky-contact-bar";
 import { TelTracking } from "@/components/tel-tracking";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { SITE_URL, AGENT, BROKERAGE } from "@/lib/site";
 
 import "./globals.css";
@@ -56,6 +57,7 @@ export default function RootLayout({
         <SiteFooter />
         <StickyContactBar />
         <TelTracking />
+        <GoogleAnalytics />
       </body>
     </html>
   );

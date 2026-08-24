@@ -17,11 +17,11 @@ export const metadata: Metadata = {
   Resend also has to be accurate about what those vendors actually do with
   submitted data — nobody has verified that against their terms yet.
 
-  TODO(legal): the Analytics section below describes the site as it is today —
-  no provider loaded, no cookies set by our own code. CLAUDE.md §4 plans Vercel
-  Analytics and GA4. Whether enabling them requires a consent mechanism is a
-  question for counsel, not an assumption to bake into this page; settle it and
-  rewrite that section at the same commit that adds the tag.
+  TODO(legal): the Analytics section below now reflects that GA4 is loaded
+  (components/google-analytics.tsx, production only). What is still unresolved
+  is whether that requires a consent mechanism (a cookie banner, an opt-out) —
+  that is a question for counsel, not an assumption baked into this page or the
+  code that ships the tag. Do not treat the section below as that answer.
 */
 
 /**
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
  * changes — a privacy policy dated earlier than its own text is worse than one
  * with no date at all.
  */
-const LAST_UPDATED = "August 10, 2026";
+const LAST_UPDATED = "August 23, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -81,11 +81,18 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="font-display text-2xl">Analytics</h2>
           <p className="mt-3">
-            We record which pages are visited and when someone taps a phone number or
-            submits a form, so we can tell what is useful. No analytics provider is
-            connected to this site today, and we set no advertising or tracking cookies of
-            our own. If that changes, this section will name the provider and describe any
-            choices available to you before it is turned on.
+            We use Google Analytics to record which pages are visited and when someone taps
+            a phone number or submits a form, so we can tell what is useful. Google
+            Analytics sets cookies in your browser to do this. We do not use this data for
+            advertising, and we do not sell it. You can opt out of Google Analytics
+            tracking across all sites using{" "}
+            <a
+              href="https://tools.google.com/dlpage/gaoptout"
+              className="underline underline-offset-2"
+            >
+              Google&rsquo;s browser add-on
+            </a>
+            .
           </p>
         </section>
 
