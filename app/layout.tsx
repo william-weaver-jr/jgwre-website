@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Libre_Franklin } from "next/font/google";
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyContactBar } from "@/components/sticky-contact-bar";
@@ -58,6 +60,7 @@ export default function RootLayout({
         <StickyContactBar />
         <TelTracking />
         <GoogleAnalytics />
+        <SpeedInsights />
       </body>
     </html>
   );
