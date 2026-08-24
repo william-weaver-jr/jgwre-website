@@ -124,7 +124,7 @@ export default function AreasIndexPage() {
             <>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
                 A market gets a guide when there is something specific to say about what tends
-                to be askable in it — not a paragraph of adjectives and a listing feed. That
+                to be askable in it, not a paragraph of adjectives and a listing feed. That
                 takes longer and there are fewer of them. It is the only version worth reading.
               </p>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-muted">

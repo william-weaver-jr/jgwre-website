@@ -50,12 +50,12 @@ export async function generateMetadata({
     /* The market name leads, because that is the word people search. The rest
        states the angle so the result is not interchangeable with the dozen
        other "{market} real estate" titles on the same page of results. */
-    title: `${area.name}, ${area.state} — what is negotiable here`,
-    description: area.lede,
+    title: `${area.name}, ${area.state}: what is negotiable here`,
+    description: area.metaDescription ?? area.lede,
     alternates: { canonical: `/areas/${area.slug}` },
     openGraph: {
-      title: `${area.name}, ${area.state} — what is negotiable here`,
-      description: area.lede,
+      title: `${area.name}, ${area.state}: what is negotiable here`,
+      description: area.metaDescription ?? area.lede,
       url: `/areas/${area.slug}`,
       type: "article",
     },

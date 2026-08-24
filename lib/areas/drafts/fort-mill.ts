@@ -43,10 +43,16 @@ export const FORT_MILL_DRAFT: Area = {
   /* The AEO surface. Written as far as the sourced material allows; the rest
      waits on the same four answers everything else here waits on. */
   answer:
-    "Fort Mill is in York County, South Carolina, across the state line from Charlotte, which makes it a different transaction rather than just a different address — different forms, a different due-diligence structure, and different deadlines. Jasmine Garcia is licensed in both states and has closed twelve in this corridor. TODO(verify): add what the housing stock and the drive are actually like, once she has described them.",
+    "Fort Mill is in York County, South Carolina, across the state line from Charlotte, which makes it a different transaction rather than just a different address: different forms, a different due-diligence structure, and different deadlines. Jasmine Garcia is licensed in both states and has closed twelve in this corridor. TODO(verify): add what the housing stock and the drive are actually like, once she has described them.",
 
   lede:
-    "Fort Mill is in York County, South Carolina — across the state line from Charlotte, and a different transaction because of it. Twelve of her closings are in this corridor.",
+    "Fort Mill is in York County, South Carolina, across the state line from Charlotte, and a different transaction because of it. Twelve of her closings are in this corridor.",
+
+  /* The lede runs 170 characters, which a result listing cuts mid-clause. The
+     closing count is the part that survives being dropped, because the corridor
+     record is already made on /carolinas-border. */
+  metaDescription:
+    "Fort Mill is in York County, South Carolina, across the state line from Charlotte. That makes it a different transaction, not just a different address.",
 
   /* Written from her own closings, which is honest and narrow. The market-level
      picture is the part she has to supply. */
@@ -57,7 +63,7 @@ export const FORT_MILL_DRAFT: Area = {
      allowlist in docs/CONTENT-MARKETING.md §2, and the numbers circulating on
      competitor blogs are not a source. docs/AREAS-SPEC.md §3. */
   priceContext:
-    "TODO(verify): how price behaves here compared with south Charlotte — whether it moves faster or slower, and what it responds to. Describe the movement, not the number; no area price figure may ship without a documented source.",
+    "TODO(verify): how price behaves here compared with south Charlotte, whether it moves faster or slower, and what it responds to. Describe the movement, not the number. No area price figure may ship without a documented source.",
 
   /* I-77 is plain geography and safe to state. Everything with a clock on it is
      hers. */
@@ -82,7 +88,7 @@ export const FORT_MILL_DRAFT: Area = {
     {
       question: "Can one agent handle both sides of the North Carolina / South Carolina line?",
       answer:
-        "Only if they are licensed in both states, and most Charlotte agents are licensed in North Carolina alone. Jasmine Garcia holds licenses in both — NC 334700 and SC 125546 — which is what makes it possible to shop Fort Mill and Ballantyne in the same search rather than choosing a side first.",
+        "Only if they are licensed in both states, and most Charlotte agents are licensed in North Carolina alone. Jasmine Garcia holds licenses in both, NC 334700 and SC 125546, which is what makes it possible to shop Fort Mill and Ballantyne in the same search rather than choosing a side first.",
     },
   ],
 
@@ -92,7 +98,7 @@ export const FORT_MILL_DRAFT: Area = {
          The strongest lever on the page: specific, genuinely non-obvious, and
          absent from every templated neighbourhood page in this city. */
       title: "The seller across the table may not be a person",
-      body: "Some of what is for sale here is held by a company rather than a household — an iBuyer that bought from the last owner, or a builder still carrying finished product. That changes the negotiation completely. A company has no attachment to the house and no feelings about your offer, but it also has a pricing model it will not argue with, and an internal list of which concessions are pre-approved and which need a person to sign. Price is usually the hardest thing to move. Cost items are usually the easiest. Knowing which is which before you write is most of the work.",
+      body: "Some of what is for sale here is held by a company rather than a household: an iBuyer that bought from the last owner, or a builder still carrying finished product. That changes the negotiation completely. A company has no attachment to the house and no feelings about your offer, but it also has a pricing model it will not argue with, and an internal list of which concessions are pre-approved and which need a person to sign. Price is usually the hardest thing to move. Cost items are usually the easiest. Knowing which is which before you write is most of the work.",
     },
     {
       /* Grounded in the 2024 Fort Mill new-construction purchase where the

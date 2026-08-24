@@ -63,6 +63,17 @@ export type Area = Market & {
   lede: string;
 
   /**
+   * The meta description, when the lede is the wrong length for one.
+   *
+   * The two have different jobs. A lede is read on the page with the h1 above
+   * it and can run as long as the sentence needs. A meta description is cut off
+   * around 160 characters in a result listing, so a long lede reused here gets
+   * truncated mid-clause. Falls back to `lede` when absent, which is correct
+   * whenever the lede already fits.
+   */
+  metaDescription?: string;
+
+  /**
    * The query this page exists to answer, phrased the way someone would type it
    * or say it aloud. Authoring discipline, never rendered — an area page that
    * cannot name its query is a page built for a keyword rather than a reader.

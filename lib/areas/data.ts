@@ -98,22 +98,28 @@ export const AREAS: readonly Area[] = [
        BRAND-VOICE.md §4 permits Ayrsley by name; her HOA and the unit count
        stay on /about. */
     answer:
-      "Steele Creek is southwest Charlotte, and it was mostly farmland until the late 1990s. The residential boom ran from then through the 2010s, which puts the middle of the housing stock around 2006 and leaves very little of it built before 1980. Newer stock means slab foundations, almost no basements, and inspection findings that are predictable rather than surprising. Houses here sit on the market longer than they do in south Charlotte, and new construction sets a ceiling that resale has to price under — both of which give a buyer room that does not exist further east. Jasmine Garcia has lived in Ayrsley, inside Steele Creek, since 2021.",
+      "Steele Creek is southwest Charlotte, and it was mostly farmland until the late 1990s. The residential boom ran from then through the 2010s, which puts the middle of the housing stock around 2006 and leaves very little of it built before 1980. Newer stock means slab foundations, almost no basements, and inspection findings that are predictable rather than surprising. Houses here sit on the market longer than they do in south Charlotte, and new construction sets a ceiling that resale has to price under. Both of those give a buyer room that does not exist further east. Jasmine Garcia has lived in Ayrsley, inside Steele Creek, since 2021.",
 
     lede:
       "Steele Creek was farmland until the late 1990s, and most of what is here now went up after that. Houses sit longer than they do in south Charlotte, and that is leverage if you know what to do with it.",
 
+    /* The lede runs 200 characters, which a result listing cuts mid-clause. Same
+       two facts, shorter, with the market name first because that is the word
+       being searched. */
+    metaDescription:
+      "Steele Creek was farmland until the late 1990s, so the stock is newer than it looks. Houses sit longer here than in south Charlotte, and that is leverage.",
+
     housingStock:
-      "It went up in bands rather than blending, because the farmland sold off in pieces and each piece became its own community with its own build year — Berewick, Palisades, Ayrsley, which is the one she lives in. The middle of the stock dates to about 2006, and almost nothing here predates 1980. Detached houses outnumber townhomes by something like four to one, and the townhomes are scattered through rather than gathered in one place. The Palisades end holds the larger houses and the acreage; the older houses on genuinely big lots sit closer to Lake Wylie. The ground is flat, so foundations are slabs and basements are rare — the lots that support a walkout are down by the water, and almost nowhere else.",
+      "It went up in bands rather than blending, because the farmland sold off in pieces and each piece became its own community with its own build year: Berewick, Palisades, Ayrsley, which is the one she lives in. The middle of the stock dates to about 2006, and almost nothing here predates 1980. Detached houses outnumber townhomes by something like four to one, and the townhomes are scattered through rather than gathered in one place. The Palisades end holds the larger houses and the acreage. The older houses on genuinely big lots sit closer to Lake Wylie. The ground is flat, so foundations are slabs and basements are rare. The lots that support a walkout are down by the water, and almost nowhere else.",
 
     priceContext:
-      "This is not a prestige market and it does not price like one. It is more affordable than SouthPark or Ballantyne and it behaves differently: houses sit longer here, and a seller who prices above the market does not get rescued by it. The ceiling is set by new construction rather than by resale — some townhome communities are selling now for less than they released for, which pulls the resale around them down with them. Treat any single statistic you are quoted about this market carefully, including the ones here: nobody agrees where Steele Creek stops, so the numbers move depending on where the person quoting them drew the line.",
+      "This is not a prestige market and it does not price like one. It is more affordable than SouthPark or Ballantyne and it behaves differently: houses sit longer here, and a seller who prices above the market does not get rescued by it. The ceiling is set by new construction rather than by resale. Some townhome communities are selling now for less than they released for, which pulls the resale around them down with them. Treat any single statistic you are quoted about this market carefully, including the ones here: nobody agrees where Steele Creek stops, so the numbers move depending on where the person quoting them drew the line.",
 
     commute:
-      "I-77 is the route everyone knows and it is reliably congested; the toll lanes have been in the news for years. What Steele Creek has that much of the county does not is alternatives — I-485 loops around and is often faster than sitting on 77, and the side roads genuinely work. South Tryon is the exception, and it gets worse the further south you go on it. The drive is roughly symmetrical in and out, and like everywhere here it has been getting slower year over year.",
+      "I-77 is the route everyone knows, and it is reliably congested. The toll lanes have been in the news for years. What Steele Creek has that much of the county does not is alternatives. I-485 loops around and is often faster than sitting on 77, and the side roads genuinely work. South Tryon is the exception, and it gets worse the further south you go on it. The drive is roughly symmetrical in and out, and like everywhere here it has been getting slower year over year.",
 
     whatTrades:
-      "Two things are on the market at once: builder inventory in the newer communities, and resale from the early-2000s stock that has usually turned over once or twice. The resale arrives with the list a twenty-year-old house arrives with, and the systems tend to reach the end of their first life together, because the houses around it were built within a few years of each other. What you do not get here is the surprise an older Charlotte neighborhood produces — the quirks of a 1930s house are not in play. Worth knowing that a large share of the housing here is apartments, so the for-sale market is smaller than the number of roofs suggests.",
+      "Two things are on the market at once: builder inventory in the newer communities, and resale from the early-2000s stock that has usually turned over once or twice. The resale arrives with the list a twenty-year-old house arrives with, and the systems tend to reach the end of their first life together, because the houses around it were built within a few years of each other. What you do not get here is the surprise an older Charlotte neighborhood produces. The quirks of a 1930s house are not in play. Worth knowing that a large share of the housing here is apartments, so the for-sale market is smaller than the number of roofs suggests.",
 
     levers: [
       {
@@ -130,7 +136,7 @@ export const AREAS: readonly Area[] = [
         /* From "homes sit longer here" and "no sellers successfully
            overpricing", both hers. */
         title: "Time on the market is information, and it is on your side",
-        body: "Houses take longer to sell here than they do in the faster parts of south Charlotte, and that is not a defect to be talked around — it is the shape of the negotiation. A listing that has been sitting has already told you what the seller has learned about their price. In a market where overpricing does not get rescued, patience is a position. The mistake is treating a Steele Creek listing the way you would treat one in a submarket where hesitating costs you the house.",
+        body: "Houses take longer to sell here than they do in the faster parts of south Charlotte, and that is not a defect to be talked around. It is the shape of the negotiation. A listing that has been sitting has already told you what the seller has learned about their price. In a market where overpricing does not get rescued, patience is a position. The mistake is treating a Steele Creek listing the way you would treat one in a submarket where hesitating costs you the house.",
       },
       {
         /* Inference from her two observations — dominant early-2000s era, and
@@ -160,7 +166,7 @@ export const AREAS: readonly Area[] = [
       {
         question: "Is Steele Creek mostly townhomes or single-family homes?",
         answer:
-          "Single-family, by a wide margin — roughly four detached houses for every attached one, and the townhomes are spread through the area rather than concentrated in one part of it. A large share of the housing overall is apartments, so the for-sale market is smaller than the total number of homes would suggest.",
+          "Single-family, by a wide margin. Roughly four detached houses for every attached one, and the townhomes are spread through the area rather than concentrated in one part of it. A large share of the housing overall is apartments, so the for-sale market is smaller than the total number of homes would suggest.",
       },
       {
         /* The boundary problem is real, it is why no percentage appears

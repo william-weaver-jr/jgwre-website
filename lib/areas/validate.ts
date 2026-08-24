@@ -102,6 +102,17 @@ export function findIncompleteFields(area: Area): string[] {
 
   if (!area.targetQuery?.trim()) problems.push("targetQuery is empty");
 
+  /* Whatever ends up in the meta description has to survive a result listing
+     without being cut mid-clause. Checked against the value the page actually
+     renders, so a long lede with no override fails here rather than silently
+     truncating in search. */
+  const meta = area.metaDescription ?? area.lede;
+  if (meta.trim().length > 160) {
+    problems.push(
+      `meta description is ${meta.trim().length} characters, over the 160 limit (set metaDescription)`,
+    );
+  }
+
   if (area.levers.length < 2) problems.push("needs at least two local levers");
   for (const lever of area.levers) {
     if (!lever.title?.trim() || !lever.body?.trim()) problems.push("a lever is missing text");
