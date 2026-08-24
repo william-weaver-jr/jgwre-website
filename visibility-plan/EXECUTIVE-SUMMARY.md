@@ -65,9 +65,13 @@ as unconfirmed.
 ### 2. Fix entity identification — *the highest-leverage technical work available*
 Because her name is contested, generic identity signals are worth far more here than they
 would be for an agent with an unusual name. Concretely: `Person` schema on the home page
-(it exists on `/about` only), geography in title tags (only the home page contains
-"Charlotte"), and a reciprocal link from her Stone Realty Group bio — a high-authority page
-that currently does not link to her site at all.
+(there is currently no top-level `Person` entity anywhere on the site), geography in title
+tags (only the home page contains "Charlotte"), and her LinkedIn named in `sameAs`.
+
+> **Status: shipped 2026-08-24.** The schema, the titles, and the LinkedIn corroboration are
+> done. A fourth component — a reciprocal link from her Stone Realty Group bio — was originally
+> listed here and has been **removed from the recommendation**: the brokerage's commission
+> incentives run against it (see Risks, and `AUDIT.md` §3.3).
 
 ### 3. Extend the structured-data pattern that already works to the pages that convert
 `/areas/steele-creek` and the one blog post already emit `FAQPage` + `BreadcrumbList`.
@@ -97,6 +101,7 @@ events are configured.
 | **Name ambiguity suppresses brand search** | Medium-High | Cannot be fixed by content volume — only by entity signals and third-party consistency. |
 | **Publishing pressure vs. §6 discipline** | Medium | The instinct to fill 14 area pages fast is exactly what `lib/areas/data.ts` warns against. The guardrails work; the risk is someone routing around them. |
 | **Compliance drift on new surfaces** | Medium | Review and aggregate-rating schema is a §7 advertising surface. It needs BIC review, not just a code change. |
+| **The brokerage's incentives run against hers** | High | Added 2026-08-24. SRG takes a materially higher commission share on brokerage-sourced leads and intends to keep sourcing them — which is why this site exists. Assume no cooperation: the bio backlink is unlikely, and any link that routes her organic traffic into a brokerage-hosted funnel may convert cheap leads into expensive ones. See `AUDIT.md` §3.3 and §3.5, and T6b. **This never licenses weakening §7** — brokerage identification stays on every page. The goal is her own pipeline, not her own firm. |
 | **Single-author bottleneck** | Medium | Every distinctive page needs Jasmine's actual knowledge. Interview capacity, not writing capacity, is the constraint. |
 | **Expecting fast results** | Medium | A new domain in a competitive local market realistically shows meaningful organic movement in 3–6 months. Anything promising faster is guessing. |
 

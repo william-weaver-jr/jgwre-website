@@ -266,8 +266,24 @@ displays `jasmine@mattstoneteam.com`. The site therefore offers no email contact
 Whether to publish it is a business decision (Locked Decision #4 is phone-first, deliberately),
 but the `TODO` should be resolved either way.
 
-### 3.3 The brokerage bio does not link back to her site
+### 3.3 The brokerage bio does not link back to her site — and probably will not
 **Severity: High · Confidence: High · [VERIFIED]**
+
+> **Context added 2026-08-24 (Bill), and it changes the recommendation.** Stone Realty Group
+> takes a **materially higher share of Jasmine's commission when the brokerage sources the
+> lead**, and the BIC intends to keep sourcing them. That is the commercial reason this site
+> exists at all. A link from his site to hers moves leads out of his column at his own expense,
+> so it is unlikely to be granted.
+>
+> **This has a wider consequence than one backlink.** Any part of this plan that assumed brokerage
+> cooperation needs re-reading with that assumption removed — see T6b in
+> `IMPLEMENTATION-BACKLOG.md` on where "Search Homes" sends her organic traffic, which is the
+> live example and is currently in her primary navigation. The authority T6 was meant to supply
+> now has to come from sources with no stake in her lead flow: REALTOR® association
+> directories, local press, partnership content, and her own third-party profiles.
+>
+> **What does not change:** §7. She may not present as independent, and brokerage
+> identification stays on every page. The objective is her own *pipeline*, not her own *firm*.
 
 `mattstoneteam.com/jasmine-garcia/` carries her full §5 statistics, her phone, her email, and
 a Zillow link — and **no link to jasminegarcia.com**. This is a relevant, topically-aligned page
@@ -291,8 +307,19 @@ Fort Mill is both the strongest candidate (12 documented closings) and the one a
 It is also directly contested: The Longleaf Group publishes a ~2,500-word "Fort Mill vs Indian
 Land" comparison today (§5).
 
-### 3.5 The IDX destination is a placeholder
-**Severity: Medium · Confidence: High · [VERIFIED]**
+### 3.5 The IDX destination is a placeholder — and may be worse than a placeholder
+**Severity: Medium → High · Confidence: Medium · [VERIFIED / NEEDS DATA]**
+
+> **Reassessed 2026-08-24** in light of §3.3. The recommendation below — copy mackenziesiek.com
+> and point at an agent subdomain — assumed the only question was attribution to her. Given the
+> commission split, there is a prior question: **when a visitor arrives here from organic
+> search, clicks "Search Homes", and converts on a brokerage-hosted IDX, whose lead is it and at
+> which split?**
+>
+> If it is the brokerage's, then the most prominent outbound link on the site converts her own
+> organic traffic into brokerage-sourced leads at the worse rate — which would make "Search
+> Homes" the most expensive link on the site, and it currently sits in primary navigation.
+> **Get this answered in writing before resolving the URL.** T6b.
 
 `SEARCH_HOMES_URL = "https://mattstoneteam.com"` with a `TODO(verify)`. "Search Homes" —
 a primary nav item — currently sends visitors to the brokerage home page rather than to a
@@ -315,9 +342,28 @@ third-party aggregators that already surfaced in search (Agent Pronto, FastExper
 listwithclever, U.S. News). Several of these generate profiles without the agent's
 involvement, which means they may already carry stale or wrong data.
 
-**Note a name-consistency risk:** her LinkedIn is under **"Jasmine Garcia Weaver"** while every
-other surface uses "Jasmine Garcia." For a common name, an inconsistent variant weakens rather
-than strengthens the entity graph.
+**On the LinkedIn name variant — ✅ RESOLVED 2026-08-24, and the original framing was wrong.**
+Her LinkedIn displays **"Jasmine Garcia Weaver"** (Weaver is her married name) while every other
+surface uses "Jasmine Garcia." This draft originally called that a consistency risk that had to
+be fixed before the profile could be linked. On examination it is not a risk at all:
+
+- `sameAs` asserts that a URL refers to the same entity. It does not assert that names match,
+  and married, maiden, and professional variants are common enough that entity resolution
+  expects them.
+- The profile independently states Stone Realty Group, Charlotte, and Broker/REALTOR® — which
+  is precisely the corroboration §4.1 needs. She is one of several public Jasmine Garcias and
+  the only one at this brokerage.
+- **The variant is in the index whether or not this site links it.** Linking does not create
+  the inconsistency; it supplies the means to resolve two records into one person.
+
+So the profile is now named in `sameAs` (`lib/site.ts` `SOCIAL.linkedin`, URL confirmed by
+Bill). It is deliberately **not** linked from any page — there is no LinkedIn audience to send
+anywhere, and its only job is corroboration. `alternateName` is deliberately **not** set: that
+would put her married name into her own advertising, which is her branding decision, not one to
+infer from a third-party display name.
+
+**Renaming the LinkedIn profile is therefore optional**, not a prerequisite. It would tidy the
+brand; it does not unblock anything.
 
 ---
 

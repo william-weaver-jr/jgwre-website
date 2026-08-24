@@ -69,8 +69,9 @@ image URL invisibly.
 **Verified:** 744 tests green; rendered JSON-LD inspected in a browser with real dimensions
 (1600×2000); no console errors.
 **Outstanding:** the "validates in Rich Results Test" criterion needs a public URL and can only
-be confirmed after deploy. LinkedIn is still **not** in `sameAs` — that is gated on X13
-(the "Jasmine Garcia Weaver" name variant), as specified.
+be confirmed after deploy.
+**LinkedIn added 2026-08-24**, URL confirmed by Bill — see X13 below, which closes differently
+than this backlog originally assumed.
 
 <details><summary>Original task specification</summary>
 
@@ -108,8 +109,8 @@ more specific and more useful geography for that page than the metro name.
 
 **Verified:** all titles unique, all ≤ 60 characters rendered including the ` · Jasmine Garcia`
 template, `og:title` inherits correctly, canonicals and single-`h1` unaffected.
-**Outstanding:** ⚠ **Jasmine has not reviewed these.** That was an acceptance criterion. They
-are her advertising and she should read them before this deploys.
+**✅ Approved by Jasmine 2026-08-24.** The acceptance criterion is met; these are cleared to
+deploy.
 
 <details><summary>Original task specification</summary>
 
@@ -173,13 +174,62 @@ either map 301s to the closest equivalent on jasminegarcia.com, or take the site
 notes it is blocked on deciding which markets the new site commits to.
 </details>
 
-### T6 — Brokerage bio backlink
+### T6 — Brokerage bio backlink ⚠ RESCORED — expect a no
 **Files:** none
 **Do:** Ask Stone Realty Group to add a link to jasminegarcia.com from
 `mattstoneteam.com/jasmine-garcia/`.
-**Acceptance:** [ ] Link live, followed, pointing at the apex.
-**Why:** an established, topically-aligned page carrying her full statistics that currently
-does not link to her site. The cheapest legitimate authority and entity signal available.
+**Acceptance:** [ ] Asked. [ ] Link live *(unlikely — see below)*.
+
+> **Context added 2026-08-24 (Bill).** The BIC takes a **materially higher share of Jasmine's
+> commission when the brokerage sources the lead**, and intends to keep sourcing them. A link
+> from his site to hers moves leads from his column to hers at his own expense. He is unlikely
+> to grant it, and the ask may draw attention to a pipeline that is better left unremarked.
+>
+> **Revised guidance:** keep it as a low-cost, low-expectation ask — ideally framed as agent
+> profile completeness rather than as marketing — and **do not build any plan on it**. Its
+> original score (64.0) assumed a cooperative counterparty. Treat Confidence as 2 rather than
+> 4, which drops it to **32.0** and out of the "approve first" tier.
+>
+> **What replaces it.** The authority it was meant to supply has to come from sources with no
+> stake in her lead flow: the Canopy Realtor® Association and NC REALTORS® directories, local
+> press and the Charlotte Observer nomination follow-through (ROADMAP E4), partnership content
+> with lenders and inspectors (E5), and her own third-party profiles (T13, X12). None of those
+> require the brokerage's cooperation, which is now a design requirement rather than a
+> preference.
+
+**Why it was scored high originally:** an established, topically-aligned page carrying her full
+statistics that does not link to her site. That remains true — it is just not obtainable.
+
+### T6b — ⚠ NEW: audit where "Search Homes" sends her traffic *(raised by the same context)*
+**Files:** [lib/site.ts](../lib/site.ts) `SEARCH_HOMES_URL`
+**Severity: High · Confidence: Medium**
+
+`SEARCH_HOMES_URL` is a `TODO(verify)` pointing at `mattstoneteam.com`, and N15 proposed
+resolving it to an agent-attributed IDX subdomain such as `jasmine.mattstoneteam.com`, copying
+what mackenziesiek.com does.
+
+**Given the commission split, that proposal needs a question answered before it is
+implemented:** when a visitor arrives on jasminegarcia.com from organic search, clicks "Search
+Homes", registers on a brokerage-hosted IDX, and becomes a lead — **whose lead is it, and at
+which split?**
+
+If the answer is "the brokerage's," then the site's most prominent outbound link converts her
+own hard-won organic traffic into brokerage-sourced leads at the worse rate. That would make
+"Search Homes" the single most expensive link on the site, and it is currently in the primary
+navigation.
+
+**Do:** Ask Stone Realty Group, in writing, how leads originating on an agent IDX subdomain are
+attributed and split.
+**Acceptance:**
+- [ ] Written answer on attribution and split
+- [ ] If leads route to the brokerage at the higher split: reconsider the placement. Options
+      include demoting it out of primary nav, or keeping it but ensuring her own intake is the
+      more prominent path on every page it appears
+- [ ] `SEARCH_HOMES_URL` resolved either way — it currently points at a brokerage home page,
+      which serves nobody
+**Note:** Locked Decision #2 (link out, no IDX on this domain) is not in question — that is a
+compliance decision and it stands. This is about *where* the link points and how prominent it
+is, not whether to build IDX here.
 
 ### T7 — Publish `/areas/fort-mill`
 **Files:** [lib/areas/drafts/fort-mill.ts](../lib/areas/drafts/fort-mill.ts) → [lib/areas/data.ts](../lib/areas/data.ts)
