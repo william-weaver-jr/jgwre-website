@@ -307,9 +307,11 @@ BIC's call to make alone:
 
   The vendor half of the counsel review is split: Resend is still open, and **Follow Up Boss
   is parked until the CRM is connected** (Bill, 2026-08-24). Nothing has been sent there —
-  no account, no key. Unpark it with the connection, and note that Locked Decision #5 gates
-  launch on the forms reaching FUB, so the page's "stored in ... Follow Up Boss" sentence
-  and a working integration have to land together.
+  no account, no key. The page no longer names the vendor either: it said submissions were
+  stored in Follow Up Boss while every one of them was reaching the notification email and
+  nothing else, so the sentence was trimmed the same day. Restore it and unpark the vendor
+  check together, when the integration is connected — which Locked Decision #5 puts before
+  launch.
 - **The transactions pipeline states are still blocked.** Active / pending / coming-soon
   need their own written BIC approval — `docs/TRANSACTIONS-SPEC.md` §2 and §12 below. A
   general site approval is not that approval. Do not build them on request without it.

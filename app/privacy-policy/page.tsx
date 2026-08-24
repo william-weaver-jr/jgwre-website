@@ -22,12 +22,17 @@ export const metadata: Metadata = {
   no account, no API key, and nothing has ever been sent there, so reading its
   terms now would be reading them for a configuration nobody has chosen yet.
 
-  The sentence naming Follow Up Boss under "How we use it" describes where
-  submissions are going to go, and Locked Decision #5 gates launch on exactly
-  that — no form ships unwired. So the two land together or the sentence is
-  wrong: if this site is ever put live with FUB still unconnected, trim that
-  sentence to the notification email before it goes, and take the vendor check
-  off the parking lot at the same time.
+  "How we use it" named Follow Up Boss until 2026-08-24 and no longer does. The
+  sentence was describing where submissions were going to go, while every
+  submission was in fact reaching one place: the notification email. A privacy
+  policy is the wrong document to be forward-looking in — it is read by someone
+  deciding whether to type their phone number in, and it should describe what
+  happens to it today.
+
+  Put the vendor back the day the integration is connected. Locked Decision #5
+  gates launch on the forms reaching FUB, so that day is before launch, and the
+  parked vendor check (CLAUDE.md §7) comes off the lot with it. The sentence to
+  restore names the CRM and says a copy of the submission is stored there.
 
   The consent question this comment used to hold open was decided on 2026-08-24
   (Bill): no banner, a full disclosure, and a reachable opt-out. A GA4 install
@@ -80,9 +85,8 @@ export default function PrivacyPolicyPage() {
           <h2 className="font-display text-2xl">How we use it</h2>
           <p className="mt-3">
             We use your information to respond to your inquiry and to provide real estate
-            services you request. Submissions are stored in our customer relationship
-            manager, Follow Up Boss, and a notification is emailed to {AGENT.name}. We do not
-            sell your information.
+            services you request. What you submit is emailed to {AGENT.name}, who contacts
+            you directly. We do not sell your information.
           </p>
         </section>
 
