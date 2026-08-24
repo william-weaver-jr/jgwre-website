@@ -3,8 +3,10 @@ import type { Metadata } from "next";
 import { ContactIntake } from "@/components/contact-intake";
 import { SocialLinks } from "@/components/social-links";
 import { PageHero } from "@/components/page-hero";
+import { VideoEmbed } from "@/components/video-embed";
 import { Button } from "@/components/ui/button";
 import { AGENT, BROKERAGE } from "@/lib/site";
+import { videoForRoute } from "@/lib/video";
 
 /*
   docs/CONTENT-PLAN.md: "Phone first, large. Form secondary."
@@ -24,6 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  /* Registered in lib/video/data.ts. No VideoObject here — /about is the
+     video's canonical home and emits it once. */
+  const intro = videoForRoute("/contact");
+
   return (
     <>
       <PageHero
@@ -49,6 +55,15 @@ export default function ContactPage() {
           availability claim she can't meet is worse than none.
           Tracked in docs/CONTACT-STRATEGY.md §6.
         */}
+
+        {/*
+          Inside the hero, under the number — not between the number and the
+          form. The page's job is the phone, and this is an argument for dialling
+          it rather than a stop on the way to the intake.
+        */}
+        {intro ? (
+          <VideoEmbed video={intro.video} placement={intro.placement} className="mt-14 max-w-2xl" />
+        ) : null}
       </PageHero>
 
       <ContactIntake

@@ -73,15 +73,24 @@ export const VIDEOS: readonly Video[] = [
         primary: true,
       },
       /*
-        A second, `card`-variant placement on /contact is drafted and deliberately
-        not enabled. It reads well — "know who you are calling", above the form —
-        but /contact's whole job is the phone number (docs/CONTENT-PLAN.md: "Phone
-        first, large"), and putting anything between the number and the form is a
-        conversion decision rather than a video one. Enable it after the /about
-        placement has been seen live, not at the same time.
+        Enabled 2026-08-20 on Bill's direction.
 
-        The variant itself is built and tested; this is one array entry away.
+        It sits inside the hero, under the number rather than between the number
+        and the form: /contact's whole job is the phone (docs/CONTENT-PLAN.md,
+        "Phone first, large"), and the card is an argument for dialling it, not a
+        detour on the way to the form. No `primary` — /about emits the
+        VideoObject, and the same markup on two URLs invites a crawler to pick
+        the wrong canonical.
       */
+      {
+        route: "/contact",
+        variant: "card",
+        eyebrow: "Before you call",
+        id: "video",
+        heading: "Know who you are calling.",
+        intro:
+          "The number above goes to her, not to a queue. This is who picks it up.",
+      },
     ],
   },
 

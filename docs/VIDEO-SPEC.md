@@ -114,6 +114,11 @@ Three rules that are not preferences:
   from it.
 - **No autoplay on load, no carousel, no floating player, no modal.** Every one of them
   costs more than it returns on a site whose primary call to action is a phone call.
+Where the bio video sits today: `/about` as a `feature` (its primary placement, the one that
+emits `VideoObject`), and `/contact` as a `card` inside the hero — under the number, above the
+form. That order is the rule in miniature. `/contact`'s job is the phone, so the card argues
+for dialling it rather than sitting between the reader and the intake.
+
 - **Not on `/reviews`** (a video beside verbatim testimonials invites the reader to treat
   the clip as one), **not on `/transactions`** (BIC-approved to a specific shape), **not on
   `/home-value`** (single-purpose form).
