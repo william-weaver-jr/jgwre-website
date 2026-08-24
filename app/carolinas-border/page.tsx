@@ -27,7 +27,7 @@ import { routeMetadata } from "@/lib/seo";
 */
 
 export const metadata: Metadata = {
-  title: "The NC/SC Border",
+  title: "Buying in North Carolina vs South Carolina",
   description:
     "Fort Mill, Tega Cay, Indian Land, Lake Wylie, Waxhaw. Two states, two tax regimes, two rulebooks, and a state line running through your monthly payment.",
   ...routeMetadata({ path: "/carolinas-border" }),

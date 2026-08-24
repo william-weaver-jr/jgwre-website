@@ -25,7 +25,7 @@ import { routeMetadata } from "@/lib/seo";
 */
 
 export const metadata: Metadata = {
-  title: "Buyers",
+  title: "Buying a home in Charlotte",
   description:
     "The listing agent works for the seller. Where a buyer's leverage actually sits at each stage of a Charlotte or South Carolina purchase, and when it expires.",
   ...routeMetadata({ path: "/buyers" }),

@@ -20,7 +20,7 @@ import { routeMetadata } from "@/lib/seo";
 */
 
 export const metadata: Metadata = {
-  title: "Sellers",
+  title: "Selling a home in Charlotte",
   description:
     "The buyer’s agent works for the buyer. So does the inspector. Pricing strategy, inspection negotiation, and a 98.84% list-to-sale ratio in Charlotte, NC.",
   ...routeMetadata({ path: "/sellers" }),

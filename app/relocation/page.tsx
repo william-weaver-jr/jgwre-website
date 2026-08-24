@@ -26,7 +26,7 @@ import { routeMetadata } from "@/lib/seo";
 */
 
 export const metadata: Metadata = {
-  title: "Relocation",
+  title: "Relocating to Charlotte",
   description:
     "Moving to Charlotte from out of state? Everyone in the transaction is local except you. 18 relocation transactions across the Charlotte metro and into SC.",
   ...routeMetadata({ path: "/relocation" }),

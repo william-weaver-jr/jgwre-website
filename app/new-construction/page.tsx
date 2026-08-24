@@ -19,7 +19,7 @@ import { routeMetadata } from "@/lib/seo";
 */
 
 export const metadata: Metadata = {
-  title: "New Construction",
+  title: "Buying new construction in Charlotte",
   description:
     "The builder’s sales office negotiates every day. Most buyers negotiate with one once. 17 new-construction closings across Charlotte and the NC/SC border.",
   ...routeMetadata({ path: "/new-construction" }),
