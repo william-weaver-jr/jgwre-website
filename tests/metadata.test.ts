@@ -52,6 +52,10 @@ const STATIC: [route: string, load: Loader][] = [
   ["/blog", () => import("@/app/blog/page")],
   ["/areas", () => import("@/app/areas/page")],
   ["/transactions", () => import("@/app/transactions/page")],
+  /* In the sitemap and indexable, so it is held to the same rules. It shipped
+     with no canonical at all — the one page whose metadata had no `alternates`
+     block for anyone to notice was wrong. */
+  ["/privacy-policy", () => import("@/app/privacy-policy/page")],
 ];
 
 const DYNAMIC: [route: string, load: Loader, params: Record<string, string>][] = [

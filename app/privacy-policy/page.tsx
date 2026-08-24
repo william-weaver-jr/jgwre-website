@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 
 import { AnalyticsOptOut } from "@/components/analytics-opt-out";
+import { routeMetadata } from "@/lib/seo";
 import { AGENT, BROKERAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: `How ${AGENT.name} and ${BROKERAGE.name} collect and use information submitted through this site.`,
   robots: { index: true, follow: false },
+  /* It is in the sitemap and indexable, so it needs a canonical like any other
+     page — it simply never had one, because it was the one page with no
+     `alternates` block to notice was missing. tests/metadata.test.ts covers it
+     now. `follow: false` is unchanged: the page is a destination, not a hub. */
+  ...routeMetadata({ path: "/privacy-policy" }),
 };
 
 /*
