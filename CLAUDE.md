@@ -300,8 +300,16 @@ BIC's call to make alone:
   personalization are switched off in `components/google-analytics.tsx` rather than left to
   an account default, no personal information is ever an event parameter (a test reads the
   call sites), and `/privacy-policy` carries an opt-out that all three vendors honour
-  (`lib/analytics-consent.ts`). **Reopen it if** any of Google Signals, remarketing, or a
-  Google Ads link is turned on, or the site starts marketing beyond the local area.
+  (`lib/analytics-consent.ts`). Google Signals is also **confirmed off in the GA4 property
+  itself** (Bill, 2026-08-24) — the property toggle is independent of the tag config and no
+  test can see it. **Reopen it if** any of Google Signals, remarketing, or a Google Ads link
+  is turned on, or the site starts marketing beyond the local area.
+
+  The vendor half of the counsel review is split: Resend is still open, and **Follow Up Boss
+  is parked until the CRM is connected** (Bill, 2026-08-24). Nothing has been sent there —
+  no account, no key. Unpark it with the connection, and note that Locked Decision #5 gates
+  launch on the forms reaching FUB, so the page's "stored in ... Follow Up Boss" sentence
+  and a working integration have to land together.
 - **The transactions pipeline states are still blocked.** Active / pending / coming-soon
   need their own written BIC approval — `docs/TRANSACTIONS-SPEC.md` §2 and §12 below. A
   general site approval is not that approval. Do not build them on request without it.
@@ -462,5 +470,11 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
 - [ ] Confirm Placester contract term, auto-renewal date, and content/domain ownership
       before giving notice
 - [ ] Confirm the Stone Realty Group IDX search URL (the "Search Homes" destination)
-- [ ] Follow Up Boss API credentials (tracking number confirmed: (704) 200-9360)
+- [ ] **Follow Up Boss API credentials** (tracking number confirmed: (704) 200-9360).
+      Not connected as of 2026-08-24 — no account key in any environment, so
+      `lib/fub.ts` throws and `app/api/lead/route.ts` falls back to the Resend email
+      on every submission. That fallback is the §9 contract working as designed, not
+      a substitute for the integration: Locked Decision #5 gates launch on it. The
+      privacy policy's counsel review for this vendor is parked behind the same
+      connection (§7).
 - [ ] Professional photography and any brand video

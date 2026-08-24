@@ -14,9 +14,20 @@ export const metadata: Metadata = {
 
   The BIC approved the site on 2026-08-10 (CLAUDE.md §7). That does not close
   this out: a Broker-in-Charge supervises brokerage advertising, and a privacy
-  policy is a lawyer's document. What is written here about Follow Up Boss and
-  Resend also has to be accurate about what those vendors actually do with
-  submitted data — nobody has verified that against their terms yet.
+  policy is a lawyer's document.
+
+  What this page says about Resend still has to be checked against what that
+  vendor actually does with submitted data. The matching check for Follow Up
+  Boss is **parked until the CRM is connected** (Bill, 2026-08-24) — there is
+  no account, no API key, and nothing has ever been sent there, so reading its
+  terms now would be reading them for a configuration nobody has chosen yet.
+
+  The sentence naming Follow Up Boss under "How we use it" describes where
+  submissions are going to go, and Locked Decision #5 gates launch on exactly
+  that — no form ships unwired. So the two land together or the sentence is
+  wrong: if this site is ever put live with FUB still unconnected, trim that
+  sentence to the notification email before it goes, and take the vendor check
+  off the parking lot at the same time.
 
   The consent question this comment used to hold open was decided on 2026-08-24
   (Bill): no banner, a full disclosure, and a reachable opt-out. A GA4 install

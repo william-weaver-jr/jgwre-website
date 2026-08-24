@@ -40,6 +40,13 @@ if (process.env.NODE_ENV === "production" && !MEASUREMENT_ID) {
  *   install into an advertising one, and they are the trigger that would make a
  *   consent banner advisable. Off in code means turning one on is a diff someone
  *   reviews, not a checkbox in a console nobody is watching.
+ *
+ *   The property-level toggle is the other half and it wins independently of
+ *   this config: Google Signals is **confirmed off in the GA4 property itself**
+ *   (Bill, 2026-08-24). Nothing in this repo can see or assert that, so if it is
+ *   ever switched on in the console, this comment is the only thing that will
+ *   look wrong — and the consent decision it supports is the thing that would
+ *   actually be wrong.
  * - The opt-out is applied before the first hit. gtag.js reads `ga-disable-<id>`
  *   on every hit, and setting it inline — ahead of `config` — is the only way a
  *   returning visitor who opted out is never measured, not even on the page
