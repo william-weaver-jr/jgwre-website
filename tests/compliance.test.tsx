@@ -451,6 +451,24 @@ describe("the privacy policy names every analytics vendor we load (§7)", () => 
   ])("discloses %s", async (vendor) => {
     expect(text(await page("/privacy-policy"))).toContain(vendor);
   });
+
+  /**
+   * The 2026-08-24 decision (lib/analytics-consent.ts) trades the consent banner
+   * for a disclosure and a reachable opt-out. The banner is the visible half; if
+   * the opt-out ever stops shipping, what is left is the half that took
+   * something away from the visitor and gave nothing back.
+   */
+  it("offers the opt-out the no-banner decision rests on", async () => {
+    const html = await page("/privacy-policy");
+    expect(html).toContain('id="privacy-choices"');
+    expect(html).toMatch(/Turn analytics off/);
+  });
+
+  it("states that Google's advertising features are off", async () => {
+    const body = text(await page("/privacy-policy"));
+    expect(body).toMatch(/Google Signals/);
+    expect(body).toMatch(/ad personalization/i);
+  });
 });
 
 describe("SEO metadata (§11)", () => {

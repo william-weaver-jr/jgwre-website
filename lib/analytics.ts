@@ -13,6 +13,14 @@
  * If the site ever moves to Tag Manager, this function is the only thing that changes.
  */
 
+import { hasOptedOutOfAnalytics } from "@/lib/analytics-consent";
+
+/**
+ * Strings and numbers only, and every call site passes a step, a side, a page
+ * slug, or a placement. Nothing a visitor typed. tests/compliance.test.tsx
+ * asserts that, because the failure here is invisible: GA4 accepts a name or an
+ * email as happily as a step number, and Google's terms forbid sending them.
+ */
 type EventParams = Record<string, string | number | undefined>;
 
 declare global {
@@ -30,6 +38,11 @@ declare global {
  */
 export function track(event: string, params: EventParams = {}): void {
   if (typeof window === "undefined") return;
+
+  /* Belt and braces. gtag.js already honours `ga-disable-*`, but a queued
+     dataLayer command written before the tag loads would not be covered by it
+     — and this shim exists precisely to write those. lib/analytics-consent.ts. */
+  if (hasOptedOutOfAnalytics()) return;
 
   /* The tag is loaded afterInteractive, so a fast click can land before gtag
      exists. Queueing the same command shape on dataLayer covers that window —

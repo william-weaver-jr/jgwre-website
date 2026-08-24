@@ -1,5 +1,7 @@
 import Script from "next/script";
 
+import { ANALYTICS_OPT_OUT_KEY } from "@/lib/analytics-consent";
+
 /*
   A missing measurement ID renders nothing, which is the right behaviour and
   also the reason this file warns.
@@ -30,6 +32,23 @@ if (process.env.NODE_ENV === "production" && !MEASUREMENT_ID) {
  * into the real property. Measurement ID comes from env, never hardcoded, so a
  * fork or a staging host cannot silently write into her live data.
  *
+ * Two things the config below does on purpose, both from the 2026-08-24 privacy
+ * decision recorded in lib/analytics-consent.ts:
+ *
+ * - Google Signals and ad personalization are switched off explicitly rather
+ *   than left to the account default. They are what turns a plain measurement
+ *   install into an advertising one, and they are the trigger that would make a
+ *   consent banner advisable. Off in code means turning one on is a diff someone
+ *   reviews, not a checkbox in a console nobody is watching.
+ * - The opt-out is applied before the first hit. gtag.js reads `ga-disable-<id>`
+ *   on every hit, and setting it inline — ahead of `config` — is the only way a
+ *   returning visitor who opted out is never measured, not even on the page
+ *   where they land.
+ *
+ * What is never sent is enforced elsewhere: lib/analytics.ts carries the event
+ * shim, its call sites pass step numbers and page slugs, and a test asserts no
+ * name, email, phone, or message ever becomes an event parameter.
+ *
  * See .env.example and CLAUDE.md §4.
  */
 export function GoogleAnalytics() {
@@ -45,10 +64,18 @@ export function GoogleAnalytics() {
       />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
+          try {
+            if (window.localStorage.getItem('${ANALYTICS_OPT_OUT_KEY}') === '1') {
+              window['ga-disable-${MEASUREMENT_ID}'] = true;
+            }
+          } catch (e) {}
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${MEASUREMENT_ID}');
+          gtag('config', '${MEASUREMENT_ID}', {
+            allow_google_signals: false,
+            allow_ad_personalization_signals: false
+          });
         `}
       </Script>
     </>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { AnalyticsOptOut } from "@/components/analytics-opt-out";
 import { AGENT, BROKERAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -17,14 +18,18 @@ export const metadata: Metadata = {
   Resend also has to be accurate about what those vendors actually do with
   submitted data — nobody has verified that against their terms yet.
 
-  TODO(legal): the Analytics section below now reflects everything that is
-  loaded — GA4 (components/google-analytics.tsx) and Vercel Web Analytics and
-  Speed Insights (components/vercel-analytics.tsx), all production only. What
-  is still unresolved is whether any of that requires a consent mechanism (a
-  cookie banner, an opt-out) — that is a question for counsel, not an
-  assumption baked into this page or the code that ships the tags. Do not treat
-  the section below as that answer. GA4 is the one that sets cookies; the two
-  Vercel measurements do not, which may or may not change the answer.
+  The consent question this comment used to hold open was decided on 2026-08-24
+  (Bill): no banner, a full disclosure, and a reachable opt-out. A GA4 install
+  serving one metro, with the advertising features off, is not what a consent
+  interstitial exists for. The reasoning and the conditions that would reopen it
+  — Google Signals, remarketing, a Google Ads link, or marketing beyond the local
+  area — are recorded in lib/analytics-consent.ts, next to the code that would
+  have to change. It is practical guidance rather than a formal legal opinion,
+  which is worth knowing before anyone treats it as settled forever.
+
+  Everything loaded is named below: GA4 (components/google-analytics.tsx) plus
+  Vercel Web Analytics and Speed Insights (components/vercel-analytics.tsx), all
+  production only, all covered by the opt-out.
 */
 
 /**
@@ -89,8 +94,22 @@ export default function PrivacyPolicyPage() {
             Analytics sets cookies in your browser to do this. We also use Vercel Web
             Analytics and Vercel Speed Insights, which count page views and measure how
             quickly pages load for real visitors; these set no cookies and do not identify
-            you. We do not use any of this data for advertising, and we do not sell it. You
-            can opt out of Google Analytics tracking across all sites using{" "}
+            you.
+          </p>
+          <p className="mt-3">
+            We have turned off Google&rsquo;s advertising features — Google Signals and ad
+            personalization — so this site does not build advertising audiences or follow
+            you across the web, and we do not sell any of it. We also never send your name,
+            email address, phone number, or anything you type into a form to any analytics
+            service. What we send is which page you were on and which button you tapped.
+          </p>
+          <p className="mt-3">
+            Because of that, this site does not put a cookie banner in front of you. You can
+            switch analytics off for this browser at any time under{" "}
+            <a href="#privacy-choices" className="underline underline-offset-2">
+              Your privacy choices
+            </a>{" "}
+            below, and you can opt out of Google Analytics across all sites using{" "}
             <a
               href="https://tools.google.com/dlpage/gaoptout"
               className="underline underline-offset-2"
@@ -101,8 +120,17 @@ export default function PrivacyPolicyPage() {
           </p>
         </section>
 
+        <section id="privacy-choices">
+          <h2 className="font-display text-2xl">Your privacy choices</h2>
+          <p className="mt-3">
+            You can switch analytics off for this browser. Nothing else on the site changes,
+            and you never have to tell us who you are to do it.
+          </p>
+          <AnalyticsOptOut />
+        </section>
+
         <section>
-          <h2 className="font-display text-2xl">Your choices</h2>
+          <h2 className="font-display text-2xl">Your choices about your information</h2>
           <p className="mt-3">
             You can ask us to correct or delete the information you submitted by calling{" "}
             {AGENT.phoneDisplay}. Records we are required to retain under North Carolina or

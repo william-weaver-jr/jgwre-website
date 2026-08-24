@@ -1,5 +1,9 @@
+"use client";
+
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
+import { hasOptedOutOfAnalytics } from "@/lib/analytics-consent";
 
 /**
  * Vercel Web Analytics and Speed Insights, mounted once in the root layout so
@@ -19,6 +23,13 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
  * and neither is used for advertising, but "we run no third-party analytics
  * beyond Google" would have stopped being true the moment this shipped, and
  * that page is a compliance surface.
+ *
+ * Both also honour the opt-out, through `beforeSend`. Neither sets a cookie or
+ * identifies anyone, so neither is what the opt-out is *for* — but a privacy
+ * choice that silently covers one vendor out of three is a worse answer than
+ * either honouring it everywhere or not offering it. The check reads
+ * localStorage per event rather than per mount, so a visitor who opts out is
+ * not still being measured until they navigate.
  */
 export function VercelAnalytics() {
   if (process.env.NODE_ENV !== "production") {
@@ -27,8 +38,8 @@ export function VercelAnalytics() {
 
   return (
     <>
-      <Analytics />
-      <SpeedInsights />
+      <Analytics beforeSend={(event) => (hasOptedOutOfAnalytics() ? null : event)} />
+      <SpeedInsights beforeSend={(event) => (hasOptedOutOfAnalytics() ? null : event)} />
     </>
   );
 }

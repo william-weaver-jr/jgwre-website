@@ -1,6 +1,10 @@
+import { readFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
+
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { track, readUtm } from "./analytics";
+import { ANALYTICS_OPT_OUT_KEY } from "./analytics-consent";
 
 /*
   These tests exist because this module's failure mode is silence.
@@ -15,7 +19,60 @@ import { track, readUtm } from "./analytics";
 afterEach(() => {
   delete window.gtag;
   delete window.dataLayer;
+  window.localStorage.clear();
   vi.unstubAllGlobals();
+});
+
+describe("the opt-out", () => {
+  /* gtag.js honours `ga-disable-*` itself, but a command queued on dataLayer
+     before the tag loads is written by this shim and drained afterwards — the
+     tag would run it. So the shim has to refuse first. */
+  it("sends nothing once a visitor has opted out", () => {
+    const gtag = vi.fn();
+    window.gtag = gtag;
+    window.localStorage.setItem(ANALYTICS_OPT_OUT_KEY, "1");
+
+    track("call_click", { placement: "header" });
+
+    expect(gtag).not.toHaveBeenCalled();
+    expect(window.dataLayer).toBeUndefined();
+  });
+
+  it("queues nothing for a tag that has not loaded yet either", () => {
+    window.localStorage.setItem(ANALYTICS_OPT_OUT_KEY, "1");
+
+    track("intake_submit", { side: "buy" });
+
+    expect(window.dataLayer).toBeUndefined();
+  });
+});
+
+/**
+ * Google's terms forbid sending personal information to Analytics, and
+ * /privacy-policy tells visitors in as many words that we do not. GA4 accepts a
+ * name or an email as happily as a step number, so nothing at runtime will ever
+ * catch this — the call sites are read here instead.
+ */
+describe("no personal information reaches an event", () => {
+  const FORBIDDEN = /\b(email|phone|tel|first_?name|last_?name|full_?name|message|notes|address|zip|budget)\b/i;
+
+  function sources(dir: string): string[] {
+    return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) return sources(path);
+      if (!/\.tsx?$/.test(entry.name) || entry.name.includes(".test.")) return [];
+      return [path];
+    });
+  }
+
+  it.each(["components", "app"])("%s passes no personal field to track()", (dir) => {
+    for (const path of sources(dir)) {
+      const source = readFileSync(path, "utf8");
+      for (const call of source.matchAll(/\btrack\(([\s\S]*?)\);/g)) {
+        expect(call[1], `${path} sends a personal field to GA4`).not.toMatch(FORBIDDEN);
+      }
+    }
+  });
 });
 
 describe("track", () => {

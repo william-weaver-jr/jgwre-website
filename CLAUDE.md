@@ -120,6 +120,7 @@ request (`.github/workflows/ci.yml`).
 | `tests/compliance.test.tsx` | **§7, mechanically.** Renders every page and checks brokerage identification, license numbers, the EHO and REALTOR® marks, verbatim TCPA consent, the results disclaimer beside any dollar figure, banned language, fair-housing framing, guarantee language, and undocumented claims. |
 | `tests/accessibility.test.tsx` | §10. axe-core at WCAG 2.1 AA over every page, plus landmark and link-name checks. Contrast still needs Lighthouse — jsdom computes no colours. |
 | `scripts/lib/importer.test.ts` | The workbook importer. Its failure mode is not a crash but a plausible wrong import that reaches a licensed broker's advertising, so the tests lean on quiet corruption: a moved column, a review body full of commas, a corrected neighborhood that must read as a change rather than a delete plus an add. |
+| `components/analytics-opt-out.test.tsx` + `lib/analytics-consent.test.ts` | The privacy promise. `/privacy-policy` says analytics can be switched off, and that sentence is why there is no consent banner — these keep the control honest, including in a browser that refuses localStorage. `lib/analytics.test.ts` also reads every `track()` call site so no personal field can become a GA4 parameter. |
 | `components/contact-intake.test.tsx` | The conversion path. The consent box is never pre-checked, no visitor is trapped behind the qualifying questions, and a failed submission always surfaces the phone number. |
 
 Two things follow from this:
@@ -289,8 +290,18 @@ BIC's call to make alone:
 
 - **The privacy policy still needs counsel.** A Broker-in-Charge supervises brokerage
   advertising; they are not the lawyer who signs off on a privacy policy. The page is still
-  the working draft flagged in `app/privacy-policy/page.tsx`, including the open question of
-  whether enabling analytics requires a consent mechanism.
+  a working draft, and what it says about Follow Up Boss and Resend has still not been
+  checked against those vendors' terms.
+
+  The **consent-mechanism** question inside it is decided, though, on practical grounds
+  rather than as a legal opinion — **2026-08-24, Bill: no banner, full disclosure, reachable
+  opt-out.** A GA4 install serving one metro with the advertising features off is not what a
+  consent interstitial is for. What holds that up in code: Google Signals and ad
+  personalization are switched off in `components/google-analytics.tsx` rather than left to
+  an account default, no personal information is ever an event parameter (a test reads the
+  call sites), and `/privacy-policy` carries an opt-out that all three vendors honour
+  (`lib/analytics-consent.ts`). **Reopen it if** any of Google Signals, remarketing, or a
+  Google Ads link is turned on, or the site starts marketing beyond the local area.
 - **The transactions pipeline states are still blocked.** Active / pending / coming-soon
   need their own written BIC approval — `docs/TRANSACTIONS-SPEC.md` §2 and §12 below. A
   general site approval is not that approval. Do not build them on request without it.
