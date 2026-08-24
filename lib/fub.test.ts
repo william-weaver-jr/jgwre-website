@@ -103,6 +103,102 @@ describe("sendToFollowUpBoss", () => {
     expect(bodyOf(fetchMock).person.sourceUrl).toBe("/new-construction");
   });
 
+  /**
+   * The key belongs to a user inside the brokerage's account, and that account's
+   * Lead Flow rules are not visible from here. A lead this site produced that
+   * arrives unassigned is a lead the account routes by a rule nobody in this
+   * repository controls, so the absence of this field is a real failure and not
+   * a cosmetic one.
+   */
+  describe("assignment", () => {
+    it("assigns by numeric user id when one is configured", async () => {
+      vi.stubEnv("FUB_ASSIGNED_USER_ID", "4821");
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss(lead);
+
+      expect(bodyOf(fetchMock).person.assignedUserId).toBe(4821);
+      expect(bodyOf(fetchMock).person.assignedTo).toBeUndefined();
+    });
+
+    it("prefers the id over the name when both are set", async () => {
+      vi.stubEnv("FUB_ASSIGNED_USER_ID", "4821");
+      vi.stubEnv("FUB_ASSIGNED_TO", "Jasmine Garcia");
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss(lead);
+
+      expect(bodyOf(fetchMock).person.assignedUserId).toBe(4821);
+      expect(bodyOf(fetchMock).person.assignedTo).toBeUndefined();
+    });
+
+    it("falls back to the name when only that is set", async () => {
+      vi.stubEnv("FUB_ASSIGNED_TO", "Jasmine Garcia");
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss(lead);
+
+      expect(bodyOf(fetchMock).person.assignedTo).toBe("Jasmine Garcia");
+    });
+
+    /** A non-numeric id is a typo, not an assignment. Fall through rather than send NaN. */
+    it("ignores a malformed user id instead of sending NaN", async () => {
+      vi.stubEnv("FUB_ASSIGNED_USER_ID", "jasmine");
+      vi.stubEnv("FUB_ASSIGNED_TO", "Jasmine Garcia");
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss(lead);
+
+      expect(bodyOf(fetchMock).person.assignedUserId).toBeUndefined();
+      expect(bodyOf(fetchMock).person.assignedTo).toBe("Jasmine Garcia");
+    });
+
+    it("omits assignment entirely when neither is configured", async () => {
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss(lead);
+
+      const person = bodyOf(fetchMock).person;
+      expect(person.assignedUserId).toBeUndefined();
+      expect(person.assignedTo).toBeUndefined();
+    });
+  });
+
+  /**
+   * Both headers or neither. A mismatched pair is rejected by FUB rather than
+   * ignored, so sending one alone would break every lead — the exact failure
+   * this site's email fallback exists to survive, and still not one to ship.
+   */
+  describe("system identification", () => {
+    it("sends both headers when both are configured", async () => {
+      vi.stubEnv("FUB_SYSTEM", "jasminegarcia.com");
+      vi.stubEnv("FUB_SYSTEM_KEY", "abc123");
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss(lead);
+
+      const headers = fetchMock.mock.calls[0][1].headers as Record<string, string>;
+      expect(headers["X-System"]).toBe("jasminegarcia.com");
+      expect(headers["X-System-Key"]).toBe("abc123");
+    });
+
+    it.each([
+      ["only the name", { FUB_SYSTEM: "jasminegarcia.com", FUB_SYSTEM_KEY: "" }],
+      ["only the key", { FUB_SYSTEM: "", FUB_SYSTEM_KEY: "abc123" }],
+    ])("sends neither header given %s", async (_label, env) => {
+      for (const [k, v] of Object.entries(env)) vi.stubEnv(k, v);
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss(lead);
+
+      const headers = fetchMock.mock.calls[0][1].headers as Record<string, string>;
+      expect(headers["X-System"]).toBeUndefined();
+      expect(headers["X-System-Key"]).toBeUndefined();
+    });
+
+    it("never puts the system key in the body", async () => {
+      vi.stubEnv("FUB_SYSTEM", "jasminegarcia.com");
+      vi.stubEnv("FUB_SYSTEM_KEY", "abc123");
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss(lead);
+
+      expect(fetchMock.mock.calls[0][1].body as string).not.toContain("abc123");
+    });
+  });
+
   describe("the note", () => {
     it("includes the intake answers in the visitor's own words, not option ids", async () => {
       const fetchMock = mockFetch();
