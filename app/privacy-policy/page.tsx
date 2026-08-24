@@ -17,11 +17,14 @@ export const metadata: Metadata = {
   Resend also has to be accurate about what those vendors actually do with
   submitted data — nobody has verified that against their terms yet.
 
-  TODO(legal): the Analytics section below now reflects that GA4 is loaded
-  (components/google-analytics.tsx, production only). What is still unresolved
-  is whether that requires a consent mechanism (a cookie banner, an opt-out) —
-  that is a question for counsel, not an assumption baked into this page or the
-  code that ships the tag. Do not treat the section below as that answer.
+  TODO(legal): the Analytics section below now reflects everything that is
+  loaded — GA4 (components/google-analytics.tsx) and Vercel Web Analytics and
+  Speed Insights (components/vercel-analytics.tsx), all production only. What
+  is still unresolved is whether any of that requires a consent mechanism (a
+  cookie banner, an opt-out) — that is a question for counsel, not an
+  assumption baked into this page or the code that ships the tags. Do not treat
+  the section below as that answer. GA4 is the one that sets cookies; the two
+  Vercel measurements do not, which may or may not change the answer.
 */
 
 /**
@@ -29,7 +32,7 @@ export const metadata: Metadata = {
  * changes — a privacy policy dated earlier than its own text is worse than one
  * with no date at all.
  */
-const LAST_UPDATED = "August 23, 2026";
+const LAST_UPDATED = "August 24, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -83,9 +86,11 @@ export default function PrivacyPolicyPage() {
           <p className="mt-3">
             We use Google Analytics to record which pages are visited and when someone taps
             a phone number or submits a form, so we can tell what is useful. Google
-            Analytics sets cookies in your browser to do this. We do not use this data for
-            advertising, and we do not sell it. You can opt out of Google Analytics
-            tracking across all sites using{" "}
+            Analytics sets cookies in your browser to do this. We also use Vercel Web
+            Analytics and Vercel Speed Insights, which count page views and measure how
+            quickly pages load for real visitors; these set no cookies and do not identify
+            you. We do not use any of this data for advertising, and we do not sell it. You
+            can opt out of Google Analytics tracking across all sites using{" "}
             <a
               href="https://tools.google.com/dlpage/gaoptout"
               className="underline underline-offset-2"

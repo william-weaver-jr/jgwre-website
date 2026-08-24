@@ -436,6 +436,23 @@ describe("undocumented claims (§6)", () => {
   });
 });
 
+/**
+ * The privacy policy is a compliance surface, and the thing most likely to make
+ * it wrong is code: a measurement script added to the layout discloses itself
+ * nowhere. This pins the disclosure to what components/*-analytics.tsx actually
+ * mount, so adding a fourth vendor and forgetting the page breaks the build
+ * rather than shipping a policy that undercounts what runs.
+ */
+describe("the privacy policy names every analytics vendor we load (§7)", () => {
+  it.each([
+    ["Google Analytics", "components/google-analytics.tsx"],
+    ["Vercel Web Analytics", "components/vercel-analytics.tsx"],
+    ["Vercel Speed Insights", "components/vercel-analytics.tsx"],
+  ])("discloses %s", async (vendor) => {
+    expect(text(await page("/privacy-policy"))).toContain(vendor);
+  });
+});
+
 describe("SEO metadata (§11)", () => {
   /**
    * The home page deliberately omits `title` and takes the layout's

@@ -11,10 +11,9 @@ out/
 build/
 next-env.d.ts
 
-# env
-.env
-.env.local
-.env*.local
+# env — every real one. .env.example is the checked-in template and stays.
+.env*
+!.env.example
 
 # vercel
 .vercel

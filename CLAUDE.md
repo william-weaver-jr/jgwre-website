@@ -83,7 +83,9 @@ Settled. Do not re-litigate or propose alternatives unless explicitly asked.
 - **Content:** CMS required — Jasmine must be able to publish and edit without a developer.
   (Sanity or Payload; final pick TBD — see Open Items.)
 - **Forms:** Next.js Route Handler → (a) transactional email via Resend, (b) POST to Follow Up Boss
-- **Analytics:** Vercel Analytics + GA4
+- **Analytics:** Vercel Web Analytics + Vercel Speed Insights + GA4, all mounted in the
+  root layout and all production-only. Every vendor here must also be named on
+  `/privacy-policy` — a test enforces it.
 - **Images:** `next/image`, AVIF/WebP, explicit width/height on everything
 
 ### Importing transactions
