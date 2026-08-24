@@ -78,7 +78,10 @@ export function VideoFacade({
         {poster ? (
           <Image
             src={poster.src}
-            alt=""
+            /* The panel is aria-hidden, so this is never announced — the
+               button's own label does that once. It is here for the sighted
+               reader whose image fails to load. */
+            alt={poster.alt}
             sizes="(min-width: 768px) 62vw, calc(100vw - 3.5rem)"
             placeholder="blur"
             className="h-full w-full object-cover"

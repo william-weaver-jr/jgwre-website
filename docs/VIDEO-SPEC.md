@@ -201,8 +201,10 @@ at least two pillars**, behind an `isVideoPageIndexable()` mirroring
 - [x] **BIC approval — RECEIVED 2026-08-20**, reported by Bill: the BIC funded this video
       and distributes it on his own channels. See `CLAUDE.md` §7 Approvals for scope, and for
       the one question it does not answer.
-- [ ] **No still is committed.** `assets/images/video/` is empty and the panel is
-      typographic. See `assets/images/video/README.md`.
+- [ ] **The committed still carries the brokerage hexagon.** Shipped as-is on Bill's
+      direction 2026-08-20 and swapped during the channel cleanup — `CLAUDE.md` §7 Approvals
+      has the reasoning and the boundary. This is the open item that closes when a custom
+      thumbnail exists; nothing else on this list is blocking it.
 - [ ] **Captions.** Neither existing video has corrected captions. Noted by Bill 2026-08-20.
 - [ ] **The channel cleanup is planned.** Bill confirmed 2026-08-20 that §3's YouTube-side
       conventions — the title format, the description template with brokerage identification,

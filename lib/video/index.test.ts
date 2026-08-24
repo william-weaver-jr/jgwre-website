@@ -1,3 +1,4 @@
+import type { StaticImageData } from "next/image";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -223,8 +224,28 @@ describe("urls and formatting", () => {
     expect(watchUrl(video)).toBe(`https://www.youtube.com/watch?v=${video.id}`);
   });
 
-  it("falls back to YouTube's own still while no artwork is committed", () => {
-    expect(thumbnailUrl(video, "https://jasminegarcia.com")).toBe(
+  /*
+    Built rather than read off the registry entry. Under Vite a `.jpg` import is
+    a plain URL string, not the StaticImageData the Next build produces, so
+    asserting against the real poster would assert the test environment's shape
+    and not the browser's.
+  */
+  it("declares the committed still, so markup and page show the same file", () => {
+    const still: StaticImageData = {
+      src: "/_next/static/media/meet-jasmine-still.abc123.jpg",
+      width: 1280,
+      height: 720,
+    };
+    const withPoster = { ...video, poster: { src: still, alt: "A still." } };
+    expect(thumbnailUrl(withPoster, "https://jasminegarcia.com")).toBe(
+      "https://jasminegarcia.com/_next/static/media/meet-jasmine-still.abc123.jpg",
+    );
+  });
+
+  /** The state every future entry starts in, before a still is committed. */
+  it("falls back to YouTube's own still when there is no artwork", () => {
+    const { poster: _poster, ...noArtwork } = video;
+    expect(thumbnailUrl(noArtwork, "https://jasminegarcia.com")).toBe(
       `https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`,
     );
   });

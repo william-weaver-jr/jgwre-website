@@ -1,6 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+/** See tests/next-image-stub.tsx — under Vite a .jpg import has no intrinsic width. */
+vi.mock("next/image", async () => ({
+  default: (await import("../tests/next-image-stub")).NextImageStub,
+}));
 
 import { VideoEmbed } from "./video-embed";
 import { VIDEOS } from "@/lib/video";
@@ -100,9 +105,17 @@ describe.each([
   });
 });
 
-describe("the typographic panel", () => {
-  it("shows the video's own title while no still is committed", () => {
+describe("the panel", () => {
+  it("shows the committed still, described", () => {
     render(<VideoEmbed video={video} placement={feature} />);
+    const still = screen.getByRole("img", { hidden: true });
+    expect(still).toHaveAttribute("alt", video.poster!.alt);
+  });
+
+  /** The state every entry starts in. Not a placeholder — see lib/video/types.ts. */
+  it("falls back to the video's own title when no still is committed", () => {
+    const { poster: _poster, ...noArtwork } = video;
+    render(<VideoEmbed video={noArtwork} placement={feature} />);
     /* Inside an aria-hidden panel, so it is queried as text rather than by role. */
     expect(screen.getByText(video.title)).toBeInTheDocument();
   });
@@ -111,6 +124,6 @@ describe("the typographic panel", () => {
     const { container } = render(<VideoEmbed video={video} placement={feature} />);
     /* One path, drawn from the site's own tokens. Not YouTube's mark. */
     expect(container.querySelectorAll("svg")).toHaveLength(1);
-    expect(container.innerHTML).not.toMatch(/ytimg|youtube_social|#FF0000|#ff0000/);
+    expect(container.innerHTML).not.toMatch(/youtube_social|#FF0000|#ff0000/);
   });
 });

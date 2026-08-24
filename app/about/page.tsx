@@ -83,6 +83,12 @@ export default function AboutPage() {
                 job for that money. I didn&rsquo;t leave early.
               </p>
               <p>
+                Six of those years were in Charleston and four were in Hampton, Virginia. I
+                have moved states and started over in one, which is its own education: every
+                single thing is slightly different from the way you learned it, and nobody
+                thinks to tell you which things.
+              </p>
+              <p>
                 What I left was the job. I didn&rsquo;t leave the work.
               </p>
               <p>

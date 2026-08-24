@@ -183,6 +183,17 @@ reality" is the exact register `BRAND-VOICE.md` bans, and the useful line in the
 2024 caption — that teaching taught her to lead and educate — is already on
 `/about` in better words.
 
+**Where she taught** — documented here so §6 permits the copy on `/about` and
+`/carolinas-border`. Ten years of special education: **six in Charleston, SC** and **four in
+Hampton, VA** (Bill, 2026-08-20). Two consequences worth keeping straight:
+
+- Her own bio video says "six years as a teacher" and `/about` says ten. **Both are correct**
+  and neither is corrected. The video's on-page summary states neither number, deliberately.
+- The Charleston years are the site's only evidence that her South Carolina knowledge predates
+  her South Carolina license, which is the pillar `/carolinas-border` rests on. Use it as
+  biography, never as a credential — she taught school there, she did not practise real estate
+  there.
+
 **Markets served:** Ballantyne, SouthPark, Steele Creek, Myers Park, Dilworth, South End,
 LoSo, Uptown, Pineville, Waxhaw (NC) · Fort Mill, Tega Cay, Indian Land, Clover /
 Lake Wylie, Rock Hill (SC)
@@ -295,14 +306,17 @@ video and posts it on his own channels and Medium, so its use in her advertising
 question. Covers `EpLuc5n6hHs` embedded on `/about`, the summary written beside it, and the
 `VideoObject` markup. `docs/VIDEO-SPEC.md`.
 
-It does **not** cover one thing nobody has put to him. **YouTube's auto-generated still for
-this video carries the stylized hexagon "O" burned into the frame** — the video is watermarked
-throughout, so every available frame has it. Committing that still as the player's poster
-would place a Stone Realty Group registered mark on her page as artwork, which is the exact
-use the "Must not appear" list above names. The player therefore ships with a typographic
-panel instead, and the still is not committed. If someone wants the photograph there, that is
-a separate question for the BIC — it is his mark, and the answer is probably yes, but it is
-his to give.
+**The still it ships with is a documented, temporary exception.** YouTube's generated frame
+for this video carries the stylized hexagon "O" burned in — the video is watermarked
+throughout, so no frame of it is clean — and the "Must not appear" list above forbids using
+the brokerage's registered marks decoratively. Bill directed on 2026-08-20 that it ships as-is
+and gets swapped during the channel cleanup, on the grounds that the BIC funded the video,
+distributes it himself, and it is his mark to object to.
+
+Two things follow. This is an **exception with an owner and an end date**, not a precedent —
+no other page may carry the hexagon, and `lib/images.ts` `VIDEO_STILLS` says so at the call
+site. And the swap is real work that has to actually happen: a custom thumbnail is on the
+channel-cleanup list, and when it lands the exception closes.
 
 **Footer marks, text-only — APPROVED 2026-08-10.** The BIC confirmed a text treatment of the
 Equal Housing Opportunity and REALTOR® marks is acceptable; he uses the same on his own site.
@@ -514,9 +528,10 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
 - [x] **Ten years or six? — RESOLVED 2026-08-20.** Ten total: six in Charleston, SC and four
       in Hampton, VA (Bill). `/about` and the video are both correct and neither changes. The
       video's on-page summary states neither number, deliberately — `docs/VIDEO-SPEC.md` §7.
-- [ ] **Six years teaching in Charleston is an undisclosed SC tie.** It is documented nowhere
-      in the site's copy, and `/carolinas-border` argues she knows both sides of the line. Ask
-      whether she wants it used before anyone writes it in.
+- [x] **The Charleston tie — SHIPPED 2026-08-20.** Approved for use by Bill. Documented in §5
+      and now on `/about` (the ten years, split by state) and `/carolinas-border` (the SC side
+      is somewhere she has lived, not only somewhere she is licensed). Biography, not a
+      credential: she taught school in South Carolina, she did not practise real estate there.
 - [ ] **The channel is being cleaned up.** Bill, 2026-08-20: the YouTube-side conventions in
       `docs/VIDEO-SPEC.md` §3 will be implemented — titles, descriptions carrying brokerage
       identification and the site URL, corrected captions, category, custom thumbnails. A

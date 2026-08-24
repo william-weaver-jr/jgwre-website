@@ -22,6 +22,8 @@
  * ---------------------------------------------------------------------------
  */
 
+import { VIDEO_STILLS } from "@/lib/images";
+
 import type { Video } from "./types";
 
 export const VIDEOS: readonly Video[] = [
@@ -51,6 +53,11 @@ export const VIDEOS: readonly Video[] = [
       "A minute and a half of introduction, recorded in her own words: the classroom she came from, the HOA board she sits on, the property she has owned as an investor, and how she works with the people she represents.",
 
     evergreen: true,
+
+    /* YouTube's own generated frame, committed rather than hotlinked. It carries
+       the brokerage's hexagon burned in — see lib/images.ts VIDEO_STILLS and
+       CLAUDE.md §7 Approvals for why that ships, and what replaces it. */
+    poster: VIDEO_STILLS.meetJasmine,
 
     placements: [
       {

@@ -1,10 +1,22 @@
 # Video stills
 
-Empty on purpose, and this is a finished state rather than a missing one.
+## `meet-jasmine-still.jpg`
+
+YouTube's generated frame for `EpLuc5n6hHs`, 1280×720.
+
+**It carries Stone Realty Group's stylized hexagon, burned into the frame.** The video is
+watermarked throughout, so no frame of it is clean. `CLAUDE.md` §7 forbids using the
+brokerage's registered marks decoratively, and this ships as a documented exception on Bill's
+direction (2026-08-20) because the BIC funded and distributes the video. **It is replaced by a
+custom thumbnail during the channel cleanup.** See `CLAUDE.md` §7 Approvals for the boundary —
+no other surface on this site may carry that mark.
+
+## No still is also a finished state
 
 `components/video-facade.tsx` falls back to a typographic panel — the video's title in the
 site's display face, on its own ground, with the play affordance drawn from the site's
-tokens. That is a deliberate design, not a placeholder rendering.
+tokens. A new entry with no `poster` renders that, and it is a deliberate design rather than
+a placeholder. `components/video-embed.test.tsx` covers both paths.
 
 ## When you add one
 

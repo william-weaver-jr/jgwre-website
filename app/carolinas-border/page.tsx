@@ -99,6 +99,19 @@ export default function CarolinasBorderPage() {
         <p className="mt-8 max-w-2xl text-base leading-relaxed">
           12 closings in the Fort Mill corridor.
         </p>
+        {/*
+          The license is the credential. This is the part a license does not
+          prove and a competitor cannot match by taking a course: she lived on
+          the South Carolina side for six years before she sold anything.
+
+          Stated flat, with no claim attached. Documented in CLAUDE.md §5;
+          approved for use by Bill 2026-08-20.
+        */}
+        <p className="mt-6 max-w-2xl text-base leading-relaxed">
+          The license is recent. South Carolina isn&rsquo;t. She taught school in Charleston for
+          six years before she sold a house anywhere, so the SC side of this line is somewhere
+          she has lived, not only somewhere she is licensed to work.
+        </p>
       </section>
 
       {/* ----------------------------------------------------------- DIFFERENCES */}
