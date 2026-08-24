@@ -1,4 +1,5 @@
-import { FlatCompat } from "@eslint/eslintrc";
+import coreWebVitals from "eslint-config-next/core-web-vitals";
+import typescript from "eslint-config-next/typescript";
 
 /**
  * `next lint` is deprecated and, with no config file present, dropped into an
@@ -6,16 +7,16 @@ import { FlatCompat } from "@eslint/eslintrc";
  * unattended. This is the flat config it was asking for; the script now calls
  * the ESLint CLI directly.
  *
- * `eslint-config-next` still ships eslintrc-style configs, so it is loaded
- * through FlatCompat.
+ * `eslint-config-next` ships native flat configs as of v16, so they are spread
+ * in directly. The FlatCompat wrapper this replaces was for the eslintrc-style
+ * configs v15 shipped, and v16's own configs crash it — do not reintroduce it.
  */
-const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
-
 const config = [
   {
     ignores: [".next/**", "node_modules/**", "next-env.d.ts", "coverage/**"],
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...coreWebVitals,
+  ...typescript,
   {
     rules: {
       // CLAUDE.md §4: no `any`.
