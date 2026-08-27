@@ -1,6 +1,22 @@
 import { formatIntake } from "@/lib/intake";
 import type { Lead } from "@/lib/lead";
 
+/**
+ * One host for every account, and it is not the one the account logs in at.
+ *
+ * The team's Follow Up Boss lives at `mattstone.followupboss.com`, and the page
+ * that mints an API key is `mattstone.followupboss.com/2/api` — which reads like
+ * an API base URL and is not one. That is the web app: `/2/` is a UI route and
+ * `/api` is the key-management screen inside it.
+ *
+ * The REST API is always `https://api.followupboss.com/v1/`. FUB's reference is
+ * explicit that the hostname is "always the same"; which account a request
+ * belongs to is carried by the API key, never by the hostname. Posting to the
+ * app subdomain would reach the web app, not the API.
+ *
+ * Confirm any key against `GET https://api.followupboss.com/v1/identity`, which
+ * returns the account and the user it authenticates as.
+ */
 const FUB_ENDPOINT = "https://api.followupboss.com/v1/events";
 
 /**
