@@ -13,8 +13,20 @@ npm run dev
 ```
 
 Copy `.env.example` to `.env.local` and fill it in. The lead handler reads
-`FUB_API_KEY`, `RESEND_API_KEY`, `LEAD_NOTIFICATION_EMAIL`, and `LEAD_FROM_EMAIL`
-at request time; none of them are needed to build or to run the tests.
+`FUB_API_KEY`, `FUB_ASSIGNED_USER_ID`, `RESEND_API_KEY`, `LEAD_NOTIFICATION_EMAIL`,
+and `LEAD_FROM_EMAIL` at request time; none of them are needed to build or to run
+the tests. `FUB_ASSIGNED_TO`, `FUB_SYSTEM`, and `FUB_SYSTEM_KEY` are optional and
+documented in `.env.example`.
+
+To check which account and user a Follow Up Boss key authenticates as before
+putting it anywhere — the API host is `api.followupboss.com` for every account,
+never the account's own login subdomain:
+
+```bash
+read -rs FUB_API_KEY && curl -sS -u "$FUB_API_KEY:" https://api.followupboss.com/v1/identity | python3 -m json.tool; unset FUB_API_KEY
+```
+
+`read -rs` keeps the key off the screen and out of shell history.
 
 ## Checks
 
