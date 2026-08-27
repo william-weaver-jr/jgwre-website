@@ -342,7 +342,20 @@ lead type, and UTMs.
 Locked Decision #5 gates launch on it, the site is already live, and today a Resend failure
 loses the lead outright. **Do this first regardless of score.**
 
-### T16 — `generate_lead` and `lead_failed` events ⚠
+### T16 — `generate_lead` and `lead_failed` events ✅ CODE DONE 2026-08-24
+**Shipped:** `/api/lead` now returns `delivery: "crm" | "email"` on success, so the client
+reports which channel took the lead rather than guessing. `intake_submit` moved to fire on the
+*attempt* (it previously fired after the ok-check, making it a second name for success);
+`generate_lead` fires only on confirmed persistence; `lead_failed` fires on refusal or network
+error with a grouped `reason`.
+**Verified:** the PII guard in `lib/analytics.test.ts` was proven against the new call sites by
+temporarily adding `email: payload.email` and confirming the build fails.
+**⚠ Outstanding — not code:** mark `generate_lead` and `call_click` as **key events** in the
+GA4 admin. Until that is done GA4 collects them but does not treat them as conversions, and no
+channel can be compared on lead production.
+
+<details><summary>Original task specification</summary>
+
 **Files:** [components/contact-intake.tsx](../components/contact-intake.tsx), `app/api/lead/route.ts`, [lib/analytics.ts](../lib/analytics.ts)
 **Do:** Fire `generate_lead` only on confirmed persistence; `lead_failed` when both paths fail.
 Mark `generate_lead` and `call_click` as GA4 key events.
@@ -353,6 +366,7 @@ Mark `generate_lead` and `call_click` as GA4 key events.
 - [ ] Both key events visible in GA4
 **Why the score understates it:** same reason as T15 — no search effect, but nothing downstream
 can be evaluated without it.
+</details>
 
 ### T17 — Indian Land and Ballantyne area pages
 As T7. Indian Land completes the border corridor; Ballantyne is a major NC market with ledger

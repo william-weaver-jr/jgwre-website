@@ -508,12 +508,29 @@ Three problems, in order of severity:
 3. **No lead is attributable.** Source, lead type, and UTM parameters are collected and sent
    nowhere durable, so no campaign or page can be evaluated.
 
-### 6.2 No conversion event marks a *successful* lead
+### 6.2 No conversion event marks a *successful* lead — ✅ FIXED 2026-08-24 (T16)
 **Severity: High · Confidence: High · [VERIFIED]**
 
-`intake_submit` fires in [components/contact-intake.tsx](../components/contact-intake.tsx) at
-line 153. Reading the surrounding flow, it marks the submission *attempt*. There is no
-distinct success event, and no server-side confirmation from `app/api/lead/route.ts`.
+**Correction to the original finding.** It read that `intake_submit` "marks the submission
+*attempt*." That was wrong — it fired *after* the ok-check, so it already only counted
+successes. The real defect was the opposite of the one described: an attempt that failed
+fired **nothing at all**, so a form that was tried and refused looked in GA4 exactly like a
+form nobody touched. The gap was failure visibility, not success measurement.
+
+> **RESOLVED.** `intake_submit` now fires before the request, so it means what its name says
+> and gives `generate_lead` a denominator. `generate_lead` (GA4's own recommended name) fires
+> only on a response confirming persistence, and carries a `delivery` dimension of `crm` or
+> `email` — the route now reports which channel actually took the lead. `lead_failed` fires on
+> refusal or network failure with a `reason` of `rate_limited`, `invalid`, `delivery`, or
+> `network`.
+>
+> `delivery: "email"` is the operationally important one: it means the lead exists only in an
+> inbox, and a run of them is how anyone finds out the Follow Up Boss integration has quietly
+> stopped working.
+>
+> **Still outstanding:** marking `generate_lead` and `call_click` as **key events** in the GA4
+> admin. That is a console setting, not code, and until it happens GA4 records the events
+> without treating them as conversions.
 
 Combined with **[NEEDS DATA]**: whether any GA4 *key events* (conversions) are configured in
 the property. Without them, GA4 records activity but not outcomes, and no channel can be

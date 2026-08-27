@@ -78,7 +78,7 @@ describe("POST /api/lead — the happy path", () => {
     const response = await POST(post(valid, freshIp()));
 
     expect(response.status).toBe(200);
-    await expect(response.json()).resolves.toEqual({ ok: true });
+    await expect(response.json()).resolves.toEqual({ ok: true, delivery: "crm" });
     expect(sendToFollowUpBoss).toHaveBeenCalledTimes(1);
     expect(emailsSend).toHaveBeenCalledTimes(1);
   });
@@ -163,7 +163,10 @@ describe("POST /api/lead — a lead is never dropped", () => {
     const response = await POST(post(valid, freshIp()));
 
     expect(response.status).toBe(200);
-    await expect(response.json()).resolves.toEqual({ ok: true });
+    /* "email", not "crm". The lead exists only in an inbox, and the client
+       reports that on the conversion event — a run of these is how anyone finds
+       out the integration has quietly stopped working. */
+    await expect(response.json()).resolves.toEqual({ ok: true, delivery: "email" });
     expect(emailsSend).toHaveBeenCalledTimes(1);
   });
 
@@ -194,7 +197,9 @@ describe("POST /api/lead — a lead is never dropped", () => {
     const response = await POST(post(valid, freshIp()));
 
     expect(response.status).toBe(200);
-    await expect(response.json()).resolves.toEqual({ ok: true });
+    /* Still "crm": the notification is a copy, and losing the copy does not
+       change where the lead actually landed. */
+    await expect(response.json()).resolves.toEqual({ ok: true, delivery: "crm" });
   });
 
   it("tells the visitor to call when BOTH channels fail, rather than pretending it worked", async () => {

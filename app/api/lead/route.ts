@@ -93,7 +93,17 @@ export async function POST(request: Request) {
     }
   }
 
-  return NextResponse.json({ ok: true });
+  /*
+    Which channel actually persisted the lead, reported so the client can say so
+    in its conversion event rather than guess.
+
+    Reaching here with `fubError` set means the CRM refused it and the email did
+    not — the both-failed case returned above. So "email" is not a soft warning:
+    it is a lead that exists only in an inbox, and a run of them is how you find
+    out the Follow Up Boss integration has quietly stopped working. It is a
+    dimension on the event for exactly that reason.
+  */
+  return NextResponse.json({ ok: true, delivery: fubError ? "email" : "crm" });
 }
 
 async function sendNotificationEmail(lead: Lead, fubError: unknown): Promise<void> {

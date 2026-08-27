@@ -108,6 +108,22 @@ export function ContactIntake({
     track("intake_step", { step: 3, side: side ?? "unknown", page: source });
   }
 
+  /**
+   * Why a submission failed, in the few words a report can group by.
+   *
+   * A status code would be finer-grained and less useful: the question being
+   * asked of this dimension is "should someone do something about it", and
+   * `rate_limited` (a bot, or someone impatient), `invalid` (the form let
+   * something through), and `delivery` (both channels down, a lead genuinely
+   * lost) have three different answers.
+   */
+  function failureReason(status: number): string {
+    if (status === 429) return "rate_limited";
+    if (status === 400) return "invalid";
+    if (status >= 500) return "delivery";
+    return "unknown";
+  }
+
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting) return;
@@ -136,23 +152,54 @@ export function ContactIntake({
       utm: readUtm(),
     };
 
+    /*
+      The attempt. This used to fire after the response came back, which made it
+      a second, worse name for a success — so a form that was tried and failed
+      looked in GA4 exactly like a form nobody touched. Firing it here is what
+      makes `generate_lead` below a rate rather than a raw count.
+    */
+    track("intake_submit", { side: side ?? "unknown", lead_type: payload.leadType, page: source });
+
     try {
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const result: { ok: boolean; error?: string } = await response.json();
+      const result: { ok: boolean; error?: string; delivery?: string } = await response.json();
 
       if (!response.ok || !result.ok) {
+        track("lead_failed", { page: source, reason: failureReason(response.status) });
         setError(result.error ?? `Something went wrong. Please call ${AGENT.phoneDisplay}.`);
         setSubmitting(false);
         return;
       }
 
-      track("intake_submit", { side: side ?? "unknown", lead_type: payload.leadType, page: source });
+      /*
+        The conversion. GA4's own recommended name, because this is the event
+        that gets marked as a key event and it is worth using the name the
+        reporting already understands.
+
+        It fires only on a response that says the lead was persisted — §9's
+        contract is that a lead is never silently dropped, and an analytics
+        number that counts submissions the server refused is its own quiet drop.
+        `delivery` carries whether it reached the CRM or only the inbox.
+
+        Nothing a visitor typed goes in here. lib/analytics.test.ts reads every
+        call site to enforce that, so a name or an email added to this object
+        fails the build rather than reaching Google.
+      */
+      track("generate_lead", {
+        side: side ?? "unknown",
+        lead_type: payload.leadType,
+        page: source,
+        delivery: result.delivery ?? "unknown",
+      });
       setStep("done");
     } catch {
+      /* The request never completed — offline, DNS, a blocked fetch. Distinct
+         from a server refusal, and invisible without its own event. */
+      track("lead_failed", { page: source, reason: "network" });
       setError(`We couldn’t send that. Please call ${AGENT.phoneDisplay}.`);
     } finally {
       setSubmitting(false);
