@@ -117,13 +117,25 @@ able to report on it.
 | `generate_lead` | The conversion. A form that produced a lead. |
 | `call_click` | The other conversion. Phone is the primary CTA (Locked Decision #4), so leaving it unmarked measures half the business. |
 
-> **Use `Key events → New key event`, not `Events → Create event`.** They sit next to each
-> other and do opposite things. The first marks an event this site already sends. The second
-> creates a *new, derived* event from existing ones — pointed at `generate_lead` it would
-> manufacture a second event of the same name and double-count every lead.
+> **`Key events` and `Events` are two different items in the Data display nav, and they do
+> opposite things.**
+>
+> - **`Key events` → `New key event`** — a single field. Type the name, Save. This is the one
+>   to use. It marks an event the site already sends.
+> - **`Events` → `Create event`** — offers "with code" / "without code" and, for the latter,
+>   **demands a URL or matching condition**. That is the tell that you are on the wrong screen:
+>   it builds a *new, derived* event out of existing traffic. Pointed at `generate_lead` it
+>   would manufacture a second event of the same name and double-count every lead.
+>
+> If the form is asking for a URL, back out and look for **Key events** in the left nav.
 
-A key event can be created before the event has ever been received. The name has to match
-what the code sends, character for character.
+A key event can be created before the event has ever been received — which is the point, since
+`generate_lead` cannot appear in the Events list until it has fired at least once. The name has
+to match what the code sends, character for character.
+
+Marking a key event requires **Marketer or above** at the property level. If the `New key event`
+button is missing, that is the reason. Allow up to 24 hours for it to appear in standard
+reports; Realtime shows it immediately.
 
 **Custom dimensions** — `Admin → Custom definitions → Create custom dimension`, scope
 **Event**, with the parameter name in *Event parameter*. Standard properties allow 50, so
