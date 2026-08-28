@@ -397,9 +397,38 @@ enough for his notification to fire. The proper fix is a Lead Flow rule keyed on
 `jasminegarcia.com` → assign to Jasmine, which removes the round trip. She cannot write it
 (`isOwner: false, isAdmin: false`), so it is an ask to the brokerage — and a small, concrete one.
 
-**That ask was blocked until now.** The first lead recorded as `via: <unspecified>` because only
-the event carried a source and not the person, and a Lead Flow rule cannot key on a source that
-does not exist. Fixed in `2be4a1d`.
+### The lead source cannot be set by this site — established 2026-08-28
+
+Four attempts, each ruling out the previous explanation:
+
+| Attempt | Result |
+|---|---|
+| `source` on the event | `<unspecified>` |
+| `source` on the person as well (`2be4a1d`) | `<unspecified>` |
+| `PUT /v1/people/:id {"source"}` directly | `<unspecified>` |
+| Registered system, `X-System` headers sent | `<unspecified>` |
+
+The full person payload explains all four: `"sourceId": 1, "leadFlowId": 113`. **The source is
+assigned by the account's Lead Flow, not by the caller.** Whatever the API sends, Lead Flow 113
+maps it to source id 1, which is `<unspecified>`.
+
+And it cannot be changed from here: `GET /v1/leadFlows` returns *"You do not have access to this
+API endpoint"* for her Agent-role key, and `/v1/identity` confirms the account is Stone Realty
+Group with Matt Stone as owner. Lead Flow is admin-only configuration.
+
+**So this is not a defect and there is no code fix.** Everything the site controls is correct —
+the request carries the source three ways and the registered system headers. What is missing is
+an account-side entry that only the brokerage can create.
+
+**The ask, and it is one sentence:** *add a Lead Flow entry for source `jasminegarcia.com` and
+assign it to Jasmine.* That does two things at once — it makes her website leads attributable
+instead of `<unspecified>`, and it assigns them to her at intake rather than routing to the
+broker first and relying on the API to take them back.
+
+Worth noting what it costs him: nothing operationally. And worth noting the alternative if he
+declines — `sourceUrl` still records the exact page on every lead, so attribution survives in a
+weaker form, and `assignedUserId` still lands them on her. See `AUDIT.md` §3.3 for why the ask
+may not be granted.
 
 **Email verified end to end 2026-08-28**: domain verified in Resend, sender
 `website@jasminegarcia.com`, destination `jasmine@mattstoneteam.com`, and a live submission
