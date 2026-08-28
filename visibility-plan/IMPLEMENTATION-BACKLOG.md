@@ -386,10 +386,24 @@ production logs — so Follow Up Boss accepted the lead and the Resend notificat
 channels live for the first time since launch. Root cause and the trap that hid it are in
 `AUDIT.md` §6.1.
 
-**One acceptance criterion is not yet met**, and it cannot be checked from outside: whether the
-lead is **assigned to Jasmine**. `assignedUserId: 13` is sent, but the brokerage's Lead Flow can
-override it and nothing in this repository can see that. Someone has to look in FUB. Until they
-do, treat attribution as unproven rather than working.
+**Assignment, resolved 2026-08-28.** A screenshot of the FUB timeline shows the Lead Flow
+routing the lead to the broker first, then `assignedUserId: 13` reassigning it to Jasmine —
+logged as "Assigned to Jasmine Garcia by Jasmine Garcia", because the API key authenticates as
+her. FUB's own docs explain the order: `/v1/events` assigns "as per Lead Flow screen", and our
+parameter applies after.
+
+**It works, but it is not clean.** The lead belongs to the broker for a moment, which is long
+enough for his notification to fire. The proper fix is a Lead Flow rule keyed on source
+`jasminegarcia.com` → assign to Jasmine, which removes the round trip. She cannot write it
+(`isOwner: false, isAdmin: false`), so it is an ask to the brokerage — and a small, concrete one.
+
+**That ask was blocked until now.** The first lead recorded as `via: <unspecified>` because only
+the event carried a source and not the person, and a Lead Flow rule cannot key on a source that
+does not exist. Fixed in `2be4a1d`.
+
+**Email verified end to end 2026-08-28**: domain verified in Resend, sender
+`website@jasminegarcia.com`, destination `jasmine@mattstoneteam.com`, and a live submission
+returns `{"ok":true,"delivery":"crm"}` with no Resend error in the logs.
 
 <details><summary>Original task specification</summary>
 
