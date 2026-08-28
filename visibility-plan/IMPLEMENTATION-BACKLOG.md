@@ -45,7 +45,19 @@ Every task inherits three non-negotiables:
 
 ## 2. Task detail
 
-### T1 — Search Console + Bing verification
+### T1 — Search Console + Bing verification ✅ DONE 2026-08-27
+**Shipped:** GSC **Domain** property verified for jasminegarcia.com. Sitemap submitted as an
+absolute URL — **Success, 17 URLs discovered**, matching the 17 the route serves. Indexing
+requested for `/carolinas-border` and `/negotiation`. Bing verified by import from GSC, which
+carried the sitemap across with no second verification.
+
+**Outstanding, and blocked on Google rather than on anyone here:** `Indexing → Pages` reports
+"Processing data, please check again in a day or so", which is normal for a property this new.
+The **baseline cannot be captured until that clears** — see `MEASUREMENT.md` §1.6b for what to
+record and what a healthy first reading looks like.
+
+<details><summary>Original task specification</summary>
+
 **Files:** `app/layout.tsx` (only if meta-tag verification is chosen; DNS is cleaner)
 **Do:** Verify jasminegarcia.com in GSC and Bing. Submit `https://jasminegarcia.com/sitemap.xml`.
 
@@ -84,6 +96,7 @@ one side of that.
 - [ ] Bing verified by **importing from GSC** — it auto-verifies and carries the sitemap across,
       so no second DNS record and no second sitemap submission
 **Risk:** none. **Note:** Bing feeds ChatGPT search, so this is an AEO task and not only a Bing one.
+</details>
 
 ### T2 — `Person` schema on the home page ✅ DONE 2026-08-24
 **Shipped as:** one node typed `["Person", "RealEstateAgent"]` with `@id`

@@ -13,7 +13,7 @@ Nothing here can be answered from the repository. All of it should be captured i
 
 | # | Data | Source | Why it matters | Status |
 |---|---|---|---|---|
-| 1.1 | Index coverage — pages submitted vs indexed | Google Search Console | Whether the site exists to Google at all | **Missing** |
+| 1.1 | Index coverage — pages submitted vs indexed | Google Search Console | Whether the site exists to Google at all | **GSC live 2026-08-27; data processing** |
 | 1.2 | Impressions, clicks, average position by query and page | GSC | The only reliable ranking data | **Missing** |
 | 1.3 | Core Web Vitals field data | GSC / Vercel Speed Insights | Already collecting in Vercel; unread | **Unread** |
 | 1.4 | Lighthouse scores against production | PageSpeed Insights | `CLAUDE.md` §10 bar: a11y ≥95, perf ≥90 | **Not run** |
@@ -28,6 +28,34 @@ Nothing here can be answered from the repository. All of it should be captured i
 
 **Capture 1.1–1.10 before any content work ships**, so the effect of that work is separable
 from the effect of simply becoming indexed.
+
+### 1.6b The first Search Console reading — what to record, and how to read it
+
+GSC went live 2026-08-27 and `Indexing → Pages` showed "Processing data, please check again in
+a day or so". Come back after ~48 hours and record four numbers:
+
+| Record | Where |
+|---|---|
+| Pages **indexed** vs **not indexed** | Indexing → Pages |
+| The top reasons under "not indexed" | Indexing → Pages, the table below the chart |
+| Impressions and clicks | Performance, last 28 days |
+| Any query at all with an impression | Performance → Queries |
+
+**Read it against a six-month-old domain, not against a mature site.** All four numbers being
+near zero on the first reading is the expected result and is the baseline, not a problem.
+
+Two rows in "not indexed" are normal and are **not** defects here:
+
+- **"Discovered – currently not indexed"** — Google knows the URL and has not got to it. On a
+  new low-authority domain this is ordinary and resolves on its own. It is only worth acting on
+  if it persists across months on pages that matter.
+- **"Crawled – currently not indexed"** — Google fetched it and declined to index it. Worth
+  watching, because sustained on a substantial page it is a quality signal rather than a queue.
+
+Rows that **would** be defects, and are worth raising immediately: anything mentioning
+`noindex`, a redirect, a canonical pointing somewhere unexpected, or a 4xx/5xx. Pre-flight on
+2026-08-27 found none of these — all sampled pages returned `index, follow` with
+self-referencing canonicals — so their appearance later means something changed.
 
 ---
 
