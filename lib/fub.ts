@@ -1,5 +1,15 @@
 import { formatIntake } from "@/lib/intake";
 import type { Lead } from "@/lib/lead";
+import { SITE_URL } from "@/lib/site";
+
+/**
+ * What the brokerage's CRM calls a lead from this website.
+ *
+ * One constant, used for the event source, the system name, and the person's
+ * source, because they have to agree for a Lead Flow rule to be written against
+ * it. Changing this string orphans every lead recorded under the old one.
+ */
+const LEAD_SOURCE = "jasminegarcia.com";
 
 /**
  * One host for every account, and it is not the one the account logs in at.
@@ -71,8 +81,11 @@ export async function sendToFollowUpBoss(lead: Lead): Promise<void> {
       ...systemHeaders(),
     },
     body: JSON.stringify({
-      source: "jasminegarcia.com",
-      system: "jasminegarcia.com",
+      /* The event's own source and the system that sent it. FUB draws a
+         distinction: `source` is the brand a broker knows the lead by, `system`
+         is the software that delivered it. Here they are the same string. */
+      source: LEAD_SOURCE,
+      system: LEAD_SOURCE,
       type: "Registration",
       message: buildMessage(lead),
       person: {
@@ -81,7 +94,24 @@ export async function sendToFollowUpBoss(lead: Lead): Promise<void> {
         emails: [{ value: lead.email }],
         phones: [{ value: lead.phone }],
         tags: [lead.leadType],
-        sourceUrl: lead.source,
+        /*
+          The source has to be set on the PERSON as well as on the event, and
+          the first test lead in production proved why. With only the event-level
+          field set, Follow Up Boss recorded the contact as `via: <unspecified>`
+          — the event carried a source, the contact did not.
+
+          That is the field that matters. It is what shows on the record, and it
+          is what a Lead Flow rule can route on, so a lead this site produced was
+          indistinguishable from one that arrived from nowhere. Given the
+          brokerage owns the account, an unattributed lead is the whole problem.
+        */
+        source: LEAD_SOURCE,
+        /*
+          Absolute, not the bare path. FUB treats this as a link and renders it
+          as one; `/new-construction` on its own resolves against
+          followupboss.com and lands nowhere.
+        */
+        sourceUrl: `${SITE_URL}${lead.source}`,
         ...assignment(),
       },
     }),

@@ -97,10 +97,28 @@ describe("sendToFollowUpBoss", () => {
     expect(bodyOf(fetchMock).person.tags).toEqual(["relocation"]);
   });
 
-  it("carries the source page through as sourceUrl", async () => {
+  /**
+   * The first production lead came back as `via: <unspecified>` because only the
+   * event carried a source. The contact is the record anyone reads, and the only
+   * thing a Lead Flow rule can route on — so the two have to agree.
+   */
+  it("sets the same source on the event and on the person", async () => {
     const fetchMock = mockFetch();
     await sendToFollowUpBoss(lead);
-    expect(bodyOf(fetchMock).person.sourceUrl).toBe("/new-construction");
+
+    const body = bodyOf(fetchMock);
+    expect(body.source).toBe("jasminegarcia.com");
+    expect(body.person.source).toBe("jasminegarcia.com");
+    expect(body.system).toBe("jasminegarcia.com");
+  });
+
+  /** FUB renders sourceUrl as a link, so a bare path resolves against their domain. */
+  it("carries the source page through as an absolute sourceUrl", async () => {
+    const fetchMock = mockFetch();
+    await sendToFollowUpBoss(lead);
+    expect(bodyOf(fetchMock).person.sourceUrl).toBe(
+      "https://jasminegarcia.com/new-construction",
+    );
   });
 
   /**
