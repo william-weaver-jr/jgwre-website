@@ -353,13 +353,24 @@ BIC's call to make alone:
   test can see it. **Reopen it if** any of Google Signals, remarketing, or a Google Ads link
   is turned on, or the site starts marketing beyond the local area.
 
-  The vendor half of the counsel review is split: Resend is still open, and **Follow Up Boss
-  is parked until the CRM is connected** (Bill, 2026-08-24). Nothing has been sent there —
-  no account, no key. The page no longer names the vendor either: it said submissions were
-  stored in Follow Up Boss while every one of them was reaching the notification email and
-  nothing else, so the sentence was trimmed the same day. Restore it and unpark the vendor
-  check together, when the integration is connected — which Locked Decision #5 puts before
-  launch.
+  The vendor half of the counsel review is split, and **the Follow Up Boss half is no longer
+  parked.** It was parked on 2026-08-24 (Bill) until the CRM was connected, on the grounds
+  that nothing had been sent there — no account, no key. **The integration connected and was
+  verified on 2026-08-28 (§12), so that condition is met and both follow-ups are now due:**
+
+  1. **Restore the sentence naming Follow Up Boss on `/privacy-policy`.** It was trimmed on
+     2026-08-24 because it said submissions were stored in Follow Up Boss while every one of
+     them was in fact reaching the notification email and nothing else. That is no longer
+     true — real submissions now reach the CRM, so a policy that does not name it is the
+     inaccurate version. **The page is a compliance surface: this is a material change and
+     goes to the BIC, and the vendor terms are counsel's question, not the BIC's.**
+  2. **Run the vendor check.** What the page says about Follow Up Boss now has to be checked
+     against Follow Up Boss's terms. Resend is still open and was never parked — and it is
+     now also live, carrying the same notification traffic.
+
+  The stakes moved with the connection. Until 2026-08-28 this was a review of what a draft
+  said about a vendor receiving nothing. It is now a review of what the page says about two
+  vendors receiving real client contact details.
 - **The transactions pipeline states are still blocked.** Active / pending / coming-soon
   need their own written BIC approval — `docs/TRANSACTIONS-SPEC.md` §2 and §12 below. A
   general site approval is not that approval. Do not build them on request without it.
@@ -402,7 +413,12 @@ was approved; it cannot tell you when something new needs approving.
 - Payload includes source (page slug), lead type (buyer/seller/valuation/guide), and UTM params
 - Honeypot field + rate limiting; no CAPTCHA unless spam becomes a real problem
 - On failure, still send the email via Resend and log the error — never silently drop a lead
-- Test end-to-end with a real submission before launch
+- [x] Test end-to-end with a real submission before launch — **done 2026-08-28**, both
+  channels confirmed live (§12). Re-run it after any change to the env vars or either
+  vendor: the failure this caught was invisible to `vercel env ls`.
+- **The lead `source` is the brokerage's to set, not ours.** Lead Flow assigns it
+  account-side and overrides whatever the API sends. Do not "fix" `lib/fub.ts` to chase it
+  — see §12 for the four attempts that ruled this out.
 
 ---
 
@@ -520,13 +536,43 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
 - [ ] Confirm Placester contract term, auto-renewal date, and content/domain ownership
       before giving notice
 - [ ] Confirm the Stone Realty Group IDX search URL (the "Search Homes" destination)
-- [ ] **Follow Up Boss API credentials** (tracking number confirmed: (704) 200-9360).
-      Not connected as of 2026-08-24 — no account key in any environment, so
-      `lib/fub.ts` throws and `app/api/lead/route.ts` falls back to the Resend email
-      on every submission. That fallback is the §9 contract working as designed, not
-      a substitute for the integration: Locked Decision #5 gates launch on it. The
-      privacy policy's counsel review for this vendor is parked behind the same
-      connection (§7).
+- [x] **Follow Up Boss — CONNECTED AND VERIFIED 2026-08-28.** A live submission returns
+      `{"ok":true,"delivery":"crm"}` on HTTP 200 with no error lines in the production
+      logs, so the lead reached Follow Up Boss *and* the Resend notification sent. Both
+      channels are working for the first time since the site went live, which closes the
+      Locked Decision #5 launch gate. Resend is verified end to end too: domain verified,
+      sender `website@jasminegarcia.com`, destination `jasmine@mattstoneteam.com`.
+
+      **The root cause was not a missing key, and the next person should know why.** All
+      four variables had existed in Vercel for nine days holding **empty strings**, seeded
+      with the project from the blank right-hand sides of `.env.example`. An empty string
+      is falsy, so every `if (!apiKey)` guard fired and *neither* channel ran — there was
+      no fallback, because there was no channel. Two signals actively misled: `vercel env
+      add` answers "already exists", which reads as "already set", and `vercel env ls`
+      prints "Hidden" for a Secret whether it holds a key or nothing. The fix was `env rm`
+      then `env add` with real values, and a redeploy. `.env.example` now carries the whole
+      trap, including the tell that separates empty from wrong: "is not configured" is the
+      falsy guard, while a bad key fails later as a 401.
+- [ ] **Two asks to the brokerage, both one sentence, neither fixable in code.** The
+      integration works but routes untidily, and both causes are account-side configuration
+      only Stone Realty Group can change.
+
+      **The lead source cannot be set by this site.** Four attempts ruled it out — `source`
+      on the event, `source` on the person, a direct `PUT /v1/people/:id`, and a registered
+      system with `X-System` headers — every one still landing on `<unspecified>`. The
+      person payload explains it: `"sourceId": 1, "leadFlowId": 113`. The source is assigned
+      by the account's Lead Flow, not by the caller, and `GET /v1/leadFlows` returns "You do
+      not have access to this API endpoint" for her Agent-role key. **This is not a defect
+      and there is no code fix** — the request already carries the source three ways.
+
+      **Assignment takes a round trip.** The Lead Flow routes the lead to the broker first,
+      then `assignedUserId: 13` reassigns it to Jasmine. It lands on her, but the lead is
+      his for long enough to fire his notification.
+
+      One entry fixes both: *add a Lead Flow entry for source `jasminegarcia.com` and assign
+      it to Jasmine.* It costs him nothing operationally. If he declines, `sourceUrl` still
+      records the exact page and `assignedUserId` still lands the lead on her — attribution
+      survives in a weaker form. §7 explains why the ask may not be granted.
 - [ ] Professional photography and any brand video
 - [x] **YouTube on the site — SHIPPED 2026-08-20.** The bio video on `/about` as a
       click-to-load facade, the channel in `sameAs` and the footer, and `VideoObject` on
