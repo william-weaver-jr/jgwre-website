@@ -380,7 +380,19 @@ new advertising claims and need the BIC either way.
 **Acceptance:** [ ] Validates · [ ] `provider` names her with the brokerage as parent ·
 [ ] `areaServed` derived from `MARKETS`, not hand-listed (the drift `lib/schema.tsx` already warns about)
 
-### T15 — Connect Follow Up Boss ⚠
+### T15 — Connect Follow Up Boss ✅ DONE 2026-08-28
+**Verified by live submission:** `{"ok":true,"delivery":"crm"}`, HTTP 200, no errors in the
+production logs — so Follow Up Boss accepted the lead and the Resend notification sent. Both
+channels live for the first time since launch. Root cause and the trap that hid it are in
+`AUDIT.md` §6.1.
+
+**One acceptance criterion is not yet met**, and it cannot be checked from outside: whether the
+lead is **assigned to Jasmine**. `assignedUserId: 13` is sent, but the brokerage's Lead Flow can
+override it and nothing in this repository can see that. Someone has to look in FUB. Until they
+do, treat attribution as unproven rather than working.
+
+<details><summary>Original task specification</summary>
+
 **Files:** Vercel env only; [lib/fub.ts](../lib/fub.ts) and [app/api/lead/route.ts](../app/api/lead/route.ts) are already written
 **Do:** Add `FUB_API_KEY` to Vercel. Submit a real test lead. Verify it lands with source,
 lead type, and UTMs.
@@ -392,6 +404,7 @@ lead type, and UTMs.
 **Why the score understates it:** Search Opportunity = 1 because it affects no ranking. But
 Locked Decision #5 gates launch on it, the site is already live, and today a Resend failure
 loses the lead outright. **Do this first regardless of score.**
+</details>
 
 ### T16 — `generate_lead` and `lead_failed` events ✅ CODE DONE 2026-08-24
 **Shipped:** `/api/lead` now returns `delivery: "crm" | "email"` on success, so the client

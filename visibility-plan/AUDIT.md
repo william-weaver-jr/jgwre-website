@@ -493,8 +493,30 @@ citable site, which matters more for AI answers than for classic ranking.
 
 ## 6. Conversion and traction — findings
 
-### 6.1 The lead path is broken in production — NOT just Follow Up Boss
-**Severity: Critical · Confidence: High · [VERIFIED BY LIVE TEST 2026-08-28]**
+### 6.1 The lead path — ✅ FIXED AND VERIFIED 2026-08-28
+**Severity: Critical → Closed · Confidence: High · [VERIFIED BY LIVE TEST]**
+
+> **RESOLVED.** A live submission now returns `{"ok":true,"delivery":"crm"}` on HTTP 200, with
+> no error lines in the production logs — so the lead reached Follow Up Boss *and* the Resend
+> notification sent. Both channels are working for the first time since the site went live.
+>
+> **Root cause was not what the audit assumed.** It read "Follow Up Boss is not connected, so
+> leads fall back to email." In fact all four variables existed in Vercel for nine days with
+> **empty values**, seeded with the project from the blank right-hand sides of `.env.example`.
+> An empty string is falsy, so every `if (!apiKey)` guard fired and *neither* channel ran.
+> There was no fallback, because there was no channel.
+>
+> Two signals pointed the wrong way throughout: `vercel env add` answers "already exists",
+> which reads as "already set", and `vercel env ls` prints "Hidden" for a Secret whether it
+> holds a key or an empty string. The fix was `env rm` then `env add` with real values, and a
+> redeploy. `.env.example` now carries the whole trap, including the tell that distinguishes
+> empty from wrong: "is not configured" is the falsy guard; a bad key fails later as a 401.
+>
+> **Still open, and only answerable inside FUB:** whether the account's Lead Flow honoured
+> `assignedUserId: 13` or reassigned the lead. See §3.3 — it is the commission question, not a
+> technical one.
+
+The original finding, retained because the reasoning it corrects is instructive:
 
 > **Escalated after an end-to-end test submission on the live site.** The original finding said
 > Follow Up Boss was unconnected and every lead therefore fell back to the Resend notification
