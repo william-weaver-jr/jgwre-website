@@ -52,6 +52,7 @@ Two things to check on anything coming off a phone:
 | `jasmine-portrait-warm.jpg` | 4:5, 1600×2000 | Home hero | Warm interior, camel blazer |
 | `jasmine-portrait-studio.jpg` | 4:5, 1600×2000 | About hero | Dark backdrop, black blazer |
 | `jasmine-environmental.jpg` | 4:3, 1800×1350 | Home closing CTA | In a room, not against a backdrop |
+| `jasmine-closing-day.jpg` | 12:7, 1200×700 | **Nothing yet** | Candid, at the closing table. Held — see below |
 
 Three photographs, three registers, and that is the point. The warm frame opens the
 site; the composed frame carries the page that has to hold the record; the
@@ -67,6 +68,30 @@ the original if the slot ever changes shape.
 That slot was briefed as "Charlotte housing stock — exterior." It was re-briefed
 deliberately: the section says *call before you write an offer*, and a person is a
 better argument for calling someone than a streetscape is.
+
+### Held: `jasmine-closing-day.jpg`
+
+In the repo, deliberately not in `lib/images.ts`. Added 2026-08-28 from
+`assets.agentfire3.com` (the Matt Stone Team site), where it ran as a blog photo.
+Bill confirms the photograph is Jasmine's own and hers to use, so the question is
+not ownership.
+
+It is the only candid we have of an actual closing, and that is exactly why it is
+worth holding rather than shipping. Three things have to clear first:
+
+- **Two clients are identifiable, front and centre.** §7 already requires client
+  permission to publish the case studies, which name nobody. Publishing faces is a
+  larger ask than publishing a story, and it needs their written yes, not an
+  inference from the photo having appeared on a team site.
+- **A third party's mark is in the frame.** The "Just Closed" sign carries a law
+  firm's name and phone number. Naming the closing attorney in her advertising is
+  a claim about a business relationship that nobody has cleared.
+- **It is 1200×700**, below the 2000px standard above, because that is the largest
+  version published. If it ships, get the original off her phone rather than
+  upscaling this.
+
+Registering it in `lib/images.ts` is what makes it publishable, so that step waits
+on the first two. Do not do it to fill a slot.
 
 ### Still unphotographed
 
