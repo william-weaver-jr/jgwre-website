@@ -2,6 +2,7 @@ import type { StaticImageData } from "next/image";
 
 import { AGENT, BROKERAGE } from "@/lib/site";
 
+import jasmineClosingDay from "@/assets/images/jasmine-closing-day.jpg";
 import jasmineEnvironmental from "@/assets/images/jasmine-environmental.jpg";
 import jasminePortraitStudio from "@/assets/images/jasmine-portrait-studio.jpg";
 import jasminePortraitWarm from "@/assets/images/jasmine-portrait-warm.jpg";
@@ -93,6 +94,29 @@ export const PHOTOS = {
   environmental: {
     src: jasmineEnvironmental,
     alt: `${AGENT.name} at work. ${AGENT.title} with ${BROKERAGE.name}.`,
+  },
+
+  /**
+   * Landscape, 12:7, candid, at the closing table. The only photograph on the
+   * site of the thing the site is selling actually having happened.
+   *
+   * Two things about it are settled and should not be re-litigated. The clients
+   * pictured and the closing attorney whose office it was shot in have both
+   * approved this use, and the copyright is hers (Bill, 2026-08-28). It ran on
+   * mattstoneteam.com first, which is where the file came from, not where the
+   * permission came from.
+   *
+   * It is 1200×700 — under the 2000px standard in assets/images/README.md,
+   * because that is the largest version published. Fine at the width it is used
+   * at; get the original off her phone before it goes anywhere large.
+   *
+   * The alt names nobody. The clients approved a photograph, not the publication
+   * of their names, and the law firm's sign in the frame is scenery rather than
+   * something a reader who cannot see the image needs described.
+   */
+  closingDay: {
+    src: jasmineClosingDay,
+    alt: `Two clients on their closing day, one holding a bouquet of roses, with ${AGENT.name}, ${AGENT.title} with ${BROKERAGE.name}.`,
   },
 } as const satisfies Record<string, BrandImage>;
 
