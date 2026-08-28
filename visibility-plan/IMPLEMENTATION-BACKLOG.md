@@ -68,9 +68,18 @@ why the first step is to try, not to assume.
 which matters here because `www` 308s to the apex and a URL-prefix property would report on only
 one side of that.
 
+> **On a Domain property, submit the sitemap as an absolute URL.** Entering `sitemap.xml`
+> returns "Invalid sitemap address" — a Domain property spans `http`, `https`, apex and `www`,
+> so there is no single prefix for Google to append a relative path to. Enter
+> `https://jasminegarcia.com/sitemap.xml` in full.
+>
+> The error is a useful signal rather than a fault: a URL-prefix property displays its prefix
+> greyed out beside the field and accepts the relative path, so being rejected confirms the
+> property is the Domain one.
+
 **Acceptance:**
 - [ ] GSC **Domain** property verified for jasminegarcia.com
-- [ ] Sitemap submitted, status "Success", 17 URLs discovered
+- [ ] Sitemap submitted **as an absolute URL**, status "Success", 17 URLs discovered
 - [ ] Index-coverage baseline recorded in `MEASUREMENT.md` §1
 - [ ] Bing verified by **importing from GSC** — it auto-verifies and carries the sitemap across,
       so no second DNS record and no second sitemap submission
