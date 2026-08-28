@@ -104,7 +104,70 @@ GA4 parameter.** Any new event must respect this. Do not add name, email, phone,
 
 **Mark as GA4 key events:** `generate_lead` and `call_click`. Those two are the business.
 
-### 3.3 Attribution note
+### 3.3 GA4 admin configuration
+
+Code sends the events; the property has to be told what they mean. Neither of the
+following is a code change, and until both are done GA4 collects the data without being
+able to report on it.
+
+**Key events** — `Admin → Data display → Key events → New key event`. Type the name exactly.
+
+| Event | Why it is a key event |
+|---|---|
+| `generate_lead` | The conversion. A form that produced a lead. |
+| `call_click` | The other conversion. Phone is the primary CTA (Locked Decision #4), so leaving it unmarked measures half the business. |
+
+> **Use `Key events → New key event`, not `Events → Create event`.** They sit next to each
+> other and do opposite things. The first marks an event this site already sends. The second
+> creates a *new, derived* event from existing ones — pointed at `generate_lead` it would
+> manufacture a second event of the same name and double-count every lead.
+
+A key event can be created before the event has ever been received. The name has to match
+what the code sends, character for character.
+
+**Custom dimensions** — `Admin → Custom definitions → Create custom dimension`, scope
+**Event**, with the parameter name in *Event parameter*. Standard properties allow 50, so
+scarcity is not a reason to leave any of these out.
+
+| Parameter | Sent on | Answers |
+|---|---|---|
+| `delivery` | `generate_lead` | Did the lead reach the CRM or only the inbox? **Register this one first** — a run of `email` means the Follow Up Boss integration has stopped working. |
+| `lead_type` | `intake_submit`, `generate_lead` | buyer / seller / valuation / guide / relocation |
+| `page` | every event | Which page produced it. The page-to-lead map. |
+| `side` | intake events | buying / selling |
+| `placement` | `call_click`, `intake_start` | Which CTA position works. |
+| `reason` | `lead_failed` | rate_limited / invalid / delivery / network |
+
+`step` (on `intake_step`) is the seventh parameter the code sends and is deliberately left
+unregistered: the intake is three steps, so the drop-off is already legible from the raw event
+counts and a dimension would add a report nobody reads.
+
+**Not retroactive.** A dimension reports only on data collected after it is registered, and
+takes 24–48 hours to appear. The parameters are collected either way, so registering late
+loses reporting rather than data — but it loses it permanently for the gap.
+
+### 3.4 Testing the events, and the one thing that will look like a bug
+
+Events fire **only when `NODE_ENV === "production"`** (`components/google-analytics.tsx`), so
+nothing is sent from `npm run dev`. Test against the deployed site.
+
+**The trap:** `/privacy-policy` carries a working analytics opt-out that writes
+`jg-analytics-opt-out = "1"` to `localStorage` (`lib/analytics-consent.ts`). Anyone who has
+tried that control — likely whoever tested the privacy page — has a browser that sends
+**nothing**, silently and by design. A test lead from that browser produces no events at all
+and looks exactly like a broken install.
+
+Check before concluding anything is wrong, in the browser console on jasminegarcia.com:
+
+```js
+localStorage.getItem("jg-analytics-opt-out")
+```
+
+`null` is fine. `"1"` means opted out — clear it with `localStorage.removeItem("jg-analytics-opt-out")` and reload.
+
+Then watch `Reports → Realtime → Event count by Event name` while submitting.
+
+### 3.5 Attribution note
 UTM capture already exists (`readUtm()` in [lib/analytics.ts](../lib/analytics.ts)) and §9
 specifies UTMs in the FUB payload. Once FUB is connected, source attribution works end to end.
 Until then, no lead is attributable — which is the strongest practical argument for N5 first.
