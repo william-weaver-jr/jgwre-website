@@ -493,8 +493,41 @@ citable site, which matters more for AI answers than for classic ranking.
 
 ## 6. Conversion and traction — findings
 
-### 6.1 Follow Up Boss is not connected
-**Severity: Critical · Confidence: High · [VERIFIED]**
+### 6.1 The lead path is broken in production — NOT just Follow Up Boss
+**Severity: Critical · Confidence: High · [VERIFIED BY LIVE TEST 2026-08-28]**
+
+> **Escalated after an end-to-end test submission on the live site.** The original finding said
+> Follow Up Boss was unconnected and every lead therefore fell back to the Resend notification
+> email. That was **half right, and the wrong half was the reassuring one.**
+>
+> A real submission through the form on `/new-construction` returned **HTTP 502**, and the
+> production runtime logs give both causes:
+>
+> ```
+> [lead] Follow Up Boss delivery failed  Error: FUB_API_KEY is not configured
+> [lead] Resend delivery failed          Error: Resend environment variables are not configured
+> ```
+>
+> **Neither channel is configured. No environment variables are set in production at all.** The
+> live site cannot capture a lead by any route — every visitor who completes the form is shown
+> an error and told to call instead.
+>
+> The §9 contract behaved exactly as written: it tried both channels, refused to report success,
+> and surfaced the phone number rather than pretending. The design held. What was missing was
+> the configuration, and nothing had ever exercised it.
+>
+> **Traffic to date is small** (13 active users in the preceding week, most of them likely
+> internal), so the probable number of real leads lost is zero or near it. That is luck, not
+> mitigation.
+>
+> **This is now the single most urgent item in the plan** and it outranks every content and
+> visibility task: the site is live, indexed as of 2026-08-27, and being actively promoted into
+> Search Console while unable to accept a lead.
+>
+> Fixing it needs **four** variables, not one — `FUB_API_KEY`, `FUB_ASSIGNED_USER_ID`,
+> plus `RESEND_API_KEY`, `LEAD_NOTIFICATION_EMAIL` and `LEAD_FROM_EMAIL`.
+
+The original finding, retained for context:
 
 [lib/fub.ts](../lib/fub.ts) throws when `FUB_API_KEY` is unset. `CLAUDE.md` §12 records it as
 unconnected as of 2026-08-24 — today. Every submission therefore falls back to the Resend
