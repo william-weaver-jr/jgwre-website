@@ -171,6 +171,15 @@ loses reporting rather than data — but it loses it permanently for the gap.
 
 ### 3.4 Testing the events, and the one thing that will look like a bug
 
+> **✅ Pipeline verified end to end 2026-08-27.** `call_click` was fired from the live site and
+> appeared in Realtime. That single observation clears the whole chain: the delegated listener,
+> `track()`, the gtag dialect fixed in `5d3fa35`, the measurement ID, and the property binding.
+>
+> It also produced the lesson below the hard way. The event fired correctly for some time while
+> appearing nowhere, because `Admin → Data display → Events` is a **24-hour aggregate** and was
+> being refreshed in the expectation of a live feed. **`Reports → Realtime` is the only
+> immediate view, and it holds just 30 minutes** — fire the event with the report already open.
+
 Events fire **only when `NODE_ENV === "production"`** (`components/google-analytics.tsx`), so
 nothing is sent from `npm run dev`. Test against the deployed site.
 

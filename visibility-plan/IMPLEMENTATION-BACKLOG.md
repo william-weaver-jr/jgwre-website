@@ -47,14 +47,34 @@ Every task inherits three non-negotiables:
 
 ### T1 — Search Console + Bing verification
 **Files:** `app/layout.tsx` (only if meta-tag verification is chosen; DNS is cleaner)
-**Do:** Verify jasminegarcia.com in GSC (DNS TXT preferred — survives redeploys) and Bing
-Webmaster Tools. Submit `https://jasminegarcia.com/sitemap.xml` in both.
+**Do:** Verify jasminegarcia.com in GSC and Bing. Submit `https://jasminegarcia.com/sitemap.xml`.
+
+**Ground truth, checked 2026-08-27:**
+
+| Fact | Value | Consequence |
+|---|---|---|
+| Registrar | Squarespace Domains LLC | DNS is edited at Squarespace, **not** Vercel |
+| Nameservers | `ns-cloud-c{1..4}.googledomains.com` | Google Cloud DNS, inherited from Google Domains |
+| Existing TXT | `google-site-verification=fgdTcEnw7gBR-kA05JDQO25cLrH7ZBCuc8ZnXKwy1rs` | **Already present.** Try adding the Domain property first — it may verify with no DNS change at all |
+| Domain created | 2026-03-02 | ~6 months old, which is the evidence behind "effectively a new domain" |
+| Apex / www | Vercel (`216.198.79.1`; www → `vercel-dns-017.com`) | Unchanged by any of this |
+
+That TXT token most likely came from **Google Workspace**, not Search Console — the GA4 account
+is `admin@jasminegarcia.com`, so Workspace is set up on this domain and uses the identical
+record format. Whether it also satisfies GSC depends on the account that minted it, which is
+why the first step is to try, not to assume.
+
+**Prefer a Domain property over URL-prefix.** It covers apex, `www`, `http`, and `https` in one,
+which matters here because `www` 308s to the apex and a URL-prefix property would report on only
+one side of that.
+
 **Acceptance:**
-- [ ] GSC verified, ownership persists after a deploy
-- [ ] Sitemap shows "Success" with 17 discovered URLs
-- [ ] Index-coverage baseline screenshotted into `MEASUREMENT.md`
-- [ ] Bing verified and sitemap submitted
-**Risk:** none. **Note:** Bing feeds ChatGPT search — this is an AEO task, not just a Bing one.
+- [ ] GSC **Domain** property verified for jasminegarcia.com
+- [ ] Sitemap submitted, status "Success", 17 URLs discovered
+- [ ] Index-coverage baseline recorded in `MEASUREMENT.md` §1
+- [ ] Bing verified by **importing from GSC** — it auto-verifies and carries the sitemap across,
+      so no second DNS record and no second sitemap submission
+**Risk:** none. **Note:** Bing feeds ChatGPT search, so this is an AEO task and not only a Bing one.
 
 ### T2 — `Person` schema on the home page ✅ DONE 2026-08-24
 **Shipped as:** one node typed `["Person", "RealEstateAgent"]` with `@id`
@@ -154,9 +174,18 @@ already on the page in prose.
 **Outcome:** the site was deactivated by Bill. Verified: every archived URL now returns
 **302 → `placester.com/site-unavailable`** (itself a 403). Duplicate content gone.
 **Residual, low severity:** it is a *302*, not a 410 — so the URLs will linger in the index
-longer than a hard removal would allow. Not controllable from her account. Fold a Search
-Console removal request into T1 rather than treating it as separate work. No redirect map is
+longer than a hard removal would allow. Not controllable from her account. No redirect map is
 needed or possible.
+
+> **Correction, 2026-08-27.** An earlier revision said to "fold a Search Console removal request
+> into T1." That is not available: the Removals tool acts only on a **property you have verified**,
+> and the old URLs are on `jasminegarcia.myrealestateplatform.com` — Placester's domain, which
+> she cannot verify. The only route is the public **Remove Outdated Content** tool, which is
+> per-URL, manual, and would mean filing ~50 requests.
+>
+> **Recommendation: do nothing.** The content is already gone, so Google drops these as soft-404s
+> on its own. Spend the effort only if the old URLs actually surface for her name — check once
+> after GSC has data, and let them decay otherwise.
 
 <details><summary>Original task specification</summary>
 
