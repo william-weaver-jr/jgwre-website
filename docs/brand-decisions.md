@@ -106,7 +106,7 @@ can sit below the footer on the home page. No duplicate footer.
 not about credits: the brand-discovery job it was scoped for is finished, and everything
 remaining is either Next.js work Lovable cannot do (it builds TanStack) or copy governed by
 `BRAND-VOICE.md` and §7, where its tendency to invent is a liability. See
-`docs/competitive-landscape.md` §3.
+Competitive Landscape §3 in Notion (`docs/README.md`).
 
 The project is **kept, not deleted**, as the fallback if Jasmine rejects the palette — a
 fast visual re-roll is the one thing it is still better at than hand-coding.
@@ -164,7 +164,8 @@ fold. `npm run build` and `npm run typecheck` pass.
 - **Question 2 deserves real pressure.** The brief banned "the gold-serif luxury agent
   cliché," and the direction landed on antique gold plus Cormorant Garamond. Gold is confined
   to hairlines so it is not the worst version, but Cormorant is formal before it is warm, and
-  it is the register `mackenziesiek.com` reaches for. See `docs/competitive-landscape.md` §3.
+  it is the register `mackenziesiek.com` reaches for. See Competitive Landscape §3 in
+  Notion (`docs/README.md`).
 - Confirm the real Stone Realty Group IDX URL for the `SEARCH_HOMES_URL` TODO in
   `lib/site.ts`. Mackenzie's site points at `mackenzie.mattstoneteam.com`, so a
   per-agent subdomain likely exists — ask SRG.
@@ -195,6 +196,7 @@ system — palette, type scale, spacing, and the component structure as referenc
 routing, head/meta handling, and data layer get rewritten for Next.js App Router in
 Claude Code.
 
-This does not change the plan; `docs/lovable-brief.md` already treats the decisions as
-the deliverable and the project as scaffolding. But do not expect to `git merge`
+This does not change the plan; the Lovable Brief (archived in Notion — see
+`docs/README.md`) already treats the decisions as the deliverable and the project as
+scaffolding. But do not expect to `git merge`
 Lovable's repo into ours.

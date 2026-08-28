@@ -11,6 +11,15 @@ stop and flag it rather than complying.
 - `docs/CONTENT-MARKETING.md` — the blog pipeline: the documented-facts allowlist, AEO post
   structure, the publishing cadence, and what may not be a post
 
+**Where documents live — 2026-08-28.** `docs/` holds specifications: everything in it is
+cited from source code, enforced by a test, or both. Strategy, competitive analysis, and
+research instruments live in the **JGWRE Website** space in Notion. `docs/README.md` carries
+the routing rule, the citation map, and the Notion link. The test for a new document is one
+question: *does source code cite this, or does a test enforce it?* Yes → `docs/`. No → Notion.
+
+Never copy §7 compliance rules into Notion. A second copy drifts from the enforced one, and
+the drifted copy is the one someone reads.
+
 ---
 
 ## 1. Project

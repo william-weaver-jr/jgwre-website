@@ -9,7 +9,8 @@ import { isTransactionsPageIndexable } from "@/lib/transactions";
   Add routes here as pages ship. See the build order in docs/CONTENT-PLAN.md.
 
   Only list routes that actually resolve. mackenziesiek.com advertises six
-  /neighborhood/* URLs in its sitemap that all 404 — see docs/competitive-landscape.md.
+  /neighborhood/* URLs in its sitemap that all 404 — see the Competitive Landscape
+  in Notion (docs/README.md has the link).
 
   /style-tile is deliberately absent: it is an internal review page and carries
   robots noindex.
