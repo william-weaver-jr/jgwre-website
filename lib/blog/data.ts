@@ -91,4 +91,57 @@ export const POSTS: readonly Post[] = [
     },
     body: () => import("@/content/blog/what-you-can-negotiate-besides-price.mdx"),
   },
+  {
+    slug: "why-the-highest-offer-isnt-the-best-offer",
+    title: "Why isn't the highest offer always the best offer?",
+    description:
+      "The top number and the best offer are often two different offers. What financing, deposits, contingencies, and timing do to the price a seller keeps.",
+    category: "negotiation",
+    targetQuery: "why isn't the highest offer the best offer when selling a house",
+    answer:
+      "Because price is only one line of the offer, and the rest of it decides whether that price ever reaches you. How the buyer is financing the purchase, how much they put at risk up front, what has to happen before the sale becomes certain, and when they can close all change what an offer is worth. A lower number with a larger deposit and fewer ways out is often worth more than a higher one that still has to survive a loan approval, an appraisal, and a buyer who has not sold their own house yet. The strongest offer is the one most likely to reach the closing table on the timeline the seller needs.",
+    publishedAt: "2026-08-28",
+    /* The seller-side mirror of the first post, and the pillar the blog was
+       missing: every other post here is written to a buyer.
+
+       Sourced from 2026-masons-bend-01 in lib/transactions/data.ts and from
+       zillow-sophie-fox in lib/reviews/data.ts, which is the client saying in
+       her own words that the winning offer was the one with the most favorable
+       terms. Stone Realty Group published its own account of this sale; nothing
+       here comes from it, and this post deliberately does not retell that story
+       — it answers the question underneath it. See the analysis in the session
+       of 2026-08-28 and docs/CONTENT-MARKETING.md §1 on cannibalization.
+
+       No dollar figure appears, so no disclaimer is triggered. "Closed above
+       list" ships as the ledger already ships it: an outcome, with no number
+       attached and no promise that it repeats. */
+    pillar: "/sellers",
+    faq: [
+      {
+        question: "What makes one offer stronger than another?",
+        answer:
+          "Everything attached to the price. How the buyer is financing the purchase, how much earnest money they put at risk and when it stops being refundable, how long they keep the right to walk away, what they are asking the seller to pay toward their costs, and whether they can close when the seller needs to close. Two offers at the same price can be worth very different amounts once those terms are read side by side.",
+      },
+      {
+        question: "Does a cash offer beat a financed offer?",
+        answer:
+          "Not automatically, though it removes the lender and the loan approval from the timeline, which is why cash buyers often ask for something in return. A financed offer from a well-qualified buyer with a large deposit and a firm closing date can be the better contract. The question is not how the money is coming, it is how many conditions still stand between the offer and the closing table.",
+      },
+      {
+        question: "What is earnest money, and does a larger deposit help?",
+        answer:
+          "Earnest money is the deposit a buyer puts up when the contract is signed, held by a third party and credited toward the purchase at closing. A larger deposit, and an earlier date at which it stops being refundable, tells a seller how committed the buyer is in a way the offer price cannot. It is one of the clearest signals in the contract and one of the least discussed.",
+      },
+      {
+        question: "Do buyers in North Carolina and South Carolina make offers differently?",
+        answer:
+          "Yes, and it changes how a seller reads them. A North Carolina contract runs on a due diligence period, where the buyer negotiates both how long they can investigate and what that time costs them. A South Carolina contract runs on contingencies, and there are three: financing, appraisal, and wood-destroying insect. A seller comparing offers across the state line is comparing two different sets of exits.",
+      },
+    ],
+    cta: {
+      heading: "Have offers in hand, or expecting them?",
+      body: "A call, a Zoom, or a text is usually enough to lay the terms side by side and see which one actually gets you to closing.",
+    },
+    body: () => import("@/content/blog/why-the-highest-offer-isnt-the-best-offer.mdx"),
+  },
 ];

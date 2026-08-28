@@ -85,7 +85,19 @@ export async function sendToFollowUpBoss(lead: Lead): Promise<void> {
          distinction: `source` is the brand a broker knows the lead by, `system`
          is the software that delivered it. Here they are the same string. */
       source: LEAD_SOURCE,
-      system: LEAD_SOURCE,
+      /*
+        The body's system name must match the registered `X-System` header, so
+        it comes from the same variable when one is configured.
+
+        This is not tidiness. Tested against the live account on 2026-08-28: an
+        unregistered caller cannot set a lead source at all. Sending `source` on
+        the event and on the person both had no effect, and a direct
+        `PUT /v1/people/:id {source}` was ignored too — the contact stayed
+        `<unspecified>` every time. Registration is what makes the field
+        writable, which turns FUB_SYSTEM from an optional nicety into the thing
+        that decides whether a lead this site produced is attributable to it.
+      */
+      system: process.env.FUB_SYSTEM || LEAD_SOURCE,
       type: "Registration",
       message: buildMessage(lead),
       person: {

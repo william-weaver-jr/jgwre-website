@@ -109,7 +109,29 @@ describe("sendToFollowUpBoss", () => {
     const body = bodyOf(fetchMock);
     expect(body.source).toBe("jasminegarcia.com");
     expect(body.person.source).toBe("jasminegarcia.com");
-    expect(body.system).toBe("jasminegarcia.com");
+  });
+
+  /**
+   * The body's system name and the `X-System` header identify the same
+   * integration and FUB compares them, so they cannot drift. Tested live: an
+   * unregistered caller cannot set a lead source at all, which is what makes
+   * this pair matter rather than being cosmetic.
+   */
+  it("names the registered system in the body when one is configured", async () => {
+    vi.stubEnv("FUB_SYSTEM", "Jasmine-Garcia-Website");
+    vi.stubEnv("FUB_SYSTEM_KEY", "abc123");
+    const fetchMock = mockFetch();
+    await sendToFollowUpBoss(lead);
+
+    const headers = fetchMock.mock.calls[0][1].headers as Record<string, string>;
+    expect(bodyOf(fetchMock).system).toBe("Jasmine-Garcia-Website");
+    expect(headers["X-System"]).toBe("Jasmine-Garcia-Website");
+  });
+
+  it("falls back to the site name as the system when unregistered", async () => {
+    const fetchMock = mockFetch();
+    await sendToFollowUpBoss(lead);
+    expect(bodyOf(fetchMock).system).toBe("jasminegarcia.com");
   });
 
   /** FUB renders sourceUrl as a link, so a bare path resolves against their domain. */
