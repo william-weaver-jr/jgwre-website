@@ -110,36 +110,47 @@ Code sends the events; the property has to be told what they mean. Neither of th
 following is a code change, and until both are done GA4 collects the data without being
 able to report on it.
 
-**Key events** — `Admin → Data display → Key events → New key event`. Type the name exactly.
+**Key events — DONE 2026-08-27.** Property `551224515` (JGWRE Website), under the
+`admin@jasminegarcia.com` Google account.
 
-| Event | Why it is a key event |
-|---|---|
-| `generate_lead` | The conversion. A form that produced a lead. |
-| `call_click` | The other conversion. Phone is the primary CTA (Locked Decision #4), so leaving it unmarked measures half the business. |
+| Event | Counting method | Why |
+|---|---|---|
+| `generate_lead` | Once per event | Each submission is a distinct lead record. |
+| `call_click` | **Once per session** | A `tel:` tap opens a confirm dialog, so cancel-and-retry is two events and one intent. Counting each tap would inflate the number. GA4 nudges toward "Once per event" here; the nudge is declined deliberately. |
 
-> **`Key events` and `Events` are two different items in the Data display nav, and they do
-> opposite things.**
+> **The path is not what Google's own documentation says.** Their help pages describe
+> `Admin → Data display → Key events → New key event`. **That screen no longer exists.** In the
+> current UI, `Key events` is a *tab listing* on the Events page, and creation happens at:
 >
-> - **`Key events` → `New key event`** — a single field. Type the name, Save. This is the one
->   to use. It marks an event the site already sends.
-> - **`Events` → `Create event`** — offers "with code" / "without code" and, for the latter,
->   **demands a URL or matching condition**. That is the tell that you are on the wrong screen:
->   it builds a *new, derived* event out of existing traffic. Pointed at `generate_lead` it
->   would manufacture a second event of the same name and double-count every lead.
+> `Admin → Data display → Events → Create event`
 >
-> If the form is asking for a URL, back out and look for **Key events** in the left nav.
+> Two traps in that dialog, both of which bite by default:
+>
+> 1. **"Create without code" is pre-selected and demands a URL.** That is the tell that it is
+>    the wrong choice — it derives a *new* event from existing traffic, and pointed at
+>    `generate_lead` it would manufacture a second event of the same name and double-count
+>    every lead. Choose **"Create with code"**: the name is all it needs, because the site
+>    already sends the event.
+> 2. **"Set a default key event value — US Dollar, 1" is pre-selected.** That stamps $1 of
+>    fabricated revenue onto every lead and populates GA4's revenue reports with a number
+>    nobody chose. Select **"Don't set a default key event value"**. §6 governs structured
+>    data and analytics configuration the same way it governs copy: a figure nobody can
+>    document does not ship.
+>
+> Then toggle **Mark as key event** on.
 
-A key event can be created before the event has ever been received — which is the point, since
-`generate_lead` cannot appear in the Events list until it has fired at least once. The name has
-to match what the code sends, character for character.
+Requires **Marketer or above** at the property level.
 
-Marking a key event requires **Marketer or above** at the property level. If the `New key event`
-button is missing, that is the reason. Allow up to 24 hours for it to appear in standard
-reports; Realtime shows it immediately.
+**Also present, and not ours:** `close_convert_lead`, `qualify_lead`, and `purchase` were
+pre-created by Google's Lead Gen industry template. This site sends none of them and they will
+read zero forever. Harmless, but they clutter the key-events list — worth deleting once
+somebody is certain nothing else depends on them.
 
-**Custom dimensions** — `Admin → Custom definitions → Create custom dimension`, scope
-**Event**, with the parameter name in *Event parameter*. Standard properties allow 50, so
-scarcity is not a reason to leave any of these out.
+**Custom dimensions — DONE 2026-08-27.** All six below are registered, Event-scoped.
+
+`Admin → Custom definitions → Create custom dimension`, scope **Event**, parameter name in
+*Event parameter* — which accepts free text, so a parameter that has never been received can
+still be registered. Standard properties allow 50, so scarcity is not a reason to leave any out.
 
 | Parameter | Sent on | Answers |
 |---|---|---|
