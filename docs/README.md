@@ -26,6 +26,7 @@ what makes the audit trail for a licensed broker's advertising hold together.
 | `AREAS-SPEC.md` | Area-page requirements and the levers test | `lib/areas/drafts/fort-mill.ts` |
 | `AREA-GUIDE-MIGRATION.md` | The 301 map and what did not survive the migration | `app/sitemap.ts` |
 | `VIDEO-SPEC.md` | How a video reaches the site | `lib/video/` |
+| `IMAGE-CREDITS.md` | Licence log and sourcing rules for images we did not take | `lib/images.ts` |
 | `brand-decisions.md` | Palette, typography, spacing — the source for `tailwind.config.ts` | `app/style-tile/page.tsx`, `tests/accessibility.test.tsx` |
 | `placester-archive/` | Crawl of record of the retired site — 301 source data and evidence | `app/relocation/page.tsx:19` cites a specific file as proof for a testimonial |
 
