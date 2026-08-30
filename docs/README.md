@@ -23,8 +23,8 @@ what makes the audit trail for a licensed broker's advertising hold together.
 | `CONTENT-MARKETING.md` | The blog pipeline, documented-facts allowlist, AEO post structure | `lib/blog/data.ts`, `lib/areas/`, `lib/video/` |
 | `CONTACT-STRATEGY.md` | The conversion path, intake, phone-first CTAs | `components/contact-intake.tsx`, `components/phone-cta.tsx`, `lib/lead.ts`, `lib/intake/` |
 | `TRANSACTIONS-SPEC.md` | The closed-transactions ledger and what may not appear on it | `lib/transactions/` |
-| `AREAS-SPEC.md` | Area-page requirements and the levers test | `lib/areas/drafts/fort-mill.ts` |
-| `AREA-GUIDE-MIGRATION.md` | The 301 map and what did not survive the migration | `app/sitemap.ts` |
+| `AREAS-SPEC.md` | Area-page requirements and the levers test | `lib/areas/data.ts`, `lib/areas/drafts/fort-mill.ts`, `app/areas/page.tsx` |
+| `AREA-GUIDE-MIGRATION.md` | The 301 map and what did not survive the migration | `app/areas/page.tsx`, `lib/areas/drafts/fort-mill.ts` |
 | `VIDEO-SPEC.md` | How a video reaches the site | `lib/video/` |
 | `IMAGE-CREDITS.md` | Licence log and sourcing rules for images we did not take | `lib/images.ts` |
 | `brand-decisions.md` | Palette, typography, spacing — the source for `tailwind.config.ts` | `app/style-tile/page.tsx`, `tests/accessibility.test.tsx` |
