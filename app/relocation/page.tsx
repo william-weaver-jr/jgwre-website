@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
@@ -133,6 +134,20 @@ export default function RelocationPage() {
             </li>
           ))}
         </ol>
+
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
+          You will be choosing a submarket before you have stood in one, and that is the part of a
+          remote purchase that is hardest to undo later. The{" "}
+          <Link
+            href="/areas"
+            className="decoration-accent-soft decoration-1 underline-offset-4 hover:underline"
+          >
+            area guides
+          </Link>
+          exist for that: what is
+          actually built in a market, how price behaves there, and which levers tend to exist in it.
+          A local absorbs that over years. You have to be told it.
+        </p>
       </section>
 
       <ClosingCta

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { CaseLedger, CASE_NEW_CONSTRUCTION } from "@/components/case-ledger";
 import { PageHero, SectionHeading } from "@/components/page-hero";
@@ -142,6 +143,19 @@ export default function NewConstructionPage() {
             </article>
           ))}
         </div>
+
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
+          How much of this you can use depends on where you are buying, because builder activity is
+          not spread evenly across the metro. The{" "}
+          <Link
+            href="/areas"
+            className="decoration-accent-soft decoration-1 underline-offset-4 hover:underline"
+          >
+            area guides
+          </Link>
+          say which submarkets are
+          carrying builder inventory, and what it does to the resale priced against it.
+        </p>
       </section>
 
       <ClosingCta

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
@@ -121,6 +122,17 @@ export default function SellersPage() {
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
           What happens after a buyer is interested is the part this page is about. Exposure brings
           offers. It does not read an inspection report for you.
+        </p>
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
+          Who you are competing with is a local question, and it is not always the house down the
+          street — in some markets it is a builder releasing another phase while you wait. The{" "}
+          <Link
+            href="/areas"
+            className="decoration-accent-soft decoration-1 underline-offset-4 hover:underline"
+          >
+            area guides
+          </Link>
+          say what the competition actually looks like where you are selling.
         </p>
       </section>
 

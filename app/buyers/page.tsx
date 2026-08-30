@@ -148,6 +148,17 @@ export default function BuyersPage() {
           </Link>
           , ungated. Read it before you write an offer rather than after.
         </p>
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
+          Which of those items exist on your house depends on where it is. A market carrying builder
+          inventory and a street of twenty-year-old resales are two different negotiations, and the{" "}
+          <Link
+            href="/areas"
+            className="decoration-accent-soft decoration-1 underline-offset-4 hover:underline"
+          >
+            area guides
+          </Link>
+          cover that market by market.
+        </p>
       </section>
 
       <ClosingCta
