@@ -7,7 +7,6 @@ import jasmineEnvironmental from "@/assets/images/jasmine-environmental.jpg";
 import jasminePortraitStudio from "@/assets/images/jasmine-portrait-studio.jpg";
 import jasminePortraitWarm from "@/assets/images/jasmine-portrait-warm.jpg";
 import meetJasmineStill from "@/assets/images/video/meet-jasmine-still.jpg";
-import busterBoydBridge from "@/assets/images/areas/steele-creek-buster-boyd-bridge.jpg";
 
 /**
  * Single source of truth for photography, matching the pattern in `lib/site.ts`.
@@ -33,31 +32,25 @@ export type BrandImage = {
   alt: string;
 };
 
-/**
- * A photograph this site did not take, carrying the provenance it is used under.
+/*
+ * No borrowed images on the site today.
  *
- * `PHOTOS` and `VIDEO_STILLS` are hers or the brokerage's, so the only thing a
- * call site needs from them is alt text. A borrowed image has a second
+ * There was one — a public-domain photograph banded above /areas/steele-creek —
+ * and it came back out on 2026-08-31: at 1587px wide it was being upscaled by a
+ * full-bleed layout on any large or high-DPR display, and the credit line under
+ * it was doing more visual damage than the photograph was doing good.
+ *
+ * The `SourcedImage` type went with it. If another borrowed image is ever added,
+ * bring the type back rather than adding it to `PHOTOS` — a borrowed file has an
  * obligation that has to travel *with the file rather than beside it*, because
  * the failure mode is silent: a stock photo whose licence nobody can reconstruct
- * looks exactly like one whose licence is fine, right up until it isn't.
+ * looks exactly like one whose licence is fine, right up until it isn't. Making
+ * `credit` and `sourceUrl` required by the type is what stops an entry being
+ * added without them.
  *
- * So `credit` and `sourceUrl` are required by the type. An entry cannot be added
- * without stating where the image came from, and `docs/IMAGE-CREDITS.md` holds
- * the long-form log this is the machine-readable half of.
- *
- * `credit` renders on the page. CC0 and public-domain files require no
- * attribution at all — we print one anyway, because the cost is one line of
- * small type and the benefit is that the next person to touch the page can see
- * that the question was asked and answered.
+ * The sourcing rules, and the resolution floor this one failed, are in
+ * `docs/IMAGE-CREDITS.md`.
  */
-export type SourcedImage = BrandImage & {
-  /** The visible credit line. Rendered under the image, verbatim. */
-  credit: string;
-  /** The file page the licence was confirmed on — not a search or category page. */
-  sourceUrl: string;
-};
-
 /**
  * The absolute URL and intrinsic size of a brand image, for structured data.
  *
@@ -174,46 +167,3 @@ export const VIDEO_STILLS = {
   },
 } as const satisfies Record<string, BrandImage>;
 
-/**
- * Establishing images for `/areas/[slug]`, keyed by slug.
- *
- * **Every one of these is a placeholder.** The area pages argue from local
- * knowledge — "I live here, I know what is askable here" — and a stock
- * photograph is the one element on such a page that was not sourced locally.
- * The right image is one of hers. These exist so a page is not textually naked
- * while that is arranged, and each should be replaced rather than kept.
- *
- * Partial by design: an area with no entry renders no banner, which is the
- * correct outcome. Do not fill a gap by reusing a neighbouring market's
- * photograph — a Steele Creek reader who recognises Fort Mill learns that the
- * page does not know where it is.
- *
- * Sourcing rules and the full licence log: `docs/IMAGE-CREDITS.md`. The rule
- * that matters most is the one that is easy to skip — **confirm the licence on
- * the file page itself**, never on the category page it was found through, and
- * if it cannot be confirmed there, move to the next candidate.
- */
-export const AREA_IMAGES: Partial<Record<string, SourcedImage>> = {
-  /**
-   * The Buster Boyd Bridge, carrying NC/SC 49 over Lake Wylie at the southwest
-   * edge of Steele Creek. Chosen because it is the one structure a Steele Creek
-   * reader will recognise on sight, and because it happens to be a picture of
-   * the border — which is the pillar the rest of the site rests on.
-   *
-   * Public domain (Fife_Club, 2007), confirmed on the Commons file page. Note
-   * this is the *original*, not the 2100×300 Wikivoyage banner crop derived
-   * from it: same photograph, same licence, and 629px of height instead of 300,
-   * which is the difference between a banner that can be cropped and one that
-   * can only be stretched.
-   *
-   * The alt describes the bridge and the lake. It does not describe Steele
-   * Creek, because a reader who cannot see the image is told where they are by
-   * the h1 directly beneath it.
-   */
-  "steele-creek": {
-    src: busterBoydBridge,
-    alt: "The Buster Boyd Bridge crossing Lake Wylie, seen from the shoreline on a clear day.",
-    credit: "Photo: Fife_Club, public domain, via Wikimedia Commons.",
-    sourceUrl: "https://commons.wikimedia.org/wiki/File:Buster_Boyd_Bridge.jpg",
-  },
-};

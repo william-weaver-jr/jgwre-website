@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { AreaBanner } from "@/components/area-banner";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
-import { AREA_IMAGES } from "@/lib/images";
 import { areaBySlug, publishedAreas } from "@/lib/areas";
 import { showsDollarFigure } from "@/lib/areas/validate";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
@@ -69,10 +67,6 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
   const area = areaBySlug(slug);
   if (!area) notFound();
 
-  /* Optional, and absent for most markets. An area with no photograph opens on
-     its h1, which is the layout every one of these pages had until the first
-     image landed and is a perfectly good one. lib/images.ts AREA_IMAGES. */
-  const banner = AREA_IMAGES[area.slug];
 
   const sections = [
     { id: "housing-stock", eyebrow: "What is built here", body: area.housingStock },
@@ -83,8 +77,6 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      {banner ? <AreaBanner image={banner} /> : null}
-
       <PageHero
         eyebrow={`${area.name}, ${area.state}`}
         title={

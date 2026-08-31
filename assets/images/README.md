@@ -53,7 +53,6 @@ Two things to check on anything coming off a phone:
 | `jasmine-portrait-studio.jpg` | 4:5, 1600×2000 | About hero | Dark backdrop, black blazer |
 | `jasmine-environmental.jpg` | 4:3, 1800×1350 | Home closing CTA | In a room, not against a backdrop |
 | `jasmine-closing-day.jpg` | 12:7, 1200×700 | Registered, no slot cut yet | Candid, at the closing table. Cleared — see below |
-| `areas/steele-creek-buster-boyd-bridge.jpg` | 5:2, 1587×629 | `/areas/steele-creek` banner | **Not hers.** Public domain, borrowed — see below |
 
 Three photographs, three registers, and that is the point. The warm frame opens the
 site; the composed frame carries the page that has to hold the record; the
@@ -97,21 +96,6 @@ her phone before it goes anywhere large, and do not upscale this file to fake it
 It is registered in `lib/images.ts` as `closingDay` and no page uses it yet. Per the
 note below, cut its slot alongside a brief rather than dropping it into the first
 gap that will take a landscape crop.
-
-### `areas/` — borrowed images, and why they sit in their own folder
-
-Everything else in here is hers. The files under `areas/` are not, and the folder exists so
-that fact is visible in a file path rather than only in a comment. The convention above
-(`jasmine-<subject>-<variant>.jpg`) does not apply; these are named
-`<area-slug>-<subject>.jpg`, because the slug is what a reader is trying to match them to.
-
-They are registered in `lib/images.ts` as `AREA_IMAGES`, whose `SourcedImage` type requires
-a credit line and the file page the licence was confirmed on. The licence log and the
-sourcing rules are `docs/IMAGE-CREDITS.md`; read rule 1 before adding one.
-
-**Each is a placeholder.** An area page argues from local knowledge, and a borrowed
-photograph is the one thing on it that was not sourced locally. Replacing these with her own
-is the goal, not a nice-to-have — see below.
 
 ### Still unphotographed
 

@@ -34,39 +34,40 @@ asked: `assets/images/README.md`, which carries the clearance record for
 
 ## Log
 
+**Empty. No borrowed image is on the site.**
+
 | Page | Placement | File | Source | Licence | Attribution required | Credit line used | Added |
 |---|---|---|---|---|---|---|---|
-| `/areas/steele-creek` | Banner, above the hero | `assets/images/areas/steele-creek-buster-boyd-bridge.jpg` | [Wikimedia Commons — File:Buster Boyd Bridge.jpg](https://commons.wikimedia.org/wiki/File:Buster_Boyd_Bridge.jpg) | Public domain (Fife_Club, 2007) | No | "Photo: Fife_Club, public domain, via Wikimedia Commons." | 2026-08-30 |
+| — | — | — | — | — | — | — | — |
 
 ---
 
 ## Notes
 
-### Steele Creek — why the original and not the banner crop
+### The one that was here, and why it came out
 
-The candidate first identified was
-[`File:WV banner Charlotte Steele Creek Buster Boyd Bridge.jpg`](https://commons.wikimedia.org/wiki/File:WV_banner_Charlotte_Steele_Creek_Buster_Boyd_Bridge.jpg),
-a CC0 Wikivoyage banner at 2100×300. It is a crop of the file we actually shipped, and its
-own Commons description says so.
+A public-domain photograph of the Buster Boyd Bridge ran as a full-bleed band above
+`/areas/steele-creek` from 2026-08-30 to 2026-08-31. It was removed for two reasons worth
+recording, because both will recur with the next candidate.
 
-The parent is public domain at 1587×629 — the same photograph under an equally free
-licence with more than twice the vertical resolution. At 300px tall the banner could only
-be shown at roughly the height it already was; at 629px the shipped file can be cropped to
-whatever band the layout wants and still have pixels left over.
+**Resolution.** The file was 1587×629. A full-bleed band asks for the viewport width, so on a
+1920px display the browser wants 1920 CSS pixels and roughly 3840 device pixels on a 2×
+screen. The file could supply neither, and `next/image` cannot invent detail it was not
+given — it upscaled, and it showed.
 
-Worth recording because the parent was nearly passed over on the grounds that its licence
-"could not be confirmed." It could — via the Commons API
-(`action=query&prop=imageinfo&iiprop=extmetadata`), which returns `LicenseShortName` and
-`AttributionRequired` as structured fields and does not depend on a file page rendering
-readably. Rule 2 above still stands. Rule 2 is about what to do when confirmation genuinely
-fails, not a reason to stop after one attempt.
+**The credit line.** One line of small type under a photograph is cheap in the abstract and
+expensive in place: it sat between the image and the `h1`, and it read as an apology for the
+image rather than as provenance.
 
-### Every area image is a placeholder
+### The floor for the next one
 
-The area pages argue from local knowledge. A stock photograph is the single element on such
-a page that was not sourced locally, and a reader who recognises a borrowed picture learns
-something about the page that the copy is working hard to deny.
+Two numbers, and a preference.
 
-These exist so a page is not textually naked while photography is arranged. Each is meant
-to be replaced by one of Jasmine's own, and a row here marked `(removed — replaced by ___)`
-is this file working correctly.
+- **Full-bleed:** do not, unless the source is at least **2560px** wide. Nothing borrowed has
+  cleared that yet.
+- **Page-width** (`max-w-6xl`, 1152px CSS): **2304px** for a crisp 2× render. A 1600px file is
+  acceptable here and would have been acceptable for the bridge; it was the full-bleed
+  treatment, not the file alone, that failed.
+- **Prefer hers.** An area page argues from local knowledge. A borrowed photograph is the one
+  element on it that was not sourced locally, and that tension does not go away by choosing a
+  better stock image.
