@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { locationLabel, sideLabel, type Transaction } from "@/lib/transactions";
 import { publishableReviewById } from "@/lib/reviews";
+import { areaBySlug } from "@/lib/areas";
 
 /**
  * One closed transaction, as a ledger row rather than a listing card.
@@ -30,6 +31,8 @@ export function TransactionRow({ transaction }: { transaction: Transaction }) {
       : undefined,
   ].filter(Boolean);
 
+  const guide = transaction.market ? areaBySlug(transaction.market) : undefined;
+
   return (
     <article className="rule-gold break-inside-avoid pt-6">
       <p className="eyebrow">{sideLabel(transaction.side)}</p>
@@ -39,6 +42,23 @@ export function TransactionRow({ transaction }: { transaction: Transaction }) {
       </h3>
 
       <p className="mt-2 text-sm text-ink-muted">{meta.join(" · ")}</p>
+
+      {/* Only where the market has a guide someone can actually read. Most rows
+          carry no market at all (the ledger records subdivisions, the roster
+          records markets, and only she can map between them), and most mapped
+          markets have no page yet — so this is rare today and grows on its own
+          as guides land. areaBySlug returns published areas only, so a market
+          that is mapped but unwritten renders nothing rather than a 404. */}
+      {guide ? (
+        <p className="mt-2 text-sm">
+          <Link
+            href={`/areas/${guide.slug}`}
+            className="decoration-accent-soft decoration-1 underline-offset-4 hover:underline"
+          >
+            What is negotiable in {guide.name}
+          </Link>
+        </p>
+      ) : null}
 
       {transaction.photo ? (
         <Image

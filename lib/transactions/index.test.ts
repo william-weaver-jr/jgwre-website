@@ -6,6 +6,8 @@ import { join } from "node:path";
 
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { MARKETS } from "@/lib/areas";
+
 import { TRANSACTION_METRICS } from "./internal-metrics";
 import { SAMPLE_TRANSACTIONS } from "./sample";
 import {
@@ -265,6 +267,54 @@ describe("the transactions dataset", () => {
   it("has no status field, which is blocked pending BIC approval", () => {
     for (const row of [...TRANSACTIONS, ...SAMPLE_TRANSACTIONS]) {
       expect(row).not.toHaveProperty("status");
+    }
+  });
+});
+
+describe("the market cross-link", () => {
+  const slugs = new Set(MARKETS.map((m) => m.slug));
+
+  /**
+   * The failure this catches is a typo that renders nothing. `market` only
+   * produces a link when it resolves to a published area, so "steele creek" or
+   * "steelecreek" would fail silently and forever — the row would simply never
+   * grow the link, and nobody would know to look.
+   */
+  it("uses only real §5 market slugs", () => {
+    for (const row of TRANSACTIONS) {
+      if (row.market === undefined) continue;
+      expect(slugs.has(row.market), `${row.id} has market "${row.market}"`).toBe(true);
+    }
+  });
+
+  /**
+   * The mapping is deliberately partial. It is set where the city is the market,
+   * where the subdivision name is the market name, or where she confirmed it —
+   * and left undefined everywhere else, because a first pass guessed three
+   * Charlotte subdivisions into Steele Creek and got one right.
+   *
+   * This asserts the three safe classes stayed correct rather than asserting a
+   * count, which would only measure how far through the ask we are.
+   */
+  it("maps a row whose city is itself a market to that market", () => {
+    for (const row of TRANSACTIONS) {
+      const cityAsMarket = MARKETS.find(
+        (m) => m.name.toLowerCase() === row.city.toLowerCase(),
+      );
+      if (!cityAsMarket || row.city === "Charlotte") continue;
+      expect(row.market, `${row.id} is in ${row.city} but is not mapped to it`).toBe(
+        cityAsMarket.slug,
+      );
+    }
+  });
+
+  it("never maps a row to a market in the other state", () => {
+    for (const row of TRANSACTIONS) {
+      if (!row.market) continue;
+      const market = MARKETS.find((m) => m.slug === row.market);
+      expect(market?.state, `${row.id} is in ${row.state} but mapped to ${row.market}`).toBe(
+        row.state,
+      );
     }
   });
 });

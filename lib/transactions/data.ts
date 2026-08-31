@@ -100,6 +100,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     neighborhood: "English Trails",
     city: "Fort Mill",
     state: "SC",
+    /* city is the market */
+    market: "fort-mill",
     propertyType: "Single Family",
     pillars: ["carolinas-border"],
     /* Workbook: "a back to back transaction" — under contract on this house
@@ -187,6 +189,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     neighborhood: "Masons Bend",
     city: "Fort Mill",
     state: "SC",
+    /* city is the market */
+    market: "fort-mill",
     propertyType: "Single Family",
     pillars: ["sellers", "carolinas-border"],
     /* Workbook: multiple offers inside 48 hours, closed above list. The client's
@@ -343,6 +347,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     neighborhood: "Preston Park",
     city: "Pineville",
     state: "NC",
+    /* city is the market */
+    market: "pineville",
     propertyType: "Single Family",
     builder: "Meritage Homes",
     /* Relocation is documented in the client's own review — out of state, and
@@ -434,6 +440,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     neighborhood: "Shopton Point",
     city: "Charlotte",
     state: "NC",
+    /* confirmed by Bill 2026-08-19 */
+    market: "steele-creek",
     propertyType: "Single Family",
     builder: "Meritage Homes",
     pillars: ["new-construction"],
@@ -460,6 +468,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     neighborhood: "Lexington Commons",
     city: "Rock Hill",
     state: "SC",
+    /* city is the market */
+    market: "rock-hill",
     propertyType: "Townhouse",
     pillars: ["carolinas-border"],
     lever: "Seller concessions at closing.",
@@ -543,6 +553,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     neighborhood: "SouthPark",
     city: "Charlotte",
     state: "NC",
+    /* subdivision name is the market name */
+    market: "southpark",
     propertyType: "Condo",
     pillars: [],
     lever: "Purchased under list price.",
@@ -572,6 +584,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     neighborhood: "Midbrook",
     city: "Rock Hill",
     state: "SC",
+    /* city is the market */
+    market: "rock-hill",
     propertyType: "Single Family",
     /* York County, and a listed SC market as of 2026-08-17 (CLAUDE.md §5). */
     pillars: ["carolinas-border"],
@@ -694,6 +708,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     neighborhood: "Dilworth",
     city: "Charlotte",
     state: "NC",
+    /* subdivision name is the market name */
+    market: "dilworth",
     propertyType: "Condo",
     pillars: [],
     lever: "Purchased under list price, with seller concessions on top.",

@@ -32,6 +32,24 @@ export type Transaction = {
   neighborhood?: string;
   city: string;
   state: "NC" | "SC";
+  /**
+   * The §5 market this closing sits in, as a slug from lib/areas/markets.ts.
+   *
+   * Optional and frequently absent, because it cannot be derived. The ledger
+   * records subdivisions — "Shopton Point", "Moores Chapel Village" — and the
+   * roster records markets, and only Jasmine can map between them. A first pass
+   * guessed three Charlotte subdivisions into Steele Creek and got one right.
+   *
+   * So it is set only where the answer is known rather than inferred: where the
+   * city IS the market, where the subdivision name IS the market name, or where
+   * she has confirmed the pairing. Everything else stays undefined until asked.
+   * An absent market costs a cross-link; a wrong one sends a reader to a page
+   * about somewhere their house is not.
+   *
+   * lib/transactions/index.test.ts rejects any value that is not a real market
+   * slug, so a typo cannot quietly render nothing.
+   */
+  market?: string;
   propertyType: "Single Family" | "Townhouse" | "Condo";
   /** Named on new-construction entries — the ten-builder list is a real moat. */
   builder?: string;
