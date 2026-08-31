@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { publishedAreas } from "@/lib/areas";
 import { publishedPosts } from "@/lib/blog";
 import { AGENT, BROKERAGE, RESULTS_DISCLAIMER, SOCIAL, TCPA_CONSENT } from "@/lib/site";
+import { staticPageRoutes } from "./page-routes";
 
 /** See tests/next-image-stub.tsx. `alt` survives, which is what §10 asserts here. */
 vi.mock("next/image", async () => ({
@@ -80,6 +81,7 @@ const PAGES: PageEntry[] = [
   ["/contact", () => import("@/app/contact/page")],
   ["/blog", () => import("@/app/blog/page")],
   ["/areas", () => import("@/app/areas/page")],
+  ["/transactions", () => import("@/app/transactions/page")],
   ["/privacy-policy", () => import("@/app/privacy-policy/page")],
   ...POST_PAGES,
   ...AREA_PAGES,
@@ -528,5 +530,27 @@ describe("images (§10)", () => {
     for (const img of imgs) {
       expect(img, `${route} has an <img> with no alt attribute`).toMatch(/\balt=/);
     }
+  });
+});
+
+describe("page coverage", () => {
+  /**
+   * Static routes with no compliance surface, each excluded for a stated
+   * reason. Everything else on disk must appear in `PAGES` above, or it ships
+   * unaudited — which is exactly how `/transactions` slipped through: listed
+   * in tests/metadata.test.ts, absent here and from tests/accessibility.test.tsx.
+   */
+  const EXEMPT = [
+    // Internal design reference, index:false/follow:false. Not advertising —
+    // see the comment at the top of app/style-tile/page.tsx.
+    "/style-tile",
+  ];
+
+  it("covers every static page route on disk", () => {
+    const listed = new Set(PAGES.map(([route]) => route));
+    const missing = staticPageRoutes().filter(
+      (route) => !listed.has(route) && !EXEMPT.includes(route),
+    );
+    expect(missing, `add these routes to PAGES in tests/compliance.test.tsx`).toEqual([]);
   });
 });

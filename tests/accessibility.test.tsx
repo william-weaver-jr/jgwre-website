@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { publishedAreas } from "@/lib/areas";
 import { publishedPosts } from "@/lib/blog";
+import { staticPageRoutes } from "./page-routes";
 
 /**
  * CLAUDE.md §10: real estate sites are a common target for ADA demand letters,
@@ -62,6 +63,7 @@ const PAGES: PageEntry[] = [
   ["/contact", () => import("@/app/contact/page")],
   ["/blog", () => import("@/app/blog/page")],
   ["/areas", () => import("@/app/areas/page")],
+  ["/transactions", () => import("@/app/transactions/page")],
   ["/privacy-policy", () => import("@/app/privacy-policy/page")],
   ...POST_PAGES,
   ...AREA_PAGES,
@@ -153,5 +155,18 @@ describe("keyboard and landmark structure (§10)", () => {
         `${link.outerHTML} does not say it opens an external site`,
       ).toMatch(/external|new (tab|window)/);
     }
+  });
+});
+
+describe("page coverage", () => {
+  /** See the matching list in tests/compliance.test.tsx for why each is here. */
+  const EXEMPT = ["/style-tile"];
+
+  it("covers every static page route on disk", () => {
+    const listed = new Set(PAGES.map(([route]) => route));
+    const missing = staticPageRoutes().filter(
+      (route) => !listed.has(route) && !EXEMPT.includes(route),
+    );
+    expect(missing, `add these routes to PAGES in tests/accessibility.test.tsx`).toEqual([]);
   });
 });

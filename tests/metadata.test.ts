@@ -5,6 +5,7 @@ import { publishedAreas } from "@/lib/areas";
 import { publishedPosts } from "@/lib/blog";
 import { canonicalUrl } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
+import { staticPageRoutes } from "./page-routes";
 
 /**
  * Canonical and og:url, on every route, checked against each other.
@@ -162,5 +163,18 @@ describe("canonicalUrl()", () => {
 
   it("joins an interior path without doubling the slash", () => {
     expect(canonicalUrl("/about")).toBe(`${SITE_URL}/about`);
+  });
+});
+
+describe("page coverage", () => {
+  /** See the matching list in tests/compliance.test.tsx for why each is here. */
+  const EXEMPT = ["/style-tile"];
+
+  it("covers every static page route on disk", () => {
+    const listed = new Set(STATIC.map(([route]) => route));
+    const missing = staticPageRoutes().filter(
+      (route) => !listed.has(route) && !EXEMPT.includes(route),
+    );
+    expect(missing, `add these routes to STATIC in tests/metadata.test.ts`).toEqual([]);
   });
 });
