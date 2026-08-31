@@ -23,8 +23,21 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary-deep active:bg-primary-deep",
+        /*
+          `whitespace-nowrap` here and nowhere else, and the distinction is the
+          point. It was removed from the base class because a real secondary
+          label — "The 19 Things Besides Price You Can Negotiate" — forced 438px
+          of horizontal overflow at 375px when it could not wrap.
+
+          This variant only ever contains a phone number. Left to wrap, it did:
+          in the home page hero the button sits in a flex row beside that same
+          long label, lost the shrink contest, and broke "(704) 200-9360" across
+          two lines — rendering 76px tall against 56px for the identical button
+          in the closing section. A phone number split over two lines reads as a
+          rendering fault in the most prominent CTA on the site.
+        */
         phone:
-          "bg-primary text-primary-foreground tabular-nums hover:bg-primary-deep active:bg-primary-deep",
+          "bg-primary text-primary-foreground whitespace-nowrap tabular-nums hover:bg-primary-deep active:bg-primary-deep",
         outlineInk:
           "border border-accent-soft bg-transparent text-ink hover:border-accent hover:bg-surface-sunken",
         gold: "border border-accent bg-transparent text-accent hover:bg-accent hover:text-accent-foreground",

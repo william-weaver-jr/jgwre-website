@@ -3,6 +3,7 @@ import Link from "next/link";
 import { EqualHousingMark, RealtorMark } from "@/components/compliance-marks";
 import { SocialLinks } from "@/components/social-links";
 import { publishedAreas } from "@/lib/areas";
+import { publishedPosts } from "@/lib/blog";
 import { GUIDE_TITLE } from "@/lib/intake";
 import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
 import { isTransactionsPageIndexable } from "@/lib/transactions";
@@ -98,6 +99,17 @@ export function SiteFooter() {
                 <li>
                   <Link href="/transactions" className="underline-offset-4 hover:underline">
                     Transactions
+                  </Link>
+                </li>
+              ) : null}
+              {/* Gated like the two above, but fixing the opposite failure: /blog
+                  was linked from nowhere at all until 2026-08-31 — not here, not
+                  the header, not one link on the home page — while two posts sat
+                  published and reachable only through sitemap.xml. */}
+              {publishedPosts().length > 0 ? (
+                <li>
+                  <Link href="/blog" className="underline-offset-4 hover:underline">
+                    Blog
                   </Link>
                 </li>
               ) : null}
