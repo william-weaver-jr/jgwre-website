@@ -204,13 +204,24 @@ Hampton, VA** (Bill, 2026-08-20). Two consequences worth keeping straight:
   there.
 
 **Markets served:** Ballantyne, SouthPark, Steele Creek, Myers Park, Dilworth, South End,
-LoSo, Uptown, Pineville, Waxhaw (NC) · Fort Mill, Tega Cay, Indian Land, Clover /
-Lake Wylie, Rock Hill (SC)
+LoSo, Uptown, Pineville, Waxhaw, East Charlotte, Northwest Charlotte (NC) · Fort Mill,
+Tega Cay, Indian Land, Clover / Lake Wylie, Rock Hill (SC)
 
 Confirmed 2026-08-17. Lake Wylie is the unincorporated area; Clover is the town, so
 both names appear. Closings outside this list happen and belong in the transactions
 ledger when they do — Dallas NC is already there. "Markets served" is where she is
 positioned and where area pages get built, not a boundary on what she has closed.
+
+**East Charlotte and Northwest Charlotte added 2026-08-31.** Not from her own account —
+from the closed-transactions workbook's own Geographical Submarket column, cross-referenced
+against the full 44-row ledger. Seven closings carry "East Charlotte" exactly (Shannon Park,
+Windsor Park, Turtle Rock, Fieldlark Trails, Easthaven ×2) and four carry "Northwest
+Charlotte" exactly (Trinity Park, Moores Chapel Village, Aveline at Coulwood ×2) — the two
+largest evidence counts of any market on this roster, ahead of every market that predates
+them. Bill approved adding both formally. Two adjacent submarket labels in the same column,
+"North Charlotte" and "North Charlotte / University Area", are deliberately NOT folded in —
+Carlton Hills, Brownes Ferry, and Katelyn Moors stay unmapped rather than stretched into a
+market they were never recorded against.
 
 ---
 
@@ -466,6 +477,19 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
 - [ ] **Refresh the §5 stat block.** The documented counts date from an earlier pull and are
       likely low — she has closed more since. Get current numbers from Follow Up Boss or the
       MLS, including a families-served count if she wants that framing on the site.
+- [x] **Area-page build order set from the ledger — 2026-08-31.** `docs/AREAS-SPEC.md` §12
+      tallies all 44 rows against the §5 roster by market. East Charlotte (7) and Northwest
+      Charlotte (4) turned out to have more evidence than any pre-existing market and are now
+      on the roster themselves. Five markets — Myers Park, South End, Uptown, Tega Cay,
+      Waxhaw — have zero rows. The tally is a snapshot, not a ruling: more transactions still
+      need to be added to the workbook, and it should be re-run when they are.
+- [ ] **Phase 2, parked: a submarket layer above `/areas/[slug]`.** `docs/AREAS-SPEC.md` §13.
+      The workbook's Geographical Submarket tier (Gaston County, Cabarrus County, North
+      Charlotte / University Area, and others) sits one level above individual area pages and
+      could target broader queries the site doesn't own today — but it is a second
+      cannibalization problem on top of the one `CONTENT-PLAN.md` §5 already solved, and the
+      roster only just grew from this same data. Revisit once several `/areas` pages are live
+      and ranking, not before.
 - [x] **Vitality Homebuyers — RESOLVED 2026-08-07.** She co-owned it; it is no longer active.
       **Not disclosed on the site.** The investor-side experience still informs how she reads
       a property, so the About page reflects that perspective without naming the company.

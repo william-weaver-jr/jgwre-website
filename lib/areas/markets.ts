@@ -20,6 +20,22 @@ export const MARKETS: readonly Market[] = [
   { slug: "uptown", name: "Uptown", state: "NC" },
   { slug: "pineville", name: "Pineville", state: "NC" },
   { slug: "waxhaw", name: "Waxhaw", state: "NC" },
+  /* Added 2026-08-31, not from her own account but from the workbook's own
+     Geographical Submarket column, which groups a real cluster of closings
+     under this name. Seven rows carry it exactly — Shannon Park, Windsor
+     Park, Turtle Rock, Fieldlark Trails, and Easthaven (×2, both 2022 and
+     2023) — the single largest evidence count of any market on this roster,
+     ahead of every market that predates it. See lib/transactions/data.ts and
+     the tally in docs/AREAS-SPEC.md §11. */
+  { slug: "east-charlotte", name: "East Charlotte", state: "NC" },
+  /* Added 2026-08-31, same source and method as East Charlotte, above. Four
+     rows carry it exactly — Trinity Park, Moores Chapel Village, and Aveline
+     at Coulwood (×2, both closings). Two nearby submarket labels in the same
+     column, "North Charlotte" and "North Charlotte / University Area", are
+     NOT the same value and are deliberately not folded in here — Carlton
+     Hills, Brownes Ferry, and Katelyn Moors stay unmapped rather than
+     stretched into a market they were not recorded against. */
+  { slug: "northwest-charlotte", name: "Northwest Charlotte", state: "NC" },
   { slug: "fort-mill", name: "Fort Mill", state: "SC" },
   { slug: "tega-cay", name: "Tega Cay", state: "SC" },
   { slug: "indian-land", name: "Indian Land", state: "SC" },

@@ -387,11 +387,12 @@ market: a thick documented record, or her own residency. Fort Mill has the first
 Creek has both a documented closing and the second. After those, the border corridor, then
 the Charlotte submarkets where `lib/reviews/data.ts` shows real activity.
 
-**Ask the subdivision question once, not per page.** The ledger stores subdivisions and the
-roster stores towns, and only Jasmine can map between them — the Steele Creek pass turned up
-one match out of three guesses. Doing that mapping for all 33 closings in one sitting would
-tell us which markets actually have evidence behind them, and would settle the running order
-for every remaining page.
+**The subdivision question, asked once — answered 2026-08-31.** This section originally
+asked for exactly what §12 below now provides: the full ledger, mapped in one sitting, so
+the running order stops being guessed at row by row. The closed-transactions workbook grew
+its own Neighborhood and Geographical Submarket columns, and cross-referencing all 44 rows
+against the §5 roster surfaced the answer for the whole roster at once rather than one
+market at a time.
 
 **Ship them one at a time.** A market with nothing real to say stays absent from `data.ts`
 and its URL 404s, which is the specified behaviour.
@@ -406,3 +407,82 @@ most `/area/{slug}/` URLs also land there. See `docs/AREA-GUIDE-MIGRATION.md` §
 The hub must list only markets that have pages. `unwrittenMarkets()` stays out of the UI —
 a card linking to a 404, or a page rushed thin to satisfy a card, is the failure this whole
 document exists to prevent.
+
+---
+
+## 12. The build order, from the ledger — a snapshot, not a ruling
+
+Every one of the 44 ledger rows, matched against its workbook Neighborhood or Geographical
+Submarket value where that value names a §5 market exactly. `market` set on the row wherever
+it does; CLAUDE.md §5 and `lib/areas/markets.ts` record the two new markets this surfaced.
+Full method and the individual row-by-row reasoning is in the chat history of 2026-08-31 —
+this table is the conclusion, not the derivation.
+
+| Rank | Market | Rows | Why it's there |
+|---|---|---|---|
+| 1 | **East Charlotte** | 7 | Shannon Park ×2, Windsor Park, Turtle Rock, Fieldlark Trails, Easthaven ×2 |
+| 2 | **Northwest Charlotte** | 4 | Trinity Park, Moores Chapel Village, Aveline at Coulwood ×2 |
+| 3 | Fort Mill | 2 | English Trails, Masons Bend |
+| 3 | Rock Hill | 2 | Lexington Commons, Midbrook |
+| 3 | **Steele Creek** | 2 | Shopton Point, Waterlyn — **plus residency (§10), which outranks the count** |
+| 6 | SouthPark | 1 | Piedmont Row / Foreman |
+| 6 | Dilworth | 1 | 1315 East Condominium / Bernhardt |
+| 6 | Pineville | 1 | Preston Park |
+| 6 | LoSo | 1 | LoSo Terraces / LoSo Townhomes |
+| 6 | Lake Wylie | 1 | Patriots Crossing |
+| 6 | Indian Land | 1 | Walnut Creek — her own review says "Lancaster / Indian Land" |
+| 6 | Ballantyne | 1 | Belle Vista / "Ballantyne West" |
+| — | Myers Park, South End, Uptown, Tega Cay, Waxhaw | 0 | No closing in 44 rows names any of them |
+
+**Steele Creek stays second regardless of the tie at rank 3.** §10's residency argument is
+categorical, not additive — she does not need to research the commute, she drives it — and
+that outranks a raw count the same way it outranked Fort Mill's thicker record when this
+document first proposed the order.
+
+**This will change, and is meant to.** The workbook is a slice of her 73+ career
+transactions, not the whole of it — Bill's own note when confirming the two new markets was
+that more transactions still need to be added to close that gap. Re-run this tally whenever
+the workbook grows materially rather than trusting this table past its date. The zero-row
+markets in particular are a snapshot of the workbook's current coverage, not a verdict on
+whether she has ever worked there.
+
+**Proposed order, superseding §11's "hub → Fort Mill → Steele Creek":** hub → East
+Charlotte → Northwest Charlotte → Fort Mill → Steele Creek → re-assess. The zero-evidence
+five wait on either new closings or a residency-style case, whichever comes first.
+
+---
+
+## 13. Phase 2 — a submarket layer above `/areas/[slug]` (not scoped, not scheduled)
+
+Recorded 2026-08-31 so the assessment survives past the conversation that produced it. Bill's
+call: **hold this. Revisit once several `/areas` pages are live**, not before.
+
+**The opportunity.** The workbook's hierarchy is three levels — Subdivision → Neighborhood →
+Geographical Submarket — and the site has one: `/areas/[slug]`, flat, matched 1:1 to the §5
+roster. The Submarket tier (East Charlotte, Northwest Charlotte, Gaston County / Greater
+Charlotte Area, and others §12 didn't promote) sits one level above the individual area
+pages and would target broader, earlier-funnel queries — "homes for sale east charlotte" —
+that nothing on the site currently owns. Roughly half the ledger's 44 rows sit in submarket
+clusters with no page at all once East Charlotte and Northwest Charlotte are accounted for:
+Gaston County (Dallas ×2, Mount Holly), Cabarrus County / Concord (×2), North Charlotte /
+University Area (Brownes Ferry, Katelyn Moors), plus single closings in Huntersville and
+Mint Hill.
+
+**The cost.** A hub page above `/areas/[slug]` is a second cannibalization problem of exactly
+the kind `CONTENT-PLAN.md` §5 already solved once for `/carolinas-border` vs.
+`/areas/fort-mill` — every submarket hub would need the same split worked out against its
+own children, and against whichever pillar page already touches that geography. It is also
+another content-discipline surface: a hub page makes claims about a broader area than any
+single closing supports, which is exactly the "plausible aggregate statistic" failure mode
+`AREA-GUIDE-MIGRATION.md` documents in the site this one replaces.
+
+**Why later, not now.** Two live area pages is not enough children for a hub to organize, and
+building the layer before the roster has real content inverts §8's stepped-build reasoning:
+the child pages are the expensive, evidence-gated part; the hub is cheap and can be added
+whenever the children exist. There is no efficiency captured by front-loading it.
+
+**What would trigger revisiting it:** several `/areas/[slug]` pages live and ranking, and a
+clear answer on whether the off-roster clusters above (Gaston County, Cabarrus County, North
+Charlotte / University Area) get promoted into the §5 roster the way East Charlotte and
+Northwest Charlotte just were. If they do, the case for a hub layer gets stronger with each
+addition; if the roster stays as it is, a flat `/areas` index may simply be enough.

@@ -71,7 +71,7 @@ function withText(overrides: Partial<Area>): Area {
 
 describe("the market roster", () => {
   it("carries every market in CLAUDE.md §5", () => {
-    expect(MARKETS).toHaveLength(15);
+    expect(MARKETS).toHaveLength(17);
     expect(MARKETS.filter((m) => m.state === "SC").map((m) => m.name).sort()).toEqual([
       "Fort Mill",
       "Indian Land",

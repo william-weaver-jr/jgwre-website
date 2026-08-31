@@ -43,6 +43,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: ["sellers"],
+    /* Submarket column: East Charlotte, exact match. */
+    market: "east-charlotte",
     /* Workbook: "Helped an estate sale." Kept plain. An estate sale means
        someone is selling a house after a death, and the ledger should not
        dress that up. */
@@ -58,6 +60,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: ["sellers"],
+    /* Submarket column: Northwest Charlotte, exact match. */
+    market: "northwest-charlotte",
   },
   {
     id: "2026-edgewater-01",
@@ -126,6 +130,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     propertyType: "Single Family",
     /* Relocating from Florida. */
     pillars: ["relocation"],
+    /* Submarket column: East Charlotte, exact match. */
+    market: "east-charlotte",
     /* Workbook: under list, plus concessions. The client's own review adds
        what the concessions were FOR — foundation work the house needed — which
        is the part worth having, and it carries no figure. */
@@ -248,6 +254,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: ["sellers"],
+    /* Submarket column: East Charlotte, exact match. */
+    market: "east-charlotte",
   },
 
   /* ------------------------------------------------------------------ 2024 */
@@ -261,6 +269,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "SC",
     propertyType: "Single Family",
     pillars: ["sellers", "carolinas-border"],
+    /* Neighborhood column: "Lake Wylie / Bethel" — and Clover, the closing's city, is lake-wylie's own postal city in markets.ts. */
+    market: "lake-wylie",
     lever: "Under contract in four days.",
   },
   {
@@ -277,6 +287,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     builder: "Hopper Communities",
     /* Relocation from Chicago, documented in both clients' own reviews. */
     pillars: ["new-construction", "relocation"],
+    /* Subdivision "LoSo Townhomes", Neighborhood "Lower South End (LoSo)" — both name the market directly. */
+    market: "loso",
     lever: "Out-of-state buyers who toured for one weekend and bought at the end of it.",
     /* Two reviews, one from each half of the couple, already linked to each
        other by sameTransactionAs. Never run both on a page — linking the
@@ -326,6 +338,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: ["sellers"],
+    /* Submarket column: Northwest Charlotte, exact match. */
+    market: "northwest-charlotte",
     reviewId: "zillow-david-godfrey",
   },
   {
@@ -393,6 +407,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: ["sellers"],
+    /* Neighborhood column: Steele Creek, exact match — confirmed by Bill 2026-08-31: off Shopton Rd, considered Southwest Charlotte. */
+    market: "steele-creek",
     lever: "Under contract in one day.",
   },
   {
@@ -405,6 +421,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "SC",
     propertyType: "Single Family",
     pillars: ["sellers", "carolinas-border"],
+    /* Neighborhood column: "Indian Land Perimeter" — and the client's own review says "sold our home in Lancaster/Indian Land." */
+    market: "indian-land",
     /* The lever is sourced from the workbook's review text for this closing,
        which is a FAMILY member's account — these are her parents. Kept
        deliberately (Bill, 2026-08-17): the facts are facts about the
@@ -487,6 +505,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     /* Relocating from South Carolina — a short move, but a state line and two
        sets of rules, which is what the pillar is about. */
     pillars: ["relocation"],
+    /* Submarket column: East Charlotte, exact match. */
+    market: "east-charlotte",
     lever: "Purchased under list price.",
   },
 
@@ -519,6 +539,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: [],
+    /* Submarket column: East Charlotte, exact match. */
+    market: "east-charlotte",
     lever: "Purchased under list price, with seller concessions on top.",
     reviewId: "zillow-shayna-quilty-yoder",
   },
@@ -605,6 +627,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: [],
+    /* Submarket column: East Charlotte, exact match. */
+    market: "east-charlotte",
     reviewId: "google-seth-kuhnau",
   },
   {
@@ -620,6 +644,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     propertyType: "Single Family",
     builder: "JCB Urban",
     pillars: ["new-construction"],
+    /* Submarket column: Northwest Charlotte, exact match. */
+    market: "northwest-charlotte",
     /* A hot market and the winning offer went over asking. Deliberately not
        marketed: it is a dollar outcome, and "paid more than asking" is not a
        lever that recommends her. */
@@ -640,6 +666,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     propertyType: "Single Family",
     builder: "JCB Urban",
     pillars: ["new-construction"],
+    /* Submarket column: Northwest Charlotte, exact match. */
+    market: "northwest-charlotte",
     reviewId: "zillow-harrist245034",
   },
   {
@@ -671,6 +699,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Single Family",
     pillars: [],
+    /* Submarket column: East Charlotte, exact match. */
+    market: "east-charlotte",
     lever: "Seller concessions at closing.",
   },
   {
@@ -683,6 +713,8 @@ export const TRANSACTIONS: readonly Transaction[] = [
     state: "NC",
     propertyType: "Condo",
     pillars: [],
+    /* Neighborhood column: "Ballantyne West". */
+    market: "ballantyne",
     lever: "Won in a multiple-offer situation.",
   },
   {
