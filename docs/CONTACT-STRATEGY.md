@@ -243,7 +243,7 @@ attached; the branch questions are the cheapest thing on the page to change.
 | | |
 |---|---|
 | `lib/intake/` | Questions, branches, and the lever table. `levers.ts` is copy and reads as advertising — see the compliance header on it |
-| `components/contact-intake.tsx` | The three-step form. Radios and checkboxes under the chips, so keyboard and screen reader semantics come free |
+| `components/contact-intake.tsx` | The three-step form. Radios and checkboxes under the chips, so keyboard and screen reader semantics come free. Step 3 also carries an **optional** preferred-contact choice (call / text / email), added 2026-08-31 — it reaches both the FUB note and the notification email as a "Prefers:" line, and the confirmation screen answers in the same terms rather than telling a texter she will call |
 | `components/sticky-contact-bar.tsx` | Mobile bar. Appears past 600px, hides whenever the intake is on screen |
 | `components/contact-link-tracking.tsx` | One delegated listener for `tel:` **and** `sms:`; every contact link carries `data-cta-placement`. Was `tel-tracking.tsx` until 2026-08-31 |
 | `app/contact/page.tsx` | Phone first in the hero, intake below, brokerage block last |

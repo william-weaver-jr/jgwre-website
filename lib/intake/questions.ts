@@ -1,4 +1,4 @@
-import type { IntakeQuestion, Side } from "./types";
+import type { ContactMethod, IntakeQuestion, Side } from "./types";
 
 /**
  * Step 1. Five options, one tap, no personal information.
@@ -14,6 +14,29 @@ export const SIDES: readonly { value: Side; label: string; note: string }[] = [
   { value: "relocating", label: "Relocating here", note: "Moving to Charlotte from out of state" },
   { value: "deciding", label: "Still deciding", note: "Working out whether this is the year" },
 ];
+
+/**
+ * Step 3. How she should reach them, offered after the details rather than
+ * before: this is a refinement of contact she has already agreed to, not a
+ * gate in front of it.
+ *
+ * "Text" exists on this list because the site can now honour it. Until
+ * 2026-08-31 there was no sms: link anywhere on the site, so asking the question
+ * would have collected a preference nothing could act on.
+ *
+ * There is no "no preference" option. Selecting nothing already says that, and
+ * a fourth radio to say the same thing is a decision asked for no reason.
+ */
+export const CONTACT_METHODS: readonly { value: ContactMethod; label: string }[] = [
+  { value: "call", label: "A call" },
+  { value: "text", label: "A text" },
+  { value: "email", label: "An email" },
+];
+
+/** The label for a stored preference, for the FUB note and the email. */
+export function contactMethodLabel(method: ContactMethod): string {
+  return CONTACT_METHODS.find((m) => m.value === method)?.label ?? method;
+}
 
 /**
  * Market groups rather than the fourteen individual markets in CLAUDE.md §5 — a

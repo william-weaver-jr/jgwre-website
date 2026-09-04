@@ -3,7 +3,7 @@ import { Resend } from "resend";
 
 import { leadSchema, type Lead } from "@/lib/lead";
 import { sendToFollowUpBoss } from "@/lib/fub";
-import { formatIntake } from "@/lib/intake";
+import { formatContactMethod, formatIntake } from "@/lib/intake";
 import { AGENT } from "@/lib/site";
 
 /**
@@ -118,6 +118,7 @@ async function sendNotificationEmail(lead: Lead, fubError: unknown): Promise<voi
   const resend = new Resend(apiKey);
 
   const intake = formatIntake(lead.side, lead.intake);
+  const prefers = formatContactMethod(lead.contactMethod);
 
   const warning = fubError
     ? "WARNING: this lead did NOT reach Follow Up Boss. Add it manually.\n\n"
@@ -136,6 +137,7 @@ async function sendNotificationEmail(lead: Lead, fubError: unknown): Promise<voi
       `Type:  ${lead.leadType}`,
       `Page:  ${lead.source}`,
       intake.length ? `\n${intake.join("\n")}` : "",
+      prefers ? `\n${prefers}` : "",
       lead.message ? `\nMessage:\n${lead.message}` : "",
       `\nTCPA consent accepted at submission.`,
     ].join("\n"),

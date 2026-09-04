@@ -271,6 +271,20 @@ describe("sendToFollowUpBoss", () => {
       await sendToFollowUpBoss(lead);
       expect(bodyOf(fetchMock).message).not.toContain("Message:");
     });
+
+    /* The note is what she reads before calling, so a stated preference has to
+       be in it and not only in the payload. */
+    it("names a stated contact preference in the words the visitor tapped", async () => {
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss({ ...lead, contactMethod: "text" });
+      expect(bodyOf(fetchMock).message).toContain("Prefers: A text");
+    });
+
+    it("omits the preference line when none was given", async () => {
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss(lead);
+      expect(bodyOf(fetchMock).message).not.toContain("Prefers:");
+    });
   });
 
   describe("failures", () => {

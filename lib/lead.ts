@@ -31,6 +31,16 @@ export const leadSchema = z.object({
     )
     .optional(),
 
+  /**
+   * Step 3, optional. How she should reach them.
+   *
+   * Optional in the schema as well as the UI, and deliberately so: it is asked
+   * at the moment the visitor is already handing over a name, an email and a
+   * phone number, and a required decision there is bought with completions.
+   * Absent means no preference, which is a real answer.
+   */
+  contactMethod: z.enum(["call", "text", "email"]).optional(),
+
   /** TCPA consent. Must be explicitly true — never pre-checked in the UI. */
   consent: z.literal(true, {
     errorMap: () => ({ message: "Consent is required to submit this form." }),

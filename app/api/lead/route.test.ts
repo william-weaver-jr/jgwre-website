@@ -102,6 +102,43 @@ describe("POST /api/lead — the happy path", () => {
     expect(email.text).toContain("New construction");
     expect(email.text).toContain("TCPA consent accepted at submission");
   });
+
+  /*
+    The preferred contact method has to survive BOTH deliveries. The route
+    builds the FUB payload and the email body separately from the same lead, so
+    a field can easily reach one and not the other — and a preference that only
+    Follow Up Boss can see is invisible to whoever reads the notification.
+  */
+  it("carries a stated contact preference into the notification email", async () => {
+    const { POST } = await loadRoute();
+    await POST(post({ ...valid, contactMethod: "text" }, freshIp()));
+
+    expect(emailsSend.mock.calls[0][0].text).toContain("Prefers: A text");
+  });
+
+  it("passes the preference to Follow Up Boss too", async () => {
+    const { POST } = await loadRoute();
+    await POST(post({ ...valid, contactMethod: "email" }, freshIp()));
+
+    expect(sendToFollowUpBoss).toHaveBeenCalledWith(
+      expect.objectContaining({ contactMethod: "email" }),
+    );
+  });
+
+  it("says nothing about a preference that was not given", async () => {
+    const { POST } = await loadRoute();
+    await POST(post(valid, freshIp()));
+
+    expect(emailsSend.mock.calls[0][0].text).not.toContain("Prefers:");
+  });
+
+  /* Optional means optional: an unknown value must not cost the lead. */
+  it("rejects an unrecognised preference rather than accepting it silently", async () => {
+    const { POST } = await loadRoute();
+    const response = await POST(post({ ...valid, contactMethod: "carrier-pigeon" }, freshIp()));
+
+    expect(response.status).toBe(400);
+  });
 });
 
 describe("POST /api/lead — validation", () => {

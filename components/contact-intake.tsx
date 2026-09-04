@@ -8,9 +8,11 @@ import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { readUtm, track } from "@/lib/analytics";
 import {
   BRANCHES,
+  CONTACT_METHODS,
   SIDES,
   SIDE_TO_LEAD_TYPE,
   selectLevers,
+  type ContactMethod,
   type IntakeQuestion,
   type Side,
 } from "@/lib/intake";
@@ -66,6 +68,8 @@ export function ContactIntake({
   const [side, setSide] = useState<Side | null>(prefill?.side ?? null);
   const [answers, setAnswers] = useState<Answers>(prefill?.answers ?? {});
   const [submitting, setSubmitting] = useState(false);
+  /* Kept so the confirmation can answer in the same terms the visitor chose. */
+  const [chosenMethod, setChosenMethod] = useState<ContactMethod | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const started = useRef(false);
@@ -138,6 +142,18 @@ export function ContactIntake({
       ),
     );
 
+    /*
+      Validated against CONTACT_METHODS rather than cast. FormData yields a
+      string or null, and `as ContactMethod` on that is a claim the browser has
+      not made — a stale or tampered value would sail through here and be
+      rejected by zod on the server as a whole-form 400, losing a lead over an
+      optional field. Unrecognised means unstated.
+    */
+    const rawMethod = data.get("contactMethod");
+    const contactMethod = CONTACT_METHODS.some((m) => m.value === rawMethod)
+      ? (rawMethod as ContactMethod)
+      : undefined;
+
     const payload = {
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
@@ -147,6 +163,7 @@ export function ContactIntake({
       leadType: leadType ?? (side ? SIDE_TO_LEAD_TYPE[side] : "general"),
       side: side ?? undefined,
       intake: Object.keys(filled).length ? filled : undefined,
+      contactMethod,
       consent: data.get("consent") === "on",
       website: String(data.get("website") ?? ""),
       utm: readUtm(),
@@ -195,6 +212,7 @@ export function ContactIntake({
         page: source,
         delivery: result.delivery ?? "unknown",
       });
+      setChosenMethod(contactMethod);
       setStep("done");
     } catch {
       /* The request never completed — offline, DNS, a blocked fetch. Distinct
@@ -234,7 +252,7 @@ export function ContactIntake({
         </div>
 
         {step === "done" ? (
-          <Confirmation levers={levers.map((lever) => lever.text)} />
+          <Confirmation levers={levers.map((lever) => lever.text)} method={chosenMethod} />
         ) : (
           <>
             <p className="mt-10 text-sm text-ink-muted" aria-live="polite">
@@ -499,6 +517,42 @@ function ContactStep({
         </div>
       </div>
 
+      {/*
+        How she should reach them. Optional, and nothing is pre-selected.
+
+        It sits after the details rather than before them: this refines contact
+        the visitor has already agreed to, it does not gate it. Nothing here may
+        touch the consent block below — that text is verbatim and the checkbox is
+        never pre-checked. CLAUDE.md §7.
+
+        A <fieldset> with a real <legend>, like both radio groups in steps 1 and
+        2. A group of radios whose only label is a paragraph above them is the
+        commonest way a form passes a glance and fails a screen reader. §10.
+
+        No "no preference" option: choosing nothing already says it.
+      */}
+      <fieldset className="mt-8 border-0 p-0">
+        <legend className="text-sm font-medium text-ink">
+          How should she reach you?{" "}
+          <span className="font-normal text-ink-muted">(optional)</span>
+        </legend>
+        <div className="mt-3 flex flex-wrap gap-3">
+          {CONTACT_METHODS.map((method) => (
+            <label key={method.value} className="cursor-pointer">
+              <input
+                type="radio"
+                name="contactMethod"
+                value={method.value}
+                className="peer sr-only"
+              />
+              <span className="inline-flex min-h-11 items-center rounded-sm border border-border bg-surface-raised px-5 text-base transition-colors hover:border-accent-soft peer-checked:border-accent peer-focus-visible:outline-2 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-accent">
+                {method.label}
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
       {/* Honeypot. Real users never see it; bots fill it. CLAUDE.md §9. */}
       <div aria-hidden="true" className="sr-only">
         <label htmlFor={`${formId}-website`}>Website</label>
@@ -567,7 +621,31 @@ function ContactStep({
   );
 }
 
-function Confirmation({ levers }: { levers: readonly string[] }) {
+function Confirmation({
+  levers,
+  method,
+}: {
+  levers: readonly string[];
+  method?: ContactMethod;
+}) {
+  /*
+    Answer in the terms the visitor just chose. Asking a preference and then
+    telling everyone the same thing makes the question theatre, and a reader who
+    ticked "A text" and is then told she will call has been told the field did
+    not matter.
+
+    Deliberately still not a promise about timing, and the number stays on screen
+    in every branch — this narrows the channel, it does not add a commitment.
+    The confirmation screen is advertising and is already listed for BIC review
+    in docs/CONTACT-STRATEGY.md §7.
+  */
+  const reach =
+    method === "text"
+      ? `She’ll text you from ${AGENT.phoneDisplay}. If you’d rather not wait, that number takes calls and texts.`
+      : method === "email"
+        ? `She’ll email you. If you’d rather not wait, ${AGENT.phoneDisplay} takes calls and texts.`
+        : `She’ll call you from ${AGENT.phoneDisplay}. If you’d rather not wait, that number takes calls and texts.`;
+
   return (
     <div className="mt-10">
       <ol className="max-w-3xl border-t border-border">
@@ -582,8 +660,7 @@ function Confirmation({ levers }: { levers: readonly string[] }) {
       </ol>
 
       <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-muted">
-        Your details are with Jasmine. She’ll call you from {AGENT.phoneDisplay}. If you’d
-        rather not wait, that number takes calls and texts.
+        Your details are with Jasmine. {reach}
       </p>
 
       <div className="mt-8">

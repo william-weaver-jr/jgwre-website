@@ -338,3 +338,92 @@ describe("accessibility (§10)", () => {
     );
   });
 });
+
+/**
+ * The preferred-contact field, added 2026-08-31.
+ *
+ * It is optional, and the tests that matter are the ones that keep it optional:
+ * a field asked at the moment a visitor is already handing over a name, an
+ * email and a phone number is bought with completions if it ever becomes a
+ * gate. The rest guard the two things a screenshot cannot show — that it is a
+ * labelled group rather than loose radios, and that it did not disturb consent.
+ */
+describe("preferred contact method", () => {
+  async function toContactStep(user: ReturnType<typeof userEvent.setup>) {
+    render(<ContactIntake {...props} prefill={{ side: "buying" }} />);
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+  }
+
+  it("offers call, text, and email, with nothing preselected", async () => {
+    const user = userEvent.setup();
+    await toContactStep(user);
+
+    const group = screen.getByRole("group", { name: /How should she reach you/ });
+    expect(group).toBeInTheDocument();
+
+    for (const label of ["A call", "A text", "An email"]) {
+      const option = screen.getByRole("radio", { name: label });
+      expect(option).not.toBeChecked();
+      expect(option).not.toBeRequired();
+    }
+  });
+
+  /* The one that matters most: it must never block a submission. */
+  it("submits without a preference, and sends none", async () => {
+    const user = userEvent.setup();
+    await toContactStep(user);
+    await fillContactStep(user);
+    await user.click(screen.getByRole("button", { name: "Send this to Jasmine" }));
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    expect(payload().contactMethod).toBeUndefined();
+  });
+
+  it("sends the choice when one is made", async () => {
+    const user = userEvent.setup();
+    await toContactStep(user);
+    await user.click(screen.getByRole("radio", { name: "A text" }));
+    await fillContactStep(user);
+    await user.click(screen.getByRole("button", { name: "Send this to Jasmine" }));
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    expect(payload().contactMethod).toBe("text");
+  });
+
+  /*
+    Asking a preference and then telling everyone the same thing makes the
+    question theatre. A reader who ticked "A text" and is then told she will
+    call has been told the field did not matter.
+  */
+  it("answers the confirmation in the terms the visitor chose", async () => {
+    const user = userEvent.setup();
+    await toContactStep(user);
+    await user.click(screen.getByRole("radio", { name: "A text" }));
+    await fillContactStep(user);
+    await user.click(screen.getByRole("button", { name: "Send this to Jasmine" }));
+
+    await waitFor(() => expect(screen.getByText(/Your details are with Jasmine/)).toBeInTheDocument());
+    expect(screen.getByText(/She’ll text you/)).toBeInTheDocument();
+    expect(screen.queryByText(/She’ll call you/)).not.toBeInTheDocument();
+  });
+
+  it("still says call when no preference was given", async () => {
+    const user = userEvent.setup();
+    await toContactStep(user);
+    await fillContactStep(user);
+    await user.click(screen.getByRole("button", { name: "Send this to Jasmine" }));
+
+    await waitFor(() => expect(screen.getByText(/She’ll call you/)).toBeInTheDocument());
+  });
+
+  /* §7. The field sits above the consent block and must not have moved it. */
+  it("leaves the consent box unchecked and required", async () => {
+    const user = userEvent.setup();
+    await toContactStep(user);
+    await user.click(screen.getByRole("radio", { name: "A call" }));
+
+    const consent = screen.getByRole("checkbox", { name: new RegExp(TCPA_CONSENT.slice(0, 40)) });
+    expect(consent).not.toBeChecked();
+    expect(consent).toBeRequired();
+  });
+});

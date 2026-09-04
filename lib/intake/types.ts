@@ -9,6 +9,16 @@
 /** Step 1. The only question with no wrong answer, and the only one with no PII. */
 export type Side = "buying" | "selling" | "both" | "relocating" | "deciding";
 
+/**
+ * Step 3. How she should reach them.
+ *
+ * Optional, and that is the whole design. It is asked at the point the visitor
+ * is already handing over a name, an email and a phone number, so anything that
+ * adds a required decision there is bought at the cost of completions. An
+ * unanswered preference is a real answer — it means they do not mind.
+ */
+export type ContactMethod = "call" | "text" | "email";
+
 /** One step-2 answer. Multi-select questions hold an array. */
 export type AnswerValue = string | readonly string[];
 

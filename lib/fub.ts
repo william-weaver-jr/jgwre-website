@@ -1,4 +1,4 @@
-import { formatIntake } from "@/lib/intake";
+import { formatContactMethod, formatIntake } from "@/lib/intake";
 import type { Lead } from "@/lib/lead";
 import { SITE_URL } from "@/lib/site";
 
@@ -181,6 +181,7 @@ function buildMessage(lead: Lead): string {
     // The intake answers are the reason to call this lead prepared. They go above
     // the free-text message, which is optional and usually empty.
     ...formatIntake(lead.side, lead.intake),
+    formatContactMethod(lead.contactMethod),
     lead.message ? `Message: ${lead.message}` : null,
     lead.utm
       ? `UTM: ${Object.entries(lead.utm)

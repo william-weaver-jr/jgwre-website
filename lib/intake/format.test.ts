@@ -3,8 +3,8 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { formatIntake } from "./format";
-import { BRANCHES, SIDE_TO_LEAD_TYPE, SIDES, labelFor } from "./questions";
+import { formatContactMethod, formatIntake } from "./format";
+import { BRANCHES, CONTACT_METHODS, SIDE_TO_LEAD_TYPE, SIDES, labelFor } from "./questions";
 import { LEVERS, selectLevers } from "./levers";
 import { GUIDE_TITLE, GUIDE_TITLE_SHORT, ITEM_COUNT_WORD, NEGOTIABLE_ITEMS } from "./guide";
 import type { Side } from "./types";
@@ -197,5 +197,28 @@ describe("guide title", () => {
 
   it("spells the count in words for prose", () => {
     expect(ITEM_COUNT_WORD).toBe("nineteen");
+  });
+});
+
+describe("formatContactMethod", () => {
+  it("says nothing when the visitor did not choose", () => {
+    expect(formatContactMethod(undefined)).toBeNull();
+  });
+
+  it("renders the label a human tapped, not the stored id", () => {
+    expect(formatContactMethod("text")).toBe("Prefers: A text");
+    expect(formatContactMethod("call")).toBe("Prefers: A call");
+    expect(formatContactMethod("email")).toBe("Prefers: An email");
+  });
+
+  /*
+    lib/fub.ts and the route handler build the same lead twice for two
+    destinations. One label source is what stops the CRM note and the
+    notification email disagreeing about what the visitor asked for.
+  */
+  it("covers every option the form can offer", () => {
+    for (const method of CONTACT_METHODS) {
+      expect(formatContactMethod(method.value)).toBe(`Prefers: ${method.label}`);
+    }
   });
 });
