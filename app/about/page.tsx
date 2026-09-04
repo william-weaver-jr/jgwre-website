@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/page-hero";
 import { PHOTOS } from "@/lib/images";
 import { JsonLd, videoObjectSchema } from "@/lib/schema";
 import { isPrimaryPlacement, videoForRoute } from "@/lib/video";
-import { BROKERAGE, PILLARS } from "@/lib/site";
+import { BROKERAGE, CAREER_TRANSACTIONS, PILLARS } from "@/lib/site";
 import Link from "next/link";
 import { GUIDE_TITLE } from "@/lib/intake";
 import { routeMetadata } from "@/lib/seo";
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 /** Documented in CLAUDE.md §5. See the open item there about refreshing these. */
 const RECORD = [
   { value: "Top 5", label: "Producer at Stone Realty Group, 2023 and 2024" },
-  { value: "73+", label: "Transactions closed" },
+  { value: CAREER_TRANSACTIONS, label: "Transactions closed" },
   { value: "105", label: "Five-star client reviews" },
 ];
 

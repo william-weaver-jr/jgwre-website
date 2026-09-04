@@ -397,6 +397,53 @@ describe("banned language (BRAND-VOICE.md §2)", () => {
   });
 });
 
+describe("completeness claims (§7)", () => {
+  /**
+   * An absolute about what a list contains is the same class of problem as an
+   * absolute about what a negotiation will produce, and easier to write by
+   * accident.
+   *
+   * /negotiation carried three of these until 2026-09-04 — "the list of
+   * everything else" in its meta description, "everything else" in the OG
+   * description, and "everything that can be asked for" above the form. A
+   * purchase contract has more terms than any list of nineteen, so each was
+   * both inaccurate and an absolute in advertising. The h1 was already bounded.
+   *
+   * Two things are deliberately NOT caught here, and both are on the site:
+   *
+   * - "Everything below is also on the table" (/negotiation) says the listed
+   *   items are negotiable. It makes no claim that the list is exhaustive.
+   * - "Almost every term in a purchase contract is negotiable" (a published
+   *   post) is the correctly hedged form. An earlier draft of this test matched
+   *   the bare phrase "every term" and failed on it, which is the wrong lesson:
+   *   the hedge is what makes it accurate, and a test that punishes hedging
+   *   teaches the opposite of what §7 wants.
+   *
+   * So the patterns below are specific constructions, not keywords.
+   */
+  const ABSOLUTES = [
+    "everything that can be",
+    "everything else on the table",
+    "list of everything",
+    "complete list",
+    "exhaustive list",
+    "is everything you can",
+    "all the terms you can",
+  ];
+
+  it.each(PAGES.map(([route]) => route))(
+    "%s claims no list is complete",
+    async (route) => {
+      const body = ourCopy(await page(route)).toLowerCase();
+      for (const phrase of ABSOLUTES) {
+        expect(body, `${route} contains the completeness claim "${phrase}"`).not.toContain(
+          phrase,
+        );
+      }
+    },
+  );
+});
+
 describe("undocumented claims (§6)", () => {
   /**
    * §6 says to leave `TODO(verify)` in place rather than invent a number. It is

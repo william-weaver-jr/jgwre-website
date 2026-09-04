@@ -153,6 +153,23 @@ export const BROKERAGE = {
 } as const;
 
 /**
+ * Career closed transactions, as documented in CLAUDE.md §5.
+ *
+ * A string rather than a number because the "+" is part of the claim: the
+ * documented figure is a floor, not a count, and rendering `73` alone would
+ * assert something narrower than the source supports.
+ *
+ * It lives here because three pages state it and two of them used to hold their
+ * own copy. /transactions needs it to explain why its ledger shows fewer rows
+ * than the home page shows transactions — the two numbers measure different
+ * things, and a visitor comparing them can only tell that if one page says so.
+ *
+ * §5's open item about refreshing the stat block applies to this value. When it
+ * is refreshed, this is the only line that changes.
+ */
+export const CAREER_TRANSACTIONS = "73+";
+
+/**
  * "Search Homes" points at the existing Stone Realty Group IDX — zero compliance
  * surface, no MLS data on this domain. CLAUDE.md Locked Decision #2.
  */

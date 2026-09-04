@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { PHOTOS } from "@/lib/images";
 import { dedupeByTransaction, publishableReviews, reviewById } from "@/lib/reviews";
 import { JsonLd, realEstateAgentSchema } from "@/lib/schema";
-import { AGENT, PILLARS } from "@/lib/site";
+import { AGENT, CAREER_TRANSACTIONS, PILLARS } from "@/lib/site";
 import { GUIDE_TITLE, ITEM_COUNT, SIDES } from "@/lib/intake";
 import { routeMetadata } from "@/lib/seo";
 
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 
 const RECORD = [
   { value: "98.84%", label: "List-to-sale ratio" },
-  { value: "73+", label: "Transactions" },
+  { value: CAREER_TRANSACTIONS, label: "Transactions" },
   { value: "105", label: "Five-star reviews" },
 ];
 

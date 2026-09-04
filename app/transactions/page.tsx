@@ -4,7 +4,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { TransactionRow } from "@/components/transaction-row";
-import { AGENT, PILLARS } from "@/lib/site";
+import { AGENT, CAREER_TRANSACTIONS, PILLARS } from "@/lib/site";
 import { routeMetadata } from "@/lib/seo";
 import {
   filterByPillar,
@@ -81,6 +81,30 @@ export default async function TransactionsPage({
           <>
             Closed transactions, both sides, grouped by year. Where something other than price
             moved, it says so. That is usually where the money was.
+            {/*
+              Why this page counts fewer than the home page does.
+
+              The home page and /about both state {CAREER_TRANSACTIONS} career
+              transactions; the filter below reads "All ({rows.length})". A
+              visitor comparing the two sees a discrepancy and has no way to tell
+              that the numbers measure different things.
+
+              The ledger is NOT a curated selection — every row in the closed
+              transactions workbook is here. It is simply not the whole career
+              yet, because the workbook is still being filled in from the closing
+              records. An earlier proposal to label these "featured transactions"
+              would have been inaccurate in exactly the direction that matters:
+              it implies the rest were judged and left out.
+
+              Derived from `rows`, never typed. The workbook grows.
+            */}
+            {rows.length > 0 ? (
+              <span className="mt-5 block">
+                {rows.length} of them are documented here so far, out of {CAREER_TRANSACTIONS}{" "}
+                in her career. This is the whole ledger, not a selection from it — the rest
+                are still being entered from the closing records.
+              </span>
+            ) : null}
           </>
         }
       />

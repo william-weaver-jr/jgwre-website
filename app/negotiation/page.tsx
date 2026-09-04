@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ContactIntake } from "@/components/contact-intake";
-import { GUIDE_TITLE, GUIDE_TITLE_SHORT, ITEM_COUNT_WORD, NEGOTIABLE_ITEMS } from "@/lib/intake";
+import {
+  GUIDE_TITLE,
+  GUIDE_TITLE_SHORT,
+  ITEM_COUNT,
+  ITEM_COUNT_WORD,
+  NEGOTIABLE_ITEMS,
+} from "@/lib/intake";
 import { AGENT } from "@/lib/site";
 import { routeMetadata } from "@/lib/seo";
 
@@ -17,14 +23,26 @@ import { routeMetadata } from "@/lib/seo";
   is a claim about outcomes.
 */
 
+/*
+  Nothing on this page may claim the list is complete.
+
+  It said three different versions of that until 2026-09-04 — "the list of
+  everything else" in the meta description, "everything else" in the OG
+  description, and "everything that can be asked for" above the form. A
+  contract has more terms than any list of nineteen, so an unbounded claim is
+  both wrong and the kind of absolute §7 keeps out of advertising. The h1 was
+  already correctly bounded; these are now in agreement with it.
+
+  Counts are interpolated from ITEM_COUNT rather than typed, so adding an item
+  to lib/intake/guide.ts cannot leave a stale number in a search result.
+*/
 export const metadata: Metadata = {
   title: GUIDE_TITLE,
-  description:
-    "Price is one line in the contract. Here is the list of everything else on the table in a Charlotte, NC or South Carolina purchase.",
+  description: `Price is one line in the contract. Here are ${ITEM_COUNT} other terms you can ask about in a Charlotte, NC or South Carolina purchase.`,
   ...routeMetadata({
     path: "/negotiation",
     ogTitle: GUIDE_TITLE_SHORT,
-    ogDescription: "Price is one line in the contract. Here is the list of everything else.",
+    ogDescription: `Price is one line in the contract. Here are ${ITEM_COUNT} other things you can ask for.`,
   }),
 };
 
@@ -88,7 +106,7 @@ export default function NegotiationPage() {
         source="/negotiation"
         leadType="guide"
         heading={`Which of the ${ITEM_COUNT_WORD} apply to your house?`}
-        body="The list above is everything that can be asked for. A few taps narrows it to what’s plausibly on your table."
+        body="The list above covers what comes up most often. A few taps narrows it to what’s plausibly on your table."
       />
     </>
   );
