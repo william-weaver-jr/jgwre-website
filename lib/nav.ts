@@ -1,6 +1,5 @@
 import { publishedAreas } from "@/lib/areas";
 import { publishedPosts } from "@/lib/blog";
-import { SEARCH_HOMES_URL } from "@/lib/site";
 import { isTransactionsPageIndexable } from "@/lib/transactions";
 
 /**
@@ -24,7 +23,9 @@ import { isTransactionsPageIndexable } from "@/lib/transactions";
  * 2. **Contact is not a nav item.** It is the phone button, which is the whole
  *    point of CLAUDE.md Locked Decision #4.
  *
- * NOT DECIDED HERE: where "Search Homes" belongs. See the note on it below.
+ * 3. **Search Homes is not here at all.** It was, until 2026-09-04. See the note
+ *    at the foot of primaryNav() — it is the one item whose placement is an
+ *    economic decision rather than a design one.
  */
 
 export type NavLink = {
@@ -98,25 +99,33 @@ export function primaryNav(): NavItem[] {
   );
 
   /*
-    "Search Homes" is LEFT EXACTLY WHERE IT WAS, and that is a decision rather
-    than an oversight.
+    "SEARCH HOMES" IS DELIBERATELY NOT HERE. It lives in the footer only, and
+    putting it back into the primary navigation costs Jasmine money.
 
-    The audit recommended deep-linking it and giving it a visible external cue,
-    on the reasonable assumption that a link pointing at a brokerage home page is
-    simply broken. It is — SEARCH_HOMES_URL is still the bare root. But T6b in
-    the implementation backlog raises what that audit could not know: a visitor
-    who arrives here from organic search, clicks through to brokerage-hosted IDX,
-    and registers may become a *brokerage-sourced* lead, at a materially worse
-    commission split for Jasmine. This site exists to avoid exactly that.
+    T6b asked how a lead is attributed when a visitor arrives here from organic
+    search, clicks Search Homes, and registers on brokerage-hosted IDX.
+    ANSWERED BY JASMINE, 2026-09-04: those leads still go to Matt, and they
+    affect her commission split. So the most prominent outbound link on the site
+    was converting her own organic traffic into broker-sourced leads at the worse
+    rate — the exact thing this site exists to avoid.
 
-    So "fix the destination" and "demote it out of primary navigation" are
-    opposite responses to one finding, and which is right depends on a written
-    answer from Stone Realty Group that nobody has yet. Until it arrives, the
-    honest move is to change neither the destination nor the prominence.
+    Two findings from the same day reinforce it:
 
-    Do not resolve this by guessing. See task V4.
+    - `jasmine.mattstoneteam.com` exists and is live, but names her nowhere. No
+      bio, no photo, no phone number, a "© 2026 Stone Realty Group" footer, and a
+      Create Account / Login gate in front of the listings. The subdomain string
+      is the only part of it that is hers.
+    - `mattstoneteam.com/idx/` redirects to the generic brokerage search, which
+      carries the brokerage's phone number rather than hers.
+
+    Locked Decision #2 requires this site to link out to the Stone Realty Group
+    IDX rather than host MLS data here. It says nothing about prominence, and the
+    footer satisfies it. Do not "fix" this by promoting the link, by deep-linking
+    it to the agent subdomain, or by resolving SEARCH_HOMES_URL to anything that
+    captures registrations — none of those change who gets the lead.
+
+    Revisit only if the attribution changes. lib/nav.test.ts holds it here.
   */
-  items.push({ href: SEARCH_HOMES_URL, label: "Search Homes", external: true });
 
   return items;
 }

@@ -34,6 +34,23 @@ describe("primary navigation", () => {
     expect(hrefs()).not.toContain("/contact");
   });
 
+  /*
+    The most expensive link on the site, and the reason it is a test rather than
+    a comment. Jasmine confirmed on 2026-09-04 that a visitor who registers on
+    the brokerage IDX still becomes Matt's lead and still affects her commission
+    split — so a "Search Homes" item in the primary navigation converts her own
+    organic traffic against her.
+
+    It stays in the footer, which is all Locked Decision #2 requires. Anyone
+    re-adding it here, or pointing it at the agent subdomain, should have to
+    delete this test and read why first.
+  */
+  it("keeps Search Homes out of the primary nav", () => {
+    const external = flatten().filter((link) => link.external);
+    expect(external, `external links in the nav: ${JSON.stringify(external)}`).toEqual([]);
+    expect(hrefs().some((href) => href.includes("mattstoneteam"))).toBe(false);
+  });
+
   it("gives every link a label", () => {
     for (const link of flatten()) {
       expect(link.label.trim().length, JSON.stringify(link)).toBeGreaterThan(0);

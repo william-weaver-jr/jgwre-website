@@ -574,7 +574,33 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       go back to the BIC.
 - [ ] Confirm Placester contract term, auto-renewal date, and content/domain ownership
       before giving notice
-- [ ] Confirm the Stone Realty Group IDX search URL (the "Search Homes" destination)
+- [x] **"Search Homes" — RESOLVED 2026-09-04, and the answer changed its placement.**
+      Jasmine confirmed that a visitor who reaches the brokerage IDX and registers **still
+      becomes Matt's lead, and it still affects her commission split.** So the site's most
+      prominent outbound link was converting her own organic traffic into broker-sourced
+      leads at the worse rate — the precise thing this site exists to avoid.
+
+      **It is now footer-only.** Locked Decision #2 requires linking out to the SRG IDX
+      rather than hosting MLS data here; it says nothing about prominence, and the footer
+      satisfies it. `lib/nav.ts` carries the reasoning and `lib/nav.test.ts` keeps it out of
+      the primary nav.
+
+      Two findings from the same check, both worth keeping:
+
+      - `jasmine.mattstoneteam.com` **exists and is live** — the agent-attributed subdomain
+        an earlier proposal wanted built. It names her nowhere: no bio, no photo, no phone
+        number, a "© 2026 Stone Realty Group" footer, and a Create Account / Login gate in
+        front of the listings. The subdomain string is the only part of it that is hers.
+      - `mattstoneteam.com/idx/` redirects to the generic brokerage search, which carries the
+        brokerage's number (704.755.5095) rather than hers.
+
+      **Do not "fix" this by deep-linking it.** Promoting the link, pointing it at the agent
+      subdomain, or resolving `SEARCH_HOMES_URL` to anything that captures registrations
+      changes none of the above — the lead still routes to the broker. Revisit only if the
+      attribution itself changes.
+
+      One good finding: her brokerage bio page `mattstoneteam.com/jasmine-garcia/` does
+      display her FUB tracking number. It still does not link to jasminegarcia.com.
 - [x] **Follow Up Boss — CONNECTED AND VERIFIED 2026-08-28.** A live submission returns
       `{"ok":true,"delivery":"crm"}` on HTTP 200 with no error lines in the production
       logs, so the lead reached Follow Up Boss *and* the Resend notification sent. Both
