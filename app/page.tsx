@@ -192,20 +192,30 @@ export default function HomePage() {
         the rendered colour cannot be read back and checked; the two remaining
         `/25` values are hairlines, where WCAG sets no ratio. Lighthouse still
         owes this a pass. CLAUDE.md §10.
+
+        THE MOBILE SIZES ARE LOAD-BEARING, not a style preference. At the full
+        `text-base` / `px-5` treatment the three chips measured 347px against
+        319px of usable width at 375, so they wrapped to a second row and the
+        band stood 383px tall — taller than the two elements it replaced, which
+        undercut the point of merging them. Dropping to `text-sm` / `px-3.5`
+        below `sm` fits them on one row at 360, 375 and 414 and takes the band
+        to 295px. The 44px tap target is untouched; only the type and the
+        horizontal padding move. Below about 340px they wrap again, which is
+        fine — flex-wrap degrades, it does not break.
       */}
       <div className="border-y border-primary-deep bg-primary text-primary-foreground">
-        <div className="mx-auto max-w-6xl px-gutter py-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-14">
+        <div className="mx-auto max-w-6xl px-gutter py-6 lg:py-8">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-14">
             <div>
               <p className="eyebrow-inverse">Start where you are</p>
-              <ul className="mt-4 flex flex-wrap gap-3">
+              <ul className="mt-3 flex flex-wrap gap-2 sm:mt-4 sm:gap-3">
                 {PATHWAYS.map((path) => (
                   <li key={path.href}>
                     <Link
                       href={path.href}
                       data-cta-placement="home-hero-pathway"
                       /* min-h-11 for the 44px target. CLAUDE.md §10. */
-                      className="inline-flex min-h-11 items-center rounded-sm border border-accent-soft px-5 text-base font-medium transition-colors hover:bg-primary-deep"
+                      className="inline-flex min-h-11 items-center rounded-sm border border-accent-soft px-3.5 text-sm font-medium transition-colors hover:bg-primary-deep sm:px-5 sm:text-base"
                     >
                       {path.label}
                     </Link>
@@ -225,7 +235,7 @@ export default function HomePage() {
               two live forms on one page would split the funnel across duplicate
               events and double the §7 surface.
             */}
-            <div className="flex shrink-0 flex-col gap-4 border-t border-primary-foreground/25 pt-5 sm:flex-row sm:items-center lg:max-w-md lg:border-t-0 lg:border-l lg:border-primary-foreground/25 lg:pt-0 lg:pl-14">
+            <div className="flex shrink-0 flex-col gap-3 border-t border-primary-foreground/25 pt-4 sm:flex-row sm:items-center lg:max-w-md lg:border-t-0 lg:border-l lg:border-primary-foreground/25 lg:pt-0 lg:pl-14">
               <p className="text-base leading-relaxed">
                 Not ready to call? Answer five questions and see which terms are worth asking
                 for on your house.
