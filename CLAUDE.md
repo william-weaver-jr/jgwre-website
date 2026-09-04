@@ -338,6 +338,21 @@ no other page may carry the hexagon, and `lib/images.ts` `VIDEO_STILLS` says so 
 site. And the swap is real work that has to actually happen: a custom thumbnail is on the
 channel-cleanup list, and when it lands the exception closes.
 
+**UX audit copy changes — APPROVED 2026-09-04.** Reported by Bill, from a manual BIC
+review rather than a drafted request. Covers the four §7-touching items raised by the
+Visual & Structural Website Audit and tracked as V14, V15, V16 and V12 in the V-series
+task list, plus the intake confirmation copy changed by V10 (the confirmation now answers
+in the contact channel the visitor chose rather than telling everyone "she'll call you").
+
+Two things this does **not** do, and neither is a doubt about the approval:
+
+- **It does not unblock V16 on its own.** That item adds date ranges and sample sizes to
+  the performance figures, and those numbers do not exist yet — the open item below about
+  refreshing the §5 stat block is its real dependency. Approval to state scope is not the
+  same as having the scope to state.
+- **It does not close the privacy-policy item.** That still needs counsel on the Follow Up
+  Boss and Resend vendor terms, which is not the BIC's question.
+
 **Footer marks, text-only — APPROVED 2026-08-10.** The BIC confirmed a text treatment of the
 Equal Housing Opportunity and REALTOR® marks is acceptable; he uses the same on his own site.
 So the current footer is an approved state, not a stopgap waiting on artwork. Dropping the
