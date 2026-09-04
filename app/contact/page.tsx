@@ -39,14 +39,16 @@ export default function ContactPage() {
         title="The number goes to her."
         lede="Not a call center, not an assistant, and not a form that disappears into a queue. Calls and texts both work."
       >
-        <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-          <Button asChild variant="phone" size="xl" className="w-full sm:w-auto">
+        {/* Same grid as components/phone-cta.tsx, and for the same reason —
+            equal button heights at every width. See the note there. */}
+        <div className="mt-10 grid auto-rows-fr gap-3 lg:auto-rows-auto lg:grid-flow-col lg:auto-cols-max lg:justify-start">
+          <Button asChild variant="phone" size="xl">
             <a href={AGENT.phoneHref} data-cta-placement="contact-hero">
               <span className="sr-only">Call {AGENT.name} at </span>
               {AGENT.phoneDisplay}
             </a>
           </Button>
-          <Button asChild variant="outlineInk" size="xl" className="w-full sm:w-auto">
+          <Button asChild variant="outlineInk" size="xl">
             <a href="#start" data-cta-placement="contact-hero">Rather not call? Start here</a>
           </Button>
         </div>

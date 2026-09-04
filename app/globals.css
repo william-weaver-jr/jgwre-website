@@ -122,6 +122,29 @@
 }
 
 /*
+  The same eyebrow on a navy field.
+
+  It is a separate utility rather than a `text-accent-soft` tacked onto
+  `eyebrow`, because both are utilities and which one wins is a question about
+  emission order rather than about intent — the wrong answer there is invisible
+  in review and unreadable on the page.
+
+  The colour has to change. Antique gold (#8a6a2f) on navy (#232c3d) is about
+  2.8:1 and fails AA outright; the soft gold (#c9a96a) is about 6.4:1 and
+  passes. That is the exact inverse of their behaviour on cream, where the soft
+  gold is the one that fails — which is why docs say to keep it off small text
+  there. CLAUDE.md §10.
+*/
+@utility eyebrow-inverse {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent-soft);
+}
+
+/*
   Transaction figures. Tabular so columns align like a ledger — these read as
   evidence, not marketing. docs/CASE-STUDIES.md forbids amplifying them.
 */

@@ -32,15 +32,35 @@ export function PhoneCta({
 }) {
   return (
     <div className={className}>
-      <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-        <Button asChild variant="phone" size="xl" className="w-full sm:w-auto">
+      {/*
+        A grid, and it lays out on `lg` rather than `sm`. Both are about one
+        thing: the secondary label is a real sentence — "The 19 Things Besides
+        Price You Can Negotiate" — and it wraps.
+
+        Centred in a flex row, each button took its own natural height, so the
+        phone rendered 56px beside a 78px neighbour and the pair looked broken.
+        Stretching fixes that but is not enough on its own: side by side at
+        768px the label wrapped to four lines, both buttons became 150px tall,
+        and a phone number floating in the middle of a 150px slab is worse than
+        the mismatch was. So the row waits for `lg`, where there is room for the
+        sentence on two lines.
+
+        `auto-rows-fr` is what equalises them while STACKED, which flexbox
+        cannot do — `items-stretch` on a column stretches width, not height.
+        Below `lg` both buttons are the height of the taller one; at `lg` and up
+        the grid flows into columns and stretches them to the row height.
+
+        The result is equal heights at every width, which is the whole point.
+      */}
+      <div className="grid auto-rows-fr gap-3 lg:auto-rows-auto lg:grid-flow-col lg:auto-cols-max lg:justify-start">
+        <Button asChild variant="phone" size="xl">
           <a href={AGENT.phoneHref} data-cta-placement={placement}>
             <span className="sr-only">Call {AGENT.name} at </span>
             {AGENT.phoneDisplay}
           </a>
         </Button>
         {secondary ? (
-          <Button asChild variant="outlineInk" size="xl" className="w-full sm:w-auto">
+          <Button asChild variant="outlineInk" size="xl">
             <Link href={secondary.href}>{secondary.label}</Link>
           </Button>
         ) : null}

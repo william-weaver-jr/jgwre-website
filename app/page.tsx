@@ -121,24 +121,24 @@ export default function HomePage() {
             <p className="eyebrow">
               Broker / REALTOR&reg; &middot; Charlotte, NC &middot; NC &amp; SC
             </p>
-            <div className="mt-6 w-16 rule-gold" aria-hidden="true" />
-            <h1 className="mt-6 font-display text-display-sm text-balance sm:text-display md:text-display-lg">
+            <div className="mt-5 w-16 rule-gold" aria-hidden="true" />
+            <h1 className="mt-5 font-display text-display-sm text-balance sm:text-display md:text-display-lg">
               Most people think negotiating is just about getting the price down.
               <span className="block italic">It&rsquo;s not.</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
               Sometimes the biggest savings come from things buyers don&rsquo;t even know to ask
               for.
             </p>
 
             {/*
               The one PhoneCta on the site with the text line switched off. The
-              hero already carries the number, the guide, and three pathways;
-              a fourth line here would push the pathways further below the fold
-              to say something the closing block and /contact both say properly.
+              band directly below carries both of the hero's other entry points,
+              and /contact and the closing block both say the text line properly.
+              A fourth line here would only push the fold further down.
             */}
             <PhoneCta
-              className="mt-8"
+              className="mt-7"
               placement="home-hero"
               sms={false}
               secondary={{
@@ -146,60 +146,6 @@ export default function HomePage() {
                 label: GUIDE_TITLE,
               }}
             />
-
-            {/*
-              The three pathways, above the fold and deliberately plain.
-
-              The problem they solve is narrow and real: everything else this
-              high on the page speaks to a buyer. The headline is her own line
-              about what buyers don't know to ask for, and the secondary CTA is
-              the buyer's guide — so a seller could reasonably read the first
-              screen and conclude the site is not for them. It sits four screens
-              above anything that says otherwise.
-
-              THE HEADLINE AND LEDE ARE NOT THE PLACE TO FIX THAT. Both are her
-              own words, quoted in CLAUDE.md §2 as the origin of the USP.
-              Rewriting them to be side-neutral would sand down the one sentence
-              the whole site is built on. A visible choice does the same job
-              without touching it.
-
-              They are links to the three service pages rather than a control
-              that prefills the intake down the page. Those pages already open
-              their own intake at step 2 with the side filled in
-              (docs/CONTACT-STRATEGY.md §6), so a seller who picks "Selling"
-              lands on selling copy and a form that has stopped asking what it
-              can already see. Reaching the intake without the argument would be
-              the weaker half of that.
-
-              Labels are SIDES in lib/intake/questions.ts, verbatim. The reader
-              picks "Selling" here and meets the same word as the selected chip
-              on arrival; two names for one choice reads as two choices.
-
-              No question header — BRAND-VOICE.md §2 bans them.
-            */}
-            {/*
-              One line, no rule above it, label inline with the choices. It began
-              as a bordered block with its own heading and cost 99px of hero
-              height for three words and three links — which pushed itself, and
-              more importantly the phone button above it, below the fold.
-            */}
-            <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-1">
-              <p className="eyebrow">Start where you are</p>
-              <ul className="flex flex-wrap items-center gap-x-7 gap-y-1">
-                {PATHWAYS.map((path) => (
-                  <li key={path.href}>
-                    <Link
-                      href={path.href}
-                      data-cta-placement="home-hero-pathway"
-                      // min-h-11 for the 44px target on a phone. CLAUDE.md §10.
-                      className="inline-flex min-h-11 items-center text-base font-medium underline decoration-accent-soft decoration-1 underline-offset-[6px] hover:decoration-accent"
-                    >
-                      {path.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
 
           {/*
@@ -217,40 +163,80 @@ export default function HomePage() {
       </section>
 
       {/*
-        ------------------------------------------------------- INTAKE SHORTCUT
+        ------------------------------------------------------------ WAYS IN
 
-        A jump to the intake, immediately under the hero.
+        One navy band under the hero, carrying both of the page's early entry
+        points: pick the side of the table you are on, or start the intake.
 
-        The gap it closes is larger than "the form is a long way down". Until
-        2026-08-31 the only two links to #start on the whole site were the mobile
-        sticky bar — which is `md:hidden` — and a button on /contact. So a
-        DESKTOP visitor had no path to the questionnaire at all: not on this
-        page, not on any pillar page. They could call, or they could scroll
-        6,788px. docs/CONTACT-STRATEGY.md §2 is explicit that the form exists for
-        the reader who will not phone a stranger, and that reader was being
-        offered the phone or nothing.
+        WHY THEY ARE TOGETHER. They were two separate things — three text links
+        inside the hero column, and a cream strip below it — doing the same job
+        one after the other: give a reader who is not going to phone yet
+        somewhere to go. Two quiet bands in sequence read as one long preamble
+        before the case studies, and the case studies are the argument.
 
-        It links to #start rather than mounting a second ContactIntake. Two live
-        forms on one page would split the funnel between two instances of the
-        same events and double the §7 surface — the consent text, the
-        disclaimer, and the confirmation copy are all advertising, and reviewing
-        them once is the point of there being one.
+        WHY NAVY. It is the first dark field on the page, which is what the
+        August audit asked for to break up long cream stretches, and it is
+        earned here rather than decorative — a full-bleed band is the strongest
+        way to tell a seller the site is not only for buyers, which is the
+        problem the pathways exist to solve.
 
-        Quiet on purpose. It sits between the hero and the case studies, which
-        are the argument; a loud band here would interrupt the reader on their
-        way into the thing that persuades them.
+        CONTRAST, measured in a browser rather than asserted, because jsdom
+        computes no colours and this suite cannot see any of it. On #232c3d:
+        chip and body text 13.4:1, the soft-gold eyebrow 6.25:1, and the cream
+        button's ink label 15.3:1. The antique gold used for eyebrows on cream
+        is about 2.8:1 here and is never used on this field — see
+        `eyebrow-inverse` in globals.css.
+
+        Text colours here are solid tokens, not opacity modifiers. Tailwind v4
+        emits `oklab(... / .85)` for those, which is correct on screen but means
+        the rendered colour cannot be read back and checked; the two remaining
+        `/25` values are hairlines, where WCAG sets no ratio. Lighthouse still
+        owes this a pass. CLAUDE.md §10.
       */}
-      <div className="border-b border-border bg-surface-raised">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-gutter py-7 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-xl text-base leading-relaxed text-ink-muted">
-            <span className="font-medium text-ink">Not ready to call?</span> Answer five
-            questions and see which terms are worth asking for on your house.
-          </p>
-          <Button asChild variant="outlineInk" className="w-full shrink-0 sm:w-auto">
-            <a href="#start" data-cta-placement="home-band">
-              Start here
-            </a>
-          </Button>
+      <div className="border-y border-primary-deep bg-primary text-primary-foreground">
+        <div className="mx-auto max-w-6xl px-gutter py-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-14">
+            <div>
+              <p className="eyebrow-inverse">Start where you are</p>
+              <ul className="mt-4 flex flex-wrap gap-3">
+                {PATHWAYS.map((path) => (
+                  <li key={path.href}>
+                    <Link
+                      href={path.href}
+                      data-cta-placement="home-hero-pathway"
+                      /* min-h-11 for the 44px target. CLAUDE.md §10. */
+                      className="inline-flex min-h-11 items-center rounded-sm border border-accent-soft px-5 text-base font-medium transition-colors hover:bg-primary-deep"
+                    >
+                      {path.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/*
+              The intake shortcut, quieter than the pathways and deliberately so.
+              It still closes the gap it was built for: until 2026-08-31 the only
+              links to #start on the whole site were the mobile sticky bar, which
+              is `md:hidden`, and one button on /contact — so a desktop visitor
+              had no path to the questionnaire at all. docs/CONTACT-STRATEGY.md §2.
+
+              It links to the anchor rather than mounting a second ContactIntake:
+              two live forms on one page would split the funnel across duplicate
+              events and double the §7 surface.
+            */}
+            <div className="flex shrink-0 flex-col gap-4 border-t border-primary-foreground/25 pt-5 sm:flex-row sm:items-center lg:max-w-md lg:border-t-0 lg:border-l lg:border-primary-foreground/25 lg:pt-0 lg:pl-14">
+              <p className="text-base leading-relaxed">
+                Not ready to call? Answer five questions and see which terms are worth asking
+                for on your house.
+              </p>
+              <Button asChild variant="onPrimary" className="shrink-0">
+                <a href="#start" data-cta-placement="home-band">
+                  Start here
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 

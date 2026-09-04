@@ -40,6 +40,14 @@ const buttonVariants = cva(
           "bg-primary text-primary-foreground whitespace-nowrap tabular-nums hover:bg-primary-deep active:bg-primary-deep",
         outlineInk:
           "border border-accent-soft bg-transparent text-ink hover:border-accent hover:bg-surface-sunken",
+        /*
+          For use ON the navy field, where every other variant fails: `phone`
+          and `default` are navy on navy, `outlineInk` and `ghost` carry ink
+          text, and `gold` would put #8a6a2f on #232c3d at roughly 2.8:1.
+          Inverting to a cream fill also makes this the single light object on a
+          dark band, which is the hierarchy we want there anyway.
+        */
+        onPrimary: "bg-surface text-ink hover:bg-surface-sunken active:bg-surface-sunken",
         gold: "border border-accent bg-transparent text-accent hover:bg-accent hover:text-accent-foreground",
         ghost: "text-ink hover:bg-surface-sunken",
         link: "text-accent underline decoration-accent-soft underline-offset-4 hover:decoration-accent",
