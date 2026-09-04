@@ -4,7 +4,7 @@ import { Cormorant_Garamond, Libre_Franklin } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyContactBar } from "@/components/sticky-contact-bar";
-import { TelTracking } from "@/components/tel-tracking";
+import { ContactLinkTracking } from "@/components/contact-link-tracking";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { VercelAnalytics } from "@/components/vercel-analytics";
 import { SITE_URL, AGENT, BROKERAGE } from "@/lib/site";
@@ -63,7 +63,7 @@ export default function RootLayout({
         <main id="main">{children}</main>
         <SiteFooter />
         <StickyContactBar />
-        <TelTracking />
+        <ContactLinkTracking />
         <GoogleAnalytics />
         <VercelAnalytics />
       </body>

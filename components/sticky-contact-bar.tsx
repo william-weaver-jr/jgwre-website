@@ -61,19 +61,40 @@ export function StickyContactBar() {
       aria-hidden={!shown}
       inert={!shown}
     >
+      {/*
+        Three actions since 2026-08-31, and that is why the first one reads
+        "Call" rather than the number.
+
+        Three controls and the full "(704) 200-9360" do not both fit: at 375px
+        the bar has 319px of usable width, so each of three is ~106px against a
+        number that needs ~137px on its own. The number is not lost by
+        shortening the label — SiteHeader is `sticky top-0` and stays pinned
+        while scrolled, so the digits are on screen at the top of the viewport
+        the entire time this bar is on screen at the bottom. Verified.
+
+        The phone keeps first position. CLAUDE.md Locked Decision #4.
+      */}
       <div className="flex gap-3 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <a
           href={AGENT.phoneHref}
           data-cta-placement="sticky-bar"
-          className="inline-flex min-h-12 flex-1 items-center justify-center rounded-sm bg-primary px-4 text-sm font-medium tracking-wide tabular-nums text-primary-foreground"
+          className="inline-flex min-h-12 flex-1 items-center justify-center rounded-sm bg-primary px-3 text-sm font-medium tracking-wide text-primary-foreground"
         >
-          <span className="sr-only">Call {AGENT.name} at </span>
-          {AGENT.phoneDisplay}
+          Call
+          <span className="sr-only"> {AGENT.name} at {AGENT.phoneDisplay}</span>
+        </a>
+        <a
+          href={AGENT.smsHref}
+          data-cta-placement="sticky-bar"
+          className="inline-flex min-h-12 flex-1 items-center justify-center rounded-sm border border-accent-soft px-3 text-sm font-medium tracking-wide text-ink"
+        >
+          Text
+          <span className="sr-only"> {AGENT.name} at {AGENT.phoneDisplay}</span>
         </a>
         <a
           href="#start"
           onClick={() => track("intake_start", { placement: "sticky-bar" })}
-          className="inline-flex min-h-12 flex-1 items-center justify-center rounded-sm border border-accent-soft px-4 text-sm font-medium tracking-wide text-ink"
+          className="inline-flex min-h-12 flex-1 items-center justify-center rounded-sm border border-accent-soft px-3 text-sm font-medium tracking-wide text-ink"
         >
           Start here
         </a>

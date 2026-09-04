@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ContactIntake } from "@/components/contact-intake";
 import { SocialLinks } from "@/components/social-links";
 import { PageHero } from "@/components/page-hero";
+import { SmsLine } from "@/components/phone-cta";
 import { VideoEmbed } from "@/components/video-embed";
 import { Button } from "@/components/ui/button";
 import { AGENT, BROKERAGE } from "@/lib/site";
@@ -49,6 +50,13 @@ export default function ContactPage() {
             <a href="#start">Rather not call? Start here</a>
           </Button>
         </div>
+
+        {/*
+          The lede above has said "calls and texts both work" since launch, and
+          until 2026-08-31 there was no way to send one from anywhere on the
+          site. This is the page that makes that sentence true.
+        */}
+        <SmsLine placement="contact-hero" className="mt-5" />
 
         {/*
           No stated hours. mackenziesiek.com publishes "Available 7 days a week";

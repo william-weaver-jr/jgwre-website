@@ -74,16 +74,38 @@ of that page is ask for a click before asking for a name.
 
 So:
 
-| Surface | Call | Form |
-|---|---|---|
-| Header (all pages) | `tel:` button, persistent | — |
-| Home hero | Primary | Secondary link to the intake |
-| Pillar page foot | Beside the form | **Inline, prefilled from the page** |
-| `/negotiation` | Beside the form | Inline (lead type `guide`) |
-| `/home-value` | Beside the form | Inline (lead type `valuation`) |
-| `/contact` | Large, first, with hours | Full intake below it |
-| Mobile, scrolled | Sticky bar: **Call** / **Start** | — |
-| Footer | Number + brokerage block | — |
+| Surface | Call | Text | Form |
+|---|---|---|---|
+| Header (all pages) | `tel:` button, persistent | — | — |
+| Home hero | Primary | — (see below) | Secondary link to the intake |
+| Pillar page foot | Beside the form | "Or text her at…" under the buttons | **Inline, prefilled from the page** |
+| `/negotiation` | Beside the form | Same line | Inline (lead type `guide`) |
+| `/home-value` | Beside the form | Same line | Inline (lead type `valuation`) |
+| `/contact` | Large, first | Under the buttons | Full intake below it |
+| Mobile, scrolled | Sticky bar: **Call** | Sticky bar: **Text** | Sticky bar: **Start here** |
+| Footer | Number + brokerage block | — | — |
+
+**Text shipped 2026-08-31.** `/contact` had said "calls and texts both work" since launch
+while no `sms:` link existed anywhere on the site — copy writing a cheque the interface did
+not honour. Bill confirmed the Follow Up Boss tracking number accepts texts.
+
+Three things about how it is built, each a decision rather than a detail:
+
+- **It is a line of copy, not a third button.** Locked Decision #4 makes the phone primary,
+  and a third equal-weight control is how a clear choice becomes a menu. The number is
+  visible rather than implied, because an `sms:` link does nothing useful on a desktop and
+  that reader needs to be able to read the digits and pick up their own phone.
+- **Not in the home hero.** That hero already carries the number, the guide, and the three
+  pathways; a fourth line would push the pathways further below the fold to say something
+  the closing block and `/contact` both say properly. It is the one `PhoneCta` with the
+  text line switched off.
+- **The sticky bar says "Call", not the number.** Three controls and "(704) 200-9360" do
+  not both fit — 319px of usable width at 375px against a number needing ~137px alone. The
+  digits are not lost: `SiteHeader` is `sticky top-0` and stays pinned while scrolled, so
+  they are on screen at the top the whole time the bar is at the bottom. Verified.
+
+mackenziesiek.com reaches the same conclusion from the other direction — §1 records its
+closing line as "Or call/text me directly at (704) 610-0959".
 
 The phone does not get demoted anywhere. It gets a *companion*, because the two capture
 different people: the phone captures decided high-intent visitors during business hours, the
@@ -174,14 +196,23 @@ Instrument before launch or the comparison is unrecoverable.
 1. **Form completion rate** — submits ÷ visitors who reached step 1. Segment by entry page.
 2. **Step drop-off** — fire an event per step. If step 2 leaks, cut a question from the
    worst-performing branch. This is the whole reason for stepping the form.
-3. **`tel:` click rate** — click event on every `tel:` link, tagged by placement (header,
-   hero, form-adjacent, sticky, footer). Currently unmeasured anywhere on the site.
+3. **`tel:` and `sms:` click rate** — click event on every contact link, tagged by
+   placement (header, hero, form-adjacent, sticky, footer). One delegated listener,
+   `components/contact-link-tracking.tsx`.
+
+   **A text fires `text_click`, never `call_click`.** They are separate events on purpose:
+   the question this measurement exists to answer is *which contact path does a given
+   placement produce*, and folding texts into the call event answers it with a confident
+   wrong number rather than not at all. They also cost her different things — a call
+   interrupts, a text waits. An `sms:` link carries its parent's placement with a `-sms`
+   suffix, so a placement can still be grouped across both.
+   `components/contact-link-tracking.test.tsx` holds that apart.
 4. **Lead-to-conversation rate, from FUB** — the one that decides whether this was right.
    Contacted ÷ received, and how many reach appointment. A form that halves submissions and
    doubles this wins.
 5. **Assisted calls** — visitors who hit step 1, abandoned, then called. FUB's tracking
    number plus a session flag. The form earns credit for these; naive form metrics won't.
-6. **Sticky-bar split** — Call vs Start taps on mobile.
+6. **Sticky-bar split** — Call vs Text vs Start taps on mobile, now three ways.
 
 Nothing about the intake is locked. §3's structure is a hypothesis with an instrument
 attached; the branch questions are the cheapest thing on the page to change.
@@ -195,7 +226,7 @@ attached; the branch questions are the cheapest thing on the page to change.
 | `lib/intake/` | Questions, branches, and the lever table. `levers.ts` is copy and reads as advertising — see the compliance header on it |
 | `components/contact-intake.tsx` | The three-step form. Radios and checkboxes under the chips, so keyboard and screen reader semantics come free |
 | `components/sticky-contact-bar.tsx` | Mobile bar. Appears past 600px, hides whenever the intake is on screen |
-| `components/tel-tracking.tsx` | One delegated listener; every `tel:` link carries `data-cta-placement` |
+| `components/contact-link-tracking.tsx` | One delegated listener for `tel:` **and** `sms:`; every contact link carries `data-cta-placement`. Was `tel-tracking.tsx` until 2026-08-31 |
 | `app/contact/page.tsx` | Phone first in the hero, intake below, brokerage block last |
 | Inline on | `/`, `/negotiation`, `/new-construction`, `/sellers`, `/relocation`, `/carolinas-border`, `/about`, `/reviews`, `/transactions` |
 

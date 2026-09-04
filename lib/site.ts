@@ -13,6 +13,18 @@ export const AGENT = {
   /** Follow Up Boss tracking number. Confirmed. CLAUDE.md Locked Decision #6. */
   phoneDisplay: "(704) 200-9360",
   phoneHref: "tel:+17042009360",
+  /*
+    The same number, dialled differently. Confirmed by Bill on 2026-08-31 that
+    the Follow Up Boss tracking number accepts texts — which matters, because
+    /contact has told visitors "calls and texts both work" since launch while
+    nothing on the site offered a way to send one.
+
+    Deliberately no `?body=` prefill. The separator for it differs between iOS
+    and Android (`?` vs `&`, and older iOS wants neither), so a prefilled
+    message is the one part of this link that can silently fail to open the
+    messaging app at all. A bare `sms:` opens a blank thread everywhere.
+  */
+  smsHref: "sms:+17042009360",
   email: "TODO(verify)",
 } as const;
 

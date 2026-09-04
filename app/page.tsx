@@ -130,9 +130,16 @@ export default function HomePage() {
               for.
             </p>
 
+            {/*
+              The one PhoneCta on the site with the text line switched off. The
+              hero already carries the number, the guide, and three pathways;
+              a fourth line here would push the pathways further below the fold
+              to say something the closing block and /contact both say properly.
+            */}
             <PhoneCta
               className="mt-8"
               placement="home-hero"
+              sms={false}
               secondary={{
                 href: "/negotiation",
                 label: GUIDE_TITLE,
