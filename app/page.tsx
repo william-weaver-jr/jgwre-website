@@ -16,7 +16,7 @@ import { PHOTOS } from "@/lib/images";
 import { dedupeByTransaction, publishableReviews, reviewById } from "@/lib/reviews";
 import { JsonLd, realEstateAgentSchema } from "@/lib/schema";
 import { AGENT, PILLARS } from "@/lib/site";
-import { GUIDE_TITLE, ITEM_COUNT } from "@/lib/intake";
+import { GUIDE_TITLE, ITEM_COUNT, SIDES } from "@/lib/intake";
 import { routeMetadata } from "@/lib/seo";
 
 /*
@@ -44,6 +44,31 @@ const RECORD = [
   { value: "73+", label: "Transactions" },
   { value: "105", label: "Five-star reviews" },
 ];
+
+/**
+ * The three hero pathways, and the reason they are derived rather than typed.
+ *
+ * Each label is read out of SIDES — the same list that renders step 1 of the
+ * intake — so the word a visitor picks here is the word they meet on arrival.
+ * Typing "Relocating" by hand would drift from "Relocating here" the first time
+ * either is edited, and the drift would be invisible: two plausible labels for
+ * one choice, on two pages nobody diffs side by side.
+ *
+ * Three, not the full five. "Both" and "Still deciding" are real answers to a
+ * form question and have no page of their own; a hero that offers five doors is
+ * a form, and both of those readers are served by the intake below.
+ */
+const PATHWAYS = [
+  { side: "buying", href: "/buyers" },
+  { side: "selling", href: "/sellers" },
+  { side: "relocating", href: "/relocation" },
+].map(({ side, href }) => {
+  const match = SIDES.find((s) => s.value === side);
+  // Throwing beats rendering a blank link: a renamed Side should fail the build,
+  // not ship a pathway with no text in the most valuable space on the site.
+  if (!match) throw new Error(`Home pathway references unknown intake side: ${side}`);
+  return { href, label: match.label };
+});
 
 /**
  * The two reviews below the case studies. One buyer, one seller, chosen because
@@ -77,7 +102,20 @@ export default function HomePage() {
 
       {/* ------------------------------------------------------------------ HERO */}
       <section className="border-b border-border">
-        <div className="mx-auto grid max-w-6xl gap-12 px-gutter py-20 md:grid-cols-[1.35fr_1fr] md:items-center md:py-32">
+        {/*
+          `md:py-20`, down from `md:py-32` on 2026-08-31, and the reason is a
+          measurement rather than a taste: at 1440×800 — an ordinary laptop —
+          the hero phone button's bottom edge sat at 859px, below the fold. The
+          primary conversion control on a phone-first site (Locked Decision #4)
+          was off screen on arrival for anyone not on a tall monitor, and had
+          been since launch. 128px of padding above a display-scale headline is
+          what put it there.
+
+          What did NOT change is the headline's type scale. It is the USP in her
+          own words and the best thing on the page; the fold is worth 48px of
+          padding, not a smaller h1.
+        */}
+        <div className="mx-auto grid max-w-6xl gap-12 px-gutter py-20 md:grid-cols-[1.35fr_1fr] md:items-center">
           <div>
             <p className="eyebrow">
               Broker / REALTOR&reg; &middot; Charlotte, NC &middot; NC &amp; SC
@@ -87,19 +125,73 @@ export default function HomePage() {
               Most people think negotiating is just about getting the price down.
               <span className="block italic">It&rsquo;s not.</span>
             </h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink-muted">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
               Sometimes the biggest savings come from things buyers don&rsquo;t even know to ask
               for.
             </p>
 
             <PhoneCta
-              className="mt-10"
+              className="mt-8"
               placement="home-hero"
               secondary={{
                 href: "/negotiation",
                 label: GUIDE_TITLE,
               }}
             />
+
+            {/*
+              The three pathways, above the fold and deliberately plain.
+
+              The problem they solve is narrow and real: everything else this
+              high on the page speaks to a buyer. The headline is her own line
+              about what buyers don't know to ask for, and the secondary CTA is
+              the buyer's guide — so a seller could reasonably read the first
+              screen and conclude the site is not for them. It sits four screens
+              above anything that says otherwise.
+
+              THE HEADLINE AND LEDE ARE NOT THE PLACE TO FIX THAT. Both are her
+              own words, quoted in CLAUDE.md §2 as the origin of the USP.
+              Rewriting them to be side-neutral would sand down the one sentence
+              the whole site is built on. A visible choice does the same job
+              without touching it.
+
+              They are links to the three service pages rather than a control
+              that prefills the intake down the page. Those pages already open
+              their own intake at step 2 with the side filled in
+              (docs/CONTACT-STRATEGY.md §6), so a seller who picks "Selling"
+              lands on selling copy and a form that has stopped asking what it
+              can already see. Reaching the intake without the argument would be
+              the weaker half of that.
+
+              Labels are SIDES in lib/intake/questions.ts, verbatim. The reader
+              picks "Selling" here and meets the same word as the selected chip
+              on arrival; two names for one choice reads as two choices.
+
+              No question header — BRAND-VOICE.md §2 bans them.
+            */}
+            {/*
+              One line, no rule above it, label inline with the choices. It began
+              as a bordered block with its own heading and cost 99px of hero
+              height for three words and three links — which pushed itself, and
+              more importantly the phone button above it, below the fold.
+            */}
+            <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-1">
+              <p className="eyebrow">Start where you are</p>
+              <ul className="flex flex-wrap items-center gap-x-7 gap-y-1">
+                {PATHWAYS.map((path) => (
+                  <li key={path.href}>
+                    <Link
+                      href={path.href}
+                      data-cta-placement="home-hero-pathway"
+                      // min-h-11 for the 44px target on a phone. CLAUDE.md §10.
+                      className="inline-flex min-h-11 items-center text-base font-medium underline decoration-accent-soft decoration-1 underline-offset-[6px] hover:decoration-accent"
+                    >
+                      {path.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/*
