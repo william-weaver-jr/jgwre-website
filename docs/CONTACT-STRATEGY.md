@@ -137,7 +137,7 @@ So the form asks the questions instead. **Three steps, contact details last.**
 
 ### Step 1 — Which side of the table? (no PII)
 
-One tap. `Buying` · `Selling` · `Both` · `Relocating here` · `Still deciding`
+One tap. `Buying` · `Selling` · `Both` · `Relocating` · `Still deciding`
 
 Starting with a low-commitment, non-personal question is the single highest-leverage change
 available: the visitor is committed before they are asked for anything they'd hesitate over,

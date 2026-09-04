@@ -11,7 +11,14 @@ export const SIDES: readonly { value: Side; label: string; note: string }[] = [
   { value: "buying", label: "Buying", note: "A first home, a next one, or an investment" },
   { value: "selling", label: "Selling", note: "Listing a home you own" },
   { value: "both", label: "Both", note: "Selling one and buying the next" },
-  { value: "relocating", label: "Relocating here", note: "Moving to Charlotte from out of state" },
+  /*
+    "Relocating", not "Relocating here". The word "here" was doing no work the
+    note below it does not already do, and it was the widest label on the list —
+    which matters because the home page's pathway chips are read from these
+    labels, and at the full type size the three of them overflowed one row on a
+    phone. Shortened 2026-09-04.
+  */
+  { value: "relocating", label: "Relocating", note: "Moving to Charlotte from out of state" },
   { value: "deciding", label: "Still deciding", note: "Working out whether this is the year" },
 ];
 

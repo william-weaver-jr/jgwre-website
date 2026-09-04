@@ -51,9 +51,11 @@ const RECORD = [
  *
  * Each label is read out of SIDES — the same list that renders step 1 of the
  * intake — so the word a visitor picks here is the word they meet on arrival.
- * Typing "Relocating" by hand would drift from "Relocating here" the first time
- * either is edited, and the drift would be invisible: two plausible labels for
- * one choice, on two pages nobody diffs side by side.
+ * Typing them by hand would drift the first time either side is edited, and the
+ * drift would be invisible: two plausible labels for one choice, on two pages
+ * nobody diffs side by side. That derivation has already earned itself — the
+ * relocating label was shortened in lib/intake/questions.ts on 2026-09-04 and
+ * this page needed no edit at all.
  *
  * Three, not the full five. "Both" and "Still deciding" are real answers to a
  * form question and have no page of their own; a hero that offers five doors is
