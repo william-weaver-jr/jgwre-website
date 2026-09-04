@@ -1,7 +1,13 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
+import {
+  CASE_CONDITION,
+  CASE_NEW_CONSTRUCTION,
+  CASE_RESALE,
+} from "@/components/case-ledger";
 import { SIDES } from "@/lib/intake";
+import { RESULTS_DISCLAIMER } from "@/lib/site";
 
 vi.mock("next/image", async () => ({
   default: (await import("../tests/next-image-stub")).NextImageStub,
@@ -74,5 +80,60 @@ describe("home page hero pathways", () => {
       expect(pathway.label.length).toBeGreaterThan(0);
       expect(pathway.href.startsWith("/")).toBe(true);
     }
+  });
+});
+
+/**
+ * The three case studies, after the section was condensed on 2026-08-31.
+ *
+ * The compliance suite already asserts that a page showing a dollar figure
+ * carries the results disclaimer. It cannot assert the opposite direction: a
+ * future trim that deletes a case, or drops a ledger row, removes the figure
+ * *and* the obligation together and leaves every existing test green while
+ * quietly weakening the site's central proof.
+ *
+ * docs/CASE-STUDIES.md is explicit on both counts — three different shapes of
+ * win, and "$22,210 stays $22,210" — so both are asserted here.
+ */
+/** Just the case-study section, from its opening tag to the next section end. */
+function caseStudySection(html: string): string {
+  const start = html.indexOf('aria-labelledby="outcomes"');
+  expect(start, "the case-study section is gone from the home page").toBeGreaterThan(-1);
+  return html.slice(start, html.indexOf("</section>", start));
+}
+
+describe("home page case studies", () => {
+  it("renders every term and figure of all three cases", async () => {
+    const html = await homeMarkup();
+
+    for (const entries of [CASE_CONDITION, CASE_RESALE, CASE_NEW_CONSTRUCTION]) {
+      for (const entry of entries) {
+        expect(html, `missing ledger term: ${entry.term}`).toContain(entry.term);
+        expect(html, `missing ledger value: ${entry.value}`).toContain(entry.value);
+      }
+    }
+  });
+
+  /*
+    Hardcoded on purpose, against the constants rather than derived from them.
+    The rule in docs/CASE-STUDIES.md is about these exact numbers, so a test
+    that reads them from the same file it is guarding would pass through any
+    edit to it.
+  */
+  it("keeps the documented figures exact and unrounded", async () => {
+    const html = await homeMarkup();
+    for (const figure of ["$20,000", "$22,210", "$34,000", "$50,000"]) {
+      expect(html, `${figure} is no longer on the home page`).toContain(figure);
+    }
+  });
+
+  it("keeps all three cases, so the argument stays three shapes and not one", async () => {
+    // Scoped to the section: the four pillar cards are <article> too, and
+    // counting them would make this pass no matter what happened here.
+    expect(caseStudySection(await homeMarkup()).match(/<article/g) ?? []).toHaveLength(3);
+  });
+
+  it("keeps the results disclaimer with them", async () => {
+    expect(await homeMarkup()).toContain(RESULTS_DISCLAIMER);
   });
 });

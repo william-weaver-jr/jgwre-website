@@ -256,15 +256,20 @@ export default function HomePage() {
 
       {/* ---------------------------------------------------------- CASE STUDIES */}
       <section aria-labelledby="outcomes" className="mx-auto max-w-6xl px-gutter py-section">
-        <p className="eyebrow">Three transactions</p>
+        {/*
+          The standfirst under this heading used to read "Three closed
+          transactions. None of them won the same way." Every fact in it was
+          already on screen — "three" in the eyebrow, "no two the same" in the
+          heading — so the eyebrow absorbed the one word that was not ("closed",
+          which is the load-bearing one) and the sentence went. Condensing this
+          section starts with the copy that repeats itself, not with the figures.
+        */}
+        <p className="eyebrow">Three closed transactions</p>
         <h2 id="outcomes" className="mt-4 max-w-2xl font-display text-4xl leading-tight md:text-5xl">
           Every negotiation has a different shape.
         </h2>
-        <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-muted">
-          Three closed transactions. None of them won the same way.
-        </p>
 
-        <div className="mt-14 space-y-12">
+        <div className="mt-10 space-y-8">
           {/*
             Case 2 in docs/CASE-STUDIES.md leads here because it is the most
             surprising, not the biggest — the one where the price never moved. It
@@ -275,7 +280,7 @@ export default function HomePage() {
             order is not doc order, and "Case 01" on the page previously meant
             something different from "Case 1" in the doc.
           */}
-          <article className="border-t-2 border-accent bg-surface-raised px-7 py-10 md:px-12 md:py-14">
+          <article className="border-t-2 border-accent bg-surface-raised px-7 py-9 md:px-12 md:py-11">
             <div className="grid gap-8 md:grid-cols-[11rem_1fr]">
               <div>
                 <p className="eyebrow">Condition, not price</p>
@@ -284,8 +289,8 @@ export default function HomePage() {
                 <h3 className="max-w-xl font-display text-3xl leading-snug md:text-4xl">
                   No money off the price. All of it in condition.
                 </h3>
-                <CaseLedger className="mt-8" entries={CASE_CONDITION} />
-                <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-muted">
+                <CaseLedger className="mt-6" entries={CASE_CONDITION} />
+                <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-muted">
                   The list price never moved. The house that closed was not the house that was
                   listed.
                 </p>
@@ -293,34 +298,52 @@ export default function HomePage() {
             </div>
           </article>
 
-          {/* Case 1 — plain on the page ground. Three ledger figures, nothing else. */}
-          <article className="grid gap-8 rule-top pt-10 md:grid-cols-[11rem_1fr]">
-            <div>
+          {/*
+            Cases 1 and 3 sit SIDE BY SIDE from `md` up, and that is where most of
+            this section's height went.
+
+            Stacked, the three cases spent 1,822px of a page the audit already
+            called too long, while the widest thing in any of them was a
+            three-row ledger sitting in a 1,100px column. The saving is entirely
+            in unused horizontal space — every case, every term, and every figure
+            is still on the page, which is what CASE-STUDIES.md requires and what
+            makes this a trim rather than a cut.
+
+            The lead case keeps the full width above them. It was already the one
+            with the most visual presence, so a 1-plus-2 arrangement reinforces
+            the hierarchy the section had rather than inventing one — and the
+            framing that matters ("three different shapes of win", not three
+            wins) is carried by the labels and the ledgers, which are untouched.
+
+            Their eyebrow moves above the heading instead of into an 11rem left
+            column: at half width that column is no longer a margin note, it is a
+            squeeze.
+          */}
+          <div className="grid gap-8 md:grid-cols-2">
+            {/* Case 1 — plain on the page ground. Three ledger figures, nothing else. */}
+            <article className="rule-top pt-8">
               <p className="eyebrow">One contract, three wins</p>
-            </div>
-            <div>
-              <h3 className="font-display text-2xl leading-snug md:text-3xl">
+              <h3 className="mt-3 font-display text-2xl leading-snug md:text-3xl">
                 Price, cash, and position in one contract.
               </h3>
-              <CaseLedger className="mt-6" entries={CASE_RESALE} />
-            </div>
-          </article>
+              <CaseLedger className="mt-5" entries={CASE_RESALE} />
+            </article>
 
-          {/* Case 3 — quiet cream inset with a gold left hairline. No dark field. */}
-          <article className="grid gap-8 border-l-2 border-accent-soft bg-surface-sunken px-7 py-10 md:grid-cols-[11rem_1fr] md:px-10">
-            <div>
+            {/* Case 3 — quiet cream inset with a gold left hairline. No dark field. */}
+            <article className="border-l-2 border-accent-soft bg-surface-sunken px-7 py-8 md:px-8">
               <p className="eyebrow">New construction</p>
-            </div>
-            <div>
-              <h3 className="font-display text-2xl leading-snug md:text-3xl">
+              <h3 className="mt-3 font-display text-2xl leading-snug md:text-3xl">
                 The builder&rsquo;s own money.
               </h3>
-              <CaseLedger className="mt-6" entries={CASE_NEW_CONSTRUCTION} />
-            </div>
-          </article>
+              <CaseLedger className="mt-5" entries={CASE_NEW_CONSTRUCTION} />
+            </article>
+          </div>
         </div>
 
-        <ResultsDisclaimer className="mt-12" />
+        {/* Still immediately below the last figure, which is the whole
+            requirement — §7 and docs/CASE-STUDIES.md. Side-by-side cards do not
+            change that; there is one disclaimer under all three, as before. */}
+        <ResultsDisclaimer className="mt-10" />
       </section>
 
       {/* -------------------------------------------------------------- SPECIALTY */}

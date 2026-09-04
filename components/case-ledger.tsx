@@ -18,10 +18,16 @@ export function CaseLedger({
   entries: readonly LedgerEntry[];
   className?: string;
 }) {
+  /*
+    Row padding is py-2.5, down from py-3.5 on 2026-08-31. Ten rows across the
+    three home page cases, at 57px each, were the largest single block of height
+    in that section. A ledger row still reads as a ledger row at 49px, and
+    nothing about the figures themselves changed.
+  */
   return (
     <dl className={`divide-y divide-border border-y border-border ${className}`}>
       {entries.map((entry) => (
-        <div key={entry.term} className="flex items-baseline justify-between gap-6 py-3.5">
+        <div key={entry.term} className="flex items-baseline justify-between gap-6 py-2.5">
           <dt className="text-base">{entry.term}</dt>
           <dd className="figure-plain text-lg">{entry.value}</dd>
         </div>
