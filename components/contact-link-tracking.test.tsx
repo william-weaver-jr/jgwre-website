@@ -75,6 +75,35 @@ describe("contact link tracking", () => {
     expect(clickAndCapture('<a href="/buyers" data-cta-placement="nav">Buy</a>')).toEqual([]);
   });
 
+  /*
+    `intake_start` moved here from an inline onClick on the sticky bar when the
+    second and third "#start" links shipped. The risk of that move is firing
+    twice for one click — once from the listener and once from a leftover
+    handler — which would silently inflate the one funnel number the intake is
+    judged on.
+  */
+  describe("the intake jump", () => {
+    it("records a #start link as one intake_start", () => {
+      const events = clickAndCapture(
+        '<a href="#start" data-cta-placement="home-band">Start here</a>',
+      );
+      expect(events).toHaveLength(1);
+      expect(events[0].event).toBe("intake_start");
+      expect(events[0].params.placement).toBe("home-band");
+    });
+
+    it("keeps placements apart, so the band and the bar stay comparable", () => {
+      expect(
+        clickAndCapture('<a href="#start" data-cta-placement="sticky-bar">Start here</a>')[0]
+          .params.placement,
+      ).toBe("sticky-bar");
+    });
+
+    it("does not treat another in-page anchor as the intake", () => {
+      expect(clickAndCapture('<a href="#outcomes">Jump</a>')).toEqual([]);
+    });
+  });
+
   it("ignores a mailto, which is neither and must not become one", () => {
     expect(clickAndCapture('<a href="mailto:someone@example.com">Email</a>')).toEqual([]);
   });

@@ -47,7 +47,7 @@ export default function ContactPage() {
             </a>
           </Button>
           <Button asChild variant="outlineInk" size="xl" className="w-full sm:w-auto">
-            <a href="#start">Rather not call? Start here</a>
+            <a href="#start" data-cta-placement="contact-hero">Rather not call? Start here</a>
           </Button>
         </div>
 

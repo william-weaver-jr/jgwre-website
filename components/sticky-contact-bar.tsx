@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { track } from "@/lib/analytics";
 import { AGENT } from "@/lib/site";
 
 /**
@@ -91,9 +90,13 @@ export function StickyContactBar() {
           Text
           <span className="sr-only"> {AGENT.name} at {AGENT.phoneDisplay}</span>
         </a>
+        {/* `intake_start` is fired by the delegated listener in
+            components/contact-link-tracking.tsx, which matches every
+            `href="#start"` on the site. It used to be an inline onClick here,
+            back when this was the only such link. */}
         <a
           href="#start"
-          onClick={() => track("intake_start", { placement: "sticky-bar" })}
+          data-cta-placement="sticky-bar"
           className="inline-flex min-h-12 flex-1 items-center justify-center rounded-sm border border-accent-soft px-3 text-sm font-medium tracking-wide text-ink"
         >
           Start here

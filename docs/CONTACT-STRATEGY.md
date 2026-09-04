@@ -78,6 +78,7 @@ So:
 |---|---|---|---|
 | Header (all pages) | `tel:` button, persistent | — | — |
 | Home hero | Primary | — (see below) | Secondary link to the intake |
+| Home, under the hero | — | — | **Compact band: "Start here" → `#start`** |
 | Pillar page foot | Beside the form | "Or text her at…" under the buttons | **Inline, prefilled from the page** |
 | `/negotiation` | Beside the form | Same line | Inline (lead type `guide`) |
 | `/home-value` | Beside the form | Same line | Inline (lead type `valuation`) |
@@ -99,6 +100,18 @@ Three things about how it is built, each a decision rather than a detail:
   pathways; a fourth line would push the pathways further below the fold to say something
   the closing block and `/contact` both say properly. It is the one `PhoneCta` with the
   text line switched off.
+**The intake band shipped 2026-08-31**, and it closes a bigger gap than "the form is a
+long way down". Until that date the only two links to `#start` on the entire site were the
+mobile sticky bar — which is `md:hidden` — and one button on `/contact`. **A desktop visitor
+had no path to the questionnaire at all**, on any page: they could call, or they could scroll
+6,788px. §2 above says the form exists for the reader who will not phone a stranger, and on a
+desktop that reader was being offered the phone or nothing.
+
+It links to `#start` rather than mounting a second `ContactIntake`. Two live forms on one
+page would split the funnel across two instances of the same events and double the §7
+surface — the consent text, the disclaimer and the confirmation copy are all advertising,
+and reviewing them once is the point of there being one of them.
+
 - **The sticky bar says "Call", not the number.** Three controls and "(704) 200-9360" do
   not both fit — 319px of usable width at 375px against a number needing ~137px alone. The
   digits are not lost: `SiteHeader` is `sticky top-0` and stays pinned while scrolled, so
@@ -213,6 +226,12 @@ Instrument before launch or the comparison is unrecoverable.
 5. **Assisted calls** — visitors who hit step 1, abandoned, then called. FUB's tracking
    number plus a session flag. The form earns credit for these; naive form metrics won't.
 6. **Sticky-bar split** — Call vs Text vs Start taps on mobile, now three ways.
+7. **Where `intake_start` comes from** — `home-band`, `sticky-bar`, `contact-hero`. All
+   three fire from the same delegated listener rather than an inline handler per link:
+   with one link an `onClick` was fine, with three it is how one ships untracked or two
+   mechanisms double-count the same click. `/contact`'s button fired nothing at all until
+   2026-08-31. The band-vs-bar split is what says whether a desktop reader wanted the form
+   early or was only ever going to call.
 
 Nothing about the intake is locked. §3's structure is a hypothesis with an instrument
 attached; the branch questions are the cheapest thing on the page to change.

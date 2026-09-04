@@ -25,14 +25,38 @@ const EVENTS: Record<string, string> = {
   "sms:": "text_click",
 };
 
+/**
+ * Every link that jumps to the intake, wherever it is.
+ *
+ * These were tracked at the call site until 2026-08-31, when there was exactly
+ * one of them. Now there are three — the sticky bar, the home page band, and
+ * /contact — and an inline `onClick` per link is how one of them quietly ships
+ * untracked, or how two mechanisms end up firing the same event twice for the
+ * same click. The delegated listener already existed for `tel:`; this is the
+ * same click.
+ */
+const INTAKE_ANCHOR = 'a[href="#start"]';
+
 export function ContactLinkTracking() {
   useEffect(() => {
     function onClick(event: MouseEvent) {
       const target = event.target;
       if (!(target instanceof Element)) return;
 
-      const link = target.closest<HTMLAnchorElement>('a[href^="tel:"], a[href^="sms:"]');
+      const link = target.closest<HTMLAnchorElement>(
+        `a[href^="tel:"], a[href^="sms:"], ${INTAKE_ANCHOR}`,
+      );
       if (!link) return;
+
+      const page = window.location.pathname;
+
+      if (link.matches(INTAKE_ANCHOR)) {
+        track("intake_start", {
+          placement: link.dataset.ctaPlacement ?? "unlabeled",
+          page,
+        });
+        return;
+      }
 
       // Read the scheme off the attribute, not the resolved `href` property:
       // the property is normalised by the browser and the attribute is what the
@@ -41,10 +65,7 @@ export function ContactLinkTracking() {
       const name = EVENTS[scheme];
       if (!name) return;
 
-      track(name, {
-        placement: link.dataset.ctaPlacement ?? "unlabeled",
-        page: window.location.pathname,
-      });
+      track(name, { placement: link.dataset.ctaPlacement ?? "unlabeled", page });
     }
 
     document.addEventListener("click", onClick);

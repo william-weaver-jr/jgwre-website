@@ -12,6 +12,7 @@ import { ContactIntake } from "@/components/contact-intake";
 import { PhoneCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { ReviewCard } from "@/components/review-card";
+import { Button } from "@/components/ui/button";
 import { PHOTOS } from "@/lib/images";
 import { dedupeByTransaction, publishableReviews, reviewById } from "@/lib/reviews";
 import { JsonLd, realEstateAgentSchema } from "@/lib/schema";
@@ -214,6 +215,44 @@ export default function HomePage() {
           />
         </div>
       </section>
+
+      {/*
+        ------------------------------------------------------- INTAKE SHORTCUT
+
+        A jump to the intake, immediately under the hero.
+
+        The gap it closes is larger than "the form is a long way down". Until
+        2026-08-31 the only two links to #start on the whole site were the mobile
+        sticky bar — which is `md:hidden` — and a button on /contact. So a
+        DESKTOP visitor had no path to the questionnaire at all: not on this
+        page, not on any pillar page. They could call, or they could scroll
+        6,788px. docs/CONTACT-STRATEGY.md §2 is explicit that the form exists for
+        the reader who will not phone a stranger, and that reader was being
+        offered the phone or nothing.
+
+        It links to #start rather than mounting a second ContactIntake. Two live
+        forms on one page would split the funnel between two instances of the
+        same events and double the §7 surface — the consent text, the
+        disclaimer, and the confirmation copy are all advertising, and reviewing
+        them once is the point of there being one.
+
+        Quiet on purpose. It sits between the hero and the case studies, which
+        are the argument; a loud band here would interrupt the reader on their
+        way into the thing that persuades them.
+      */}
+      <div className="border-b border-border bg-surface-raised">
+        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-gutter py-7 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-xl text-base leading-relaxed text-ink-muted">
+            <span className="font-medium text-ink">Not ready to call?</span> Answer five
+            questions and see which terms are worth asking for on your house.
+          </p>
+          <Button asChild variant="outlineInk" className="w-full shrink-0 sm:w-auto">
+            <a href="#start" data-cta-placement="home-band">
+              Start here
+            </a>
+          </Button>
+        </div>
+      </div>
 
       {/* ---------------------------------------------------------- CASE STUDIES */}
       <section aria-labelledby="outcomes" className="mx-auto max-w-6xl px-gutter py-section">
