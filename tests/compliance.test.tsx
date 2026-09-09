@@ -518,6 +518,19 @@ describe("the privacy policy names every analytics vendor we load (§7)", () => 
     expect(body).toMatch(/Google Signals/);
     expect(body).toMatch(/ad personalization/i);
   });
+
+  /*
+    The link itself has to be named, not only its consequences. Bill directed the
+    GA4 to Google Ads link on 2026-09-08 so `generate_lead` could be imported as
+    a conversion. A page that says the advertising features are off while saying
+    nothing about analytics data reaching an advertising product is accurate
+    sentence by sentence and misleading read whole — which is the failure this
+    suite exists to catch.
+  */
+  it("discloses that Analytics is linked to Google Ads", async () => {
+    const body = text(await page("/privacy-policy"));
+    expect(body).toMatch(/linked to Google Ads/i);
+  });
 });
 
 describe("SEO metadata (§11)", () => {

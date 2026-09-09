@@ -41,6 +41,16 @@ if (process.env.NODE_ENV === "production" && !MEASUREMENT_ID) {
  *   consent banner advisable. Off in code means turning one on is a diff someone
  *   reviews, not a checkbox in a console nobody is watching.
  *
+ *   These two lines got more load-bearing on 2026-09-08, not less. The property
+ *   is now linked to Google Ads so `generate_lead` can be imported as a
+ *   conversion (CLAUDE.md §7), and the obvious next thought is that the flags
+ *   below are now pointless because the data is going to an ad product anyway.
+ *   They are the reason it goes there as a conversion count and nothing else:
+ *   Google documents that disabling ads personalization leaves measurement
+ *   intact while blocking remarketing audiences and personalized targeting. The
+ *   sentence on /privacy-policy promising no advertising audiences is true
+ *   because of these two lines. Do not flip them to "fix" an Ads report.
+ *
  *   The property-level toggle is the other half and it wins independently of
  *   this config: Google Signals is **confirmed off in the GA4 property itself**
  *   (Bill, 2026-08-24). Nothing in this repo can see or assert that, so if it is
