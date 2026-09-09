@@ -156,6 +156,49 @@ export const REVIEWS: readonly Review[] = [
       "TODO(verify): platform, posting date, permalink, and byline all unconfirmed — transcribed from the workbook. Seller side, and an estate sale run for an out-of-state client, which makes it one of the few seller reviews on file. Worth chasing. Transaction row 2026-charlotte-01.",
   },
   {
+    /* Added to the workbook 2026-09-09, alongside the Highlights on the same
+       row. No permalink supplied — same gate as unverified-john-white. */
+    id: "unverified-aime-barron",
+    author: "Aime Barron",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed.",
+    date: "2026-08-01",
+    datePrecision: "year",
+    transaction: {
+      role: "sold",
+      propertyType: "Single Family",
+      year: 2026,
+      location: "Turtle Rock, Charlotte, NC",
+    },
+    body: "Jasmine was absolutely amazing to work with! She was professional, knowledgeable, responsive, and made the entire process feel so much easier. She was always there to answer my questions and genuinely cared about making sure everything went smoothly. I'm so grateful for all of her help and would highly recommend Jasmine to anyone looking for a fantastic real estate agent!",
+    statesDollarOutcome: false,
+    openQuestion:
+      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2026-turtle-rock-01.",
+  },
+  {
+    /* Added to the workbook 2026-09-09. Opens "We used Stone Realty" — the
+       brokerage's own name in the client's first sentence — which is worth
+       keeping in mind when this is eventually matched to a platform. */
+    id: "unverified-yvon",
+    author: "Jean & Wilda Yvon",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed.",
+    date: "2026-08-01",
+    datePrecision: "year",
+    transaction: {
+      role: "bought",
+      propertyType: "Single Family",
+      year: 2026,
+      location: "Edgewater, Lancaster, SC",
+    },
+    body: "We used Stone Realty to purchase a house in Lancaster, South Carolina. The process was seamless. They have such a great team. Everyone in the was accessible, involved and ready to help. We worked directly with the Real Estate Agent Jasmine Garcia. She was such a joy to work with. She really knows her craft. She knows the area. She understood what seemed stressful for us and knew exactly how explain that would calm the nerves down. We would highy recommend Jasmine to anyone who's buying a home in the area. Especially if you're not from the area. Thank you so much to the Matt Stone team and Jasmine Garcia in particular.",
+    statesDollarOutcome: false,
+    openQuestion:
+      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. The workbook's transcription carries its own typos ('Everyone in the was accessible', 'knew exactly how explain') — quoted as supplied per §7, not tidied. Transaction row 2026-edgewater-01.",
+  },
+  {
     id: "google-cathy-phillips",
     /* The workbook records the buyers as Harold & Cathy Phillips; the review is
        bylined Cathy Phillips alone, and the byline is what is recorded. */

@@ -53,8 +53,20 @@ export const TRANSACTION_METRICS: readonly TransactionMetrics[] = [
     note: "2-1 rate buydown at 2.87 / 3.87 / 4.87 percent, seller paid.",
   },
 
-  { transactionId: "2026-turtle-rock-01", closingPrice: 345000 },
-  { transactionId: "2026-trinity-park-01", closingPrice: 250000 },
+  {
+    transactionId: "2026-turtle-rock-01",
+    closingPrice: 345000,
+    note: "Sold for 99% of list price, under contract in three weeks.",
+  },
+  {
+    transactionId: "2026-trinity-park-01",
+    closingPrice: 250000,
+    note: "An investor's flip. Sold for 96.2% of list price, under contract in under two weeks.",
+  },
+  { transactionId: "2026-ayrsley-01", closingPrice: 350000, note: "Sold for 99% of list price." },
+  { transactionId: "2026-arvin-hills-01", closingPrice: 340000, note: "Sold for 99% of list price." },
+  /* SOUTH CAROLINA — non-disclosure. */
+  { transactionId: "2024-tega-cay-01", closingPrice: 312000 },
   /* SOUTH CAROLINA — non-disclosure. */
   { transactionId: "2026-edgewater-01", closingPrice: 360000, concessions: 5000 },
   { transactionId: "2026-windsor-park-01", closingPrice: 309900, concessions: 15066.91, belowList: 15100 },

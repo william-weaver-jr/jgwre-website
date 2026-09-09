@@ -416,7 +416,8 @@ Every one of the 44 ledger rows, matched against its workbook Neighborhood or Ge
 Submarket value where that value names a §5 market exactly. `market` set on the row wherever
 it does; CLAUDE.md §5 and `lib/areas/markets.ts` record the two new markets this surfaced.
 Full method and the individual row-by-row reasoning is in the chat history of 2026-08-31 —
-this table is the conclusion, not the derivation.
+this table is the conclusion, not the derivation. **Re-run 2026-09-09** against 47 rows (44
++ 3): only one rank changed, but it is the one this section said to watch for.
 
 | Rank | Market | Rows | Why it's there |
 |---|---|---|---|
@@ -432,7 +433,14 @@ this table is the conclusion, not the derivation.
 | 6 | Lake Wylie | 1 | Patriots Crossing |
 | 6 | Indian Land | 1 | Walnut Creek — her own review says "Lancaster / Indian Land" |
 | 6 | Ballantyne | 1 | Belle Vista / "Ballantyne West" |
-| — | Myers Park, South End, Uptown, Tega Cay, Waxhaw | 0 | No closing in 44 rows names any of them |
+| 6 | **Tega Cay** | 1 | A single thin row — city, state, and property type only, added 2026-09-09 |
+| — | Myers Park, South End, Uptown, Waxhaw | 0 | No closing in 47 rows names any of them |
+
+**Tega Cay moves out of the zero-evidence group** on one closing with no subdivision, no
+review, and no lever — the thinnest row in the ledger. It qualifies the same way every other
+rank-6 market did: the city itself is the market. Worth noting rather than treating as
+equivalent to SouthPark or Dilworth's rank-6 evidence, which each carry at least a named
+subdivision.
 
 **Steele Creek stays second regardless of the tie at rank 3.** §10's residency argument is
 categorical, not additive — she does not need to research the commute, she drives it — and
@@ -447,8 +455,9 @@ markets in particular are a snapshot of the workbook's current coverage, not a v
 whether she has ever worked there.
 
 **Proposed order, superseding §11's "hub → Fort Mill → Steele Creek":** hub → East
-Charlotte → Northwest Charlotte → Fort Mill → Steele Creek → re-assess. The zero-evidence
-five wait on either new closings or a residency-style case, whichever comes first.
+Charlotte → Northwest Charlotte → Fort Mill → Steele Creek → re-assess. The remaining
+zero-evidence four (Myers Park, South End, Uptown, Waxhaw) wait on either new closings or a
+residency-style case, whichever comes first.
 
 ---
 

@@ -540,6 +540,21 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
 - [ ] **`unverified-john-white` needs a permalink.** Seller side, an estate sale run for an
       out-of-state client — one of very few seller reviews on file, so worth chasing. Its
       row (`2026-charlotte-01`) carries no review link until it clears.
+- [x] **Workbook update — 47 rows, up from 44 — 2026-09-09.** Three new closings (Ayrsley,
+      Arvin Hills, Tega Cay) plus new Highlights/reviews on three already-shipped rows
+      (Turtle Rock, Trinity Park, Edgewater). `/transactions` needed no edit — its count is
+      read from `TRANSACTIONS.length`, per V15 (2026-09-04). Two new gated reviews added
+      (`unverified-aime-barron`, `unverified-yvon`), same TODO(verify) treatment as the rest.
+      Every percentage-of-list figure the sheet added (99%, 96.2%) was dropped from its
+      lever for the same reason a dollar figure would be — a quantified outcome for one
+      closing, without the disclaimer this page does not carry.
+- [ ] **`2026-ayrsley-01` is marked Left Review: Y with no review text in the sheet.** Same
+      open state `unverified-john-white` was in before its permalink work started, except
+      here there is nothing to transcribe yet, gated or otherwise. Worth a direct ask rather
+      than a workbook chase: **the client on this row is Bill** — his own home sale, in the
+      same Ayrsley development where she lives (a different unit; §10 already establishes it
+      has five separate HOAs). If he wrote a review, it is his to supply; if he did not, the
+      row stands fine without one, the same as several others in the ledger.
 - [ ] **Do not publish the Vicki White review as written.** It is a strong five-star
       review, but it attacks the opposing agent at length ("the poster child for giving
       realtors a bad name") and states the client believes she was mistreated because she

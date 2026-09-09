@@ -34,6 +34,51 @@ import type { Transaction } from "./types";
 export const TRANSACTIONS: readonly Transaction[] = [
   /* ------------------------------------------------------------------ 2026 */
   {
+    id: "2026-ayrsley-01",
+    side: "seller",
+    year: 2026,
+    month: 10,
+    neighborhood: "Ayrsley",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    builder: "Lennar",
+    /* Neighborhood column: Steele Creek, exact match. Ayrsley is the same
+       community named in AREAS-SPEC.md §10 as where she lives — a different
+       household's home, in the same mixed-HOA development, not hers. That
+       distinction is why this row is unremarkable under §10's "her home is
+       not a case study" rule: it names someone else's closing. */
+    market: "steele-creek",
+    pillars: ["sellers"],
+    /* Workbook: "Multiple showings in one weekend. Under contract in 7 days.
+       Sold for 99% of list price." Figure dropped for the reason given on
+       Turtle Rock and Trinity Park, above; the showings-to-contract speed
+       carries no number and is the real lever. */
+    lever: "Multiple showings in one weekend, under contract in seven days.",
+    /* Left Review: Y, but the sheet's Reviews cell is blank — no text to
+       transcribe. Same open-ended state as Jonathan Fitch's row before that
+       one was corrected; flagged in CLAUDE.md §12 rather than guessed at. */
+  },
+  {
+    id: "2026-arvin-hills-01",
+    side: "seller",
+    year: 2026,
+    month: 8,
+    neighborhood: "Arvin Hills",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    /* Relocation column: Y — a seller relocating away, not a buyer relocating
+       in. The pillar has meant either direction since the column was added
+       (see 2024-cresswind-01 and 2023-easthaven-01 for the buyer-side use). */
+    pillars: ["sellers", "relocation"],
+    /* Workbook's Neighborhood (submarket-evidence) column is blank, and the
+       Submarket value is "North Charlotte" — not "Northwest Charlotte" — so
+       this stays unmapped for the same reason Carlton Hills, Brownes Ferry,
+       and Katelyn Moors do (CLAUDE.md §5, 2026-08-31). */
+    lever: "An estate sale for an out-of-town client, under contract inside a month.",
+  },
+  {
     id: "2026-turtle-rock-01",
     side: "seller",
     year: 2026,
@@ -45,10 +90,15 @@ export const TRANSACTIONS: readonly Transaction[] = [
     pillars: ["sellers"],
     /* Submarket column: East Charlotte, exact match. */
     market: "east-charlotte",
-    /* Workbook: "Helped an estate sale." Kept plain. An estate sale means
-       someone is selling a house after a death, and the ledger should not
-       dress that up. */
-    lever: "An estate sale.",
+    /* Workbook (2026-09-09 update) added "Sold for 99% of list price. Went
+       under contract in just 3 weeks." on top of the estate sale already
+       recorded. The percentage is dropped by the same discipline that drops a
+       dollar figure — it is a quantified outcome for one closing, and the site
+       treats those as needing a disclaimer it does not carry here (§7; see how
+       the reviews schema flags "quantified financial outcome" even without a
+       literal $). Speed survives because it names no number. */
+    lever: "An estate sale, under contract in three weeks.",
+    reviewId: "unverified-aime-barron",
   },
   {
     id: "2026-trinity-park-01",
@@ -62,6 +112,12 @@ export const TRANSACTIONS: readonly Transaction[] = [
     pillars: ["sellers"],
     /* Submarket column: Northwest Charlotte, exact match. */
     market: "northwest-charlotte",
+    /* Workbook (2026-09-09): "Under contract in less than 2 weeks... Helped an
+       investor sell his flip." The 96.2%-of-list figure is dropped for the
+       same reason as Turtle Rock's, above — selling an investor's flip fast is
+       the genuinely distinctive fact and it carries no number. No review was
+       left on this one (Left Review: N). */
+    lever: "Sold an investor's flip, under contract inside two weeks.",
   },
   {
     id: "2026-edgewater-01",
@@ -76,7 +132,13 @@ export const TRANSACTIONS: readonly Transaction[] = [
     /* Relocating from New York — the workbook's new Relocation column, which
        is the first time that pillar has had a source other than a review. */
     pillars: ["new-construction", "relocation", "carolinas-border"],
-    lever: "Out-of-state buyers. Builder concessions at closing.",
+    /* Workbook (2026-09-09) added Highlights and a review that were both blank
+       before: "Buyers received full home furniture (model home) and purchased
+       below comps for the neighborhood." Neither clause names a figure, so
+       both survive as stated — "below comps" is a comparison, not a number. */
+    lever:
+      "Out-of-state buyers. Builder concessions at closing, the model home's furniture included, and a price below the neighborhood's comps.",
+    reviewId: "unverified-yvon",
   },
   {
     id: "2026-annsborough-park-01",
@@ -259,6 +321,25 @@ export const TRANSACTIONS: readonly Transaction[] = [
   },
 
   /* ------------------------------------------------------------------ 2024 */
+  {
+    id: "2024-tega-cay-01",
+    side: "buyer",
+    year: 2024,
+    month: 5,
+    /* Workbook records no subdivision, neighborhood, or submarket for this
+       row — the thinnest entry in the ledger. locationLabel() degrades to
+       city, state. */
+    city: "Tega Cay",
+    state: "SC",
+    propertyType: "Townhouse",
+    /* city is the market. Tega Cay's first row — CLAUDE.md §5 and
+       AREAS-SPEC.md §12 both listed it at zero evidence until this one. */
+    market: "tega-cay",
+    pillars: ["carolinas-border"],
+    /* No Highlights, no review, no concessions in the sheet. A row without a
+       lever is still evidence that the closing happened; nothing here is
+       invented to fill the gap. */
+  },
   {
     id: "2024-patriots-crossing-01",
     side: "seller",
