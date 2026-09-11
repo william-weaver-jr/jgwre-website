@@ -381,6 +381,19 @@ Two things it does **not** cover:
   the promise in that paragraph is enforced by `lib/google-click-ids.test.ts` rather than
   asserted in copy.
 
+**Naming the data processors on `/privacy-policy` — APPROVED 2026-09-11.** Reported by Bill.
+Covers the sentence in *How we use it* naming **Follow Up Boss** as the CRM that stores a
+submission and **Resend** as the provider that carries the notification email.
+
+Both were already receiving real client contact details when this was approved — the CRM
+since 2026-08-28, Resend since before that — from a page that named neither. The direction
+of the error is what made it worth fixing promptly: a policy that under-describes what
+happens to a phone number reads exactly like one that is complete, so nothing surfaced it.
+`tests/compliance.test.tsx` now asserts both names and what each vendor does with a
+submission, against the rendered page.
+
+It does **not** cover the vendor-terms review, which is counsel's and still open (§12).
+
 **Footer marks, text-only — APPROVED 2026-08-10.** The BIC confirmed a text treatment of the
 Equal Housing Opportunity and REALTOR® marks is acceptable; he uses the same on his own site.
 So the current footer is an approved state, not a stopgap waiting on artwork. Dropping the
@@ -412,26 +425,21 @@ BIC's call to make alone:
   that nothing had been sent there — no account, no key. **The integration connected and was
   verified on 2026-08-28 (§12), so that condition is met and both follow-ups are now due:**
 
-  1. **Restore the sentence naming Follow Up Boss on `/privacy-policy` — RESTORED
-     2026-09-11**, directed by Bill. It was trimmed on 2026-08-24 because it said
-     submissions were stored in Follow Up Boss while every one of them was in fact reaching
-     the notification email and nothing else. The integration connected on 2026-08-28, which
-     made the trimmed version the inaccurate one, and nothing brought the sentence back for
-     two weeks — real client contact details reached a vendor the page did not name.
-     `tests/compliance.test.tsx` now asserts both the CRM's name and that the page says
-     submissions are stored there, reading the rendered page rather than the source, so a
-     comment about intent cannot satisfy it.
+  1. **Name both processors on `/privacy-policy` — DONE 2026-09-11, BIC APPROVED.** Reported
+     by Bill, covering this and the Resend half below. The Follow Up Boss sentence was
+     trimmed on 2026-08-24 because it said submissions were stored in the CRM while every
+     one of them was in fact reaching the notification email and nothing else. The
+     integration connected on 2026-08-28, which made the trimmed version the inaccurate one,
+     and nothing brought the sentence back for two weeks — real client contact details
+     reached a vendor the page did not name. Resend was never named at all.
 
-     **The written BIC approval for this one is not yet filed.** The page is a compliance
-     surface and §7 wants material changes approved before they ship. File it here when it
-     is given, or say so if it was covered by the 2026-09-11 conversation that approved the
-     Google Ads disclosures.
-  2. **Run the vendor check.** What the page says about Follow Up Boss now has to be checked
-     against Follow Up Boss's terms. Resend is still open and was never parked — and it is
-     now also live, carrying the same notification traffic. **Resend is still named nowhere
-     in the rendered copy**: the page says a copy is emailed to her and does not say which
-     vendor carries it. Restoring the CRM sentence did not touch that, deliberately — it was
-     not what was asked for, and it is the same kind of material change.
+     `tests/compliance.test.tsx` now asserts both, and asserts what each one does with a
+     submission rather than only that the name appears. It reads the rendered page, not the
+     source, so a comment explaining the intent cannot satisfy it.
+  2. **Run the vendor check.** Still open, and naming them did not close it. What the page
+     says about Follow Up Boss and Resend has to be read against those vendors' terms —
+     counsel's question, not the BIC's. Both now carry real client contact details, so this
+     is no longer a review of what a draft says about a vendor receiving nothing.
 
   The stakes moved with the connection. Until 2026-08-28 this was a review of what a draft
   said about a vendor receiving nothing. It is now a review of what the page says about two

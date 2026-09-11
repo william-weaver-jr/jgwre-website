@@ -516,10 +516,14 @@ describe("the privacy policy names every analytics vendor we load (§7)", () => 
     Asserted from the rendered page rather than the source, so a comment
     explaining the intent cannot satisfy it.
   */
-  it("names the CRM that stores what a visitor submits", async () => {
+  it.each([
+    ["Follow Up Boss", "lib/fub.ts", /stored in Follow Up Boss/i],
+    ["Resend", "app/api/lead/route.ts", /through Resend/i],
+  ])("names %s, which receives what a visitor submits", async (vendor, _source, phrasing) => {
     const body = text(await page("/privacy-policy"));
-    expect(body).toContain("Follow Up Boss");
-    expect(body).toMatch(/stored in Follow Up Boss/i);
+    expect(body).toContain(vendor);
+    // Naming it is half of it; the page has to say what the vendor does with it.
+    expect(body).toMatch(phrasing);
   });
 
   /**

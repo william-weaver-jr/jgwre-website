@@ -43,12 +43,15 @@ export const metadata: Metadata = {
   names both processors, so the page cannot drift from the integration again
   without failing the build.
 
-  TODO(legal): still not closed by restoring it. What this page says about
-  Follow Up Boss — and about Resend, which carries the same submission as the
-  notification email and is named nowhere in the copy — has to be checked
-  against those vendors' terms. That is counsel's, not the BIC's, and the
-  stakes moved when the CRM connected: this is no longer a review of what a
-  draft says about a vendor receiving nothing.
+  Resend is named alongside it as of 2026-09-11, in the same approval. It
+  carries the same submission as the notification email, so a page that named
+  the CRM and not the mail vendor would have been half a disclosure.
+
+  TODO(legal): naming them does not close the vendor check. What this page says
+  about Follow Up Boss and Resend still has to be read against those vendors'
+  terms, which is counsel's rather than the BIC's. The stakes moved when the
+  CRM connected: this is no longer a review of what a draft says about a vendor
+  receiving nothing.
 
   The consent question this comment used to hold open was decided on 2026-08-24
   (Bill): no banner, a full disclosure, and a reachable opt-out. A GA4 install
@@ -131,7 +134,8 @@ export default function PrivacyPolicyPage() {
             We use your information to respond to your inquiry and to provide real estate
             services you request. What you submit is stored in Follow Up Boss, the customer
             relationship manager {BROKERAGE.name} uses, and a copy is emailed to{" "}
-            {AGENT.name}, who contacts you directly. We do not sell your information.
+            {AGENT.name} through Resend, our email provider. She contacts you directly. We
+            do not sell your information.
           </p>
         </section>
 
