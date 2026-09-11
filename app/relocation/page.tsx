@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageHero, SectionHeading } from "@/components/page-hero";
-import { ClosingCta } from "@/components/phone-cta";
+import { ClosingCta, PhoneCta } from "@/components/phone-cta";
 import { routeMetadata } from "@/lib/seo";
+import { AGENT } from "@/lib/site";
 
 /*
   PILLAR — relocation.
@@ -27,9 +28,9 @@ import { routeMetadata } from "@/lib/seo";
 */
 
 export const metadata: Metadata = {
-  title: "Relocating to Charlotte",
+  title: "Moving to Charlotte from out of state",
   description:
-    "Moving to Charlotte from out of state? Everyone in the transaction is local except you. 18 relocation transactions across the Charlotte metro and into SC.",
+    "Charlotte relocation representation from Jasmine Garcia, licensed in NC and SC, with 18 relocation transactions: neighborhoods, commutes, and the NC/SC decision.",
   ...routeMetadata({ path: "/relocation" }),
 };
 
@@ -68,21 +69,46 @@ export default function RelocationPage() {
   return (
     <>
       <PageHero
-        eyebrow="Pillar · The other side of this table"
+        variant="landing"
+        eyebrow="Charlotte relocation buyer representation"
         title={
           <>
-            You’re two thousand miles out.
-            <span className="block italic">Everyone else at the table is twenty minutes away.</span>
+            Moving to Charlotte?
+            <span className="block">
+              Get local representation before you choose a neighborhood&mdash;or a state.
+            </span>
           </>
         }
         lede={
           <>
-            The listing agent, the seller, the inspector, the appraiser, the attorney: all local,
-            all fluent in a market you are reading about on a screen. That gap is the thing to
-            close first.
+            {AGENT.name} helps out-of-state buyers evaluate Charlotte neighborhoods, commute
+            realities, and the North Carolina&ndash;South Carolina decision from the ground. She is
+            licensed in both states and has handled 18 relocation transactions across the Charlotte
+            metro.
           </>
         }
-      />
+      >
+        {/* Text line off above the fold, on in the closing block. See /new-construction. */}
+        <PhoneCta
+          className="mt-7"
+          placement="hero-relocation"
+          sms={false}
+          secondary={{ href: "#start", label: "Plan your Charlotte move" }}
+        />
+      </PageHero>
+
+      {/* -------------------------------------------------------------- THE TABLE */}
+      <section aria-labelledby="table" className="mx-auto max-w-6xl px-gutter pt-section">
+        <SectionHeading eyebrow="The other side of this table" id="table">
+          You’re two thousand miles out.
+          <span className="block italic">Everyone else at the table is twenty minutes away.</span>
+        </SectionHeading>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
+          The listing agent, the seller, the inspector, the appraiser, the attorney: all local, all
+          fluent in a market you are reading about on a screen. That gap is the thing to close
+          first.
+        </p>
+      </section>
 
       {/* ------------------------------------------------------------- THE RECORD */}
       <section aria-labelledby="record" className="mx-auto max-w-6xl px-gutter py-section">

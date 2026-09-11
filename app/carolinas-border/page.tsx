@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import { PageHero, SectionHeading } from "@/components/page-hero";
-import { ClosingCta } from "@/components/phone-cta";
-import { BROKERAGE } from "@/lib/site";
+import { ClosingCta, PhoneCta } from "@/components/phone-cta";
+import { AGENT, BROKERAGE } from "@/lib/site";
 import { routeMetadata } from "@/lib/seo";
 
 /*
@@ -27,9 +27,9 @@ import { routeMetadata } from "@/lib/seo";
 */
 
 export const metadata: Metadata = {
-  title: "Buying in North Carolina vs South Carolina",
+  title: "Buying near the Charlotte NC/SC state line",
   description:
-    "Fort Mill, Tega Cay, Indian Land, Lake Wylie, Waxhaw. Two states, two tax regimes, two rulebooks, and a state line running through your monthly payment.",
+    "Jasmine Garcia is licensed in both Carolinas, so buyers can compare Fort Mill, Tega Cay, Indian Land, Lake Wylie, and Waxhaw homes with one representative.",
   ...routeMetadata({ path: "/carolinas-border" }),
 };
 
@@ -68,21 +68,45 @@ export default function CarolinasBorderPage() {
   return (
     <>
       <PageHero
-        eyebrow="Pillar · The other side of this table"
+        variant="landing"
+        eyebrow="Charlotte NC/SC buyer representation"
         title={
           <>
-            Two states, two tax regimes, two rulebooks.
-            <span className="block italic">The state line runs through your monthly payment.</span>
+            Buying near Charlotte’s state line?
+            <span className="block">
+              Compare the home, the costs, and the contract before you choose NC or SC.
+            </span>
           </>
         }
         lede={
           <>
-            Two houses fifteen minutes apart can carry very different annual costs and close under
-            different rules. Buyers comparing them on list price alone are comparing the wrong
-            number.
+            {AGENT.name} is licensed in both North Carolina and South Carolina, so Charlotte-area
+            buyers can compare homes on either side with one representative. She helps clients
+            examine the differences that list price alone does not show, including recurring costs,
+            contract rules, and closing structure.
           </>
         }
-      />
+      >
+        {/* Text line off above the fold, on in the closing block. See /new-construction. */}
+        <PhoneCta
+          className="mt-7"
+          placement="hero-carolinas-border"
+          sms={false}
+          secondary={{ href: "#start", label: "Compare NC and SC" }}
+        />
+      </PageHero>
+
+      {/* -------------------------------------------------------------- THE TABLE */}
+      <section aria-labelledby="table" className="mx-auto max-w-6xl px-gutter pt-section">
+        <SectionHeading eyebrow="The other side of this table" id="table">
+          Two states, two tax regimes, two rulebooks.
+          <span className="block italic">The state line runs through your monthly payment.</span>
+        </SectionHeading>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
+          Two houses fifteen minutes apart can carry very different annual costs and close under
+          different rules. Buyers comparing them on list price alone are comparing the wrong number.
+        </p>
+      </section>
 
       {/* --------------------------------------------------------- DUAL LICENSURE */}
       <section aria-labelledby="licensed" className="mx-auto max-w-6xl px-gutter py-section">
