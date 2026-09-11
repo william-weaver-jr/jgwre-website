@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ContactIntake } from "./contact-intake";
 import { TCPA_CONSENT } from "@/lib/site";
+import { GOOGLE_CLICK_IDS_STORAGE_KEY } from "@/lib/google-click-ids";
 
 /**
  * The intake is the site's only conversion path, and two of its properties are
@@ -32,6 +33,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  window.localStorage.clear();
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
@@ -233,6 +235,26 @@ describe("submission", () => {
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalled());
     expect(payload().website).toBe("");
+  });
+
+  it("posts the persisted first-touch Google click identifiers", async () => {
+    window.localStorage.setItem(
+      GOOGLE_CLICK_IDS_STORAGE_KEY,
+      JSON.stringify({ gclid: "click-1", wbraid: "web-2", gbraid: "app-3" }),
+    );
+    const user = userEvent.setup();
+    render(<ContactIntake {...props} prefill={{ side: "buying" }} />);
+
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    await fillContactStep(user);
+    await user.click(screen.getByRole("button", { name: "Send this to Jasmine" }));
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    expect(payload().googleClickIds).toEqual({
+      gclid: "click-1",
+      wbraid: "web-2",
+      gbraid: "app-3",
+    });
   });
 
   it("shows the confirmation with questions worth asking, never a promise", async () => {

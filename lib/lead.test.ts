@@ -130,4 +130,24 @@ describe("leadSchema", () => {
     });
     expect(parsed.utm).toEqual({ source: "google", medium: "cpc", campaign: "border" });
   });
+
+  it("accepts Google click identifiers for offline attribution", () => {
+    const parsed = leadSchema.parse({
+      ...valid,
+      googleClickIds: { gclid: "gclid-1", wbraid: "wbraid-2", gbraid: "gbraid-3" },
+    });
+
+    expect(parsed.googleClickIds).toEqual({
+      gclid: "gclid-1",
+      wbraid: "wbraid-2",
+      gbraid: "gbraid-3",
+    });
+  });
+
+  it("rejects an empty or oversized Google click identifier object", () => {
+    expect(leadSchema.safeParse({ ...valid, googleClickIds: {} }).success).toBe(false);
+    expect(
+      leadSchema.safeParse({ ...valid, googleClickIds: { gclid: "x".repeat(513) } }).success,
+    ).toBe(false);
+  });
 });

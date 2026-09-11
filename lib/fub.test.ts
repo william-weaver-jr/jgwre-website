@@ -266,6 +266,18 @@ describe("sendToFollowUpBoss", () => {
       expect(bodyOf(fetchMock).message).toContain("UTM: source=google campaign=border");
     });
 
+    it("records Google click identifiers for later offline conversion matching", async () => {
+      const fetchMock = mockFetch();
+      await sendToFollowUpBoss({
+        ...lead,
+        googleClickIds: { gclid: "click-1", wbraid: "web-2" },
+      });
+
+      expect(bodyOf(fetchMock).message).toContain(
+        "Google click IDs: gclid=click-1 wbraid=web-2",
+      );
+    });
+
     it("omits the message line entirely when the visitor left it blank", async () => {
       const fetchMock = mockFetch();
       await sendToFollowUpBoss(lead);

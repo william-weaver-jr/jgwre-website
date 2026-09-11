@@ -139,6 +139,12 @@ async function sendNotificationEmail(lead: Lead, fubError: unknown): Promise<voi
       intake.length ? `\n${intake.join("\n")}` : "",
       prefers ? `\n${prefers}` : "",
       lead.message ? `\nMessage:\n${lead.message}` : "",
+      lead.googleClickIds
+        ? `\nGoogle click IDs: ${Object.entries(lead.googleClickIds)
+            .filter(([, value]) => value)
+            .map(([key, value]) => `${key}=${value}`)
+            .join(" ")}`
+        : "",
       `\nTCPA consent accepted at submission.`,
     ].join("\n"),
   });

@@ -103,6 +103,17 @@ describe("POST /api/lead — the happy path", () => {
     expect(email.text).toContain("TCPA consent accepted at submission");
   });
 
+  it("keeps Google click identifiers in the backup notification", async () => {
+    const { POST } = await loadRoute();
+    await POST(
+      post({ ...valid, googleClickIds: { gclid: "click-1", gbraid: "app-2" } }, freshIp()),
+    );
+
+    expect(emailsSend.mock.calls[0][0].text).toContain(
+      "Google click IDs: gclid=click-1 gbraid=app-2",
+    );
+  });
+
   /*
     The preferred contact method has to survive BOTH deliveries. The route
     builds the FUB payload and the email body separately from the same lead, so

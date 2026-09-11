@@ -56,6 +56,16 @@ export const leadSchema = z.object({
     })
     .optional(),
 
+  /** Google Ads first-touch identifiers, captured exactly as supplied in the URL. */
+  googleClickIds: z
+    .object({
+      gclid: z.string().trim().min(1).max(512).optional(),
+      wbraid: z.string().trim().min(1).max(512).optional(),
+      gbraid: z.string().trim().min(1).max(512).optional(),
+    })
+    .refine((ids) => Object.values(ids).some(Boolean), "At least one click ID is required")
+    .optional(),
+
   /** Honeypot. Must be empty. */
   website: z.string().max(0).optional(),
 });

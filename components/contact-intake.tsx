@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { readUtm, track } from "@/lib/analytics";
+import { captureFirstTouchGoogleClickIds } from "@/lib/google-click-ids";
 import {
   BRANCHES,
   CONTACT_METHODS,
@@ -87,6 +88,12 @@ export function ContactIntake({
     started.current = true;
   }, [step]);
 
+  // Capture on arrival, before a visitor can navigate away from the tagged URL.
+  // The same function is called again at submit time as a storage-failure fallback.
+  useEffect(() => {
+    captureFirstTouchGoogleClickIds();
+  }, []);
+
   function chooseSide(next: Side) {
     setSide(next);
     setAnswers({});
@@ -167,6 +174,7 @@ export function ContactIntake({
       consent: data.get("consent") === "on",
       website: String(data.get("website") ?? ""),
       utm: readUtm(),
+      googleClickIds: captureFirstTouchGoogleClickIds(),
     };
 
     /*

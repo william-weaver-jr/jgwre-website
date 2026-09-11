@@ -189,6 +189,12 @@ function buildMessage(lead: Lead): string {
           .map(([k, v]) => `${k}=${v}`)
           .join(" ")}`
       : null,
+    lead.googleClickIds
+      ? `Google click IDs: ${Object.entries(lead.googleClickIds)
+          .filter(([, v]) => v)
+          .map(([k, v]) => `${k}=${v}`)
+          .join(" ")}`
+      : null,
     "TCPA consent: accepted at submission",
   ].filter(Boolean);
 
