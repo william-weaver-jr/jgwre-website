@@ -22,8 +22,13 @@
  *   audience is built and no event is eligible for personalized targeting.
  * - What changed is the destination. Analytics data now reaches an advertising
  *   product, which is the premise the no-banner answer was resting on.
- *   /privacy-policy discloses the link, and the banner question itself is with
- *   counsel and the BIC rather than settled here.
+ *   /privacy-policy discloses the link, approved by the BIC on 2026-09-11. The
+ *   banner question was not in that approval and is with counsel.
+ *
+ * One thing this key does not cover, and should be read as a gap rather than a
+ * decision: lib/google-click-ids.ts captures Google Ads click identifiers on
+ * arrival and never calls hasOptedOutOfAnalytics(). A visitor who switches
+ * analytics off still has one stored and sent to the CRM. CLAUDE.md §12.
  *
  * Deliberately localStorage and not a cookie: a preference about being measured
  * should not itself be sent to a server on every request.

@@ -353,6 +353,31 @@ Two things this does **not** do, and neither is a doubt about the approval:
 - **It does not close the privacy-policy item.** That still needs counsel on the Follow Up
   Boss and Resend vendor terms, which is not the BIC's question.
 
+**Google Ads conversion link, privacy policy wording — APPROVED 2026-09-11.** Reported by
+Bill. Covers the paragraph on `/privacy-policy` disclosing that Google Analytics is linked
+to Google Ads so `generate_lead` can be imported as a conversion, and what that link shares
+(that a request was completed, and the page it came from — no name, email, phone, or typed
+content).
+
+This is the 2026-08-24 consent decision's own reopen condition being spent deliberately.
+The tag config did not change: Google documents that disabling ads personalization leaves
+measurement intact, so the conversion reaches Google Ads with Google Signals and ad
+personalization both still off. No remarketing audience is built and nothing is eligible
+for personalized targeting, which is why the existing paragraph saying so stays accurate.
+`components/google-analytics.tsx` carries the warning that those two lines are now what
+keeps that sentence true.
+
+Two things it does **not** cover:
+
+- **The consent-banner question.** The no-banner position rested partly on analytics data
+  reaching no advertising product, and now it does. A Broker-in-Charge supervises
+  advertising; whether a banner is required is counsel's. Still open, flagged in the page.
+- **Google Ads click identifiers.** `lib/google-click-ids.ts` shipped separately on
+  2026-09-11 and stores `gclid`/`wbraid`/`gbraid` in `localStorage` on arrival, then sends
+  them to Follow Up Boss with the lead. That was not in front of the BIC as part of this
+  request, `/privacy-policy` does not describe it, and it does not consult the analytics
+  opt-out. See the open item below.
+
 **Footer marks, text-only — APPROVED 2026-08-10.** The BIC confirmed a text treatment of the
 Equal Housing Opportunity and REALTOR® marks is acceptable; he uses the same on his own site.
 So the current footer is an approved state, not a stopgap waiting on artwork. Dropping the
@@ -638,6 +663,28 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       it to Jasmine.* It costs him nothing operationally. If he declines, `sourceUrl` still
       records the exact page and `assignedUserId` still lands the lead on her — attribution
       survives in a weaker form. §7 explains why the ask may not be granted.
+- [ ] **Google Ads click identifiers are captured but not disclosed, and not opt-outable.**
+      `lib/google-click-ids.ts` (2026-09-11) reads `gclid`, `wbraid`, and `gbraid` from the
+      landing URL, writes the first one to `localStorage` on arrival — a `useEffect` on
+      mount, so no form interaction is needed — keeps it indefinitely, and attaches it to
+      the lead sent to Follow Up Boss. Attribution that survives the stepped intake is a
+      real need and the first-touch design is the right shape for it. Three things about it
+      are decisions nobody has made yet:
+
+      1. **`/privacy-policy` does not describe it.** The nearest sentence covers "campaign
+         parameters in the link you arrived through" in *What we collect*, which is about a
+         form submission. This stores an advertising identifier on the visitor's device
+         before any form is touched. The page is a compliance surface, so saying so is a
+         material change and goes to the BIC.
+      2. **It ignores the analytics opt-out.** `hasOptedOutOfAnalytics()` is never
+         consulted, so a visitor who used *Turn analytics off* still has a Google Ads click
+         identifier stored and sent to the CRM. There is a defensible reading — the CRM
+         record is a business record of how a lead arrived, not analytics — but the page
+         promises a switch, and this is not behind it. `lib/google-click-ids.test.ts` has
+         no test either way, which is what makes it an accident rather than a position.
+      3. **It may bear on the banner question** now with counsel, which is about advertising
+         identifiers more than about page views.
+
 - [ ] Professional photography and any brand video
 - [x] **YouTube on the site — SHIPPED 2026-08-20.** The bio video on `/about` as a
       click-to-load facade, the channel in `sameAs` and the footer, and `VideoObject` on

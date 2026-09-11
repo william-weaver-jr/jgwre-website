@@ -57,9 +57,18 @@ export const metadata: Metadata = {
   targeting, no personal data. The copy below says so, and it is accurate.
 
   What did change is that analytics data now reaches an advertising product at
-  all, which is the premise the "no banner" sentence rests on. That sentence is
-  therefore the one thing here nobody should treat as re-decided by this commit.
-  It is counsel's call, and the BIC's for the page itself.
+  all, which is the premise the "no banner" sentence rests on. The BIC approved
+  the disclosure below on 2026-09-11 (CLAUDE.md §7). The banner itself was not
+  in that approval and is not re-decided by it: a Broker-in-Charge supervises
+  advertising, and this one is counsel's.
+
+  TODO(legal): the click identifiers are the sharper version of the same
+  question and are not described anywhere on this page. lib/google-click-ids.ts
+  stores `gclid`/`wbraid`/`gbraid` in localStorage on arrival and sends them to
+  the CRM with the lead. "Campaign parameters in the link you arrived through"
+  in *What we collect* is about a submitted form and does not cover an
+  advertising identifier written to the device before anything is submitted.
+  CLAUDE.md §12 carries the open item.
 
   Everything loaded is named below: GA4 (components/google-analytics.tsx) plus
   Vercel Web Analytics and Speed Insights (components/vercel-analytics.tsx), all
