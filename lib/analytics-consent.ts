@@ -12,6 +12,24 @@
  * advertising features off explicitly rather than relying on the account
  * default, so flipping one is a code change that lands in a diff.
  *
+ * One of those has happened. Bill directed on 2026-09-08 that the property be
+ * linked to Google Ads, so `generate_lead` can be imported as a conversion.
+ * Read the list above as one condition spent rather than four still unspent:
+ *
+ * - The tag config did NOT change, and did not need to. Google documents that
+ *   disabling ads personalization does not affect measurement, so the
+ *   conversion is importable with both flags still false. No remarketing
+ *   audience is built and no event is eligible for personalized targeting.
+ * - What changed is the destination. Analytics data now reaches an advertising
+ *   product, which is the premise the no-banner answer was resting on.
+ *   /privacy-policy discloses the link, approved by the BIC on 2026-09-11. The
+ *   banner question was not in that approval and is with counsel.
+ *
+ * One thing this key does not cover, and should be read as a gap rather than a
+ * decision: lib/google-click-ids.ts captures Google Ads click identifiers on
+ * arrival and never calls hasOptedOutOfAnalytics(). A visitor who switches
+ * analytics off still has one stored and sent to the CRM. CLAUDE.md §12.
+ *
  * Deliberately localStorage and not a cookie: a preference about being measured
  * should not itself be sent to a server on every request.
  */

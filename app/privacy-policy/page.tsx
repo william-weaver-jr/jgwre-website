@@ -43,11 +43,32 @@ export const metadata: Metadata = {
   The consent question this comment used to hold open was decided on 2026-08-24
   (Bill): no banner, a full disclosure, and a reachable opt-out. A GA4 install
   serving one metro, with the advertising features off, is not what a consent
-  interstitial exists for. The reasoning and the conditions that would reopen it
-  — Google Signals, remarketing, a Google Ads link, or marketing beyond the local
-  area — are recorded in lib/analytics-consent.ts, next to the code that would
-  have to change. It is practical guidance rather than a formal legal opinion,
-  which is worth knowing before anyone treats it as settled forever.
+  interstitial exists for.
+
+  TODO(legal): one of that decision's own reopen conditions has now occurred.
+  Bill directed on 2026-09-08 that the GA4 property be linked to Google Ads so
+  `generate_lead` can be imported as a conversion, and "a Google Ads link" is
+  named in that list verbatim (CLAUDE.md §7, lib/analytics-consent.ts).
+
+  What did **not** change is most of why the answer was no banner. Google's own
+  documentation is explicit that disabling ads personalization does not affect
+  measurement, so the conversion reaches Google Ads with Google Signals and ad
+  personalization both still off: no remarketing audiences, no personalized
+  targeting, no personal data. The copy below says so, and it is accurate.
+
+  What did change is that analytics data now reaches an advertising product at
+  all, which is the premise the "no banner" sentence rests on. The BIC approved
+  the disclosure below on 2026-09-11 (CLAUDE.md §7). The banner itself was not
+  in that approval and is not re-decided by it: a Broker-in-Charge supervises
+  advertising, and this one is counsel's.
+
+  TODO(legal): the click identifiers are the sharper version of the same
+  question and are not described anywhere on this page. lib/google-click-ids.ts
+  stores `gclid`/`wbraid`/`gbraid` in localStorage on arrival and sends them to
+  the CRM with the lead. "Campaign parameters in the link you arrived through"
+  in *What we collect* is about a submitted form and does not cover an
+  advertising identifier written to the device before anything is submitted.
+  CLAUDE.md §12 carries the open item.
 
   Everything loaded is named below: GA4 (components/google-analytics.tsx) plus
   Vercel Web Analytics and Speed Insights (components/vercel-analytics.tsx), all
@@ -118,7 +139,13 @@ export default function PrivacyPolicyPage() {
             you.
           </p>
           <p className="mt-3">
-            We have turned off Google&rsquo;s advertising features — Google Signals and ad
+            Our Google Analytics is linked to Google Ads, so that when advertising runs we
+            can tell which ads led someone to get in touch. What that link shares is that a
+            request was completed and which page it came from. It does not share your name,
+            your email address, your phone number, or anything you typed.
+          </p>
+          <p className="mt-3">
+            Google&rsquo;s advertising features stay off — Google Signals and ad
             personalization — so this site does not build advertising audiences or follow
             you across the web, and we do not sell any of it. We also never send your name,
             email address, phone number, or anything you type into a form to any analytics
