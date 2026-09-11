@@ -375,8 +375,9 @@ Two things it does **not** cover:
 - **Google Ads click identifiers.** `lib/google-click-ids.ts` shipped separately on
   2026-09-11 and stores `gclid`/`wbraid`/`gbraid` in `localStorage` on arrival, then sends
   them to Follow Up Boss with the lead. That was not in front of the BIC as part of this
-  request, `/privacy-policy` does not describe it, and it does not consult the analytics
-  opt-out. See the open item below.
+  request, and `/privacy-policy` still does not describe it. The opt-out half was fixed the
+  same day — the capture is now behind `hasOptedOutOfAnalytics()` — but disclosing it is a
+  material change to the page and needs its own approval. See the open item below.
 
 **Footer marks, text-only — APPROVED 2026-08-10.** The BIC confirmed a text treatment of the
 Equal Housing Opportunity and REALTOR® marks is acceptable; he uses the same on his own site.
@@ -678,7 +679,8 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       it to Jasmine.* It costs him nothing operationally. If he declines, `sourceUrl` still
       records the exact page and `assignedUserId` still lands the lead on her — attribution
       survives in a weaker form. §7 explains why the ask may not be granted.
-- [ ] **Google Ads click identifiers are captured but not disclosed, and not opt-outable.**
+- [ ] **Google Ads click identifiers are captured but not disclosed.** (The opt-out half of
+      this item was resolved 2026-09-11 — see point 2.)
       `lib/google-click-ids.ts` (2026-09-11) reads `gclid`, `wbraid`, and `gbraid` from the
       landing URL, writes the first one to `localStorage` on arrival — a `useEffect` on
       mount, so no form interaction is needed — keeps it indefinitely, and attaches it to
@@ -691,14 +693,17 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
          form submission. This stores an advertising identifier on the visitor's device
          before any form is touched. The page is a compliance surface, so saying so is a
          material change and goes to the BIC.
-      2. **It ignores the analytics opt-out.** `hasOptedOutOfAnalytics()` is never
-         consulted, so a visitor who used *Turn analytics off* still has a Google Ads click
-         identifier stored and sent to the CRM. There is a defensible reading — the CRM
-         record is a business record of how a lead arrived, not analytics — but the page
-         promises a switch, and this is not behind it. `lib/google-click-ids.test.ts` has
-         no test either way, which is what makes it an accident rather than a position.
+      2. ~~**It ignores the analytics opt-out.**~~ **RESOLVED 2026-09-11 (Bill).** The
+         capture now consults `hasOptedOutOfAnalytics()` and clears anything it already
+         stored when it finds an opt-out, so the switch covers what the browser holds and
+         not only what it sends next. The competing reading — that a CRM record of how a
+         lead arrived is a business record rather than analytics — lost on the plainer
+         point that a visitor asking not to be measured does not mean "except by the
+         advertising identifier". `lib/google-click-ids.test.ts` now asserts it from the
+         outside, and the three assertions fail if the gate is removed.
       3. **It may bear on the banner question** now with counsel, which is about advertising
-         identifiers more than about page views.
+         identifiers more than about page views. The gate narrows what is at stake — an
+         opted-out visitor now has nothing stored — but does not answer it.
 
 - [ ] Professional photography and any brand video
 - [x] **YouTube on the site — SHIPPED 2026-08-20.** The bio video on `/about` as a
