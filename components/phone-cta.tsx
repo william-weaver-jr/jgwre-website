@@ -61,7 +61,27 @@ export function PhoneCta({
         </Button>
         {secondary ? (
           <Button asChild variant="outlineInk" size="xl">
-            <Link href={secondary.href}>{secondary.label}</Link>
+            {/*
+              An in-page anchor is a plain <a> carrying the placement, not a
+              <Link>. Two reasons, and both are about the same click.
+
+              `components/contact-link-tracking.tsx` fires `intake_start` for
+              every `a[href="#start"]` on the site and reads the placement off
+              `data-cta-placement`. A <Link> renders an anchor that matches that
+              selector, so the event would fire either way — but unlabeled, and
+              docs/CONTACT-STRATEGY.md §5.7 exists specifically to compare
+              placements. An unlabeled one is a hole in that comparison.
+
+              The router also has nothing to do on a same-page hash; letting the
+              browser handle it keeps the focus and scroll behaviour native.
+            */}
+            {secondary.href.startsWith("#") ? (
+              <a href={secondary.href} data-cta-placement={placement}>
+                {secondary.label}
+              </a>
+            ) : (
+              <Link href={secondary.href}>{secondary.label}</Link>
+            )}
           </Button>
         ) : null}
       </div>

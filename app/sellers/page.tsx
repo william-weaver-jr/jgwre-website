@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageHero, SectionHeading } from "@/components/page-hero";
-import { ClosingCta } from "@/components/phone-cta";
+import { ClosingCta, PhoneCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
-import { BROKERAGE } from "@/lib/site";
+import { AGENT, BROKERAGE } from "@/lib/site";
 import { routeMetadata } from "@/lib/seo";
 
 /*
@@ -23,7 +23,7 @@ import { routeMetadata } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Selling a home in Charlotte",
   description:
-    "The buyer’s agent works for the buyer. So does the inspector. Pricing strategy, inspection negotiation, and a 98.84% list-to-sale ratio in Charlotte, NC.",
+    "Charlotte listing representation from Jasmine Garcia: pricing, market preparation, offers, inspection response, appraisal, and closing. Licensed in NC and SC.",
   ...routeMetadata({ path: "/sellers" }),
 };
 
@@ -54,20 +54,42 @@ export default function SellersPage() {
   return (
     <>
       <PageHero
-        eyebrow="Pillar · The other side of this table"
+        variant="landing"
+        eyebrow="Charlotte home-selling representation"
         title={
           <>
-            The buyer’s agent works for the buyer. The inspector works for the buyer.
-            <span className="block italic">Somebody should be working for you.</span>
+            Selling a home in Charlotte?
+            <span className="block">Put representation on your side before you set the price.</span>
           </>
         }
         lede={
           <>
-            By the time an offer arrives, the other side has two professionals reading your house
-            for leverage. Both are doing their jobs correctly. Neither one is doing yours.
+            {AGENT.name} represents Charlotte-area homeowners from pricing and market preparation
+            through offers, inspections, appraisal, and closing. The work starts before the listing
+            goes live, when sellers still have the most control over their position.
           </>
         }
-      />
+      >
+        {/* Text line off above the fold, on in the closing block. See /new-construction. */}
+        <PhoneCta
+          className="mt-7"
+          placement="hero-sellers"
+          sms={false}
+          secondary={{ href: "#start", label: "Start your selling plan" }}
+        />
+      </PageHero>
+
+      {/* -------------------------------------------------------------- THE TABLE */}
+      <section aria-labelledby="table" className="mx-auto max-w-6xl px-gutter pt-section">
+        <SectionHeading eyebrow="The other side of this table" id="table">
+          The buyer’s agent works for the buyer. The inspector works for the buyer.
+          <span className="block italic">Somebody should be working for you.</span>
+        </SectionHeading>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
+          By the time an offer arrives, the other side has two professionals reading your house for
+          leverage. Both are doing their jobs correctly. Neither one is doing yours.
+        </p>
+      </section>
 
       {/* ------------------------------------------------------------ THE EVIDENCE */}
       <section aria-labelledby="evidence" className="mx-auto max-w-6xl px-gutter py-section">

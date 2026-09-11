@@ -3,10 +3,11 @@ import Link from "next/link";
 
 import { CaseLedger, CASE_NEW_CONSTRUCTION } from "@/components/case-ledger";
 import { PageHero, SectionHeading } from "@/components/page-hero";
-import { ClosingCta } from "@/components/phone-cta";
+import { ClosingCta, PhoneCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { GUIDE_TITLE } from "@/lib/intake";
 import { routeMetadata } from "@/lib/seo";
+import { AGENT } from "@/lib/site";
 
 /*
   PILLAR — the strongest of the four and the one with the best case study.
@@ -22,7 +23,7 @@ import { routeMetadata } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Buying new construction in Charlotte",
   description:
-    "The builder’s sales office negotiates every day. Most buyers negotiate with one once. 17 new-construction closings across Charlotte and the NC/SC border.",
+    "Charlotte new-construction buyer representation from Jasmine Garcia, licensed in NC and SC, with 17 new-construction closings across the metro and the state line.",
   ...routeMetadata({ path: "/new-construction" }),
 };
 
@@ -72,21 +73,49 @@ export default function NewConstructionPage() {
   return (
     <>
       <PageHero
-        eyebrow="Pillar · The other side of this table"
+        variant="landing"
+        eyebrow="Charlotte new-construction buyer representation"
         title={
           <>
-            The builder’s rep has negotiated a hundred of these this year.
-            <span className="block italic">You’ve negotiated none.</span>
+            Buying new construction in Charlotte?
+            <span className="block">Bring your own representation before the first visit.</span>
           </>
         }
         lede={
           <>
-            A builder’s sales office does this every day, with a contract they wrote, on terms
-            they set. Most buyers walk into that room once in their lives. That gap is the whole
-            problem, and it is fixable.
+            {AGENT.name} is a Charlotte {AGENT.title}, licensed in North Carolina and South
+            Carolina, with 17 new-construction closings across the metro and the state line. She
+            helps buyers compare builder incentives, lender terms, upgrades, and contract
+            deadlines before the builder’s process limits their options.
           </>
         }
-      />
+      >
+        {/*
+          Phone first, per Locked Decision #4. The text line is off here and on
+          in the closing block: at 375px this hero has to fit the eyebrow, the
+          whole h1, the lede and the phone button inside 812px, and a fourth
+          line buys nothing the foot of the page does not already offer.
+        */}
+        <PhoneCta
+          className="mt-7"
+          placement="hero-new-construction"
+          sms={false}
+          secondary={{ href: "#start", label: "Start your builder plan" }}
+        />
+      </PageHero>
+
+      {/* ------------------------------------------------------------- THE TABLE */}
+      <section aria-labelledby="table" className="mx-auto max-w-6xl px-gutter pt-section">
+        <SectionHeading eyebrow="The other side of this table" id="table">
+          The builder’s rep has negotiated a hundred of these this year.
+          <span className="block italic">You’ve negotiated none.</span>
+        </SectionHeading>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
+          A builder’s sales office does this every day, with a contract they wrote, on terms they
+          set. Most buyers walk into that room once in their lives. That gap is the whole problem,
+          and it is fixable.
+        </p>
+      </section>
 
       {/* ------------------------------------------------------------- THE RECORD */}
       <section aria-labelledby="record" className="mx-auto max-w-6xl px-gutter py-section">
