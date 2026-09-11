@@ -3,8 +3,14 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ContactIntake } from "./contact-intake";
+import { track } from "@/lib/analytics";
 import { TCPA_CONSENT } from "@/lib/site";
 import { GOOGLE_CLICK_IDS_STORAGE_KEY } from "@/lib/google-click-ids";
+
+vi.mock("@/lib/analytics", () => ({
+  track: vi.fn(),
+  readUtm: vi.fn(() => undefined),
+}));
 
 /**
  * The intake is the site's only conversion path, and two of its properties are
@@ -27,9 +33,10 @@ let fetchMock: ReturnType<typeof vi.fn>;
 beforeEach(() => {
   fetchMock = vi.fn().mockResolvedValue({
     ok: true,
-    json: async () => ({ ok: true }),
+    json: async () => ({ ok: true, delivery: "crm" }),
   });
   vi.stubGlobal("fetch", fetchMock);
+  vi.mocked(track).mockClear();
 });
 
 afterEach(() => {
@@ -178,6 +185,49 @@ describe("TCPA consent (§7)", () => {
 });
 
 describe("submission", () => {
+  it("records generate_lead only after the server confirms persistence", async () => {
+    const user = userEvent.setup();
+    render(<ContactIntake {...props} prefill={{ side: "buying" }} />);
+
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    await fillContactStep(user);
+    await user.click(screen.getByRole("button", { name: "Send this to Jasmine" }));
+
+    await waitFor(() =>
+      expect(track).toHaveBeenCalledWith("generate_lead", {
+        side: "buying",
+        lead_type: "buyer",
+        page: "/contact",
+        delivery: "crm",
+      }),
+    );
+
+    const events = vi.mocked(track).mock.calls.map(([event]) => event);
+    expect(events.indexOf("intake_submit")).toBeLessThan(events.indexOf("generate_lead"));
+    expect(events).not.toContain("lead_failed");
+  });
+
+  it("preserves fallback-email delivery on the conversion event", async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      json: async () => ({ ok: true, delivery: "email" }),
+    });
+
+    const user = userEvent.setup();
+    render(<ContactIntake {...props} prefill={{ side: "selling" }} />);
+
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    await fillContactStep(user);
+    await user.click(screen.getByRole("button", { name: "Send this to Jasmine" }));
+
+    await waitFor(() =>
+      expect(track).toHaveBeenCalledWith(
+        "generate_lead",
+        expect.objectContaining({ delivery: "email" }),
+      ),
+    );
+  });
+
   it("posts the whole lead to the single handler", async () => {
     const user = userEvent.setup();
     render(<ContactIntake {...props} />);
@@ -274,6 +324,7 @@ describe("when submission fails", () => {
   it("surfaces the server's message and keeps the form on screen", async () => {
     fetchMock.mockResolvedValue({
       ok: false,
+      status: 400,
       json: async () => ({ ok: false, error: "Too many submissions. Please try again shortly." }),
     });
 
@@ -286,6 +337,11 @@ describe("when submission fails", () => {
     const alert = await screen.findByRole("alert");
     expect(alert).toHaveTextContent("Too many submissions");
     expect(screen.getByLabelText("Name")).toHaveValue("Dana Ruiz");
+    expect(track).toHaveBeenCalledWith(
+      "lead_failed",
+      expect.objectContaining({ reason: "invalid" }),
+    );
+    expect(track).not.toHaveBeenCalledWith("generate_lead", expect.anything());
   });
 
   it("falls back to the phone number when the request never lands", async () => {
