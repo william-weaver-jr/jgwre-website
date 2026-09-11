@@ -265,6 +265,8 @@ should not be asked whether they are buying.
 - [x] `leadSchema` carries the step-2 answers as a typed `intake` object rather than
       flattening them into `message`, so FUB gets structured fields it can filter on.
       Rendered into the FUB note and the notification email by `lib/intake/format.ts`.
-- [ ] BIC approval covers this too: the confirmation-screen copy is advertising.
+- [x] The confirmation-screen copy is advertising and was covered by the BIC's UX-audit
+      approval of 2026-09-04 (CLAUDE.md §7). Per-change approval ended 2026-09-11; the copy
+      is still advertising, and §7's guardrails on it in §3 above are unchanged.
 - [ ] No CAPTCHA at launch — honeypot plus rate limiting, per §9. Revisit only if spam
       becomes real. Matt Stone's reCAPTCHA is a cost we don't need to inherit.

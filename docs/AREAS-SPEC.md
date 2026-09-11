@@ -239,9 +239,10 @@ question is the valuable one.
    completeness, and cross-area distinctness over the real data.
 3. Re-read against §4 of this document by eye. The regexes catch known phrasings, not
    novel ones.
-4. **Confirm no new claim needs the BIC.** A new statistic or a new claim about her record
-   is a material change under §7 and goes back before it ships. Restating documented §5
-   figures does not.
+4. **Confirm the page introduces no undocumented claim.** A new statistic or a new claim
+   about her record needs §5 or `docs/CASE-STUDIES.md` behind it — §6, which the standing
+   approval of 2026-09-11 does not touch. Flag any such claim when you hand the page over.
+   Restating documented §5 figures needs nothing.
 5. Check `generateMetadata` output: it uses `lede` as the meta description, so a lede over
    ~160 characters gets truncated in results. Write the lede knowing it does double duty.
 

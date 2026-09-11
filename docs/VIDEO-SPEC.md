@@ -84,8 +84,10 @@ exact reason `lib/site.ts` `SOCIAL` links Instagram and Facebook rather than emb
 3. Set `placements`. One page, maybe two. Exactly one carries `primary: true`.
 4. Add a `transcript` only if the copy clears §7 — see §5 below.
 5. `npm run verify`.
-6. **If it introduces a claim, a statistic, or a dollar figure, it goes to the BIC before
-   it ships.** §7's "material changes after" applies to a video exactly as to a page.
+6. **If it introduces a claim, a statistic, or a dollar figure, say so out loud when you
+   hand it over.** Since 2026-09-11 that is a disclosure to Jasmine, not an approval round
+   trip — CLAUDE.md §7 Approvals. §6 is unchanged: an undocumented figure does not ship
+   because a video said it.
 
 Committing a still to `assets/images/video/` and setting `poster` is optional; without one
 the panel is typographic, which is a finished state rather than a placeholder.

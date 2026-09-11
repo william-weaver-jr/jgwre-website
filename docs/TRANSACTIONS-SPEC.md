@@ -1,8 +1,9 @@
 # Transactions page — spec and constraints
 
 Proposed 2026-08-10. Status: **approved in principle for CLOSED transactions only;
-blocked on data. Pipeline states (active / pending / coming soon) are NOT approved —
-see the compliance flags below, which need the BIC before anything changes.**
+blocked on data. Pipeline states (active / pending / coming soon) are still NOT built —
+see the compliance flags below. Since 2026-09-11 that is a content conflict to solve
+rather than an approval to obtain (CLAUDE.md §7 Approvals), and it is unsolved.**
 
 The idea: a page of completed transactions, both sides, as visual and detailed proof
 of the kinds of homes and deals Jasmine actually works. The value is real — it is the
@@ -59,8 +60,8 @@ Flagged per CLAUDE.md §7 ("stop and flag"), not built:
    keeps "available" true within hours.
 
 If she wants pipeline visibility, the compliant version is one line and a link:
-"Current listings are with Stone Realty Group" → the team IDX. Revisit only with
-written BIC approval and a real data path.
+"Current listings are with Stone Realty Group" → the team IDX. Revisit only with a real
+data path and an answer to the flags above.
 
 ## 3. Visual and structural direction
 
@@ -85,7 +86,8 @@ adds the desktop.
 - [x] **Transaction export — RESOLVED.** The closed-transactions workbook (Google
   Sheets) is the source, and it now carries every field the ledger needs. See §5.
 - [ ] Her own photography, if any entries should carry images.
-- [ ] BIC read on the pipeline-states question before that half is ever revisited.
+- [ ] An answer to the pipeline-states conflict in §2 before that half is ever revisited.
+      No longer an approval to collect — a problem to solve.
 
 ## 5. Importing from the workbook
 

@@ -304,8 +304,35 @@ TCPA consent language carried over from the team site. Do not reword, shorten, o
 the associated checkbox.
 
 ### Approvals
-The Broker-in-Charge at Stone Realty Group must approve this site in writing before it goes
-live, and must approve material changes after.
+
+**STANDING APPROVAL — 2026-09-11, reported by Bill.** The Broker-in-Charge has approved
+this project as a whole, and Jasmine holds ownership and decision authority over the site.
+**Per-change BIC sign-off is no longer a gate.** A material change no longer waits on an
+approval round trip: she decides, and it ships.
+
+Read that for exactly what it is — a change to *who decides*, and to nothing else.
+
+- **Every rule above this line still holds.** Brokerage identification, the address, both
+  license numbers, the Equal Housing Opportunity and REALTOR® marks, verbatim TCPA consent,
+  the results disclaimer beside a dollar figure, the fair-housing limits, the guarantee ban,
+  unaltered testimonials, and the ban on using Stone Realty Group's registered marks
+  decoratively. Those come from NC and SC advertising regulation and from NAR, not from the
+  BIC's preference, and an approval cannot waive them. `tests/compliance.test.tsx` keeps
+  enforcing every one.
+- **§6 is untouched.** No credential, award, designation, or statistic ships unless §5 or
+  `docs/CASE-STUDIES.md` documents it. Authority to decide is not evidence for a claim.
+- **Counsel is not the BIC.** The privacy policy and the consent-banner question were never
+  the BIC's to answer (§12), and this does not answer them.
+- **The BIC still supervises her advertising** as a matter of licensure, whatever the
+  workflow is. So the two asks that were queued for him stay worth making, and anything
+  that would be a surprise to him is still worth a heads-up — as courtesy and as
+  self-interest, not as a gate.
+
+What this replaces: a rule reading "must approve this site in writing before it goes live,
+and must approve material changes after." The approvals below are kept as the record of
+what was reviewed and when, because several of them carry reasoning — the watermark
+exception, the transactions shape, the Google Ads link — that is still the reason the code
+looks the way it does. None of them is a gate any more.
 
 **APPROVED 2026-08-10** — reported by Bill. Covers the site as it stands and the results
 disclaimer wording. This clears the production-deploy gate.
@@ -316,10 +343,13 @@ from the 2022 workbook and is indexed, linked in the footer, and in the sitemap.
 covers the ledger as specified in `docs/TRANSACTIONS-SPEC.md` §1 — neighborhood-level
 locations, side always stated, no prices, no client names, no addresses.
 
-It does **not** extend to the pipeline states, which remain blocked (§2 of that spec and
-the open item in §12). Nor to displaying dollar figures on the page: closing prices live
-in `lib/transactions/internal-metrics.ts`, which no page may import, and putting any of
-them on screen is a fresh decision for the BIC.
+It does **not** extend to the pipeline states or to dollar figures on the page. Under the
+standing approval those are Jasmine's calls rather than the BIC's, but neither is unblocked
+by default and neither should be built on a passing mention: the pipeline states carry a
+real compliance conflict (`docs/TRANSACTIONS-SPEC.md` §2), and price bands run into SC's
+non-disclosure rules and pull the results disclaimer in with them (§12). Closing prices
+live in `lib/transactions/internal-metrics.ts`, which no page may import; that stays true
+until someone deliberately decides otherwise.
 
 **The bio video on `/about` — APPROVED 2026-08-20.** Reported by Bill. The BIC funded this
 video and posts it on his own channels and Medium, so its use in her advertising is not in
@@ -445,14 +475,23 @@ BIC's call to make alone:
   The stakes moved with the connection. Until 2026-08-28 this was a review of what a draft
   said about a vendor receiving nothing. It is now a review of what the page says about two
   vendors receiving real client contact details.
-- **The transactions pipeline states are still blocked.** Active / pending / coming-soon
-  need their own written BIC approval — `docs/TRANSACTIONS-SPEC.md` §2 and §12 below. A
-  general site approval is not that approval. Do not build them on request without it.
+- **The transactions pipeline states are still parked.** Active / pending / coming-soon are
+  no longer waiting on the BIC — they are waiting on the conflict in
+  `docs/TRANSACTIONS-SPEC.md` §2, which is a content problem, not an approval problem.
+  Read it before building them, and build them only when someone asks for them by name.
 
-"Material changes after" now applies. Anything that alters a compliance surface — the
-disclaimer, the consent text, brokerage identification, a new claim or statistic — goes back
-to the BIC before it ships. The suite in `tests/compliance.test.tsx` guards the wording that
-was approved; it cannot tell you when something new needs approving.
+Since 2026-09-11 a material change no longer goes anywhere before it ships. That removes
+the round trip and it removes the second reader, and the second reader was doing real work
+— so the burden it carried now sits here:
+
+- **Say what changed.** When a change touches a compliance surface — the disclaimer, the
+  consent text, brokerage identification, a claim, a statistic — name it in the report and
+  in the commit message, in plain language, so the person deciding is deciding rather than
+  finding out later.
+- **`tests/compliance.test.tsx` is the floor, not the reviewer.** It guards wording that
+  already exists. It cannot recognise a claim nobody has written yet, and it cannot tell
+  you that a true sentence is misleading read whole. That judgement was the BIC's; it is
+  now ours, on the page, before the commit.
 
 **Client permission for the three case studies has been obtained.** Names remain omitted.
 
@@ -560,8 +599,8 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       outlive this one.)
 - [x] **Transactions page — SHIPPED 2026-08-17.** `docs/TRANSACTIONS-SPEC.md`. Ten closed
       transactions, all 2022, from the closed-transactions workbook. Public, indexed, and
-      BIC-approved (§7). Active/pending/coming-soon remain a compliance conflict needing
-      separate written approval — do not implement on request without it.
+      BIC-approved (§7). Active/pending/coming-soon remain a compliance conflict —
+      `docs/TRANSACTIONS-SPEC.md` §2 is the blocker now that the approval gate is gone.
 - [x] **Backfill 2023–2026 into the ledger — DONE 2026-08-17.** The workbook grew to 32
       closings spanning 2022–2026, including the first seller-side rows and the first
       2026 closing. Neighborhood and property type now come from the workbook, which is
@@ -608,15 +647,17 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       realtors a bad name") and states the client believes she was mistreated because she
       is a military veteran. Republishing it puts a disparaging claim about an identifiable
       third party on the brokerage's advertising and drags a protected characteristic into
-      copy §7 keeps clear of. Her closing is in the ledger; the words need the BIC and
-      probably counsel.
+      copy §7 keeps clear of. Her closing is in the ledger; the words still need counsel.
+      The standing approval does not touch this one — the exposure is defamation and a
+      protected characteristic on advertising, which was never the BIC's question.
 - [ ] **Price bands on the transactions ledger — parked idea, not approved.** Deliberately
       not built now. The question it would answer is a real one ("does she work in my
       range?"), and the compliant shape is a coarse band as a filter or a single §5 line,
       never a per-row figure. Blockers to clear first: SC is a non-disclosure state, so no
       SC row may contribute a figure without written per-transaction permission; §7 pulls
-      the results disclaimer in alongside any dollar outcome; and it is a material change,
-      so it goes to the BIC. The underlying numbers are already recorded in
+      the results disclaimer in alongside any dollar outcome. The BIC round trip is no
+      longer one of the blockers; the other two are unchanged, and they are the hard ones.
+      The underlying numbers are already recorded in
       `lib/transactions/internal-metrics.ts`, which a test keeps out of `app/` and
       `components/`.
 - [ ] CMS final pick: Sanity vs Payload — deferred, non-critical for Phase 1 launch.
@@ -632,9 +673,12 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       contract mechanics are named per state. Four or five more still to draft.
 - [x] NC and SC license numbers — NC 334700, SC 125546 (§7)
 - [x] **Broker-in-Charge approval (site + results disclaimer wording) — RECEIVED 2026-08-10.**
-      See §7 Approvals for what it covers and the two things it does not. §7 asks for written
-      approval: file the written record if it is not already filed. Material changes from here
-      go back to the BIC.
+      See §7 Approvals for what it covers. File the written record if it is not already filed.
+- [x] **Per-change BIC approval — NO LONGER A GATE, 2026-09-11.** Reported by Bill: the BIC
+      has approved the project as a whole and Jasmine holds decision authority over the site.
+      §7 Approvals carries the scope — it changes who decides, and changes none of the
+      advertising rules, none of §6's evidence requirement, and nothing that was counsel's
+      question rather than the BIC's.
 - [ ] Confirm Placester contract term, auto-renewal date, and content/domain ownership
       before giving notice
 - [x] **"Search Homes" — RESOLVED 2026-09-04, and the answer changed its placement.**

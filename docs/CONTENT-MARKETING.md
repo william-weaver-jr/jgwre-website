@@ -175,10 +175,11 @@ true, or whether it sounds like her.
 
 - **Jasmine reads every post before it ships.** The tests do not know her market. A post can
   be perfectly compliant and still be wrong about how a builder in Fort Mill behaves.
-- **The BIC sees anything that touches a compliance surface.** §7: material changes go back
-  to him. A post that introduces a new claim, a new statistic, or new language about
-  outcomes is a material change. Routine posts inside the documented-facts allowlist are
-  not, and do not need a fresh approval each week.
+- **A post that touches a compliance surface gets named as one.** Since 2026-09-11 it does
+  not go to the BIC first (CLAUDE.md §7 Approvals), so the safeguard is that a new claim, a
+  new statistic, or new language about outcomes is called out to Jasmine rather than
+  discovered later. Routine posts inside the documented-facts allowlist carry none of
+  that.
 - **The site's general approval (2026-08-10) does not cover future blog copy.** It covers
   the site as it stood. A post making a claim nobody has reviewed is exactly the case §7
   reserves for him.
