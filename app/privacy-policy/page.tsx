@@ -62,18 +62,20 @@ export const metadata: Metadata = {
   in that approval and is not re-decided by it: a Broker-in-Charge supervises
   advertising, and this one is counsel's.
 
-  TODO(legal): the click identifiers are the sharper version of the same
-  question and are still not described anywhere on this page.
-  lib/google-click-ids.ts stores `gclid`/`wbraid`/`gbraid` in localStorage on
-  arrival and sends them to the CRM with the lead. "Campaign parameters in the
-  link you arrived through" in *What we collect* is about a submitted form and
-  does not cover an advertising identifier written to the device before
-  anything is submitted.
+  The click identifiers are described below as of 2026-09-11, approved by the
+  BIC with the Google Ads disclosure. They are the sharper version of the same
+  question: lib/google-click-ids.ts stores `gclid`/`wbraid`/`gbraid` in
+  localStorage on arrival, before anything is submitted, which "campaign
+  parameters in the link you arrived through" in *What we collect* never
+  covered — that sentence is about a form. The paragraph is in Analytics rather
+  than What we collect because the opt-out is the next thing said after it, and
+  the opt-out is the part a reader can act on.
 
-  The opt-out now covers them (2026-09-11), so the sentence below offering to
-  switch analytics off is true of the identifiers too, and an opted-out visitor
-  has none stored. That narrows what is undisclosed; it does not close it.
-  Describing the capture is a material change and needs the BIC. CLAUDE.md §12.
+  The gate landed the same day, so the promise in that paragraph is enforced
+  rather than asserted: hasOptedOutOfAnalytics() is consulted before any
+  capture, and an opt-out clears what is already stored.
+
+  The banner is the one thing here still open, and it is counsel's.
 
   Everything loaded is named below: GA4 (components/google-analytics.tsx) plus
   Vercel Web Analytics and Speed Insights (components/vercel-analytics.tsx), all
@@ -85,7 +87,7 @@ export const metadata: Metadata = {
  * changes — a privacy policy dated earlier than its own text is worse than one
  * with no date at all.
  */
-const LAST_UPDATED = "August 24, 2026";
+const LAST_UPDATED = "September 11, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -148,6 +150,13 @@ export default function PrivacyPolicyPage() {
             can tell which ads led someone to get in touch. What that link shares is that a
             request was completed and which page it came from. It does not share your name,
             your email address, your phone number, or anything you typed.
+          </p>
+          <p className="mt-3">
+            If you reach this site by clicking a Google ad, Google puts an identifier for
+            that click in the link. We keep it in your browser so that if you get in touch
+            later we can tell which ad brought you here, and we include it with your request
+            when you send it. We keep the first one and never replace it with a later one.
+            Switching analytics off below stops this and clears anything already kept.
           </p>
           <p className="mt-3">
             Google&rsquo;s advertising features stay off — Google Signals and ad

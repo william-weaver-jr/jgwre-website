@@ -531,6 +531,22 @@ describe("the privacy policy names every analytics vendor we load (§7)", () => 
     const body = text(await page("/privacy-policy"));
     expect(body).toMatch(/linked to Google Ads/i);
   });
+
+  /*
+    lib/google-click-ids.ts writes a Google Ads identifier to the visitor's
+    device on arrival, before any form is touched. "Campaign parameters in the
+    link you arrived through" under What we collect is about a submission and
+    never covered it. Disclosed 2026-09-11 with BIC approval, and asserted here
+    because the capture is invisible from the page — nobody reviewing this copy
+    would know to miss it.
+  */
+  it("discloses the Google Ads click identifier kept in the browser", async () => {
+    const body = text(await page("/privacy-policy"));
+    expect(body).toMatch(/clicking a Google ad/i);
+    expect(body).toMatch(/keep it in your browser/i);
+    // The opt-out is the actionable half, so it has to travel with the disclosure.
+    expect(body).toMatch(/clears anything already kept/i);
+  });
 });
 
 describe("SEO metadata (§11)", () => {
