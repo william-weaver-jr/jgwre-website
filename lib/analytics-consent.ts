@@ -25,10 +25,13 @@
  *   /privacy-policy discloses the link, approved by the BIC on 2026-09-11. The
  *   banner question was not in that approval and is with counsel.
  *
- * One thing this key does not cover, and should be read as a gap rather than a
- * decision: lib/google-click-ids.ts captures Google Ads click identifiers on
- * arrival and never calls hasOptedOutOfAnalytics(). A visitor who switches
- * analytics off still has one stored and sent to the CRM. CLAUDE.md §12.
+ * This key also gates Google Ads click identifiers, decided 2026-09-11 (Bill).
+ * lib/google-click-ids.ts consults it before capturing, and clears what it has
+ * already stored when it finds an opt-out — so the switch covers what this
+ * browser holds and not only what it sends next. For a day the two files did
+ * not know about each other and a visitor could switch analytics off while
+ * still having an identifier stored and sent to the CRM. Nothing failed, which
+ * is why it survived review.
  *
  * Deliberately localStorage and not a cookie: a preference about being measured
  * should not itself be sent to a server on every request.

@@ -7,6 +7,8 @@
  * return, or complete the stepped intake without losing the click that brought
  * them here.
  */
+import { hasOptedOutOfAnalytics } from "@/lib/analytics-consent";
+
 export type GoogleClickIds = Partial<Record<"gclid" | "wbraid" | "gbraid", string>>;
 
 export const GOOGLE_CLICK_IDS_STORAGE_KEY = "jg-google-click-ids-v1";
@@ -58,6 +60,32 @@ export function clickIdsFromSearch(search: string): GoogleClickIds | undefined {
  */
 export function captureFirstTouchGoogleClickIds(): GoogleClickIds | undefined {
   if (typeof window === "undefined") return undefined;
+
+  /*
+    The opt-out gates this, decided 2026-09-11 (Bill).
+
+    There was a defensible reading where it should not: what reaches Follow Up
+    Boss is a business record of how a lead arrived, not an analytics hit, and
+    /privacy-policy offers to switch *analytics* off. The reading lost on the
+    plainer fact that a visitor who asks not to be measured does not mean
+    "except by the advertising identifier", and on this being a Google Ads
+    token rather than a note we wrote ourselves.
+
+    It also forgets. Returning early would leave an identifier captured before
+    the opt-out sitting in storage indefinitely, and the switch reads as a
+    promise about what this browser holds, not only about what it sends next.
+    Clearing here rather than in the opt-out control is deliberate: this runs
+    on mount on every page, so a visitor who opted out before this shipped is
+    cleaned up on their next visit without anyone having to migrate anything.
+  */
+  if (hasOptedOutOfAnalytics()) {
+    try {
+      window.localStorage.removeItem(GOOGLE_CLICK_IDS_STORAGE_KEY);
+    } catch {
+      // Unavailable storage cannot hold a stale identifier either.
+    }
+    return undefined;
+  }
 
   try {
     const stored = window.localStorage.getItem(GOOGLE_CLICK_IDS_STORAGE_KEY);

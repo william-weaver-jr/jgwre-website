@@ -63,12 +63,17 @@ export const metadata: Metadata = {
   advertising, and this one is counsel's.
 
   TODO(legal): the click identifiers are the sharper version of the same
-  question and are not described anywhere on this page. lib/google-click-ids.ts
-  stores `gclid`/`wbraid`/`gbraid` in localStorage on arrival and sends them to
-  the CRM with the lead. "Campaign parameters in the link you arrived through"
-  in *What we collect* is about a submitted form and does not cover an
-  advertising identifier written to the device before anything is submitted.
-  CLAUDE.md §12 carries the open item.
+  question and are still not described anywhere on this page.
+  lib/google-click-ids.ts stores `gclid`/`wbraid`/`gbraid` in localStorage on
+  arrival and sends them to the CRM with the lead. "Campaign parameters in the
+  link you arrived through" in *What we collect* is about a submitted form and
+  does not cover an advertising identifier written to the device before
+  anything is submitted.
+
+  The opt-out now covers them (2026-09-11), so the sentence below offering to
+  switch analytics off is true of the identifiers too, and an opted-out visitor
+  has none stored. That narrows what is undisclosed; it does not close it.
+  Describing the capture is a material change and needs the BIC. CLAUDE.md §12.
 
   Everything loaded is named below: GA4 (components/google-analytics.tsx) plus
   Vercel Web Analytics and Speed Insights (components/vercel-analytics.tsx), all
