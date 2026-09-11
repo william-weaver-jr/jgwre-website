@@ -436,10 +436,11 @@ BIC's call to make alone:
      `tests/compliance.test.tsx` now asserts both, and asserts what each one does with a
      submission rather than only that the name appears. It reads the rendered page, not the
      source, so a comment explaining the intent cannot satisfy it.
-  2. **Run the vendor check.** Still open, and naming them did not close it. What the page
-     says about Follow Up Boss and Resend has to be read against those vendors' terms —
-     counsel's question, not the BIC's. Both now carry real client contact details, so this
-     is no longer a review of what a draft says about a vendor receiving nothing.
+  2. **Run the vendor check — REVIEWED 2026-09-11**, reported by Bill. What `/privacy-policy`
+     says about Follow Up Boss and Resend has been read against those vendors' terms. No
+     resulting copy change was reported, so the page stands as written; if the review did
+     call for one, it has not been made and this item should be reopened rather than
+     assumed closed.
 
   The stakes moved with the connection. Until 2026-08-28 this was a review of what a draft
   said about a vendor receiving nothing. It is now a review of what the page says about two
