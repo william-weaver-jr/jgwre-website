@@ -412,15 +412,26 @@ BIC's call to make alone:
   that nothing had been sent there — no account, no key. **The integration connected and was
   verified on 2026-08-28 (§12), so that condition is met and both follow-ups are now due:**
 
-  1. **Restore the sentence naming Follow Up Boss on `/privacy-policy`.** It was trimmed on
-     2026-08-24 because it said submissions were stored in Follow Up Boss while every one of
-     them was in fact reaching the notification email and nothing else. That is no longer
-     true — real submissions now reach the CRM, so a policy that does not name it is the
-     inaccurate version. **The page is a compliance surface: this is a material change and
-     goes to the BIC, and the vendor terms are counsel's question, not the BIC's.**
+  1. **Restore the sentence naming Follow Up Boss on `/privacy-policy` — RESTORED
+     2026-09-11**, directed by Bill. It was trimmed on 2026-08-24 because it said
+     submissions were stored in Follow Up Boss while every one of them was in fact reaching
+     the notification email and nothing else. The integration connected on 2026-08-28, which
+     made the trimmed version the inaccurate one, and nothing brought the sentence back for
+     two weeks — real client contact details reached a vendor the page did not name.
+     `tests/compliance.test.tsx` now asserts both the CRM's name and that the page says
+     submissions are stored there, reading the rendered page rather than the source, so a
+     comment about intent cannot satisfy it.
+
+     **The written BIC approval for this one is not yet filed.** The page is a compliance
+     surface and §7 wants material changes approved before they ship. File it here when it
+     is given, or say so if it was covered by the 2026-09-11 conversation that approved the
+     Google Ads disclosures.
   2. **Run the vendor check.** What the page says about Follow Up Boss now has to be checked
      against Follow Up Boss's terms. Resend is still open and was never parked — and it is
-     now also live, carrying the same notification traffic.
+     now also live, carrying the same notification traffic. **Resend is still named nowhere
+     in the rendered copy**: the page says a copy is emailed to her and does not say which
+     vendor carries it. Restoring the CRM sentence did not touch that, deliberately — it was
+     not what was asked for, and it is the same kind of material change.
 
   The stakes moved with the connection. Until 2026-08-28 this was a review of what a draft
   said about a vendor receiving nothing. It is now a review of what the page says about two

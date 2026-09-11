@@ -501,6 +501,27 @@ describe("the privacy policy names every analytics vendor we load (§7)", () => 
     expect(text(await page("/privacy-policy"))).toContain(vendor);
   });
 
+  /*
+    The analytics vendors above were covered; the one that receives the name,
+    email address and phone number was not, and that is the asymmetry this
+    closes.
+
+    The sentence naming Follow Up Boss was removed on 2026-08-24 for being
+    true-in-advance — it described a CRM that was receiving nothing. The
+    integration connected on 2026-08-28 and nothing brought the sentence back,
+    so for two weeks real client contact details reached a vendor the page did
+    not mention. Nothing failed, because a policy that under-describes reads
+    exactly like one that is complete.
+
+    Asserted from the rendered page rather than the source, so a comment
+    explaining the intent cannot satisfy it.
+  */
+  it("names the CRM that stores what a visitor submits", async () => {
+    const body = text(await page("/privacy-policy"));
+    expect(body).toContain("Follow Up Boss");
+    expect(body).toMatch(/stored in Follow Up Boss/i);
+  });
+
   /**
    * The 2026-08-24 decision (lib/analytics-consent.ts) trades the consent banner
    * for a disclosure and a reachable opt-out. The banner is the visible half; if
