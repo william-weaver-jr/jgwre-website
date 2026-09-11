@@ -28,17 +28,30 @@ export const metadata: Metadata = {
   no account, no API key, and nothing has ever been sent there, so reading its
   terms now would be reading them for a configuration nobody has chosen yet.
 
-  "How we use it" named Follow Up Boss until 2026-08-24 and no longer does. The
-  sentence was describing where submissions were going to go, while every
-  submission was in fact reaching one place: the notification email. A privacy
-  policy is the wrong document to be forward-looking in — it is read by someone
-  deciding whether to type their phone number in, and it should describe what
-  happens to it today.
+  "How we use it" named Follow Up Boss until 2026-08-24, dropped it, and names
+  it again as of 2026-09-11. The sentence was originally removed for being
+  true-in-advance: it described submissions as stored in the CRM while every one
+  of them was in fact reaching the notification email and nothing else. A
+  privacy policy is the wrong document to be forward-looking in — it is read by
+  someone deciding whether to type their phone number in, and it should describe
+  what happens to it today.
 
-  Put the vendor back the day the integration is connected. Locked Decision #5
-  gates launch on the forms reaching FUB, so that day is before launch, and the
-  parked vendor check (CLAUDE.md §7) comes off the lot with it. The sentence to
-  restore names the CRM and says a copy of the submission is stored there.
+  The integration connected on 2026-08-28 (CLAUDE.md §12), which made the
+  trimmed version the inaccurate one: real client contact details have been
+  reaching Follow Up Boss since, from a page that did not say so. Two weeks of
+  that is the cost of a sentence nobody owned. tests/compliance.test.tsx now
+  names both processors, so the page cannot drift from the integration again
+  without failing the build.
+
+  Resend is named alongside it as of 2026-09-11, in the same approval. It
+  carries the same submission as the notification email, so a page that named
+  the CRM and not the mail vendor would have been half a disclosure.
+
+  TODO(legal): naming them does not close the vendor check. What this page says
+  about Follow Up Boss and Resend still has to be read against those vendors'
+  terms, which is counsel's rather than the BIC's. The stakes moved when the
+  CRM connected: this is no longer a review of what a draft says about a vendor
+  receiving nothing.
 
   The consent question this comment used to hold open was decided on 2026-08-24
   (Bill): no banner, a full disclosure, and a reachable opt-out. A GA4 install
@@ -119,8 +132,10 @@ export default function PrivacyPolicyPage() {
           <h2 className="font-display text-2xl">How we use it</h2>
           <p className="mt-3">
             We use your information to respond to your inquiry and to provide real estate
-            services you request. What you submit is emailed to {AGENT.name}, who contacts
-            you directly. We do not sell your information.
+            services you request. What you submit is stored in Follow Up Boss, the customer
+            relationship manager {BROKERAGE.name} uses, and a copy is emailed to{" "}
+            {AGENT.name} through Resend, our email provider. She contacts you directly. We
+            do not sell your information.
           </p>
         </section>
 
