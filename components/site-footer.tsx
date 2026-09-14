@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { EqualHousingMark, RealtorMark } from "@/components/compliance-marks";
 import { SocialLinks } from "@/components/social-links";
-import { publishedAreas } from "@/lib/areas";
+import { publishedAreas, sortAreas } from "@/lib/areas";
 import { publishedPosts } from "@/lib/blog";
 import { GUIDE_TITLE } from "@/lib/intake";
 import { AGENT, BROKERAGE, PILLARS, SEARCH_HOMES_URL } from "@/lib/site";
@@ -21,7 +21,7 @@ export function SiteFooter() {
           license numbers and the Equal Housing mark are never sitting under it
           at the end of the document. CLAUDE.md §7. */}
       <div className="mx-auto max-w-6xl px-gutter py-14 pb-28 md:pb-14">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
           <div>
             <p className="font-display text-2xl leading-tight font-medium">{AGENT.name}</p>
             <p className="eyebrow mt-1">{AGENT.title}</p>
@@ -73,20 +73,6 @@ export function SiteFooter() {
                   What your home is worth
                 </Link>
               </li>
-              {/* One link to the hub rather than one per market. The hub is the
-                  canonical entry and enumerating fourteen markets here would
-                  crowd out everything else in this column as they land; the
-                  guides stay reachable from /areas and the sitemap. Gated the
-                  same way /transactions is — the route resolves either way for
-                  the 301s, but linking it sitewide before it lists anything
-                  advertises the gap. */}
-              {publishedAreas().length > 0 ? (
-                <li>
-                  <Link href="/areas" className="underline-offset-4 hover:underline">
-                    Areas
-                  </Link>
-                </li>
-              ) : null}
               <li>
                 <Link href="/reviews" className="underline-offset-4 hover:underline">
                   Reviews
@@ -141,6 +127,32 @@ export function SiteFooter() {
               </li>
             </ul>
           </nav>
+
+          {/* Every published guide by name, 2026-09-14. This replaced a single
+              hub link whose reasoning was that fourteen markets would crowd the
+              column — true, which is why they get a column of their own. The
+              guides are how she wins business in those markets, and a sitewide
+              footer link is the cheapest internal link the site has. Published
+              guides only, so nothing here can 404. */}
+          {publishedAreas().length > 0 ? (
+            <nav aria-label="Area guides" className="text-sm">
+              <p className="font-semibold">Area guides</p>
+              <ul className="mt-3 space-y-2">
+                {sortAreas(publishedAreas()).map((area) => (
+                  <li key={area.slug}>
+                    <Link href={`/areas/${area.slug}`} className="underline-offset-4 hover:underline">
+                      {area.name}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link href="/areas" className="underline-offset-4 hover:underline">
+                    All areas
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          ) : null}
         </div>
 
         <div className="mt-12 flex flex-col gap-6 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">

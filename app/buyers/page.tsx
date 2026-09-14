@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { GuideLink } from "@/components/area-guide-links";
 import { CaseLedger, CASE_RESALE } from "@/components/case-ledger";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
@@ -157,7 +158,9 @@ export default function BuyersPage() {
           >
             area guides
           </Link>
-          cover that market by market.
+          cover that market by market: <GuideLink slug="steele-creek" /> for newer detached houses
+          priced against builder inventory, <GuideLink slug="south-end" /> for condos, where the
+          building and the HOA matter as much as the price.
         </p>
       </section>
 

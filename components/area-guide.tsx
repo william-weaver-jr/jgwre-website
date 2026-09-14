@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { AreaGuidesStrip } from "@/components/area-guide-links";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta, PhoneCta } from "@/components/phone-cta";
 import { Button } from "@/components/ui/button";
@@ -367,6 +368,14 @@ export function AreaGuidePage({ area, guide }: { area: Area; guide: AreaGuide })
           </dl>
         </div>
       </section>
+
+      <AreaGuidesStrip
+        id="more-guides"
+        eyebrow="Other area guides"
+        heading="Weighing more than one part of Charlotte?"
+        exclude={area.slug}
+        className="py-section"
+      />
 
       <ClosingCta
         heading={guide.closingHeading}

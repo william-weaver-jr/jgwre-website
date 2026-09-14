@@ -462,7 +462,8 @@ describe("South End, the first diligence-format area", () => {
 
   /**
    * South End has no row in the ledger and she does not live there
-   * (docs/AREAS-SPEC.md §12). The page is built so it needs neither. The
+   * (docs/AREAS-SPEC.md §12). Since 2026-09-14 that does not stop a page from
+   * publishing, but §6 still stops the page claiming either. The
    * failure this guards is a later edit reaching for credibility it has not
    * earned — "she has sold in South End", "her clients here" — which is a §6
    * claim with nothing behind it.

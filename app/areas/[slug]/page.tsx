@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AreaGuidePage } from "@/components/area-guide";
+import { AreaGuidesStrip } from "@/components/area-guide-links";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
@@ -215,6 +216,14 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
           ))}
         </dl>
       </section>
+
+      <AreaGuidesStrip
+        id="more-guides"
+        eyebrow="Other area guides"
+        heading="Weighing more than one part of Charlotte?"
+        exclude={area.slug}
+        className="border-t border-border py-section"
+      />
 
       <ClosingCta
         heading={`Thinking about ${area.name}?`}

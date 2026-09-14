@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { GuideLink } from "@/components/area-guide-links";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta, PhoneCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
@@ -154,7 +155,9 @@ export default function SellersPage() {
           >
             area guides
           </Link>
-          say what the competition actually looks like where you are selling.
+          say what the competition actually looks like where you are selling. In{" "}
+          <GuideLink slug="steele-creek" /> it is often a builder. In{" "}
+          <GuideLink slug="south-end" /> it can be the unit one floor above yours.
         </p>
       </section>
 

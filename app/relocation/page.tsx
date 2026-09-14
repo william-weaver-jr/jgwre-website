@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { GuideLink } from "@/components/area-guide-links";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta, PhoneCta } from "@/components/phone-cta";
 import { routeMetadata } from "@/lib/seo";
@@ -172,6 +173,9 @@ export default function RelocationPage() {
           </Link>
           exist for that: what is
           actually built in a market, how price behaves there, and which levers tend to exist in it.
+          If you want to live near the light rail and walk to Uptown, start with{" "}
+          <GuideLink slug="south-end" />. If you want newer detached houses with I-485 and the
+          airport close by, start with <GuideLink slug="steele-creek" />.
           A local absorbs that over years. You have to be told it.
         </p>
       </section>

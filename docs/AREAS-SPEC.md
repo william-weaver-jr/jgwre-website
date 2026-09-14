@@ -4,6 +4,20 @@ Read `CLAUDE.md` §5–§7, `BRAND-VOICE.md`, and `CONTENT-PLAN.md` first. This 
 not restate them. It says how an area page gets authored without breaking them, and works
 Fort Mill end to end as the first example.
 
+> **POLICY CHANGE — 2026-09-14, Bill. Area pages are marketing, and they do not wait for
+> evidence.** Jasmine needs these pages to win business in markets where she has no closing
+> yet, so a market no longer needs a ledger row or her residency before its guide is written
+> and launched. Negotiation stays the site's USP, but it is one lens among several on an area
+> page, not the sole focus — a page built only around levers leaves useful copy and search
+> demand on the table.
+>
+> **What did not change: §6 and §7.** A page may say anything true about the *market* —
+> housing stock, transit, ownership costs, what to check, public facts verified at a primary
+> source. It still may not claim anything about *her* that is not documented: no "she has
+> closed here", no residency, no statistic outside CLAUDE.md §5. No area price without the
+> allowlist, and no fair-housing framing. Where this document says to wait for closings or
+> residency (§11, §12), read that as the *build-order* signal it was, not a publishing gate.
+
 **The template is finished.** `app/areas/[slug]/page.tsx`, `lib/areas/types.ts`, and
 `lib/areas/validate.ts` all shipped in `ec3a1ed`. Nothing here asks for new components. A
 market added to `lib/areas/data.ts` gets a page, a sitemap entry, a footer link, and both
@@ -396,7 +410,8 @@ against the §5 roster surfaced the answer for the whole roster at once rather t
 market at a time.
 
 **Ship them one at a time.** A market with nothing real to say stays absent from `data.ts`
-and its URL 404s, which is the specified behaviour.
+and its URL 404s, which is the specified behaviour. *(2026-09-14: "nothing real to say" means
+no substantive, verifiable market content — not "no closing". See the policy note at the top.)*
 
 **An `/areas` index page is needed at launch — this reverses an earlier call here.** The
 original reasoning was that an index over one entry is itself a thin page, and to revisit at
@@ -458,7 +473,8 @@ whether she has ever worked there.
 **Proposed order, superseding §11's "hub → Fort Mill → Steele Creek":** hub → East
 Charlotte → Northwest Charlotte → Fort Mill → Steele Creek → re-assess. The remaining
 zero-evidence four (Myers Park, South End, Uptown, Waxhaw) wait on either new closings or a
-residency-style case, whichever comes first.
+residency-style case, whichever comes first. **Superseded 2026-09-14:** they no longer wait.
+South End shipped that day with no ledger row. Order the rest by marketing value.
 
 ---
 
@@ -529,7 +545,8 @@ Every string in `guide` is scanned by `areaText()`. `guideText()` lists the fiel
 so the type checker forces a decision when a field is added.
 
 **South End's evidence position is different from Steele Creek's, and the page is built
-around that.** §12 records zero ledger rows and no residency. So the page makes no claim
+around that.** §12 records zero ledger rows and no residency — which, under the 2026-09-14
+policy, is no reason to hold a page. So the page makes no claim
 about her record there: no closings, no buildings she knows, no "she lives nearby." What it
 carries is a method that is true of attached housing on this corridor regardless of who is
 reading, plus public facts verified against CATS and South End's own site (station names,
@@ -551,3 +568,20 @@ ledger, that test is the one to revisit — deliberately, not by deleting it.
 **Attribution.** The closing intake prefills the `in-town-charlotte` market group, and
 `source` is `/areas/south-end`. `ContactIntake` now keeps page-prefilled answers when a
 visitor picks a side — before 2026-09-14 choosing a side wiped them.
+
+## 15. Where the guides are linked — 2026-09-14
+
+Every placement reads `publishedAreas()`, so a new guide appears in all of the sitewide ones
+the day it lands and nothing can link a 404. `components/area-guide-links.tsx`.
+
+| Placement | What |
+|---|---|
+| Header | "Areas" is a dropdown: All areas, then each guide (`lib/nav.ts`, tested) |
+| Footer | Its own "Area guides" column naming each guide, plus All areas |
+| Home page | `AreaGuidesStrip` after the trust strip — every guide, name and lede |
+| Every guide | `AreaGuidesStrip` above the closing block, excluding itself |
+| `/buyers`, `/sellers`, `/relocation`, `/new-construction` | Named links in the existing area paragraph via `GuideLink`, which degrades to plain text if a guide is unpublished |
+| `/transactions` | "What is negotiable in {name}" on rows mapped to a published market (unchanged) |
+
+When a guide ships, the sitewide placements need nothing. The pillar sentences are written by
+hand, so add the new market to whichever pillar paragraph it genuinely fits.

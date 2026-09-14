@@ -81,6 +81,11 @@ describe("the gates", () => {
     expect(hrefs().includes("/areas")).toBe(publishedAreas().length > 0);
   });
 
+  it("links every published guide by name, and nothing unpublished", () => {
+    const guides = hrefs().filter((href) => href.startsWith("/areas/"));
+    expect(guides.sort()).toEqual(publishedAreas().map((a) => `/areas/${a.slug}`).sort());
+  });
+
   it("links /transactions exactly when the ledger is indexable", () => {
     expect(hrefs().includes("/transactions")).toBe(isTransactionsPageIndexable());
   });

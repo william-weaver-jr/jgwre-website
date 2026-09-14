@@ -38,9 +38,11 @@
  * "family-friendly", or "up-and-coming". CLAUDE.md §7. index.test.ts scans this
  * data for that language, so a violation fails the build before it renders.
  *
- * Source: Jasmine. This is her market knowledge, not something to be researched
- * into existence. Fort Mill is the natural first one — CLAUDE.md §5 documents 12
- * closings in that corridor, so she has the most to say about it.
+ * Source: Jasmine where the content is about her or her record. POLICY CHANGE
+ * 2026-09-14 (Bill): a market no longer waits for a closing or her residency —
+ * these pages are marketing for markets she wants business in. Market facts may
+ * be researched and verified at a primary source; claims about HER still need
+ * CLAUDE.md §5 behind them (§6). docs/AREAS-SPEC.md, top of file.
  * ---------------------------------------------------------------------------
  */
 
@@ -191,8 +193,9 @@ export const AREAS: readonly Area[] = [
 
       READ THIS BEFORE ADDING TO IT. South End is one of the zero-row markets in
       docs/AREAS-SPEC.md §12: no closing in the ledger names it, and she does not
-      live here. So this page is deliberately built from nothing that needs her
-      record behind it. It makes no claim that she has closed here, lives here,
+      live here. That is no longer a reason to hold a page (policy, 2026-09-14),
+      but it still limits what the page may say about her. So it is built from
+      nothing that needs her record behind it. It makes no claim that she has closed here, lives here,
       or knows a particular building. What it offers instead is a method — the
       unit, the building, the block — that is true of attached housing on a rail
       corridor whoever is reading it, and that is exactly what a condo buyer does
