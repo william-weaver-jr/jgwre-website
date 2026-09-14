@@ -161,24 +161,30 @@ function DesktopGroup({ group }: { group: NavGroup }) {
         <Chevron open={open} />
       </button>
 
-      <ul
+      <div
         id={panelId}
         // `hidden` rather than an opacity transition: a menu that is merely
         // transparent is still focusable, which is how keyboard users end up
         // tabbing into links they cannot see.
         hidden={!open}
-        className="absolute left-0 top-full z-50 mt-3 min-w-44 border border-border bg-surface py-2 shadow-lg"
+        // The space between trigger and panel is `pt-3` on this wrapper, never a
+        // margin on the list. Margin sits outside the hover area, so the cursor
+        // crossed a 12px dead strip on its way to the links, fired mouseleave,
+        // and the menu closed before it could be used. Padding is inside the box.
+        className="absolute left-0 top-full z-50 pt-3"
       >
-        {group.children.map((child) => (
-          <li key={child.href}>
-            <NavAnchor
-              link={child}
-              onNavigate={() => setOpen(false)}
-              className="block px-4 py-2 text-sm hover:bg-surface-sunken"
-            />
-          </li>
-        ))}
-      </ul>
+        <ul className="min-w-44 border border-border bg-surface py-2 shadow-lg">
+          {group.children.map((child) => (
+            <li key={child.href}>
+              <NavAnchor
+                link={child}
+                onNavigate={() => setOpen(false)}
+                className="block px-4 py-2 text-sm hover:bg-surface-sunken"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
