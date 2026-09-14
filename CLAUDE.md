@@ -389,6 +389,15 @@ to Google Ads so `generate_lead` can be imported as a conversion, and what that 
 (that a request was completed, and the page it came from — no name, email, phone, or typed
 content).
 
+**Google Ads housing-demographics review — REVIEWED 2026-09-11.** The live Audiences view
+for `SRCH | CLT | New Construction | V1` was checked at the ad-group level. Every available
+age band (18–24 through 65+, plus Unknown), every gender category (Female, Male, and Unknown),
+and every household-income band (Top 10% through Lower 50%, plus Unknown) showed **Enabled**
+with no bid adjustment. The campaign's Exclusions table also reported no audience-segment
+exclusions. The campaign was paused and had no impressions at review time; this records its
+configuration, not delivery. Recheck this evidence if demographic targeting, audience
+segments, or campaign structure changes before activation.
+
 This is the 2026-08-24 consent decision's own reopen condition being spent deliberately.
 The tag config did not change: Google documents that disabling ads personalization leaves
 measurement intact, so the conversion reaches Google Ads with Google Signals and ad
@@ -776,6 +785,20 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       What this does **not** settle is the consent banner, which is with counsel and turns
       on advertising identifiers more than on page views. The gate narrows it — an
       opted-out visitor now has nothing stored — but does not answer it.
+
+- [ ] **V2 — Google Ads call attribution. Not a C1 pre-launch blocker.** The site already
+      emits the GA4 `call_click` event for every labeled `tel:` link, and Google Ads has an
+      enabled, eligible account-level call asset for `(704) 200-9360`. What is still absent
+      is a phone-call/click-to-call conversion action in Google Ads: the only enabled
+      conversion actions are the GA4 `generate_lead` import and the Google-hosted lead form,
+      both currently showing no recent conversions.
+
+      Complete this in v2 by choosing the attribution path (import `call_click` for website
+      phone-link clicks, configure Google Ads call reporting for calls from ads, or both),
+      then run one controlled call test after a campaign is live and a Google forwarding
+      number or other intended tracked path is visible. Do not hold C1 or launch for this:
+      the phone CTA itself works, the number is correct, and the gap affects measurement
+      rather than a visitor's ability to contact Jasmine.
 
 - [ ] Professional photography and any brand video
 - [x] **YouTube on the site — SHIPPED 2026-08-20.** The bio video on `/about` as a
