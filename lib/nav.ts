@@ -1,4 +1,4 @@
-import { publishedAreas } from "@/lib/areas";
+import { publishedAreas, sortAreas } from "@/lib/areas";
 import { publishedPosts } from "@/lib/blog";
 import { isTransactionsPageIndexable } from "@/lib/transactions";
 
@@ -85,11 +85,21 @@ export function primaryNav(): NavItem[] {
     { href: "/sellers", label: "Sell" },
   ];
 
-  // Same gate the footer uses. lib/areas keeps unwrittenMarkets() out of the UI
-  // deliberately: a card pointing at a 404, or a guide rushed thin to justify
-  // one, is the failure docs/AREAS-SPEC.md exists to prevent.
+  // Same gate the footer uses: published guides only, never unwrittenMarkets(),
+  // so nothing here can point at a 404. A group rather than a single hub link
+  // since 2026-09-14 — the guides are marketing for those markets, and a reader
+  // looking for "South End" should find it in one click, not two.
   if (publishedAreas().length > 0) {
-    items.push({ href: "/areas", label: "Areas" });
+    items.push({
+      label: "Areas",
+      children: [
+        { href: "/areas", label: "All areas" },
+        ...sortAreas(publishedAreas()).map((area) => ({
+          href: `/areas/${area.slug}`,
+          label: area.name,
+        })),
+      ],
+    });
   }
 
   items.push(

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { GuideLink } from "@/components/area-guide-links";
 import { CaseLedger, CASE_NEW_CONSTRUCTION } from "@/components/case-ledger";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta, PhoneCta } from "@/components/phone-cta";
@@ -183,7 +184,9 @@ export default function NewConstructionPage() {
             area guides
           </Link>
           say which submarkets are
-          carrying builder inventory, and what it does to the resale priced against it.
+          carrying builder inventory, and what it does to the resale priced against it. In{" "}
+          <GuideLink slug="steele-creek" />, the builder down the road is often the comp a resale
+          has to price under.
         </p>
       </section>
 

@@ -585,6 +585,14 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       on the roster themselves. Five markets — Myers Park, South End, Uptown, Tega Cay,
       Waxhaw — have zero rows. The tally is a snapshot, not a ruling: more transactions still
       need to be added to the workbook, and it should be re-run when they are.
+- [x] **Area pages no longer wait for evidence — POLICY, 2026-09-14 (Bill).** The guides are
+      marketing for markets Jasmine wants business in, so a market does not need a ledger row
+      or her residency before its page launches. Negotiation stays the USP but is not the sole
+      focus of an area page. §6 and §7 are untouched: market facts must be true and verified,
+      and nothing about *her* record ships undocumented. `/areas/south-end` shipped under this
+      the same day, in a due-diligence format. Every published guide is now linked by name
+      from the header, the footer, the home page, and the pillar pages —
+      `docs/AREAS-SPEC.md` top note, §14, §15.
 - [ ] **Phase 2, parked: a submarket layer above `/areas/[slug]`.** `docs/AREAS-SPEC.md` §13.
       The workbook's Geographical Submarket tier (Gaston County, Cabarrus County, North
       Charlotte / University Area, and others) sits one level above individual area pages and

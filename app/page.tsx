@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { AreaGuidesStrip } from "@/components/area-guide-links";
 import { BrandPhoto } from "@/components/brand-photo";
 import {
   CaseLedger,
@@ -391,6 +392,18 @@ export default function HomePage() {
           ))}
         </dl>
       </section>
+
+      {/* ------------------------------------------------------------ AREA GUIDES */}
+      {/* The guides are marketing for the markets they cover (2026-09-14), and
+          the home page is where most visitors land. Renders nothing until a
+          guide is published. */}
+      <AreaGuidesStrip
+        id="area-guides"
+        eyebrow="Area guides"
+        heading="Charlotte is not one housing market."
+        body="What you are buying, what it costs to own, and what is askable all change from one part of the metro to the next. Start with the one you are looking at."
+        className="pb-section"
+      />
 
       {/* ------------------------------------------------------------ TESTIMONIALS */}
       <section

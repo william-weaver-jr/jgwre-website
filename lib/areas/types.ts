@@ -101,4 +101,125 @@ export type Area = Market & {
 
   /** Two or more FAQ entries. Rendered, and emitted as FAQPage JSON-LD. */
   faq: readonly AreaFaq[];
+
+  /**
+   * The due-diligence format. Absent on markets whose page is the negotiation
+   * layout (Steele Creek); present where the decision a reader is actually
+   * worried about is the property itself rather than the price.
+   *
+   * See AreaGuide below and docs/AREAS-SPEC.md §14 for when to use it.
+   */
+  guide?: AreaGuide;
+};
+
+/** A contextual call to action between sections. Every one goes somewhere real. */
+export type AreaCta = {
+  /** The question or prompt the reader is left holding, in display type. */
+  prompt: string;
+  label: string;
+  /**
+   * `#start` scrolls to the intake on this page and is tracked as an intake
+   * start by components/contact-link-tracking.tsx. Anything else must be a
+   * route that exists.
+   */
+  href: string;
+};
+
+/**
+ * The diligence layout, for attached-housing markets where the building, the
+ * association, and the block decide more than the neighborhood does.
+ *
+ * Written first for South End, 2026-09-14. It reuses the six required Area
+ * fields rather than replacing them, so the validators, the distinctness test,
+ * and the hub card all keep working unchanged:
+ *
+ *   answer        → the quick answer under "what should you know"
+ *   housingStock  → the opening of "what can you buy"
+ *   levers        → the unit / building / block layers — for this format, the
+ *                   three places the other side of the table knows more than
+ *                   the listing says
+ *   commute       → the opening of the walkability section
+ *   priceContext  → the opening of the ownership-cost section
+ *   whatTrades    → the opening of the seller section
+ *
+ * Every string in here is scanned by lib/areas/validate.ts areaText(), so the
+ * fair-housing and banned-language rules reach it exactly as they reach the
+ * six fields above. A new string field added here must be added there too.
+ */
+export type AreaGuide = {
+  /**
+   * The city the market sits inside, for the eyebrow and the schema's Place —
+   * "South End, Charlotte, NC". A neighborhood is not findable by its own name
+   * alone the way a town is.
+   */
+  city: string;
+  /** The h1. Replaces "{name} and what is negotiable in it." */
+  headline: string;
+  /** The second hero paragraph, under the lede. */
+  heroCloser: string;
+  /** `<title>` before the site-name suffix the layout appends. */
+  seoTitle: string;
+  /** Label for the hero's secondary button, which scrolls to the intake. */
+  heroCta: string;
+
+  answerHeading: string;
+  facts: readonly { label: string; value: string }[];
+
+  housingHeading: string;
+  propertyTypes: readonly {
+    name: string;
+    goodFor: string;
+    /** Absent for a type described in prose only. */
+    checks?: readonly string[];
+  }[];
+  housingCta: AreaCta;
+
+  layersHeading: string;
+  layersIntro: string;
+  layersClosing: string;
+
+  transitHeading: string;
+  stations: readonly string[];
+  transitAdvantages: readonly string[];
+  transitTradeoffs: readonly string[];
+  transitCallout: string;
+
+  changeHeading: string;
+  changeBody: readonly string[];
+
+  costHeading: string;
+  costChecks: readonly string[];
+  costClosing: string;
+  costCta: AreaCta;
+
+  buyerHeading: string;
+  buyerQuestions: readonly string[];
+  buyerClosing: string;
+  buyerCta: AreaCta;
+
+  sellerHeading: string;
+  sellerChecks: readonly string[];
+  sellerClosing: string;
+  sellerCta: AreaCta;
+
+  nearbyHeading: string;
+  /**
+   * `slug` links the entry only once that market's page is published — naming a
+   * neighbor is fine, linking a 404 is not. A place off the §5 roster carries no
+   * slug at all.
+   */
+  nearby: readonly { name: string; slug?: string; chooseWhen: string }[];
+
+  faqHeading: string;
+
+  closingHeading: string;
+  closingBody: string;
+  intakeHeading: string;
+  intakeBody: string;
+  /**
+   * The intake's market-group answer, prefilled so the lead reaches Follow Up
+   * Boss already labeled. A value from lib/intake/questions.ts MARKET_OPTIONS;
+   * the visitor can still change it.
+   */
+  intakeMarket: string;
 };

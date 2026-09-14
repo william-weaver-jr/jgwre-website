@@ -148,6 +148,30 @@ describe("step 2", () => {
     expect(payload().intake).toBeUndefined();
     expect(payload().side).toBe("selling");
   });
+
+  /* An area page prefills its market group without a side. Choosing a side must
+     not wipe the one answer the page already knew — that is the attribution. */
+  it("keeps a page-prefilled answer through the side choice, and lets it be changed", async () => {
+    const user = userEvent.setup();
+    render(
+      <ContactIntake
+        {...props}
+        source="/areas/south-end"
+        prefill={{ answers: { markets: ["in-town-charlotte"] } }}
+      />,
+    );
+
+    await user.click(screen.getByRole("radio", { name: /Buying/ }));
+    expect(screen.getByRole("checkbox", { name: /In-town Charlotte/ })).toBeChecked();
+    await user.click(screen.getByRole("checkbox", { name: /South Charlotte/ }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    await fillContactStep(user);
+    await user.click(screen.getByRole("button", { name: "Send this to Jasmine" }));
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    expect(payload().intake.markets).toEqual(["in-town-charlotte", "south-charlotte"]);
+    expect(payload().source).toBe("/areas/south-end");
+  });
 });
 
 describe("TCPA consent (§7)", () => {

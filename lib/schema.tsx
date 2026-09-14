@@ -222,6 +222,36 @@ export function faqSchema(entries: readonly { question: string; answer: string }
 }
 
 /**
+ * WebPage for an area guide, `about` the place itself.
+ *
+ * Deliberately not a second RealEstateAgent: the home page already declares
+ * her, and a copy here would be a second node free to drift from the first.
+ * The page points at that node by `@id` instead.
+ */
+export function areaWebPageSchema({
+  name,
+  description,
+  path,
+  place,
+}: {
+  name: string;
+  description: string;
+  path: string;
+  /** The place as a reader would write it, e.g. "South End, Charlotte, North Carolina". */
+  place: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name,
+    description,
+    url: `${SITE_URL}${path}`,
+    about: { "@type": "Place", name: place },
+    author: { "@id": PERSON_ID },
+  };
+}
+
+/**
  * BreadcrumbList for a page one level below a hub.
  *
  * Worth having now that /areas exists: it tells a crawler the hub is the parent
