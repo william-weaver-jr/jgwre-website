@@ -114,7 +114,7 @@ export default function AreasIndexPage() {
           <SectionHeading eyebrow="The guides" id="guides">
             {areas.length === 0
               ? "The first ones are being written."
-              : "What is negotiable, market by market."}
+              : "What to know, market by market."}
           </SectionHeading>
 
           {areas.length === 0 ? (
@@ -150,7 +150,8 @@ export default function AreasIndexPage() {
             <>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
                 Housing stock and commute times are on every site in this city. These cover the
-                part that is not: which levers tend to exist here, and why.
+                part that is not: what tends to be askable in each market, and what to check
+                before you write an offer there.
               </p>
 
               <div className="mt-14 grid gap-x-14 gap-y-12 sm:grid-cols-2">

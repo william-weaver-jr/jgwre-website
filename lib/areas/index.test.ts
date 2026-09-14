@@ -421,3 +421,124 @@ describe("Steele Creek, the first published area", () => {
     expect(text.toLowerCase()).not.toContain("board president");
   });
 });
+
+describe("South End, the first diligence-format area", () => {
+  const southEnd = () => publishedAreas().find((a) => a.slug === "south-end");
+  const text = () => areaText(southEnd()!);
+
+  it("is published in the diligence format", () => {
+    expect(southEnd()).toBeDefined();
+    expect(southEnd()?.guide).toBeDefined();
+  });
+
+  /**
+   * The brief for this page listed "perfect for young professionals" and "great
+   * for singles" among the things to avoid, which is the right instinct and the
+   * exact failure this market invites: a dense, rail-served district is described
+   * by who lives in it far more often than by what is built in it. The regexes
+   * in validate.ts catch the common phrasings; these are the ones specific to
+   * urban-core copy, plus the Steele Creek proxies.
+   */
+  it("describes buildings and trains, never who lives there", () => {
+    /* "Single-family" is a housing type, the one legitimate use of the word. */
+    const lower = text().toLowerCase().replaceAll("single-family", "detached");
+    for (const proxy of [
+      "young professional",
+      "singles",
+      "famil",
+      "empty nester",
+      "retiree",
+      "school",
+      "crime",
+      "safe",
+      "demographic",
+      "vibrant",
+      "live, work",
+      "something for everyone",
+    ]) {
+      expect(lower, `south-end copy contains "${proxy}"`).not.toContain(proxy);
+    }
+  });
+
+  /**
+   * South End has no row in the ledger and she does not live there
+   * (docs/AREAS-SPEC.md §12). The page is built so it needs neither. The
+   * failure this guards is a later edit reaching for credibility it has not
+   * earned — "she has sold in South End", "her clients here" — which is a §6
+   * claim with nothing behind it.
+   */
+  it("claims no closing or residency she does not have on record", () => {
+    const lower = text().toLowerCase();
+    for (const claim of [
+      "has lived",
+      "lives in",
+      "she lives",
+      "has sold",
+      "she sold",
+      "closed in",
+      "her clients",
+      "transactions in",
+    ]) {
+      expect(lower, `south-end copy contains "${claim}"`).not.toContain(claim);
+    }
+  });
+
+  it("quotes no price, dues figure, or percentage", () => {
+    expect(showsDollarFigure(southEnd()!)).toBe(false);
+    expect(text()).not.toMatch(/\d+(\.\d+)?\s?%/);
+  });
+
+  /* An investment question on a broker's page is where a return gets implied. */
+  it("promises no appreciation or return", () => {
+    expect(text()).not.toMatch(/\b(?:will|guaranteed to) (?:appreciate|rise|increase in value)\b/i);
+    expect(text()).toContain("No location promises appreciation or a return.");
+  });
+
+  /* The CATS dates are a schedule, not a fact, and the copy has to say so. */
+  it("states the new station's schedule as a target", () => {
+    const guide = southEnd()!.guide!;
+    expect(guide.changeBody.join(" ")).toMatch(/2028/);
+    expect(guide.changeBody.join(" ").toLowerCase()).toContain("targets");
+  });
+
+  it("lists the four current stations", () => {
+    expect(southEnd()!.guide!.stations).toEqual([
+      "Carson",
+      "Bland Street",
+      "East/West Boulevard",
+      "New Bern",
+    ]);
+  });
+
+  /**
+   * The brief asked for 40–100 words per answer: long enough to stand alone when
+   * an answer engine lifts it, short enough to be lifted whole.
+   */
+  it("keeps every FAQ answer quotable on its own", () => {
+    for (const entry of southEnd()!.faq) {
+      const words = entry.answer.trim().split(/\s+/).length;
+      expect(words, `"${entry.question}" is ${words} words`).toBeGreaterThanOrEqual(40);
+      expect(words, `"${entry.question}" is ${words} words`).toBeLessThanOrEqual(100);
+    }
+  });
+
+  /**
+   * CLAUDE.md §12, 2026-09-04: the brokerage IDX is footer-only, because a
+   * registration there becomes a broker-sourced lead. "See South End homes" is
+   * the CTA most likely to be added back pointing at it.
+   */
+  it("routes every CTA to the intake or a page on this site", () => {
+    const guide = southEnd()!.guide!;
+    for (const cta of [guide.housingCta, guide.costCta, guide.buyerCta, guide.sellerCta]) {
+      expect(cta.href, cta.label).toMatch(/^(#start|\/[a-z-]+)$/);
+    }
+  });
+
+  it("prefills a market group the intake actually offers", async () => {
+    const { BRANCHES } = await import("@/lib/intake");
+    const offered = BRANCHES.buying
+      .find((q) => q.id === "markets")
+      ?.options?.map((o) => o.value);
+    expect(offered).toContain(southEnd()!.guide!.intakeMarket);
+  });
+});

@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { AreaGuidePage } from "@/components/area-guide";
 import { PageHero, SectionHeading } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { ResultsDisclaimer } from "@/components/results-disclaimer";
 import { areaBySlug, publishedAreas } from "@/lib/areas";
 import { showsDollarFigure } from "@/lib/areas/validate";
-import { JsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { JsonLd, areaWebPageSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { GUIDE_TITLE } from "@/lib/intake";
 import { routeMetadata } from "@/lib/seo";
 
@@ -47,15 +48,18 @@ export async function generateMetadata({
   const area = areaBySlug(slug);
   if (!area) return {};
 
+  /* The market name leads, because that is the word people search. The rest
+     states the angle so the result is not interchangeable with the dozen
+     other "{market} real estate" titles on the same page of results. A
+     diligence-format page names its own, because its angle is not negotiation. */
+  const title = area.guide?.seoTitle ?? `${area.name}, ${area.state}: what is negotiable here`;
+
   return {
-    /* The market name leads, because that is the word people search. The rest
-       states the angle so the result is not interchangeable with the dozen
-       other "{market} real estate" titles on the same page of results. */
-    title: `${area.name}, ${area.state}: what is negotiable here`,
+    title,
     description: area.metaDescription ?? area.lede,
     ...routeMetadata({
       path: `/areas/${area.slug}`,
-      ogTitle: `${area.name}, ${area.state}: what is negotiable here`,
+      ogTitle: title,
       ogDescription: area.metaDescription ?? area.lede,
       article: {},
     }),
@@ -67,6 +71,44 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
   const area = areaBySlug(slug);
   if (!area) notFound();
 
+  const structuredData = (
+    <>
+      {/* Every answer below is rendered on the page in the same words. Emitting one a
+          visitor cannot see is a structured-data violation and, on a licensed
+          broker's site, an advertising claim nobody reviewed. */}
+      <JsonLd data={faqSchema(area.faq)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "" },
+          { name: "Areas", path: "/areas" },
+          { name: area.name, path: `/areas/${area.slug}` },
+        ])}
+      />
+      <JsonLd
+        data={areaWebPageSchema({
+          name: area.guide?.seoTitle ?? `${area.name}, ${area.state}: what is negotiable here`,
+          description: area.metaDescription ?? area.lede,
+          path: `/areas/${area.slug}`,
+          place: [
+            area.name,
+            area.guide?.city,
+            area.state === "NC" ? "North Carolina" : "South Carolina",
+          ]
+            .filter(Boolean)
+            .join(", "),
+        })}
+      />
+    </>
+  );
+
+  if (area.guide) {
+    return (
+      <>
+        <AreaGuidePage area={area} guide={area.guide} />
+        {structuredData}
+      </>
+    );
+  }
 
   const sections = [
     { id: "housing-stock", eyebrow: "What is built here", body: area.housingStock },
@@ -185,17 +227,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
         }}
       />
 
-      {/* Every answer below is rendered above in the same words. Emitting one a
-          visitor cannot see is a structured-data violation and, on a licensed
-          broker's site, an advertising claim nobody reviewed. */}
-      <JsonLd data={faqSchema(area.faq)} />
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", path: "" },
-          { name: "Areas", path: "/areas" },
-          { name: area.name, path: `/areas/${area.slug}` },
-        ])}
-      />
+      {structuredData}
     </>
   );
 }

@@ -96,7 +96,10 @@ export function ContactIntake({
 
   function chooseSide(next: Side) {
     setSide(next);
-    setAnswers({});
+    /* Back to what the page already knew, not to nothing. An area page prefills
+       its market group without a side, and wiping it here would drop the one
+       answer the visitor never had to give. */
+    setAnswers(prefill?.answers ?? {});
     setStep("details");
     track("intake_step", { step: 2, side: next, page: source });
   }

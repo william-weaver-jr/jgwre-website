@@ -59,7 +59,58 @@ export function areaText(area: Area): string {
     area.whatTrades,
     ...area.levers.flatMap((lever) => [lever.title, lever.body]),
     ...area.faq.flatMap((entry) => [entry.question, entry.answer]),
+    ...(area.guide ? guideText(area.guide) : []),
   ].join("\n");
+}
+
+/**
+ * Every rendered string in the diligence layout. Listed field by field rather
+ * than walked generically, so the type checker fails here when AreaGuide gains
+ * a field nobody decided to scan.
+ */
+function guideText(guide: NonNullable<Area["guide"]>): string[] {
+  const cta = (c: { prompt: string; label: string }) => [c.prompt, c.label];
+  return [
+    guide.city,
+    guide.headline,
+    guide.heroCloser,
+    guide.seoTitle,
+    guide.heroCta,
+    guide.answerHeading,
+    ...guide.facts.flatMap((f) => [f.label, f.value]),
+    guide.housingHeading,
+    ...guide.propertyTypes.flatMap((t) => [t.name, t.goodFor, ...(t.checks ?? [])]),
+    ...cta(guide.housingCta),
+    guide.layersHeading,
+    guide.layersIntro,
+    guide.layersClosing,
+    guide.transitHeading,
+    ...guide.stations,
+    ...guide.transitAdvantages,
+    ...guide.transitTradeoffs,
+    guide.transitCallout,
+    guide.changeHeading,
+    ...guide.changeBody,
+    guide.costHeading,
+    ...guide.costChecks,
+    guide.costClosing,
+    ...cta(guide.costCta),
+    guide.buyerHeading,
+    ...guide.buyerQuestions,
+    guide.buyerClosing,
+    ...cta(guide.buyerCta),
+    guide.sellerHeading,
+    ...guide.sellerChecks,
+    guide.sellerClosing,
+    ...cta(guide.sellerCta),
+    guide.nearbyHeading,
+    ...guide.nearby.flatMap((n) => [n.name, n.chooseWhen]),
+    guide.faqHeading,
+    guide.closingHeading,
+    guide.closingBody,
+    guide.intakeHeading,
+    guide.intakeBody,
+  ];
 }
 
 /** Fair-housing and banned-language hits. Empty means clean. */

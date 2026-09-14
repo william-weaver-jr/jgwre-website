@@ -4,7 +4,7 @@ import type { Area, Market } from "./types";
 
 export { AREAS } from "./data";
 export { MARKETS } from "./markets";
-export type { Area, AreaLever, AreaState, Market } from "./types";
+export type { Area, AreaCta, AreaGuide, AreaLever, AreaState, Market } from "./types";
 
 /**
  * The areas that have real authored content, and therefore real pages.

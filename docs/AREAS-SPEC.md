@@ -496,3 +496,58 @@ clear answer on whether the off-roster clusters above (Gaston County, Cabarrus C
 Charlotte / University Area) get promoted into the §5 roster the way East Charlotte and
 Northwest Charlotte just were. If they do, the case for a hub layer gets stronger with each
 addition; if the roster stays as it is, a flat `/areas` index may simply be enough.
+
+---
+
+## 14. The diligence format — South End, 2026-09-14
+
+`lib/areas/types.ts` `AreaGuide`, rendered by `components/area-guide.tsx`. An area entry that
+carries `guide` gets this layout; one without it keeps the negotiation layout Steele Creek
+uses. Nothing else about publishing changes — same `data.ts`, same router, sitemap, footer,
+hub card, and both test suites.
+
+**When to use it.** In an attached-housing market on a rail corridor, the reader's worry is
+not what is askable on price. It is which of two similar condos is the better purchase once
+the association, the parking, and the block are in the comparison. The USP still applies —
+the other side of the table knows the building's budget, minutes, and competing units, and
+the buyer knows the listing photos — but the page is ordered as those questions arrive
+rather than as a list of levers. Uptown, LoSo, and the condo end of Dilworth are the likely
+next candidates. A detached-house suburb is not.
+
+**How it reuses the six fields**, so the existing validators keep biting:
+
+| Field | Renders as |
+|---|---|
+| `answer` | The short answer under "what should you know before buying" |
+| `housingStock` | The opening of "what can you actually buy" |
+| `levers` | The three layers — the unit, the building, the block |
+| `commute` | The opening of the walkability section |
+| `priceContext` | The opening of the cost-of-ownership section |
+| `whatTrades` | The opening of the seller section |
+
+Every string in `guide` is scanned by `areaText()`. `guideText()` lists the fields by hand,
+so the type checker forces a decision when a field is added.
+
+**South End's evidence position is different from Steele Creek's, and the page is built
+around that.** §12 records zero ledger rows and no residency. So the page makes no claim
+about her record there: no closings, no buildings she knows, no "she lives nearby." What it
+carries is a method that is true of attached housing on this corridor regardless of who is
+reading, plus public facts verified against CATS and South End's own site (station names,
+the 3.5-mile trail, the new-station schedule, stated as targets). `lib/areas/index.test.ts`
+asserts the absence of residency and closing claims. When a South End closing lands in the
+ledger, that test is the one to revisit — deliberately, not by deleting it.
+
+**What the brief asked for that did not ship, and why:**
+
+- **A price example ("a $500,000 condo").** A dollar figure pulls the results disclaimer onto
+  the page, and no area price is on the §2 allowlist. It reads as "the same list price".
+- **"See South End homes" pointing at search.** The IDX link is footer-only since
+  2026-09-04 (CLAUDE.md §12). The hero's secondary button goes to the intake instead.
+- **The intake as the primary hero CTA.** Locked Decision #4 is phone-first; the intake is
+  the secondary button, as on the pillar pages.
+- **Photography.** None licensed; nothing hotlinked. The wanted subjects are listed in the
+  `data.ts` comment above the entry.
+
+**Attribution.** The closing intake prefills the `in-town-charlotte` market group, and
+`source` is `/areas/south-end`. `ContactIntake` now keeps page-prefilled answers when a
+visitor picks a side — before 2026-09-14 choosing a side wiped them.
