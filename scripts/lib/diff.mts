@@ -82,9 +82,18 @@ export function compare(
   for (const row of incoming) {
     const bucket = buckets.get(identity(row)) ?? [];
     /* Prefer the same neighborhood, so two closings in one city and month pair
-       up correctly; otherwise take the first unmatched row in the bucket. */
+       up correctly. When a subdivision was renamed AND neither side's
+       neighborhood matches the other, fall back to property type before
+       resorting to bucket order — two unrelated closings that share a city,
+       month, and side are exactly where position-only matching cross-wires
+       two rows (a real case: two Charlotte February 2022 buyer closings, one
+       a single-family, one a condo, both renamed the same month — matching by
+       position alone paired each row with the other's old identity, which
+       showed up as a property-type flip that never happened). Position is the
+       last resort, not the first. */
     const match =
       bucket.find((c) => !matched.has(c) && c.neighborhood === row.neighborhood) ??
+      bucket.find((c) => !matched.has(c) && c.propertyType === row.propertyType) ??
       bucket.find((c) => !matched.has(c));
 
     if (!match) {

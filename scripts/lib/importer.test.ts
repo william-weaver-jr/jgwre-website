@@ -19,13 +19,19 @@ import type { Transaction } from "../../lib/transactions/types";
 
 const HEADER =
   "Client Name,Address,City,State,Closing Price,Closing Month,Closing Year,Sell or Buy," +
-  "Property Type,Neighborhood,New Build (Y/N),Builder,Relocation,Concessions," +
-  "Left Review (Y/N),Highlights,Reviews";
+  "Property Type,Subdivision,Neighborhood,Geographical Submarket,New Build (Y/N),Builder," +
+  "Relocation,Concessions,Left Review (Y/N),Highlights,Reviews";
 
 function csv(...rows: string[]): string {
   return [HEADER, ...rows].join("\n");
 }
 
+/**
+ * `subdivision` is what lands in `transaction.neighborhood` — the sheet's
+ * finest-grained location column, and the one this ledger has always used
+ * under that name. `neighborhood` and `geoSubmarket` here are the two coarser
+ * workbook columns, read only by `marketMatch`.
+ */
 function row(overrides: Partial<WorkbookRow> = {}): WorkbookRow {
   return {
     lineNumber: 2,
@@ -38,7 +44,9 @@ function row(overrides: Partial<WorkbookRow> = {}): WorkbookRow {
     closingYear: "2026",
     sellOrBuy: "Buy",
     propertyType: "SFH",
-    neighborhood: "Example Park",
+    subdivision: "Example Park",
+    neighborhood: "",
+    geoSubmarket: "",
     newBuild: "N",
     builder: "N/A",
     relocation: "",
@@ -85,10 +93,10 @@ describe("parseMarkdownTable", () => {
 describe("parseWorkbook", () => {
   it("reads a row into the sheet's own vocabulary", () => {
     const [first] = parseWorkbook(
-      csv("Jo,1 St,Fort Mill,SC,\"$485,000\",April,2026,Buy,SFH,English Trails,N,N/A,,,,,"),
+      csv('Jo,1 St,Fort Mill,SC,"$485,000",April,2026,Buy,SFH,English Trails,,,N,N/A,,,,,'),
     );
     expect(first.city).toBe("Fort Mill");
-    expect(first.neighborhood).toBe("English Trails");
+    expect(first.subdivision).toBe("English Trails");
     expect(first.lineNumber).toBe(2);
   });
 
@@ -106,8 +114,9 @@ describe("parseWorkbook", () => {
   });
 
   it("tolerates the trailing spacer columns the sheet carries", () => {
-    expect(() => parseWorkbook(`${HEADER},,\nJo,1 St,Charlotte,NC,$1,April,2026,Buy,SFH,P,N,,,,,,,,`))
-      .not.toThrow();
+    expect(() =>
+      parseWorkbook(`${HEADER},,\nJo,1 St,Charlotte,NC,$1,April,2026,Buy,SFH,P,,,N,,,,,,,,`),
+    ).not.toThrow();
   });
 });
 
@@ -149,31 +158,82 @@ describe("mapRow", () => {
 
   /* The rule the ledger exists to respect: a buyer-side street address would
      publish where a client lives. */
-  it("refuses a street address in the neighborhood column", () => {
-    expect(() => mapRow(row({ neighborhood: "123 Main Street" }), new Set())).toThrow(
+  it("refuses a street address in the subdivision column", () => {
+    expect(() => mapRow(row({ subdivision: "123 Main Street" }), new Set())).toThrow(
       /street address/i,
     );
   });
 
-  it("widens a complex-inside-a-neighborhood to the neighborhood, and says so", () => {
+  /* A building name that happens to start with a number is not a street
+     address — the check requires a street suffix, not just a leading digit,
+     so a case like this (a real subdivision value from the sheet) is not a
+     false positive. */
+  it("does not mistake a numbered building name for a street address", () => {
+    expect(() =>
+      mapRow(row({ subdivision: "1315 East Condominium (The Dilworth)" }), new Set()),
+    ).not.toThrow();
+  });
+
+  it("widens a complex-inside-a-subdivision to the neighborhood, and says so", () => {
     const { transaction, warnings } = mapRow(
-      row({ neighborhood: "Piedmont Row in SouthPark" }),
+      row({ subdivision: "Piedmont Row in SouthPark" }),
       new Set(),
     );
     expect(transaction.neighborhood).toBe("SouthPark");
     expect(warnings.join(" ")).toMatch(/complex/i);
   });
 
-  it("drops a neighborhood identical to the city", () => {
+  it("drops a subdivision identical to the city", () => {
     const { transaction } = mapRow(
-      row({ city: "Tega Cay", neighborhood: "Tega Cay" }),
+      row({ city: "Tega Cay", subdivision: "Tega Cay" }),
       new Set(),
     );
     expect(transaction.neighborhood).toBeUndefined();
   });
 
+  it("treats a 'None / ...' subdivision as no subdivision at all", () => {
+    expect(
+      mapRow(row({ subdivision: "None / Rural Acreage" }), new Set()).transaction.neighborhood,
+    ).toBeUndefined();
+  });
+
   it("treats N/A as no builder rather than a builder named N/A", () => {
     expect(mapRow(row({ builder: "N/A" }), new Set()).transaction.builder).toBeUndefined();
+  });
+
+  describe("marketMatch", () => {
+    it("sets market when the city itself is a §5 market", () => {
+      expect(mapRow(row({ city: "Fort Mill", state: "SC" }), new Set()).transaction.market).toBe(
+        "fort-mill",
+      );
+    });
+
+    it("sets market when the Neighborhood or Geographical Submarket column names one exactly", () => {
+      expect(
+        mapRow(row({ neighborhood: "Steele Creek" }), new Set()).transaction.market,
+      ).toBe("steele-creek");
+      expect(
+        mapRow(row({ geoSubmarket: "East Charlotte" }), new Set()).transaction.market,
+      ).toBe("east-charlotte");
+    });
+
+    /* Adjacent labels are common in this sheet, and folding one into the other
+       is exactly the guessing this field exists to avoid. */
+    it("does not fuzzy-match an adjacent label", () => {
+      expect(
+        mapRow(row({ geoSubmarket: "North Charlotte" }), new Set()).transaction.market,
+      ).toBeUndefined();
+    });
+
+    it("never matches a market on the other side of the state line", () => {
+      expect(
+        mapRow(row({ state: "NC", geoSubmarket: "Rock Hill" }), new Set()).transaction.market,
+      ).toBeUndefined();
+    });
+
+    it("leaves market unset when nothing matches", () => {
+      expect(mapRow(row(), new Set()).transaction.market).toBeUndefined();
+    });
   });
 
   describe("pillars", () => {
@@ -210,8 +270,8 @@ describe("mapRow", () => {
       expect(mapRow(row(), new Set()).transaction.id).toBe("2026-example-park-01");
     });
 
-    it("falls back to the city when the sheet records no neighborhood", () => {
-      expect(mapRow(row({ neighborhood: "N/A" }), new Set()).transaction.id).toBe(
+    it("falls back to the city when the sheet records no subdivision", () => {
+      expect(mapRow(row({ subdivision: "N/A" }), new Set()).transaction.id).toBe(
         "2026-charlotte-01",
       );
     });
@@ -320,6 +380,35 @@ describe("compare", () => {
     ]);
     expect(diff.changed).toHaveLength(1);
     expect(diff.changed[0].existing.neighborhood).toBe("Y");
+  });
+
+  /**
+   * The real case this guards: two Charlotte February 2022 buyer closings, one
+   * single-family and one a condo, BOTH had their subdivision renamed in the
+   * same workbook update. Neither incoming neighborhood matches either
+   * existing one, so the old position-only fallback paired each row with the
+   * other's identity — which surfaced as a property-type flip that never
+   * happened. Property type as a second tiebreaker fixes it.
+   */
+  it("does not cross-match two renamed rows sharing a bucket by position", () => {
+    const existing = [
+      tx({ id: "2022-oakwood-acres-01", neighborhood: "Oakwood Acres", propertyType: "Single Family" }),
+      tx({ id: "2022-dilworth-01", neighborhood: "Dilworth", propertyType: "Condo" }),
+    ];
+    // Incoming order matches the sheet's row order, which is NOT the existing order.
+    const diff = compare(existing, [
+      tx({ id: "2022-dilworth-01", neighborhood: "1315 East Condominium", propertyType: "Condo" }),
+      tx({ id: "2022-oakwood-acres-01", neighborhood: "Montclair", propertyType: "Single Family" }),
+    ]);
+
+    expect(diff.changed).toHaveLength(2);
+    const byId = new Map(diff.changed.map((c) => [c.existing.id, c]));
+    expect(byId.get("2022-oakwood-acres-01")?.incoming.neighborhood).toBe("Montclair");
+    expect(byId.get("2022-oakwood-acres-01")?.changes.map((c) => c.field)).not.toContain(
+      "propertyType",
+    );
+    expect(byId.get("2022-dilworth-01")?.incoming.neighborhood).toBe("1315 East Condominium");
+    expect(byId.get("2022-dilworth-01")?.changes.map((c) => c.field)).not.toContain("propertyType");
   });
 
   it("reports a shipped row missing from the export", () => {

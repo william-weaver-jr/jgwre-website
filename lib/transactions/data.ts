@@ -291,7 +291,10 @@ export const TRANSACTIONS: readonly Transaction[] = [
     side: "seller",
     year: 2026,
     month: 4,
-    neighborhood: "Beverly Crest",
+    /* Workbook (2026-09-17): Subdivision is "Beverly Crest Townhomes" —
+       standardized here and on 2022-beverly-crest-01, the same physical
+       property, for consistency between the two rows. */
+    neighborhood: "Beverly Crest Townhomes",
     city: "Charlotte",
     state: "NC",
     propertyType: "Townhouse",
@@ -320,25 +323,453 @@ export const TRANSACTIONS: readonly Transaction[] = [
     market: "east-charlotte",
   },
 
+  /* ------------------------------------------------------------------ 2025 */
+  {
+    id: "2025-riverfalls-01",
+    side: "buyer",
+    year: 2025,
+    month: 10,
+    neighborhood: "Riverfalls",
+    city: "Tega Cay",
+    state: "SC",
+    market: "tega-cay",
+    propertyType: "Single Family",
+    builder: "Taylor Morrison",
+    pillars: ["new-construction", "carolinas-border"],
+    /* Workbook: closing costs, "$50,000 in builder incentives", and a free
+       refrigerator. The dollar figure is dropped; the shape of the deal is
+       not — a large builder incentive on a new build is exactly the §2
+       argument. */
+    lever: "Closing costs, a substantial builder incentive, and a free refrigerator, for first-time buyers.",
+  },
+  {
+    id: "2025-plaza-shamrock-01",
+    side: "buyer",
+    year: 2025,
+    month: 8,
+    neighborhood: "Plaza Shamrock",
+    city: "Charlotte",
+    state: "NC",
+    market: "east-charlotte",
+    propertyType: "Townhouse",
+    builder: "Vista Homes",
+    pillars: ["new-construction"],
+    lever: "A first-time buyer, with seller concessions at closing.",
+  },
+  {
+    id: "2025-graham-heights-01",
+    side: "buyer",
+    year: 2025,
+    month: 9,
+    neighborhood: "Graham Heights",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: [],
+    /* Workbook: "$20k UNDER LIST PRICE... $22,210 in SELLER CONCESSIONS... a
+       whooping $34k in EQUITY... a home warranty." Every figure dropped; what
+       is left is still three distinct, real concessions in one closing. */
+    lever: "Purchased under list price, with seller concessions, equity at closing, and a home warranty.",
+    reviewId: "zillow-dias-ismailov",
+  },
+  {
+    id: "2025-davidson-landing-01",
+    side: "buyer",
+    year: 2025,
+    month: 6,
+    neighborhood: "Davidson Landing",
+    city: "Davidson",
+    state: "NC",
+    propertyType: "Condo",
+    pillars: [],
+    lever: "Seller concessions, all appliances staying, and a home warranty.",
+    reviewId: "zillow-trey-ishee",
+  },
+  {
+    id: "2025-shepherds-landing-01",
+    side: "buyer",
+    year: 2025,
+    month: 6,
+    neighborhood: "Shepherds Landing",
+    city: "Mooresville",
+    state: "NC",
+    propertyType: "Single Family",
+    builder: "Meritage",
+    pillars: ["new-construction"],
+    /* Rate and dollar figures both dropped, same discipline as
+       2026-annsborough-park-01 — a reduced rate is a lever, its percentage is
+       not on-page copy. */
+    lever: "A reduced interest rate, plus seller concessions and a price under list.",
+    reviewId: "zillow-conrado-valencia",
+  },
+  {
+    id: "2025-verbena-01",
+    side: "buyer",
+    year: 2025,
+    month: 9,
+    neighborhood: "Verbena",
+    city: "Charlotte",
+    state: "NC",
+    market: "loso",
+    propertyType: "Townhouse",
+    builder: "Copper Builders",
+    pillars: ["new-construction"],
+    /* Workbook also claims Copper Builders won "Builder of the Year" three
+       years running — a third-party award claim about the builder, not about
+       her. Left off: §6 asks for documented claims, and this one is not
+       documented anywhere on this site. The upgrades are a fact she
+       negotiated directly and need no verification beyond the closing. */
+    lever: "Free upgrades negotiated directly with the builder.",
+  },
+  {
+    id: "2025-druid-hills-01",
+    side: "seller",
+    year: 2025,
+    month: 4,
+    neighborhood: "Druid Hills North",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Townhouse",
+    pillars: ["sellers"],
+    /* Percentage-of-list dropped, same discipline as every other row. The
+       out-of-state detail is real and factual (from the paired review below,
+       not the Relocation column, which reads N for this row — she is
+       describing herself, not this specific closing's classification, so no
+       relocation pillar) and costs nothing to state. */
+    lever: "Under contract in under three weeks, for sellers already living out of state.",
+    /* Two reviews describe this closing, husband and wife, already linked to
+       each other by sameTransactionAs. Never run both — linking the one whose
+       note marks it primary. */
+    reviewId: "zillow-cedric-brown",
+  },
+  {
+    id: "2025-longview-oaks-01",
+    side: "buyer",
+    year: 2025,
+    month: 3,
+    neighborhood: "Longview Oaks",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: [],
+    lever: "First-time buyers; the home inspection came back spotless, with seller concessions at closing.",
+    /* Resolves the CLAUDE.md §12 open item: zillow-humberto-zambrano recorded
+       a 2025 purchase with no ledger row. This is that row — his Charlotte
+       purchase, a year before his August 2026 Trinity Park sale
+       (2026-trinity-park-01). The review's own Zillow line says "Rock Hill,
+       SC", which is Zillow's generated line, not the workbook. */
+    reviewId: "zillow-humberto-zambrano",
+  },
+  {
+    id: "2025-lawing-pond-01",
+    side: "seller",
+    year: 2025,
+    month: 1,
+    neighborhood: "Lawing Pond",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: ["sellers"],
+    lever: "A back-to-back sale, clearing the way to buy their next home.",
+  },
+  {
+    id: "2025-alexander-providence-townhomes-01",
+    side: "buyer",
+    year: 2025,
+    month: 5,
+    neighborhood: "Alexander Providence Townhomes",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Townhouse",
+    builder: "DRB Homes",
+    pillars: ["new-construction"],
+    /* Workbook also called this "one of the most desirable areas in the
+       Charlotte Metro" — dropped outright. "Desirable" is exactly the
+       fair-housing-adjacent adjective CLAUDE.md §7 keeps off this site,
+       regardless of which neighborhood it is attached to. */
+    lever: "Seller concessions and free blinds negotiated for a brand-new home.",
+  },
+
   /* ------------------------------------------------------------------ 2024 */
+  {
+    id: "2024-belterra-01",
+    side: "buyer",
+    year: 2024,
+    month: 2,
+    neighborhood: "Belterra",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Townhouse",
+    builder: "Meritage",
+    pillars: ["new-construction"],
+    /* Rate dropped, same discipline as every reduced-rate lever in this file. */
+    lever:
+      "Closing costs, the first year of HOA dues, and the home inspection — all covered by the seller, plus a reduced starting rate on the loan.",
+    reviewId: "zillow-makena-romagnano",
+  },
+  {
+    id: "2024-longview-oaks-01",
+    side: "seller",
+    year: 2024,
+    month: 9,
+    neighborhood: "Longview Oaks",
+    city: "Rock Hill",
+    state: "SC",
+    market: "rock-hill",
+    propertyType: "Single Family",
+    pillars: ["sellers", "carolinas-border"],
+    lever: "A back-to-back sale and purchase; this home was under contract in three days.",
+    /* No review for this side of the move — see 2024-moss-creek-village-01,
+       the same clients' purchase, which does have one. */
+  },
+  {
+    id: "2024-elizabeth-01",
+    side: "buyer",
+    year: 2024,
+    month: 8,
+    neighborhood: "Elizabeth",
+    city: "Fort Mill",
+    state: "SC",
+    market: "fort-mill",
+    propertyType: "Single Family",
+    builder: "Lennar",
+    pillars: ["new-construction", "relocation", "carolinas-border"],
+    lever:
+      "A refrigerator, blinds, washer, and dryer negotiated in, plus a reduced interest rate.",
+    reviewId: "zillow-rajeev-chhetri",
+  },
+  {
+    id: "2024-eastway-park-01",
+    side: "seller",
+    year: 2024,
+    month: 11,
+    neighborhood: "Eastway Park",
+    city: "Charlotte",
+    state: "NC",
+    market: "east-charlotte",
+    propertyType: "Single Family",
+    pillars: ["sellers"],
+    lever: "Under contract in one week, at asking price.",
+    /* The sell side of a back-to-back move — see 2024-woodbury-01, the same
+       clients' purchase the same year. */
+  },
+  {
+    id: "2024-tranquil-court-01",
+    side: "buyer",
+    year: 2024,
+    month: 12,
+    neighborhood: "Tranquil Court",
+    city: "Charlotte",
+    state: "NC",
+    market: "myers-park",
+    propertyType: "Condo",
+    pillars: [],
+    lever: "Closed successfully on a non-conforming loan, with seller concessions at closing.",
+  },
+  {
+    id: "2024-poplar-springs-01",
+    side: "buyer",
+    year: 2024,
+    month: 6,
+    neighborhood: "Poplar Springs",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: [],
+    lever: "Won in a multiple-offer situation.",
+  },
+  {
+    id: "2024-katelyn-moors-01",
+    side: "seller",
+    year: 2024,
+    month: 3,
+    neighborhood: "Katelyn Moors",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: ["sellers"],
+    /* The same clients and the same house as 2022-katelyn-moors-01 — Kathy
+       Hannan and Cori Halter bought here in 2022 (as
+       zillow-kathy-hannan / zillow-cori-halter, both linked there) and sold
+       in 2024. Neither review describes this closing, so none is linked here;
+       both are still accurate about the same address. */
+    lever: "Multiple offers, under contract in three days.",
+  },
+  {
+    id: "2024-cotswold-glen-01",
+    side: "buyer",
+    year: 2024,
+    month: 7,
+    neighborhood: "Cotswold Glen",
+    city: "Charlotte",
+    state: "NC",
+    market: "east-charlotte",
+    propertyType: "Townhouse",
+    pillars: [],
+    lever: "Won in a multiple-offer situation.",
+  },
+  {
+    id: "2024-sunbriar-01",
+    side: "buyer",
+    year: 2024,
+    month: 6,
+    neighborhood: "Sunbriar",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Single Family",
+    builder: "Pulte",
+    pillars: ["new-construction"],
+    lever: "Closing costs covered, plus a refrigerator, washer, dryer, and blinds included.",
+    reviewId: "zillow-wesley-settles",
+  },
+  {
+    id: "2024-robinson-park-01",
+    side: "seller",
+    year: 2024,
+    month: 5,
+    neighborhood: "Robinson Park",
+    city: "Charlotte",
+    state: "NC",
+    market: "east-charlotte",
+    propertyType: "Single Family",
+    pillars: ["sellers", "relocation"],
+    lever: "Under contract in three weeks.",
+  },
+  {
+    id: "2024-greenhurst-at-piper-glen-01",
+    side: "buyer",
+    year: 2024,
+    month: 10,
+    neighborhood: "Greenhurst at Piper Glen",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Condo",
+    pillars: ["relocation"],
+    lever:
+      "Purchased at list price with the staged furniture included, and a seller-paid home warranty.",
+    /* TODO(review): a "j smith" Zillow review surfaced as a possible match by
+       surname alone, but its property type (townhouse, not condo) and
+       location (Fort Mill, not Charlotte) disagree with this closing. Not
+       linked — too uncertain to treat as the same transaction. */
+  },
+  {
+    id: "2024-woodbury-01",
+    side: "buyer",
+    year: 2024,
+    month: 11,
+    neighborhood: "Woodbury",
+    city: "Charlotte",
+    state: "NC",
+    market: "east-charlotte",
+    propertyType: "Single Family",
+    pillars: [],
+    /* The buy side of a back-to-back move — see 2024-eastway-park-01, the same
+       clients' sale the same year. */
+    lever:
+      "A refrigerator, washer, dryer, and home warranty, all seller-provided — the buy side of a back-to-back move.",
+  },
+  {
+    id: "2024-rossmore-01",
+    side: "buyer",
+    year: 2024,
+    month: 9,
+    neighborhood: "Rossmore",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Townhouse",
+    pillars: [],
+    lever: "An out-of-state investor's rental purchase — helped find the tenant too.",
+    /* TODO(verify): reviewId below is a plausible byline match ("samjbkim" ~
+       Sam(uel) (J.) Kim, from client "Sam and Amy Kim") plus matching year,
+       property type, and role — but not a confirmed identity the way the
+       resolved handles elsewhere in lib/reviews are. Confirm before treating
+       the openQuestion on that review as settled. */
+    reviewId: "zillow-samjbkim",
+  },
+  {
+    id: "2024-hadley-at-arrowood-station-01",
+    side: "buyer",
+    year: 2024,
+    month: 9,
+    neighborhood: "Hadley at Arrowood Station",
+    city: "Charlotte",
+    state: "NC",
+    propertyType: "Townhouse",
+    pillars: [],
+    lever: "Purchased under asking price, with additional closing costs covered.",
+    reviewId: "zillow-davis-page",
+  },
+  {
+    id: "2024-moss-creek-village-01",
+    side: "buyer",
+    year: 2024,
+    month: 8,
+    neighborhood: "Moss Creek Village",
+    city: "Concord",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: [],
+    lever:
+      "Repairs negotiated and completed by a licensed contractor before move-in, via a credit at closing.",
+    /* The buy side of a back-to-back move — see 2024-longview-oaks-01
+       (Rock Hill, sell side), the same clients the same year. The review
+       importer suggested zillow-stephanie-stanglin for the Rock Hill sale;
+       its own details (bought, Concord, Moss Creek) match this row instead. */
+    reviewId: "zillow-stephanie-stanglin",
+  },
+  {
+    id: "2024-covington-01",
+    side: "buyer",
+    year: 2024,
+    month: 6,
+    neighborhood: "Covington",
+    city: "Huntersville",
+    state: "NC",
+    propertyType: "Single Family",
+    pillars: [],
+    lever: "Helped an older client buy in the same neighborhood as her son.",
+  },
+  {
+    id: "2024-oxford-glen-01",
+    side: "buyer",
+    year: 2024,
+    month: 8,
+    neighborhood: "Oxford Glen",
+    city: "Mint Hill",
+    state: "NC",
+    market: "east-charlotte",
+    propertyType: "Single Family",
+    pillars: [],
+    lever: "Won in a multiple-offer situation.",
+    /* TODO(review): the importer suggested google-josh-garcia by a first-name
+       match on "Josh" (the client here is Josh and Christina Giffin) — wrong
+       person, wrong year, wrong city, wrong property type. Not linked. */
+  },
+
   {
     id: "2024-tega-cay-01",
     side: "buyer",
     year: 2024,
     month: 5,
-    /* Workbook records no subdivision, neighborhood, or submarket for this
-       row — the thinnest entry in the ledger. locationLabel() degrades to
-       city, state. */
+    /* Workbook (2026-09-17) filled in a subdivision that was blank on the last
+       pull — no longer the thinnest row in the ledger. */
+    neighborhood: "Waterstone",
     city: "Tega Cay",
     state: "SC",
     propertyType: "Townhouse",
     /* city is the market. Tega Cay's first row — CLAUDE.md §5 and
        AREAS-SPEC.md §12 both listed it at zero evidence until this one. */
     market: "tega-cay",
-    pillars: ["carolinas-border"],
-    /* No Highlights, no review, no concessions in the sheet. A row without a
-       lever is still evidence that the closing happened; nothing here is
-       invented to fill the gap. */
+    /* Relocation column: Y, and her own review says "I moved to the area from
+       out of state." */
+    pillars: ["relocation", "carolinas-border"],
+    /* Workbook added Highlights ("Referral client") and a full review this
+       update. The review states "saving me thousands of dollars" on an
+       Opendoor-owned property — a quantified outcome, dropped from the lever
+       for the same reason every dollar figure is. What survives: a referral,
+       and a negotiation against an institutional seller. */
+    lever: "A referral client, negotiating against an Opendoor-owned property.",
+    reviewId: "unverified-jessica-smith",
   },
   {
     id: "2024-patriots-crossing-01",
@@ -359,9 +790,11 @@ export const TRANSACTIONS: readonly Transaction[] = [
     side: "buyer",
     year: 2024,
     month: 4,
-    /* Workbook: LoSo Terraces. Both linked reviews' Zillow lines say "York
-       Road" — the workbook is the closing record and wins. */
-    neighborhood: "LoSo Terraces",
+    /* Corrected 2026-09-17: the workbook has always said "LoSo Townhomes" —
+       "LoSo Terraces" here was a transcription error, not a sheet edit. Both
+       linked reviews' Zillow lines say "York Road", which is Zillow's
+       generated line and not the closing record either way. */
+    neighborhood: "LoSo Townhomes",
     city: "Charlotte",
     state: "NC",
     propertyType: "Townhouse",
@@ -381,7 +814,7 @@ export const TRANSACTIONS: readonly Transaction[] = [
     side: "buyer",
     year: 2024,
     month: 3,
-    neighborhood: "Cresswind",
+    neighborhood: "Cresswind Charlotte",
     city: "Mint Hill",
     state: "NC",
     propertyType: "Single Family",
@@ -398,9 +831,11 @@ export const TRANSACTIONS: readonly Transaction[] = [
     side: "buyer",
     year: 2023,
     month: 12,
-    /* Workbook: The Providence, townhome. The linked review's Zillow line says
-       "Olde Providence South" and single family — wrong on both counts. */
-    neighborhood: "The Providence",
+    /* Corrected 2026-09-17: the workbook has always said "Olde Providence
+       South" — "The Providence" here was a transcription error. The linked
+       review's Zillow line separately gets the property type wrong (single
+       family, not townhouse) — a different, genuine Zillow disagreement. */
+    neighborhood: "Olde Providence South",
     city: "Charlotte",
     state: "NC",
     propertyType: "Townhouse",
@@ -428,7 +863,7 @@ export const TRANSACTIONS: readonly Transaction[] = [
     side: "seller",
     year: 2023,
     month: 11,
-    neighborhood: "Brownes Ferry",
+    neighborhood: "Browne's Ferry",
     city: "Charlotte",
     state: "NC",
     propertyType: "Single Family",
@@ -501,6 +936,10 @@ export const TRANSACTIONS: readonly Transaction[] = [
     city: "Lancaster",
     state: "SC",
     propertyType: "Single Family",
+    /* Lennar built the home originally; this is a resale (New Build: N), so no
+       new-construction pillar. Added 2026-09-17 — the workbook has always
+       carried this builder and it was simply never transcribed. */
+    builder: "Lennar",
     pillars: ["sellers", "carolinas-border"],
     /* Neighborhood column: "Indian Land Perimeter" — and the client's own review says "sold our home in Lancaster/Indian Land." */
     market: "indian-land",
@@ -834,7 +1273,9 @@ export const TRANSACTIONS: readonly Transaction[] = [
     month: 1,
     /* Workbook: Beverly Crest. The linked review's Zillow line says "Oxford
        Hunt". */
-    neighborhood: "Beverly Crest",
+    /* Workbook (2026-09-17): standardized to "Beverly Crest Townhomes",
+       matching 2026-beverly-crest-02 — the same physical property. */
+    neighborhood: "Beverly Crest Townhomes",
     city: "Charlotte",
     state: "NC",
     propertyType: "Townhouse",

@@ -10,6 +10,7 @@
 import { REVIEWS } from "../../lib/reviews/data.ts";
 import { TRANSACTION_METRICS } from "../../lib/transactions/internal-metrics.ts";
 import type { Transaction } from "../../lib/transactions/types.ts";
+import { looksLikeStreetAddress } from "./map-transaction.mts";
 
 export type Problem = { level: "error" | "warning"; message: string };
 
@@ -34,7 +35,7 @@ export function checkDataset(rows: readonly Transaction[]): Problem[] {
     }
 
     /* The street-address rule. A buyer-side row would publish where a client lives. */
-    if (row.neighborhood && /^\d+\s/.test(row.neighborhood)) {
+    if (row.neighborhood && looksLikeStreetAddress(row.neighborhood)) {
       problems.push({
         level: "error",
         message: `${row.id}: neighborhood "${row.neighborhood}" looks like a street address.`,

@@ -66,7 +66,7 @@ export const TRANSACTION_METRICS: readonly TransactionMetrics[] = [
   { transactionId: "2026-ayrsley-01", closingPrice: 350000, note: "Sold for 99% of list price." },
   { transactionId: "2026-arvin-hills-01", closingPrice: 340000, note: "Sold for 99% of list price." },
   /* SOUTH CAROLINA — non-disclosure. */
-  { transactionId: "2024-tega-cay-01", closingPrice: 312000 },
+  { transactionId: "2024-tega-cay-01", closingPrice: 312000, concessions: 4014 },
   /* SOUTH CAROLINA — non-disclosure. */
   { transactionId: "2026-edgewater-01", closingPrice: 360000, concessions: 5000 },
   { transactionId: "2026-windsor-park-01", closingPrice: 309900, concessions: 15066.91, belowList: 15100 },
@@ -108,6 +108,39 @@ export const TRANSACTION_METRICS: readonly TransactionMetrics[] = [
   /* SOUTH CAROLINA — non-disclosure. */
   { transactionId: "2023-lexington-commons-01", closingPrice: 259900, concessions: 5000 },
   { transactionId: "2023-easthaven-01", closingPrice: 385000, belowList: 14900 },
+
+  /* 2025 */
+  { transactionId: "2025-riverfalls-01", closingPrice: 600388, note: "3% closing-cost credit, plus $50,000 in builder incentives." },
+  { transactionId: "2025-plaza-shamrock-01", closingPrice: 599900, concessions: 9000 },
+  { transactionId: "2025-graham-heights-01", closingPrice: 380000, concessions: 22210, belowList: 20000, note: "Client's own figure: $34k in equity at closing." },
+  { transactionId: "2025-davidson-landing-01", closingPrice: 559000, concessions: 7500 },
+  { transactionId: "2025-shepherds-landing-01", closingPrice: 385000, concessions: 7500, belowList: 2755, note: "Locked a 4.99% rate." },
+  { transactionId: "2025-verbena-01", closingPrice: 610000, note: "$14,000 in free upgrades negotiated with the builder." },
+  /* SOUTH CAROLINA is not a factor here — Charlotte, NC. */
+  { transactionId: "2025-druid-hills-01", closingPrice: 345000, note: "Sold for 99% of list price, under contract in under three weeks." },
+  { transactionId: "2025-longview-oaks-01", closingPrice: 285000, concessions: 3500 },
+  { transactionId: "2025-lawing-pond-01", closingPrice: 400000 },
+  { transactionId: "2025-alexander-providence-townhomes-01", closingPrice: 449900, concessions: 11000 },
+
+  /* 2024 */
+  { transactionId: "2024-belterra-01", closingPrice: 319370, concessions: 12937, note: "Locked a 3.85% starting rate." },
+  /* SOUTH CAROLINA — non-disclosure. */
+  { transactionId: "2024-longview-oaks-01", closingPrice: 296000 },
+  { transactionId: "2024-elizabeth-01", closingPrice: 484999, concessions: 12500 },
+  { transactionId: "2024-eastway-park-01", closingPrice: 495000, note: "Sold at asking price." },
+  { transactionId: "2024-tranquil-court-01", closingPrice: 375000, concessions: 12000 },
+  { transactionId: "2024-poplar-springs-01", closingPrice: 261500 },
+  { transactionId: "2024-katelyn-moors-01", closingPrice: 445000 },
+  { transactionId: "2024-cotswold-glen-01", closingPrice: 295000 },
+  { transactionId: "2024-sunbriar-01", closingPrice: 399999, concessions: 12000 },
+  { transactionId: "2024-robinson-park-01", closingPrice: 395000, note: "Closed at 98.8% of list price." },
+  { transactionId: "2024-greenhurst-at-piper-glen-01", closingPrice: 525000 },
+  { transactionId: "2024-woodbury-01", closingPrice: 419900 },
+  { transactionId: "2024-rossmore-01", closingPrice: 250000, concessions: 450 },
+  { transactionId: "2024-hadley-at-arrowood-station-01", closingPrice: 445000, concessions: 5000, belowList: 5000 },
+  { transactionId: "2024-moss-creek-village-01", closingPrice: 615000, note: "$2,250 repair credit." },
+  { transactionId: "2024-covington-01", closingPrice: 380000 },
+  { transactionId: "2024-oxford-glen-01", closingPrice: 465000 },
 
   /* 2022 */
   { transactionId: "2022-carlton-hills-01", closingPrice: 340000, belowList: 12800 },

@@ -169,9 +169,15 @@ Four pillars. Each gets a dedicated page, and each is the USP applied to a speci
    *The table:* the buyer's agent and the inspector both work for the buyer.
 
 **Supporting proof** (use sparingly, never as a stat wall):
-73+ career transactions · $30.9M career volume · 98.84% list-to-sale ratio ·
+74+ career transactions · $30.9M career volume · 98.84% list-to-sale ratio ·
 23 transactions / $9.9M in 2024 · top-5 producer at SRG in 2023 and 2024 ·
 105 five-star reviews (42 Zillow, 62 Google) · Zillow Premier Agent
+
+Raised from 73+ to 74+ on 2026-09-17: the ledger itself (`lib/transactions/data.ts`)
+now documents 74 individual closings, which is harder evidence than the original
+73+ figure. `CAREER_TRANSACTIONS` in `lib/site.ts` must never read lower than
+`TRANSACTIONS.length` — check it every time the workbook grows the ledger past the
+current floor, not only when someone remembers to "refresh the stat block."
 
 **Recognition** — documented here so §6 permits its use. Data in `lib/site.ts`
 (`RECOGNITION`). No `/awards` page: these live at the foot of `/reviews` and
@@ -637,10 +643,11 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       the same townhouse as `2022-beverly-crest-01`, sold in the same month she got them
       under contract in Fort Mill. One client, three rows, four years — the strongest
       retention evidence in the dataset.
-- [ ] **Humberto Zambrano has a 2025 purchase with no ledger row.** `zillow-humberto-zambrano`
-      records a 2025 Rock Hill BUY; the workbook has only his August 2026 Charlotte sale
-      (`2026-trinity-park-01`). Either the purchase is missing from the workbook or the
-      review's metadata is wrong. It would be the ledger's only 2025 row.
+- [x] **Humberto Zambrano's 2025 purchase — FOUND 2026-09-17.** `2025-longview-oaks-01`,
+      a Charlotte purchase a year before his August 2026 Trinity Park sale
+      (`2026-trinity-park-01`). `zillow-humberto-zambrano`'s own Zillow line says "Rock
+      Hill, SC" — that line was always wrong, not the review's metadata pointing at a
+      missing row.
 - [ ] **`unverified-john-white` needs a permalink.** Seller side, an estate sale run for an
       out-of-state client — one of very few seller reviews on file, so worth chasing. Its
       row (`2026-charlotte-01`) carries no review link until it clears.
@@ -652,6 +659,34 @@ Real estate sites are a common target for ADA demand letters. Legal risk, not a 
       Every percentage-of-list figure the sheet added (99%, 96.2%) was dropped from its
       lever for the same reason a dollar figure would be — a quantified outcome for one
       closing, without the disclaimer this page does not carry.
+- [x] **Workbook update — 74 rows, up from 47 — 2026-09-17.** Twenty-seven new closings
+      spanning 2024–2025, plus six corrections to already-shipped rows. Fourteen of the new
+      rows matched existing reviews already sitting unlinked in `lib/reviews/data.ts` —
+      the importer's `suggestReview()` found all of them, though three suggestions were
+      wrong (surname- or first-name-only matches with the wrong year, city, or property
+      type) and were not applied; see the `TODO(review)` comments left in their place.
+      One row resolves a standing open item: Humberto Zambrano's missing 2025 purchase,
+      above.
+
+      Two rows involve the same physical property being bought and later sold, and are
+      cross-referenced rather than merged: `2022-katelyn-moors-01` / `2024-katelyn-moors-01`
+      (Hannan & Halter), and three back-to-back mover pairs (Stanglin/Coffman, twice; the
+      Kesslers, once).
+
+      `CAREER_TRANSACTIONS` raised from `"73+"` to `"74+"` (`lib/site.ts`) — the ledger
+      itself now documents 74 closings, which had silently exceeded the old floor and made
+      `/transactions` read as self-contradictory ("74 of them... out of 73+"). This is the
+      first time the ledger has caught up to the documented career total; expect to raise
+      this again as the workbook keeps growing, not only when someone remembers to "refresh
+      the stat block."
+
+      The importer (`scripts/`) needed real fixes, not just new data, and both are now
+      covered by `scripts/lib/importer.test.ts`: it had never been updated for the
+      Subdivision / Neighborhood / Geographical Submarket column split (added weeks ago),
+      and its diff matcher could cross-wire two same-city, same-month, same-side closings
+      when neither's renamed subdivision matched the other's old one — caught because a
+      property-type flip that never happened showed up in the report. Fixed by adding
+      property type as a second match tiebreaker before falling back to bucket position.
 - [ ] **`2026-ayrsley-01` is marked Left Review: Y with no review text in the sheet.** Same
       open state `unverified-john-white` was in before its permalink work started, except
       here there is nothing to transcribe yet, gated or otherwise. Worth a direct ask rather

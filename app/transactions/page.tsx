@@ -4,7 +4,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { ClosingCta } from "@/components/phone-cta";
 import { TransactionRow } from "@/components/transaction-row";
-import { AGENT, CAREER_TRANSACTIONS, PILLARS } from "@/lib/site";
+import { AGENT, CAREER_TRANSACTIONS, CAREER_TRANSACTIONS_FLOOR, PILLARS } from "@/lib/site";
 import { routeMetadata } from "@/lib/seo";
 import {
   filterByPillar,
@@ -82,27 +82,44 @@ export default async function TransactionsPage({
             Closed transactions, both sides, grouped by year. Where something other than price
             moved, it says so. That is usually where the money was.
             {/*
-              Why this page counts fewer than the home page does.
+              Two true things this line could say, and which one is current
+              depends on whether the ledger has caught up to the documented
+              floor — so it is a condition, not a fixed sentence.
 
-              The home page and /about both state {CAREER_TRANSACTIONS} career
-              transactions; the filter below reads "All ({rows.length})". A
-              visitor comparing the two sees a discrepancy and has no way to tell
-              that the numbers measure different things.
+              BEHIND (rows.length < CAREER_TRANSACTIONS_FLOOR): the home page
+              and /about both state {CAREER_TRANSACTIONS} career transactions
+              while the filter below reads "All ({rows.length})". A visitor
+              comparing the two sees a discrepancy and needs to be told the
+              numbers measure different things — the ledger is not a curated
+              selection, it is simply still being filled in from the closing
+              records. ("Featured transactions" was considered and rejected:
+              it implies the rest were judged and left out, which is wrong in
+              the direction that matters.)
 
-              The ledger is NOT a curated selection — every row in the closed
-              transactions workbook is here. It is simply not the whole career
-              yet, because the workbook is still being filled in from the closing
-              records. An earlier proposal to label these "featured transactions"
-              would have been inaccurate in exactly the direction that matters:
-              it implies the rest were judged and left out.
+              CAUGHT UP (>=): the hedge above now reads as uncertainty about a
+              number that is not in question, so the page states the count
+              plainly instead. This is not "the ledger is complete forever" —
+              new closings still land here as they happen — only that there is
+              no known gap left to explain today.
 
-              Derived from `rows`, never typed. The workbook grows.
+              Both branches read `rows.length`, never a typed number, so the
+              condition re-evaluates correctly as the workbook grows.
             */}
             {rows.length > 0 ? (
               <span className="mt-5 block">
-                {rows.length} of them are documented here so far, out of {CAREER_TRANSACTIONS}{" "}
-                in her career. This is the whole ledger, not a selection from it — the rest
-                are still being entered from the closing records.
+                {rows.length >= CAREER_TRANSACTIONS_FLOOR ? (
+                  <>
+                    {rows.length} closed transactions — the whole ledger, updated as she
+                    closes more.
+                  </>
+                ) : (
+                  <>
+                    {rows.length} of them are documented here so far, out of{" "}
+                    {CAREER_TRANSACTIONS} in her career. This is the whole ledger, not a
+                    selection from it — the rest are still being entered from the closing
+                    records.
+                  </>
+                )}
               </span>
             ) : null}
           </>

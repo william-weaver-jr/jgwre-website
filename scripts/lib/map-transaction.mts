@@ -16,6 +16,7 @@
  * a neighborhood and to match a review, then discarded.
  */
 
+import { MARKETS } from "../../lib/areas/markets.ts";
 import type { Transaction, TransactionPillar } from "../../lib/transactions/types.ts";
 import type { WorkbookRow } from "./workbook.mts";
 
@@ -64,8 +65,46 @@ export function slug(value: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+/**
+ * A number followed by a street suffix — "123 Main Street", not "1315 East
+ * Condominium". Shared with checks.ts so the two street-address checks (one
+ * at import time, one over the shipped dataset) cannot drift into disagreeing
+ * about what counts as an address, the way plain `/^\d+\s/` and this used to.
+ */
+export function looksLikeStreetAddress(value: string): boolean {
+  return /^\d+\s+\S.*\b(street|st|drive|dr|road|rd|lane|ln|way|court|ct|circle|cir|avenue|ave|boulevard|blvd|place|pl|parkway|pkwy|trail|loop)\.?\s*$/i.test(
+    value,
+  );
+}
+
 function isEmpty(value: string): boolean {
-  return EMPTY_MARKERS.has(value.trim().toLowerCase());
+  const trimmed = value.trim().toLowerCase();
+  /* The sheet also writes "None / Acreage" and "None / Rural Acreage" for a
+     subdivision it has nothing finer to say about — not in EMPTY_MARKERS
+     verbatim, but the same fact. */
+  return EMPTY_MARKERS.has(trimmed) || /^none\b/.test(trimmed);
+}
+
+/**
+ * §5 market whose name exactly matches the city, or the workbook's Neighborhood
+ * or Geographical Submarket cell, in the same state as this closing.
+ *
+ * Exact only, deliberately: adjacent labels are common in this sheet ("North
+ * Charlotte" beside "Northwest Charlotte") and a fuzzy match would fold one
+ * into the other. This mirrors the by-hand rule that has governed every
+ * `market` assignment so far — city IS the market, or a workbook column names
+ * the market exactly — so it can be applied automatically without becoming a
+ * new kind of guess.
+ */
+function marketMatch(row: WorkbookRow): string | undefined {
+  const state = row.state.trim().toUpperCase();
+  const candidates = [row.city, row.neighborhood, row.geoSubmarket]
+    .map((value) => value.trim().toLowerCase())
+    .filter((value) => value !== "");
+  const market = MARKETS.find(
+    (m) => m.state === state && candidates.includes(m.name.toLowerCase()),
+  );
+  return market?.slug;
 }
 
 /** "$21,929.70" / "3500 Seller Concessions" / "" → number | undefined */
@@ -153,23 +192,32 @@ export function mapRow(row: WorkbookRow, usedIds: Set<string>): MappedRow {
   }
 
   const city = row.city.trim();
-  const rawNeighborhood = isEmpty(row.neighborhood) ? "" : row.neighborhood.trim();
+  /* The ledger's `neighborhood` field is the sheet's Subdivision column — the
+     finest of the three tiers, and the one the ledger has always stored under
+     that name, back to when it was the sheet's only location column. The
+     coarser Neighborhood and Geographical Submarket columns are read only for
+     `marketMatch`, above; they are never written to the row. */
+  const rawNeighborhood = isEmpty(row.subdivision) ? "" : row.subdivision.trim();
 
-  /* A street address in the Neighborhood column would publish where a client
-     lives — the one rule this file exists to enforce. */
-  if (/^\d+\s/.test(rawNeighborhood)) {
-    throw new RowError(row, `neighborhood "${rawNeighborhood}" looks like a street address.`);
+  /* A street address in the Subdivision column would publish where a client
+     lives — the one rule this file exists to enforce. Requiring a street
+     suffix (not just a leading number) avoids a false positive on something
+     like "1315 East Condominium" — a building name, not an address, and the
+     kind of edge case that street-address matching alone cannot tell apart
+     from "1315 East Boulevard". */
+  if (looksLikeStreetAddress(rawNeighborhood)) {
+    throw new RowError(row, `subdivision "${rawNeighborhood}" looks like a street address.`);
   }
 
-  /* The sheet writes some neighborhoods as "X in Y" ("Piedmont Row in
-     SouthPark"). That names a single complex, which is narrower than a
-     neighborhood and narrows toward the buyer, so take the wider half. */
+  /* Legacy pattern from before the three-tier split: "Piedmont Row in
+     SouthPark" named a single complex inside a neighborhood in one column.
+     Kept defensively in case the sheet ever collapses the columns again. */
   const inMatch = rawNeighborhood.match(/^(.+?)\s+in\s+(.+)$/i);
   let neighborhood = rawNeighborhood;
   if (inMatch) {
     neighborhood = inMatch[2].trim();
     warnings.push(
-      `neighborhood "${rawNeighborhood}" names a complex inside a neighborhood; ` +
+      `subdivision "${rawNeighborhood}" names a complex inside a neighborhood; ` +
         `imported as "${neighborhood}". Confirm that is the right level.`,
     );
   }
@@ -199,6 +247,7 @@ export function mapRow(row: WorkbookRow, usedIds: Set<string>): MappedRow {
       : {}),
     city,
     state,
+    ...(marketMatch(row) ? { market: marketMatch(row) } : {}),
     propertyType,
     ...(builder ? { builder } : {}),
     pillars: pillars(row, transactionSide),

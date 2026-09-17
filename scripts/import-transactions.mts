@@ -54,6 +54,7 @@ function render(mapped: MappedRow): string {
   if (row.neighborhood) lines.push(`    neighborhood: ${JSON.stringify(row.neighborhood)},`);
   lines.push(`    city: ${JSON.stringify(row.city)},`);
   lines.push(`    state: ${JSON.stringify(row.state)},`);
+  if (row.market) lines.push(`    market: ${JSON.stringify(row.market)},`);
   lines.push(`    propertyType: ${JSON.stringify(row.propertyType)},`);
   if (row.builder) lines.push(`    builder: ${JSON.stringify(row.builder)},`);
   lines.push(`    pillars: [${row.pillars.map((p) => JSON.stringify(p)).join(", ")}],`);

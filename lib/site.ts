@@ -166,8 +166,30 @@ export const BROKERAGE = {
  *
  * §5's open item about refreshing the stat block applies to this value. When it
  * is refreshed, this is the only line that changes.
+ *
+ * Raised to "74+" 2026-09-17: the workbook itself now documents 74 individual
+ * closings, which exceeded the old floor of 73+ and made /transactions read as
+ * self-contradictory ("74 of them... out of 73+ in her career"). This is not a
+ * new claim — the ledger IS the documentation, more concrete than the original
+ * 73+ ever was — so raising the floor to match it is a correction, not an
+ * invented statistic. Never let this fall below `TRANSACTIONS.length`.
  */
-export const CAREER_TRANSACTIONS = "73+";
+export const CAREER_TRANSACTIONS = "74+";
+
+/**
+ * The number inside `CAREER_TRANSACTIONS` — 74 out of "74+" — for the one
+ * comparison that needs an integer rather than the display string.
+ *
+ * /transactions uses this to decide which of two true things to say. While the
+ * ledger trails the documented floor, it explains the gap ("N of them... out
+ * of 74+"). Once the ledger has caught up — `TRANSACTIONS.length >=` this
+ * value, which it does as of 2026-09-17 — that framing reads as hedging on a
+ * number that is no longer in question, so the page states the count plainly
+ * instead. Comparing against the parsed floor rather than a hardcoded "caught
+ * up" flag means the more definite wording keeps working correctly if the
+ * workbook ever falls behind again and this constant gets raised without it.
+ */
+export const CAREER_TRANSACTIONS_FLOOR = Number(CAREER_TRANSACTIONS.replace(/\D/g, ""));
 
 /**
  * "Search Homes" points at the existing Stone Realty Group IDX — zero compliance

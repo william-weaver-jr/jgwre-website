@@ -3,10 +3,12 @@
  *
  * The sheet is the business record. This module turns one CSV export of it into
  * typed rows, and it is deliberately strict: a column it does not recognise is
- * an error, not a shrug. The sheet has already been restructured twice —
+ * an error, not a shrug. The sheet has already been restructured three times —
  * Neighborhood and Property Type appeared in one revision, Relocation and a
- * reordered Client Name column in another — and each time the silent failure
- * mode would have been importing garbage under a plausible-looking header.
+ * reordered Client Name column in another, then a single Neighborhood column
+ * split into Subdivision / Neighborhood / Geographical Submarket in a third —
+ * and each time the silent failure mode would have been importing garbage
+ * under a plausible-looking header.
  */
 
 /** One row of the sheet, still in the sheet's own vocabulary. */
@@ -22,7 +24,17 @@ export type WorkbookRow = {
   closingYear: string;
   sellOrBuy: string;
   propertyType: string;
+  /**
+   * The three-tier location split. `subdivision` is the fine-grained one — it
+   * is what map-transaction.ts uses as the ledger's `neighborhood` field, same
+   * as it used the sheet's original single "Neighborhood" column before this
+   * split existed. `neighborhood` and `geoSubmarket` here are the two coarser
+   * tiers, used only to justify a `market` slug when one of them names a §5
+   * market exactly — never rendered.
+   */
+  subdivision: string;
   neighborhood: string;
+  geoSubmarket: string;
   newBuild: string;
   builder: string;
   relocation: string;
@@ -48,7 +60,9 @@ const COLUMNS: Record<string, keyof WorkbookRow> = {
   "closing year": "closingYear",
   "sell or buy": "sellOrBuy",
   "property type": "propertyType",
+  subdivision: "subdivision",
   neighborhood: "neighborhood",
+  "geographical submarket": "geoSubmarket",
   "new build (y/n)": "newBuild",
   builder: "builder",
   relocation: "relocation",

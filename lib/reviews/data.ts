@@ -199,6 +199,29 @@ export const REVIEWS: readonly Review[] = [
       "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. The workbook's transcription carries its own typos ('Everyone in the was accessible', 'knew exactly how explain') — quoted as supplied per §7, not tidied. Transaction row 2026-edgewater-01.",
   },
   {
+    /* Added to the workbook 2026-09-17, alongside Highlights on a row that was
+       previously the thinnest in the ledger. No permalink supplied. */
+    id: "unverified-jessica-smith",
+    author: "Jessica Smith",
+    rating: 5,
+    platform: "google",
+    postedOn: "TODO(verify): unconfirmed.",
+    date: "2024-05-01",
+    datePrecision: "year",
+    transaction: {
+      role: "bought",
+      propertyType: "Townhouse",
+      year: 2024,
+      location: "Waterstone, Tega Cay, SC",
+    },
+    body: "I moved to the area from out of state and my local friend referred me to Jasmine Garcia as a realtor; I'm so glad she did. Jasmine is a true gem. I'm a first time home buyer and she helped and guided me through each step of the way. She was patient and always available for my questions. We closed last week and everything went smoothly from start to finish, I really couldn't have asked for a better experience. Jasmine did a lot of amazing negotiating and communicating. She ended up saving me thousands of dollars on an opendoor property! Most importantly I felt that Jasmine truly wanted me to find a place that I liked and didn't rush or push me to buy anything that wasn't right for me. I absolutely recommend her!",
+    /* "Saving me thousands of dollars" is a quantified financial outcome even
+       without a dollar sign — the same category the lever drops it from. */
+    statesDollarOutcome: true,
+    openQuestion:
+      "TODO(verify): platform, posting date, and permalink unconfirmed — transcribed from the workbook. Transaction row 2024-tega-cay-01. Tega Cay's first and only review; the property was Opendoor-owned, echoing the iBuyer lever already documented for Fort Mill (AREAS-SPEC.md).",
+  },
+  {
     id: "google-cathy-phillips",
     /* The workbook records the buyers as Harold & Cathy Phillips; the review is
        bylined Cathy Phillips alone, and the byline is what is recorded. */
