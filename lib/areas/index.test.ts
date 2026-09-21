@@ -801,3 +801,131 @@ describe("Myers Park", () => {
     }
   });
 });
+
+describe("SouthPark", () => {
+  const southPark = () => publishedAreas().find((a) => a.slug === "southpark");
+  const text = () => areaText(southPark()!);
+
+  it("is published in the diligence format", () => {
+    expect(southPark()).toBeDefined();
+    expect(southPark()?.guide).toBeDefined();
+  });
+
+  /** The district is one word, capital P. "South Park" is a different thing. */
+  it("spells the district SouthPark", () => {
+    expect(text()).not.toMatch(/\bSouth Park\b/);
+  });
+
+  /**
+   * The page's whole argument: the label covers three different residential
+   * propositions, and they are alternatives rather than layers of one address
+   * — which is why the eyebrow reads Option rather than Level.
+   */
+  it("presents the three SouthPark options as alternatives", () => {
+    const guide = southPark()!.guide!;
+    expect(guide.layersLabel).toBe("Option");
+    expect(southPark()!.levers).toHaveLength(3);
+    const titles = southPark()!.levers.map((l) => l.title.toLowerCase()).join(" | ");
+    expect(titles).toMatch(/established|detached|residential street/);
+    expect(titles).toMatch(/attached|condo|core/);
+  });
+
+  /**
+   * The failure this guards is the page drifting back into "SouthPark is the
+   * area around the mall". It is a district people live in, and an average
+   * across its housing types is the error the page exists to argue against.
+   */
+  it("refuses a single district-wide average, and says why", () => {
+    const lower = text().toLowerCase();
+    expect(lower).toMatch(/average price for southpark is close to meaningless|cannot describe both/);
+    expect(showsDollarFigure(southPark()!)).toBe(false);
+    expect(text()).not.toMatch(/\d+(\.\d+)?\s?%/);
+  });
+
+  /* Walkability is the claim most easily overstated in a district with a
+     walkable core and car-dependent streets around it. */
+  it("keeps walkability qualified rather than district-wide", () => {
+    const lower = text().toLowerCase();
+    expect(lower).toMatch(/parts of it are, and most of it is not|changes street by street/);
+    expect(lower).not.toMatch(/southpark is walkable\b/);
+  });
+
+  /**
+   * Development items each carry a status, and the two that are not built yet
+   * say so in the status itself rather than in prose a reader may skip.
+   */
+  it("labels every development item, including what has not started", () => {
+    const items = southPark()!.guide!.changeItems;
+    expect(items?.length).toBeGreaterThanOrEqual(5);
+    for (const item of items!) {
+      expect(item.status.trim().length, `${item.name} has no status`).toBeGreaterThan(0);
+    }
+    expect(items!.some((i) => /not started|approved/i.test(i.status))).toBe(true);
+    expect(items!.some((i) => /check current status/i.test(i.status))).toBe(true);
+  });
+
+  /**
+   * The one documented closing is 2022-southpark-01, a buyer-side condo bought
+   * under list price. The ledger deliberately records its neighborhood as
+   * "SouthPark" rather than the condo complex, because a complex plus a month
+   * plus a property type narrows toward the individual buyer. This page holds
+   * the same line.
+   */
+  it("uses the documented closing without naming the complex", () => {
+    const lower = text().toLowerCase();
+    expect(lower).toContain("under list price");
+    expect(lower).not.toContain("piedmont row");
+    for (const claim of ["has lived", "lives in", "she lives", "her clients"]) {
+      expect(lower, `southpark copy contains "${claim}"`).not.toContain(claim);
+    }
+  });
+
+  it("describes housing and amenities, never status or who lives there", () => {
+    const lower = text()
+      .toLowerCase()
+      .replaceAll("single-family", "detached")
+      .replaceAll("multifamily", "apartments");
+    for (const word of [
+      "prestigious",
+      "exclusive",
+      "elite",
+      "luxury",
+      "shopper",
+      "retail paradise",
+      "safe",
+      "crime",
+      "famil",
+      "young professional",
+      "affluent",
+      "upscale",
+      "demographic",
+      "something for everyone",
+    ]) {
+      expect(lower, `southpark copy contains "${word}"`).not.toContain(word);
+    }
+  });
+
+  it("keeps every FAQ answer quotable on its own", () => {
+    for (const entry of southPark()!.faq) {
+      const words = entry.answer.trim().split(/\s+/).length;
+      expect(words, `"${entry.question}" is ${words} words`).toBeGreaterThanOrEqual(40);
+      expect(words, `"${entry.question}" is ${words} words`).toBeLessThanOrEqual(100);
+    }
+  });
+
+  it("routes every CTA to the intake or a page on this site", () => {
+    const guide = southPark()!.guide!;
+    for (const cta of [guide.housingCta, guide.costCta, guide.buyerCta, guide.sellerCta]) {
+      expect(cta.href, cta.label).toMatch(/^(#start|\/[a-z-]+)$/);
+    }
+  });
+
+  it("links only neighbours that are real markets", () => {
+    for (const place of southPark()!.guide!.nearby) {
+      if (!place.slug) continue;
+      expect(MARKETS.some((m) => m.slug === place.slug), `${place.slug} is not a §5 market`).toBe(
+        true,
+      );
+    }
+  });
+});

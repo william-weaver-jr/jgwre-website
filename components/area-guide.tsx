@@ -238,7 +238,9 @@ export function AreaGuidePage({ area, guide }: { area: Area; guide: AreaGuide })
         <ol className="mt-14 space-y-10">
           {area.levers.map((layer, i) => (
             <li key={layer.title} className="grid gap-4 rule-top pt-8 md:grid-cols-[11rem_1fr]">
-              <p className="eyebrow">Level {i + 1}</p>
+              <p className="eyebrow">
+                {guide.layersLabel ?? "Level"} {i + 1}
+              </p>
               <div>
                 <h3 className="font-display text-2xl leading-snug md:text-3xl">{layer.title}</h3>
                 <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">

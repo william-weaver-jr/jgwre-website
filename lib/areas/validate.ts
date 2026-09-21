@@ -93,6 +93,7 @@ function guideText(guide: NonNullable<Area["guide"]>): string[] {
     guide.layersHeading,
     guide.layersIntro,
     guide.layersClosing,
+    ...(guide.layersLabel ? [guide.layersLabel] : []),
     guide.transitEyebrow,
     guide.transitHeading,
     ...guide.transitColumns.flatMap((c) => [c.heading, ...c.items]),

@@ -223,6 +223,14 @@ export type AreaGuide = {
   layersHeading: string;
   layersIntro: string;
   layersClosing: string;
+  /**
+   * The eyebrow on each of the three `levers` entries, numbered by the
+   * renderer. Defaults to "Level", which is right where the three are layers
+   * of one decision (Ballantyne, Myers Park). SouthPark sets "Option", because
+   * there the three are genuinely alternative places to live rather than
+   * layers of the same address.
+   */
+  layersLabel?: string;
 
   /**
    * Getting around. Generalised 2026-09-21 for Ballantyne: South End's version
