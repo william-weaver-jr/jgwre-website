@@ -1,7 +1,7 @@
 /**
  * Area page content — the real dataset.
  *
- * Two entries as of 2026-09-14. The discipline below is why there are not fourteen.
+ * Three entries as of 2026-09-21. The discipline below is why there are not fourteen.
  *
  * docs/CONTENT-PLAN.md is explicit: "Thin duplicated pages hurt more than they
  * help. If there isn't real content for a market, don't publish the page."
@@ -429,20 +429,32 @@ export const AREAS: readonly Area[] = [
       layersClosing:
         "Two condos with similar square footage and similar list prices can be very different purchases once those three layers are compared.",
 
+      transitEyebrow: "The Rail Trail and the Blue Line",
       transitHeading: "How walkable is South End Charlotte?",
-      stations: ["Carson", "Bland Street", "East/West Boulevard", "New Bern"],
-      transitAdvantages: [
-        "An easier trip into Uptown",
-        "Less driving for daily errands",
-        "Restaurants, shops, and the trail on foot",
-        "Appeal to the next buyer shopping for exactly this",
-      ],
-      transitTradeoffs: [
-        "Train movement and crossing signals",
-        "Foot traffic, late into the evening",
-        "Street noise and nightlife",
-        "Competition for parking, guest parking included",
-        "Construction and development around you",
+      transitColumns: [
+        {
+          heading: "Blue Line stations",
+          items: ["Carson", "Bland Street", "East/West Boulevard", "New Bern"],
+        },
+        {
+          heading: "What proximity gives you",
+          items: [
+            "An easier trip into Uptown",
+            "Less driving for daily errands",
+            "Restaurants, shops, and the trail on foot",
+            "Appeal to the next buyer shopping for exactly this",
+          ],
+        },
+        {
+          heading: "What it comes with",
+          items: [
+            "Train movement and crossing signals",
+            "Foot traffic, late into the evening",
+            "Street noise and nightlife",
+            "Competition for parking, guest parking included",
+            "Construction and development around you",
+          ],
+        },
       ],
       transitCallout:
         "A five-minute walk to the station and a bedroom window facing the corridor are two different real-estate facts.",
@@ -556,6 +568,457 @@ export const AREAS: readonly Area[] = [
       intakeBody:
         "Property type, rough timing, and which side of the table you’re on. If you have an address or a listing link, put it in the message box.",
       intakeMarket: "in-town-charlotte",
+    },
+  },
+  {
+    /*
+      Ballantyne — the second page in the diligence format (types.ts AreaGuide,
+      docs/AREAS-SPEC.md §14), published 2026-09-21 under the 2026-09-14 policy
+      that area guides do not wait for evidence.
+
+      WHAT IS DOCUMENTED, AND WHAT THEREFORE MAY BE SAID ABOUT HER.
+      One closing: 2022-belle-vista-01 — March 2022, buyer side, a CONDO in
+      "Ballantyne West", recorded lever "Won in a multiple-offer situation."
+      That row is already public on /transactions, so the page may reference it
+      and does, once, in the seller section. It is the only claim on this page
+      about her record. No residency, no volume, no "she knows every builder
+      here" — none of that is documented. §6.
+
+      PUBLIC FACTS, verified 2026-09-21 against primary or near-primary sources:
+        - Ballantyne is inside the City of Charlotte, annexed between 1999 and
+          2003; Mecklenburg County; mostly ZIP 28277; at the South Carolina
+          line (Wikipedia, Ballantyne (Charlotte neighborhood), sourced to the
+          annexation record). It is not a municipality — no town hall, no
+          separate tax jurisdiction. That is the single most useful orientation
+          fact for a searcher and it leads the page.
+        - Rezoned as roughly 2,000 acres in 1992 (Harris/Bissell). The name now
+          covers far more ground than that, which is why "what counts as
+          Ballantyne" is section two rather than a footnote.
+        - Ballantyne Corporate Park: 535 acres, bought by Northwood Investors
+          in 2017 for $1.2 billion. NO DOLLAR FIGURE FROM THAT SENTENCE SHIPS —
+          see below.
+        - Ballantyne Reimagined (goballantyne.com): Stream Park, six acres, and
+          TD Amp Ballantyne both opened September 2023; six new roads and a
+          greenway connector complete; The Bowl restaurant district opening in
+          stages; Oro Ballantyne, 26 stories and 356 residences, opened for
+          move-ins late 2025; Wegmans, about 110,000 square feet on North
+          Community House Road, opening October 2026; an NCDOT direct connector
+          from the I-485 express lanes to Johnston Road is planned.
+        - Bryant Farms Road Extension (charlottenc.gov): Phase 1, Elm Lane to
+          Rea Road, complete — ribbon-cutting 11 June 2025, landscaping
+          finished March 2026. Phase 2, Rea Road to Ardrey Kell Road, about
+          1.25 miles, is in advanced planning and design with NO published
+          completion date. The page says exactly that and no more.
+        - Greenways: Four Mile Creek, McMullen Creek and Lower McAlpine Creek
+          connect to the campus greenway connector.
+
+      DELIBERATELY ABSENT.
+        - Every dollar figure, including the $1.2 billion sale and any price
+          band. A figure pulls <ResultsDisclaimer /> onto the page, and no
+          area-level price is on the docs/CONTENT-MARKETING.md §2 allowlist.
+        - School names and anything resembling a rating. Assignment is stated
+          as what it is — a fact of the address that changes — and verification
+          is sent to CMS. docs/AREAS-SPEC.md §4 is explicit that schools are how
+          a careful page ends up making a familial-status argument.
+        - "Top-rated", "safe", who lives here. Several sources consulted lead
+          with exactly those; none of it is repeatable under §7.
+        - A listings feed or a "View homes for sale" button pointed at the
+          brokerage IDX. CLAUDE.md §12 (2026-09-04) made that link footer-only
+          because a registration there becomes a broker-sourced lead at the
+          worse split. The buyer who wants to see what is for sale is sent to
+          her instead, which is the whole reason this site exists.
+        - Images. Nothing licensed for Ballantyne is in the repo and nothing is
+          hotlinked. Wanted: The Bowl streetscape, Stream Park, a Johnston Road
+          or Ballantyne Commons Parkway streetscape, established subdivision
+          architecture. docs/IMAGE-CREDITS.md governs how one lands.
+    */
+    slug: "ballantyne",
+    name: "Ballantyne",
+    state: "NC",
+
+    targetQuery: "what is it like to live in ballantyne charlotte nc",
+
+    answer:
+      "Ballantyne is an area of far south Charlotte, in Mecklenburg County, running along Johnston Road and Ballantyne Commons Parkway up to the South Carolina line. It is part of the City of Charlotte rather than its own town, annexed between 1999 and 2003, so there is no separate town hall and no separate tax jurisdiction.\n\nMost of the housing is detached houses in master-planned subdivisions built from the 1990s onward, with townhomes, condos and newer apartments mixed in. The 535-acre office park at its center is being rebuilt as a walkable district of restaurants, shops, a park and an amphitheater, which is the biggest change here in thirty years.\n\nThe thing worth knowing before you search: Ballantyne is a name, not a boundary. Listings well outside the original master plan are marketed as Ballantyne, and the address decides school assignment, HOA dues and which houses your offer is actually competing with.",
+
+    lede:
+      "Ballantyne is far south Charlotte at the South Carolina line: master-planned subdivisions, townhomes and condos around an office park that is being rebuilt into a walkable district.",
+
+    metaDescription:
+      "Ballantyne, Charlotte NC: where it is, what you can buy, how the area is changing, and what to check before buying or selling. Guidance from Jasmine Garcia.",
+
+    housingStock:
+      "The bulk of Ballantyne is detached houses in master-planned subdivisions, most of them built from the early 1990s onward as the land west and east of Johnston Road was developed in large pieces. Each piece came with its own street pattern, its own architecture and its own homeowners association, which is why two houses a mile apart can feel like different markets.\n\nAround and between them sit townhomes, a smaller number of condos, and apartments — including the newest residential towers on the old corporate campus. There is also a golf and country club community here, where club membership is a separate arrangement from the subdivision's HOA and should be priced separately when you compare two houses.",
+
+    priceContext:
+      "Ballantyne is one of the higher-priced parts of Mecklenburg County, and the spread inside it is wide: a townhome off Community House Road and a larger house on an established subdivision street are not competing for the same buyer, even with a Ballantyne address on both.\n\nWhat moves the number for a specific house is rarely the area name. It is the subdivision, the lot, the build year, what has been updated, the HOA and any club dues, and what else is available that weekend within a few minutes' drive. Before comparing two listings, get these on the same page:",
+
+    commute:
+      "Ballantyne is built around driving. I-485 runs along its northern edge with interchanges at Johnston Road, Rea Road and Ballantyne Commons Parkway, and Johnston Road — US 521 — is the spine running south into South Carolina.\n\nThe exception is the old corporate campus, where the rebuild has added sidewalks, six new roads, a park and a greenway connector, so the newest apartments and the restaurant district genuinely are walkable to each other. That does not extend to the subdivisions. In most of Ballantyne you drive to dinner, and the honest question for a buyer is which of those two experiences they are buying into.\n\nGreenways are the other way to get around on foot: Four Mile Creek, McMullen Creek and Lower McAlpine Creek connect through this part of the county and into the campus.",
+
+    whatTrades:
+      "In Ballantyne the closest comparable is almost always inside your own subdivision, and often on your own street.\n\nThat cuts both ways. A buyer touring your house has usually already seen the other listing in the neighborhood, knows the floor plan because the builder used it forty times, and is pricing the difference between the two in updates rather than in square footage. Where your house has the same bones as its neighbors, condition, finishes and lot are the argument.\n\nThe other competition is newer: the apartments and townhomes on the rebuilt campus are pulling some of the same people who would otherwise buy a resale here. What tends to decide it:",
+
+    /* The three levels, Ballantyne's version. Not the unit/building/block of a
+       condo market — here the fuzzy name is the problem, so the levels run
+       address, subdivision, segment. */
+    levers: [
+      {
+        title: "The address, not the area name",
+        body: "Ballantyne is a marketing label attached to more ground than any boundary supports, and the address under it is what actually decides things. School assignment follows the address. So does the HOA you will pay, the county and city you are taxed by, and the set of recent sales an appraiser will use. Two listings both described as Ballantyne can answer those four questions differently.",
+      },
+      {
+        title: "The subdivision and what its association covers",
+        body: "This is not one community with one set of rules. It is dozens of separately platted subdivisions, each with its own association, dues, amenities, architectural restrictions and reserve position. Some include a pool and tennis courts; some include almost nothing. A country club membership, where one is available, is a separate arrangement again. Ask what the dues cover and what they have done recently before you treat two similar houses as similar purchases.",
+      },
+      {
+        title: "Which part of Ballantyne you are in",
+        body: "There are effectively three. The rebuilt campus around the Bowl is the newest and the only genuinely walkable part, and it is mostly apartments and condos. The established subdivisions off Johnston Road, Rea Road and Ardrey Kell Road are where most of the detached houses are, and they date from the 1990s and 2000s. Then there is the edge, where a listing carries the Ballantyne name because it sells better than the name of the road it is actually on.",
+      },
+    ],
+
+    faq: [
+      {
+        question: "Where is Ballantyne in Charlotte?",
+        answer:
+          "Ballantyne is in far south Charlotte, in Mecklenburg County, at the South Carolina state line. It runs along Johnston Road, which is US 521, and Ballantyne Commons Parkway, with I-485 along its northern edge. It sits roughly 13 to 15 miles south of Uptown Charlotte, and most of it falls in the 28277 ZIP code.",
+      },
+      {
+        question: "Is Ballantyne part of the City of Charlotte?",
+        answer:
+          "Yes. Ballantyne is part of the City of Charlotte, annexed in stages between 1999 and 2003, and it sits in Mecklenburg County. It is not a separate municipality, so there is no Ballantyne town hall, no separate town government and no separate town tax. Addresses here are Charlotte, North Carolina addresses, and city services are Charlotte services.",
+      },
+      {
+        question: "What types of homes are in Ballantyne?",
+        answer:
+          "Mostly detached houses in master-planned subdivisions built from the early 1990s onward, with townhomes, a smaller number of condos, and apartments mixed in. The newest residential is on the former corporate campus, where mixed-use buildings have added apartments and condos beside restaurants and shops. Most subdivisions have their own homeowners association, and dues and amenities vary from one to the next.",
+      },
+      {
+        question: "What is Ballantyne known for?",
+        answer:
+          "Ballantyne is known for the combination of large master-planned residential subdivisions and a major employment center in the same place, which is unusual for a residential area this far from Uptown. The 535-acre office park at its center is being redeveloped into a mixed-use district with restaurants, shops, a six-acre park and an amphitheater. Shopping, dining and services are concentrated along Johnston Road and Ballantyne Commons Parkway.",
+      },
+      {
+        question: "How far is Ballantyne from Uptown Charlotte?",
+        answer:
+          "Ballantyne sits roughly 13 to 15 miles south of Uptown Charlotte. The usual routes are I-485 to I-77, or Johnston Road north through south Charlotte. How long it takes depends heavily on the time of day and on conditions on I-485 and I-77, so treat any single drive-time figure you are quoted as an average rather than a promise.",
+      },
+      {
+        question: "What schools serve Ballantyne?",
+        answer:
+          "Ballantyne is served by Charlotte-Mecklenburg Schools. Assignment is determined by the property address, not by the neighborhood name, and CMS can and does change assignment boundaries. Magnet and choice programs are separate from home-school assignment and have their own application process. Confirm the current assignment for any specific address with CMS directly before you make an offer.",
+      },
+      {
+        question: "Is Ballantyne walkable?",
+        answer:
+          "Partly, and it depends where. The redeveloped campus around The Bowl at Ballantyne is genuinely walkable, with sidewalks, new streets, a park and restaurants close together. Most of the residential subdivisions are not: they are laid out for driving, and errands generally mean a car. Greenways along Four Mile Creek, McMullen Creek and Lower McAlpine Creek add walking and cycling connections through the wider area.",
+      },
+      {
+        question: "Is there new construction in Ballantyne?",
+        answer:
+          "Yes, though less of it than in Charlotte's outer suburbs, because much of Ballantyne was built out in earlier decades. Most current new construction is attached or multifamily on and around the redeveloped campus, including recently completed residential towers. New detached houses are limited and tend to appear on infill sites or in communities just outside the original master-planned area.",
+      },
+      {
+        question: "How is Ballantyne changing?",
+        answer:
+          "The 535-acre office park at its center is being rebuilt as a mixed-use district. A six-acre park and an amphitheater opened in 2023, six new roads and a greenway connector are in, restaurants and shops have been opening in stages, and a residential tower opened for move-ins in late 2025. A large grocery store is opening on North Community House Road in October 2026, and further roadway work is planned.",
+      },
+    ],
+
+    guide: {
+      city: "Charlotte",
+      headline:
+        "Ballantyne is a name on a lot of listings — the address under it decides what you are buying.",
+      heroCloser:
+        "Jasmine Garcia works this part of south Charlotte and can tell you what a specific Ballantyne address actually comes with, before you write an offer on it.",
+      seoTitle: "Ballantyne Charlotte NC Homes & Real Estate",
+      heroCta: "Ask about a Ballantyne address",
+
+      answerHeading: "What is it like to live in Ballantyne?",
+      facts: [
+        { label: "Where", value: "Far south Charlotte, Mecklenburg County, at the South Carolina line" },
+        { label: "Jurisdiction", value: "City of Charlotte — annexed 1999-2003, not a separate town" },
+        { label: "ZIP", value: "Mostly 28277" },
+        {
+          label: "Main roads",
+          value: "I-485, Johnston Road (US 521), Ballantyne Commons Parkway, Rea Road, Community House Road",
+        },
+        {
+          label: "Housing",
+          value: "Master-planned subdivisions, townhomes, condos, and newer mixed-use apartments",
+        },
+        { label: "Changing", value: "The 535-acre office park at its center is being rebuilt as a walkable district" },
+      ],
+
+      orientation: {
+        eyebrow: "Where it is",
+        heading: "What counts as Ballantyne?",
+        body: [
+          "Ballantyne began as a rezoning of roughly 2,000 acres in 1992 and has never been a town. It has no municipal boundary of its own, which means no line on a map settles the question of whether a given house is in it.",
+          "In practice the name gets used three ways. There is the original master-planned area either side of Johnston Road. There is the 535-acre former corporate park at its center, now being redeveloped. And there is everything marketed as Ballantyne because the name carries — listings on the Blakeney, Ardrey Kell and Providence side that a stricter definition would exclude.",
+          "None of that is dishonest, and it is not a reason to distrust a listing. It is a reason to look past the name. When a search result says Ballantyne, the questions that matter are which subdivision, which association, which school assignment and which recent sales the appraiser will reach for. Those come from the address.",
+        ],
+      },
+
+      housingHeading: "What can you buy in Ballantyne?",
+      propertyTypes: [
+        {
+          name: "Detached house",
+          goodFor:
+            "Buyers who want a yard, a garage and a master-planned subdivision, and who accept driving for most errands.",
+          checks: [
+            "Which subdivision, and its association's dues",
+            "What the dues actually cover",
+            "Build year and what has been updated since",
+            "Architectural restrictions before you plan changes",
+            "Whether a club membership is separate",
+            "Recent sales on the same streets, not area-wide",
+          ],
+        },
+        {
+          name: "Townhome",
+          goodFor:
+            "Buyers who want less exterior maintenance and a location close to Johnston Road and Ballantyne Commons Parkway.",
+          checks: [
+            "Fee-simple ownership, or legally a condo",
+            "What the association maintains, and what you do",
+            "Roof, siding and reserve funding",
+            "Rental restrictions",
+            "Guest parking",
+            "How many similar units resell each year",
+          ],
+        },
+        {
+          name: "Condo or mixed-use apartment",
+          goodFor:
+            "Buyers who want the walkable part of Ballantyne — the rebuilt campus, where restaurants and the park are a short walk rather than a drive.",
+          checks: [
+            "Dues, reserves and any assessments",
+            "Parking and storage",
+            "Rental and owner-occupancy rules",
+            "Financing requirements for the project",
+            "What is still under construction nearby",
+          ],
+        },
+      ],
+      housingCta: {
+        prompt: "Comparing a subdivision house with something on the campus?",
+        label: "Talk it through with Jasmine",
+        href: "#start",
+      },
+
+      layersHeading: "In Ballantyne, the area name is the least useful thing on the listing.",
+      layersIntro:
+        "Three things decide what a Ballantyne house actually is, and a search result shows you none of them. Work down this list for any address you are serious about.",
+      layersClosing:
+        "Two houses marketed as Ballantyne, a few miles apart, can differ on every one of these at the same list price.",
+
+      transitEyebrow: "Getting around",
+      transitHeading: "How convenient is Ballantyne, really?",
+      transitColumns: [
+        {
+          heading: "The roads that matter",
+          items: [
+            "I-485, along the northern edge",
+            "Johnston Road (US 521), the north-south spine",
+            "Ballantyne Commons Parkway",
+            "Rea Road",
+            "Community House Road",
+            "Ardrey Kell Road",
+          ],
+        },
+        {
+          heading: "What the location gives you",
+          items: [
+            "I-485 access to both I-77 and south Charlotte",
+            "A large employment base within the area itself",
+            "Shopping, dining and services close by",
+            "A short drive to the South Carolina line",
+            "Greenway access for walking and cycling",
+          ],
+        },
+        {
+          heading: "What to account for",
+          items: [
+            "A car for most daily errands",
+            "Peak congestion on Johnston Road and at I-485",
+            "Walkability that varies sharply by location",
+            "Ongoing construction on and around the campus",
+            "Roadway projects still in design",
+          ],
+        },
+      ],
+      transitCallout:
+        "Walkable Ballantyne and drive-everywhere Ballantyne are both real, and they are about two miles apart. Know which one an address is in before you fall for the photos.",
+
+      changeHeading: "What is changing in Ballantyne?",
+      changeBody: [
+        "The 535-acre office park at the center of Ballantyne was bought by Northwood Investors in 2017 and is being rebuilt as a mixed-use district under the name Ballantyne Reimagined. This is the largest change here since the area was first developed, and it is being delivered in stages rather than all at once.",
+        "Each item below says where it actually stands. That distinction matters when you are buying: a restaurant district that is open is an amenity you can use, and a roadway extension still in design is not something to pay for today.",
+      ],
+      changeItems: [
+        {
+          status: "Open",
+          name: "Stream Park and TD Amp Ballantyne",
+          body: "A six-acre park and an amphitheater, both opened in September 2023, plus a greenway connector linking the campus to the wider greenway network.",
+        },
+        {
+          status: "Open",
+          name: "Six new roads",
+          body: "New streets and intersection upgrades through the former office park, which is what makes the district walkable internally rather than a set of parking lots.",
+        },
+        {
+          status: "Opening in stages",
+          name: "The Bowl at Ballantyne",
+          body: "The restaurant, retail and entertainment district at the center of the redevelopment. Tenants have been opening in waves rather than on one date, and more are announced.",
+        },
+        {
+          status: "Open",
+          name: "Oro Ballantyne",
+          body: "A 26-story residential tower with 356 residences on the campus, opened for move-ins in late 2025. It is the tallest apartment building in south Charlotte.",
+        },
+        {
+          status: "Opening October 2026",
+          name: "Wegmans on North Community House Road",
+          body: "A roughly 110,000-square-foot grocery store on the campus. A full-size grocery within walking distance changes daily life for the newest housing here more than any restaurant does.",
+        },
+        {
+          status: "Complete",
+          name: "Bryant Farms Road Extension, Phase 1",
+          body: "A short extension connecting Elm Lane to Rea Road, opened in June 2025, giving an east-west alternative to Ballantyne Commons Parkway.",
+        },
+        {
+          status: "Planned, no date",
+          name: "Bryant Farms Road Extension, Phase 2",
+          body: "About 1.25 miles further, from Rea Road to Ardrey Kell Road. The city lists it in advanced planning and design and has published no completion date, so treat it as intent rather than schedule.",
+        },
+        {
+          status: "Planned",
+          name: "I-485 direct connector to Johnston Road",
+          body: "NCDOT has planned a direct connection between the I-485 express lanes and Johnston Road. Planned means planned: it is not something to price into an offer today.",
+        },
+      ],
+
+      costHeading: "What does a Ballantyne house cost to own?",
+      costChecks: [
+        "HOA dues, and what they cover",
+        "Whether a club membership is separate, and what it costs",
+        "Any special assessment, approved or under discussion",
+        "Reserve funding for roofs, roads and amenities",
+        "Mecklenburg County and City of Charlotte property taxes",
+        "Insurance for the specific structure and roof age",
+        "What the subdivision maintains versus what you do",
+        "Age of the systems: HVAC, roof, water heater",
+        "Architectural restrictions on future changes",
+        "Rental restrictions, if that matters later",
+      ],
+      costClosing:
+        "Jasmine can pull these together for a specific address so you are comparing two houses rather than two listing prices. Your lender, tax adviser and attorney are the right people to interpret the numbers once you have them.",
+      costCta: {
+        prompt: "Weighing two Ballantyne houses against each other?",
+        label: "Have Jasmine compare them with you",
+        href: "#start",
+      },
+
+      schools: {
+        eyebrow: "Schools",
+        heading: "Schools serving the Ballantyne area",
+        body: [
+          "Ballantyne is served by Charlotte-Mecklenburg Schools. Assignment is determined by the property address rather than by the neighborhood name, and the district can change assignment boundaries — so the assignment attached to a house today is not a permanent feature of it.",
+          "Magnet and choice programs run separately from home-school assignment and have their own application windows. Several private schools also operate in south Charlotte.",
+          "Because this page cannot be current for every address, and because assignment is the kind of thing that changes between one listing and the next, confirm it at the source for any specific property before you write an offer.",
+        ],
+        link: {
+          href: "https://www.cmsk12.org",
+          label: "Check assignment with Charlotte-Mecklenburg Schools",
+        },
+      },
+
+      buyerHeading: "Buying in Ballantyne? Ask these before you get attached.",
+      buyerQuestions: [
+        "Which subdivision is this, exactly?",
+        "What are the HOA dues, and what do they cover?",
+        "Is there a club membership, and is it optional?",
+        "Has the association approved or discussed an assessment?",
+        "What are the architectural restrictions?",
+        "What is the current CMS assignment for this address?",
+        "What has sold on these streets in the last six months?",
+        "What was updated, and when?",
+        "How old are the roof, HVAC and water heater?",
+        "What is being built nearby, and at what stage?",
+        "How far is this from the parts of Ballantyne I would actually use?",
+        "If several buyers want it, what besides price can I offer?",
+      ],
+      buyerClosing:
+        "The last one is worth planning before you need it. In a market where a well-priced house draws more than one offer, the terms around the price are often what separates two buyers.",
+      buyerCta: {
+        prompt: "Found a Ballantyne listing you like?",
+        label: "Send Jasmine the address",
+        href: "#start",
+      },
+
+      sellerHeading: "Selling in Ballantyne? Your buyer has already seen the house down the street.",
+      sellerChecks: [
+        "Recent sales in your own subdivision",
+        "Listings competing with yours right now",
+        "The same floor plan, elsewhere in the neighborhood",
+        "Updates against the neighborhood's baseline",
+        "Lot position, yard and trees",
+        "HOA dues compared with nearby subdivisions",
+        "Newer construction and rentals pulling the same buyer",
+        "The objection a buyer will raise, before they raise it",
+        "How your timing lines up with the school calendar",
+      ],
+      sellerClosing:
+        "Her one recorded Ballantyne closing is a buyer-side condo purchase won in a multiple-offer situation. The same thing that wins an offer is what a seller needs to read on the other side of the table.",
+      sellerCta: {
+        prompt: "Thinking about selling in Ballantyne?",
+        label: "Ask what your home is competing against",
+        href: "/home-value",
+      },
+
+      nearbyHeading: "Ballantyne or somewhere nearby?",
+      nearby: [
+        {
+          name: "Ballantyne",
+          chooseWhen:
+            "You want master-planned subdivisions, I-485 access and an employment and shopping base in the same place you live.",
+        },
+        {
+          name: "Pineville",
+          slug: "pineville",
+          chooseWhen:
+            "You want to be just north of Ballantyne in a town with its own government, older housing stock and generally lower prices.",
+        },
+        {
+          name: "Fort Mill",
+          slug: "fort-mill",
+          chooseWhen:
+            "You are willing to cross into South Carolina for different tax treatment and newer construction, with a similar drive to the same jobs.",
+        },
+        {
+          name: "Indian Land",
+          slug: "indian-land",
+          chooseWhen:
+            "You want to stay on the Johnston Road corridor but continue south over the state line, where much of the housing is newer.",
+        },
+        {
+          name: "SouthPark",
+          slug: "southpark",
+          chooseWhen:
+            "You want to be closer to Uptown with older established neighborhoods and a denser mix of shopping and offices.",
+        },
+      ],
+
+      faqHeading: "Ballantyne real estate: common questions",
+
+      closingHeading: "Looking at a house in Ballantyne?",
+      closingBody:
+        "Send Jasmine the address. She can tell you which subdivision it is actually in, what the association covers, what has sold near it recently, and what is being built close enough to matter — before you decide how to approach it.",
+      intakeHeading: "Tell me what you are looking at.",
+      intakeBody:
+        "Property type, rough timing, and which side of the table you are on. If you have an address or a listing link, put it in the message box.",
+      intakeMarket: "south-charlotte",
     },
   },
 ];

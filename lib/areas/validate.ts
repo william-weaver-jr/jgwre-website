@@ -78,19 +78,30 @@ function guideText(guide: NonNullable<Area["guide"]>): string[] {
     guide.heroCta,
     guide.answerHeading,
     ...guide.facts.flatMap((f) => [f.label, f.value]),
+    ...(guide.orientation
+      ? [guide.orientation.eyebrow, guide.orientation.heading, ...guide.orientation.body]
+      : []),
+    ...(guide.schools
+      ? [
+          guide.schools.eyebrow,
+          guide.schools.heading,
+          ...guide.schools.body,
+          guide.schools.link.label,
+        ]
+      : []),
     guide.housingHeading,
     ...guide.propertyTypes.flatMap((t) => [t.name, t.goodFor, ...(t.checks ?? [])]),
     ...cta(guide.housingCta),
     guide.layersHeading,
     guide.layersIntro,
     guide.layersClosing,
+    guide.transitEyebrow,
     guide.transitHeading,
-    ...guide.stations,
-    ...guide.transitAdvantages,
-    ...guide.transitTradeoffs,
+    ...guide.transitColumns.flatMap((c) => [c.heading, ...c.items]),
     guide.transitCallout,
     guide.changeHeading,
     ...guide.changeBody,
+    ...(guide.changeItems ?? []).flatMap((i) => [i.status, i.name, i.body]),
     guide.costHeading,
     ...guide.costChecks,
     guide.costClosing,

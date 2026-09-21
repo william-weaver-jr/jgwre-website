@@ -165,6 +165,33 @@ export type AreaGuide = {
   answerHeading: string;
   facts: readonly { label: string; value: string }[];
 
+  /**
+   * Where the market is, and what its name actually covers. Optional, and
+   * worth having only where the name is fuzzier than buyers assume — a
+   * marketing label attached to more ground than any boundary supports, which
+   * is the single most useful thing to tell a Ballantyne searcher first.
+   */
+  orientation?: {
+    eyebrow: string;
+    heading: string;
+    body: readonly string[];
+  };
+
+  /**
+   * Schools, handled the only way §7 permits: assignment is a fact of address,
+   * it changes, and it is verified at the district rather than here. No
+   * ratings, no rankings, no "good schools" — docs/AREAS-SPEC.md §4 records
+   * that this is the single most common way a careful neighborhood page ends
+   * up making a familial-status argument. Optional; omit rather than pad.
+   */
+  schools?: {
+    eyebrow: string;
+    heading: string;
+    body: readonly string[];
+    /** The district's own site. External, and labelled as such in the markup. */
+    link: { href: string; label: string };
+  };
+
   housingHeading: string;
   propertyTypes: readonly {
     name: string;
@@ -178,14 +205,30 @@ export type AreaGuide = {
   layersIntro: string;
   layersClosing: string;
 
+  /**
+   * Getting around. Generalised 2026-09-21 for Ballantyne: South End's version
+   * of this section was three hard-coded columns about a rail line, and a
+   * car-dependent market has to be able to say something honest here rather
+   * than borrow a transit frame it does not have.
+   */
+  transitEyebrow: string;
   transitHeading: string;
-  stations: readonly string[];
-  transitAdvantages: readonly string[];
-  transitTradeoffs: readonly string[];
+  transitColumns: readonly { heading: string; items: readonly string[] }[];
   transitCallout: string;
 
   changeHeading: string;
   changeBody: readonly string[];
+  /**
+   * Named projects, each labelled with where it actually is — open, under
+   * construction, or planned. Optional, because not every market has a
+   * build-out worth itemising.
+   *
+   * The label is the point. A development page that lists an approved project
+   * beside a finished one reads as a promise about the finished one, and
+   * every date in here ages, so each entry states its own status rather than
+   * relying on a reader to infer it.
+   */
+  changeItems?: readonly { status: string; name: string; body: string }[];
 
   costHeading: string;
   costChecks: readonly string[];

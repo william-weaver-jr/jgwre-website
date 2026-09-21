@@ -157,7 +157,8 @@ export default function SellersPage() {
           </Link>
           say what the competition actually looks like where you are selling. In{" "}
           <GuideLink slug="steele-creek" /> it is often a builder. In{" "}
-          <GuideLink slug="south-end" /> it can be the unit one floor above yours.
+          <GuideLink slug="south-end" /> it can be the unit one floor above yours. In{" "}
+          <GuideLink slug="ballantyne" /> it is usually the same floor plan, two streets over.
         </p>
       </section>
 
