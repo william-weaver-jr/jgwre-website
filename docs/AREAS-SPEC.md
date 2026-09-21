@@ -585,3 +585,52 @@ the day it lands and nothing can link a 404. `components/area-guide-links.tsx`.
 
 When a guide ships, the sitewide placements need nothing. The pillar sentences are written by
 hand, so add the new market to whichever pillar paragraph it genuinely fits.
+
+## 16. Ballantyne, and what the diligence format had to grow — 2026-09-21
+
+The second page in the §14 format, and the first written for a market that is neither
+attached housing nor rail-served. Three things came out of it.
+
+**The transit block is now data.** It was three hard-coded columns about a rail line, which
+is fine for South End and a lie anywhere else. It is `transitEyebrow` plus `transitColumns`
+now — a heading and a list per column, as many as the market needs. Ballantyne's three are
+the roads, what the location gives you, and what to account for. South End's are unchanged
+in content.
+
+**Three optional blocks were added**, each rendered only when present:
+
+- `orientation` — where the market is and what its name actually covers. Ballantyne needs
+  this more than it needs anything else on the page: the name is a marketing label attached
+  to more ground than any boundary supports, and the useful thing to tell a searcher is that
+  the address, not the label, decides school assignment, HOA, and the comp set.
+- `schools` — the district by name, assignment stated as a fact of the address, the
+  admission that it changes, and an outbound link to the district. **This block exists to
+  make the safe version easy and the unsafe version awkward.** §4 of this document is
+  explicit that schools are how a careful neighborhood page ends up making a familial-status
+  argument, and Ballantyne is the market where every competing page leads with a rating. A
+  test asserts the caveat and the district link; another asserts no rating language.
+- `changeItems` — named projects, each carrying its own status: open, opening in stages,
+  complete, planned, planned-no-date. An approved project listed beside a finished one reads
+  as a promise about the finished one, which is the failure mode of every development
+  section on every neighborhood page.
+
+**The evidence position.** One ledger row: `2022-belle-vista-01`, a buyer-side condo purchase
+in "Ballantyne West" whose recorded lever is "Won in a multiple-offer situation." That row is
+already public on `/transactions`, so the page leans on it once, in the seller section, and
+makes no other claim about her record. `market: "ballantyne"` on that row also means
+`/transactions` links the guide automatically.
+
+**What was verified, and where.** City of Charlotte annexation 1999–2003 and the 1992
+rezoning; Ballantyne Reimagined's completed park, amphitheater, roads and greenway connector,
+the residential tower, and the grocery store opening October 2026 (goballantyne.com); Bryant
+Farms Road Extension Phase 1 complete and Phase 2 in design with no published completion date
+(charlottenc.gov); the NCDOT direct connector as planned. **Re-check the development list
+before editing it** — half of it is dated by construction rather than by us.
+
+**What did not ship, and why.** The $1.2 billion office-park sale, like every other dollar
+figure: it would pull `<ResultsDisclaimer />` onto the page and no area figure is on the
+`CONTENT-MARKETING.md` §2 allowlist. School names and ratings. Any description of who lives
+there. And a "View homes for sale" button pointed at the brokerage IDX — CLAUDE.md §12
+(2026-09-04) made that link footer-only because a registration there becomes a
+broker-sourced lead at the worse split, so the buyer who wants to see what is for sale is
+sent to Jasmine instead. A test keeps every CTA on `#start` or a route on this site.

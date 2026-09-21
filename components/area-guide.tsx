@@ -84,7 +84,8 @@ function Headline({ text }: { text: string }) {
      whitespace, so without it crawlers and screen readers get "blockand". */
   return (
     <>
-      {lead} —<span className="block italic">{emphasis}</span>
+      {lead} —{" "}
+      <span className="block italic">{emphasis}</span>
     </>
   );
 }
@@ -131,6 +132,25 @@ export function AreaGuidePage({ area, guide }: { area: Area; guide: AreaGuide })
           </dl>
         </div>
       </section>
+
+      {/* ------------------------------------------------------ ORIENTATION */}
+      {guide.orientation ? (
+        <section
+          aria-labelledby="orientation"
+          className="border-t border-border bg-surface-sunken py-section"
+        >
+          <div className="mx-auto max-w-6xl px-gutter">
+            <SectionHeading eyebrow={guide.orientation.eyebrow} id="orientation">
+              {guide.orientation.heading}
+            </SectionHeading>
+            <div className="mt-5 max-w-2xl space-y-4 text-base leading-relaxed text-ink-muted">
+              {guide.orientation.body.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* ---------------------------------------------------------- HOUSING */}
       <section
@@ -201,24 +221,18 @@ export function AreaGuidePage({ area, guide }: { area: Area; guide: AreaGuide })
         className="border-y border-border bg-surface-raised py-section"
       >
         <div className="mx-auto max-w-6xl px-gutter">
-          <SectionHeading eyebrow="The Rail Trail and the Blue Line" id="walkability">
+          <SectionHeading eyebrow={guide.transitEyebrow} id="walkability">
             {guide.transitHeading}
           </SectionHeading>
           <Prose text={area.commute} />
 
           <div className="mt-14 grid gap-x-14 gap-y-12 md:grid-cols-3">
-            <div className="rule-gold pt-6">
-              <h3 className="font-display text-2xl">Blue Line stations</h3>
-              <CheckList items={guide.stations} />
-            </div>
-            <div className="rule-gold pt-6">
-              <h3 className="font-display text-2xl">What proximity gives you</h3>
-              <CheckList items={guide.transitAdvantages} />
-            </div>
-            <div className="rule-gold pt-6">
-              <h3 className="font-display text-2xl">What it comes with</h3>
-              <CheckList items={guide.transitTradeoffs} />
-            </div>
+            {guide.transitColumns.map((column) => (
+              <div key={column.heading} className="rule-gold pt-6">
+                <h3 className="font-display text-2xl">{column.heading}</h3>
+                <CheckList items={column.items} />
+              </div>
+            ))}
           </div>
 
           <p className="mt-14 max-w-3xl border-l-2 border-accent pl-6 font-display text-2xl leading-snug italic md:text-3xl">
@@ -237,6 +251,20 @@ export function AreaGuidePage({ area, guide }: { area: Area; guide: AreaGuide })
             <p key={p}>{p}</p>
           ))}
         </div>
+
+        {/* Each entry states whether it is open, being built, or only planned.
+            A list that does not say so reads as a promise about all of it. */}
+        {guide.changeItems ? (
+          <ul className="mt-12 grid gap-x-14 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {guide.changeItems.map((item) => (
+              <li key={item.name} className="rule-top pt-6">
+                <p className="eyebrow">{item.status}</p>
+                <h3 className="mt-3 font-display text-2xl leading-snug">{item.name}</h3>
+                <p className="mt-3 text-base leading-relaxed text-ink-muted">{item.body}</p>
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </section>
 
       {/* ------------------------------------------------------------- COST */}
@@ -254,6 +282,31 @@ export function AreaGuidePage({ area, guide }: { area: Area; guide: AreaGuide })
           <InlineCta cta={guide.costCta} placement={placement("cost")} />
         </div>
       </section>
+
+      {/* ---------------------------------------------------------- SCHOOLS */}
+      {guide.schools ? (
+        <section aria-labelledby="schools" className="mx-auto max-w-6xl px-gutter py-section">
+          <SectionHeading eyebrow={guide.schools.eyebrow} id="schools">
+            {guide.schools.heading}
+          </SectionHeading>
+          <div className="mt-5 max-w-2xl space-y-4 text-base leading-relaxed text-ink-muted">
+            {guide.schools.body.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+          </div>
+          <p className="mt-6 text-base">
+            <a
+              href={guide.schools.link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={link}
+            >
+              {guide.schools.link.label}
+              <span className="sr-only"> (opens an external site)</span>
+            </a>
+          </p>
+        </section>
+      ) : null}
 
       {/* ----------------------------------------------------------- BUYERS */}
       <section aria-labelledby="buying" className="mx-auto max-w-6xl px-gutter py-section">

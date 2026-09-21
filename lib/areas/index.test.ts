@@ -503,7 +503,10 @@ describe("South End, the first diligence-format area", () => {
   });
 
   it("lists the four current stations", () => {
-    expect(southEnd()!.guide!.stations).toEqual([
+    const stations = southEnd()!.guide!.transitColumns.find((c) =>
+      c.heading.includes("stations"),
+    );
+    expect(stations?.items).toEqual([
       "Carson",
       "Bland Street",
       "East/West Boulevard",
@@ -541,5 +544,133 @@ describe("South End, the first diligence-format area", () => {
       .find((q) => q.id === "markets")
       ?.options?.map((o) => o.value);
     expect(offered).toContain(southEnd()!.guide!.intakeMarket);
+  });
+});
+
+describe("Ballantyne", () => {
+  const ballantyne = () => publishedAreas().find((a) => a.slug === "ballantyne");
+  const text = () => areaText(ballantyne()!);
+
+  it("is published in the diligence format", () => {
+    expect(ballantyne()).toBeDefined();
+    expect(ballantyne()?.guide).toBeDefined();
+  });
+
+  /**
+   * Ballantyne is the market where the sources themselves are the hazard. Half
+   * the pages written about it lead with "top-rated schools" and "one of
+   * Charlotte's safest", which is the §7 line and a familial-status argument in
+   * one sentence. None of it is repeatable, in any softened form.
+   */
+  it("rates no school and describes nobody who lives there", () => {
+    /* "Single-family" and "multifamily" are housing types, the only legitimate
+       uses of the word on a real estate page. */
+    const lower = text()
+      .toLowerCase()
+      .replaceAll("single-family", "detached")
+      .replaceAll("multifamily", "apartments");
+    for (const proxy of [
+      "top-rated",
+      "top rated",
+      "highly rated",
+      "best school",
+      "good school",
+      "school district ranking",
+      "safe",
+      "crime",
+      "famil",
+      "young professional",
+      "affluent",
+      "upscale",
+      "desirable",
+      "demographic",
+      "vibrant",
+      "something for everyone",
+    ]) {
+      expect(lower, `ballantyne copy contains "${proxy}"`).not.toContain(proxy);
+    }
+  });
+
+  /**
+   * Schools are on the page, which means the page owes three things: the
+   * district by name, assignment stated as a fact of the address, and the
+   * admission that it changes. Anything less is a page that sounds
+   * authoritative about the one attribute buyers most want to be told.
+   */
+  it("sends the school question to the district, with the caveat attached", () => {
+    const schools = ballantyne()!.guide!.schools;
+    expect(schools).toBeDefined();
+    const body = schools!.body.join(" ").toLowerCase();
+    expect(body).toContain("charlotte-mecklenburg schools");
+    expect(body).toContain("address");
+    expect(body).toMatch(/change|changes/);
+    expect(schools!.link.href).toBe("https://www.cmsk12.org");
+  });
+
+  /**
+   * The development section is the other place this page could mislead without
+   * saying anything false: an approved project listed beside a finished one
+   * reads as a promise. Every entry carries its own status, and at least one
+   * says out loud that it has no date.
+   */
+  it("labels every development item with where it actually stands", () => {
+    const items = ballantyne()!.guide!.changeItems;
+    expect(items?.length).toBeGreaterThanOrEqual(4);
+    for (const item of items!) {
+      expect(item.status.trim().length, `${item.name} has no status`).toBeGreaterThan(0);
+    }
+    expect(items!.some((i) => /planned/i.test(i.status))).toBe(true);
+    expect(text().toLowerCase()).toContain("no completion date");
+  });
+
+  /* The $1.2 billion sale of the office park is true, documented, and still not
+     shippable: any dollar figure pulls the §7 results disclaimer onto the page,
+     and no area price is on the CONTENT-MARKETING §2 allowlist. */
+  it("quotes no dollar figure or percentage, including the office-park sale", () => {
+    expect(showsDollarFigure(ballantyne()!)).toBe(false);
+    expect(text()).not.toMatch(/\d+(\.\d+)?\s?%/);
+    expect(text().toLowerCase()).not.toContain("billion");
+  });
+
+  /**
+   * The only §5-documented claim about her record here is 2022-belle-vista-01,
+   * a buyer-side condo purchase carrying the recorded lever "Won in a
+   * multiple-offer situation". The page may lean on that row and does. It may
+   * not grow a second claim without a second row.
+   */
+  it("claims nothing about her record beyond the one documented closing", () => {
+    const lower = text().toLowerCase();
+    expect(lower).toContain("multiple-offer");
+    for (const claim of ["has lived", "lives in", "she lives", "years in ballantyne", "her clients"]) {
+      expect(lower, `ballantyne copy contains "${claim}"`).not.toContain(claim);
+    }
+  });
+
+  it("keeps every FAQ answer quotable on its own", () => {
+    for (const entry of ballantyne()!.faq) {
+      const words = entry.answer.trim().split(/\s+/).length;
+      expect(words, `"${entry.question}" is ${words} words`).toBeGreaterThanOrEqual(40);
+      expect(words, `"${entry.question}" is ${words} words`).toBeLessThanOrEqual(100);
+    }
+  });
+
+  /* CLAUDE.md §12, 2026-09-04: the brokerage IDX is footer-only, because a
+     registration there becomes a broker-sourced lead. A "view homes for sale"
+     button is exactly what gets added back pointing at it. */
+  it("routes every CTA to the intake or a page on this site", () => {
+    const guide = ballantyne()!.guide!;
+    for (const cta of [guide.housingCta, guide.costCta, guide.buyerCta, guide.sellerCta]) {
+      expect(cta.href, cta.label).toMatch(/^(#start|\/[a-z-]+)$/);
+    }
+  });
+
+  it("links only neighbours that are real markets", () => {
+    for (const place of ballantyne()!.guide!.nearby) {
+      if (!place.slug) continue;
+      expect(
+        MARKETS.some((m) => m.slug === place.slug),
+        `${place.slug} is not a §5 market`,
+      ).toBe(true);
+    }
   });
 });

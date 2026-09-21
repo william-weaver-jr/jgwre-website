@@ -175,7 +175,8 @@ export default function RelocationPage() {
           actually built in a market, how price behaves there, and which levers tend to exist in it.
           If you want to live near the light rail and walk to Uptown, start with{" "}
           <GuideLink slug="south-end" />. If you want newer detached houses with I-485 and the
-          airport close by, start with <GuideLink slug="steele-creek" />.
+          airport close by, start with <GuideLink slug="steele-creek" />. If you are being moved
+          into a job in south Charlotte, start with <GuideLink slug="ballantyne" />.
           A local absorbs that over years. You have to be told it.
         </p>
       </section>
