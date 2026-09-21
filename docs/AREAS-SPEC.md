@@ -677,3 +677,52 @@ Charlotte's local historic districts, because sources disagree between six and s
 count is not what a reader needs. School names and ratings. "Prestigious", "exclusive",
 "elite" and the rest of the register this market invites — a test blocks them, along with the
 apostrophe misspellings of the neighborhood's name.
+
+## 18. SouthPark, and the one-label-three-markets problem — 2026-09-21
+
+The fifth guide, fourth in the diligence format. Its argument is structural rather than
+architectural: **"SouthPark" is one label over three different residential propositions**, and
+a buyer who has not chosen between them has not yet said what they want.
+
+1. An established residential street — detached houses, lots, mature trees, laid out for cars.
+2. Attached housing near the core — townhomes and condos where walkability is real and the
+   association is most of the purchase.
+3. A nearby neighborhood that uses the name because SouthPark is the closest landmark.
+
+**New in the format: `layersLabel`.** The three `levers` render with a numbered eyebrow, which
+read "Level 1–3" for Ballantyne and Myers Park because there the three are layers of one
+address. SouthPark sets `layersLabel: "Option"`, because there they are genuine alternatives.
+The field defaults to "Level", so nothing else changed.
+
+**Why this market gets no average price, stated on the page.** A district average for SouthPark
+mixes a condo beside the mall with a detached house on a third of an acre. That is not a
+caution about precision, it is the page's actual thesis — the seller section runs on it, since
+the expensive mistake here is accepting the wrong comparable set. A test asserts the refusal
+survives future edits.
+
+**Evidence.** One ledger row: `2022-southpark-01`, a buyer-side condo purchased under list
+price, referenced once inside the option it evidences. **Note the privacy rule it inherits** —
+`lib/transactions/data.ts` deliberately records the neighborhood as "SouthPark" rather than the
+condo complex, because a complex plus a month plus a property type narrows toward the
+individual buyer. This page does not name the complex either, and a test enforces that.
+
+**Verified 2026-09-21** (re-check before editing — trail and park dates move):
+
+| Item | Status as verified |
+|---|---|
+| Backlot Trail phase one | Open since October 2023, Cross Charlotte Trail to Park South Drive |
+| Barclay Downs sidewalks / Fairview–Sharon crosswalks | Complete, 2021 and 2020 (city CNIP) |
+| SouthPark Loop (planned 3 miles) | Segments complete at Apex SouthPark and The Colony; Cameron Valley segment under construction |
+| Cameron Valley Parkway segment | Construction scheduled to begin 2027 |
+| TowneBank Symphony Park | Groundbreaking scheduled 2026, completion targeted 2027, roughly a year's closure — the district's own page still read "in planning" on the verification date, so the entry says to check current status |
+| Carnegie Boulevard rezoning | Approved 16 February 2026; up to 350 apartments with ground-floor commercial; work not expected before 2028 |
+
+Sources: southparkclt.org (SouthPark Forward 2035, Connections, the development pages),
+spancharlotte.org (the CNIP project list, which is the most granular status source found), and
+the City of Charlotte rezoning record.
+
+**Not shipped:** any dollar figure, including the published Symphony Park and Carnegie project
+costs — the mechanical `$` rule pulls the results disclaimer, and Ballantyne's office-park sale
+was dropped for the same reason. No mall tenant list or restaurant directory, both maintenance
+debt that helps no housing decision. No school names or ratings. No "prestigious", "exclusive",
+"elite", "luxury" — tested, as is the two-word "South Park" misspelling.

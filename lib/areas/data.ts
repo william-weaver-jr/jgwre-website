@@ -1,7 +1,7 @@
 /**
  * Area page content — the real dataset.
  *
- * Four entries as of 2026-09-21. The discipline below is why there are not seventeen.
+ * Five entries as of 2026-09-21. The discipline below is why there are not seventeen.
  *
  * docs/CONTENT-PLAN.md is explicit: "Thin duplicated pages hurt more than they
  * help. If there isn't real content for a market, don't publish the page."
@@ -1453,6 +1453,475 @@ export const AREAS: readonly Area[] = [
       intakeBody:
         "Property type, rough timing, and which side of the table you are on. If you have an address or a listing link, put it in the message box.",
       intakeMarket: "in-town-charlotte",
+    },
+  },
+  {
+    /*
+      SouthPark — the fifth area page, fourth in the diligence format, shipped
+      2026-09-21.
+
+      THE ARGUMENT THIS PAGE MAKES. "SouthPark" is one label over three quite
+      different residential propositions: established detached streets, attached
+      housing beside the commercial core, and a ring of nearby neighborhoods
+      that use the name because it is the nearest landmark. A buyer who says "I
+      want SouthPark" has not yet said what they want, and a seller whose house
+      is compared against the wrong one of the three gets the wrong number. That
+      is the whole page, and it is why the three `levers` here are labelled
+      Option rather than Level — see guide.layersLabel.
+
+      WHAT IS DOCUMENTED ABOUT HER RECORD.
+      One closing: 2022-southpark-01 — September 2022, buyer side, a CONDO,
+      recorded lever "Purchased under list price." Referenced once, in the
+      option that covers attached housing near the core, because that is
+      precisely the segment it evidences.
+
+      NOTE THE PRIVACY RULE ON THAT ROW. The ledger deliberately records the
+      neighborhood as "SouthPark" rather than the condo complex, because a
+      single complex plus a month plus a property type narrows toward the
+      individual buyer. This page holds the same line: it does not name the
+      complex either. lib/transactions/data.ts carries the reasoning.
+
+      VERIFIED 2026-09-21. Sources and re-check instructions in
+      docs/AREAS-SPEC.md §18.
+        - SouthPark Forward 2035, the SouthPark Community Partners vision plan
+          for the commercial core, organised around Places, Connections and
+          Mobility (southparkclt.org).
+        - The SouthPark Loop: a planned three-mile urban trail. Segments are
+          complete along Apex SouthPark and The Colony; the Cameron Valley
+          segment is under construction; a Cameron Valley Parkway segment along
+          Fairview is scheduled to begin construction in 2027 (southparkclt.org,
+          spancharlotte.org CNIP project list).
+        - Backlot Trail phase one opened October 2023, running from the Cross
+          Charlotte Trail to Park South Drive, with a future connection toward
+          the McMullen Creek Greenway.
+        - Barclay Downs sidewalks completed 2021; enhanced crosswalks at
+          Fairview and Sharon completed 2020 (both CNIP).
+        - TowneBank Symphony Park: a renovation with groundbreaking scheduled
+          for 2026 and completion targeted for 2027, expected to close the park
+          for roughly a year. The district's own development page still listed
+          it as in planning on the date above, which is why the entry says to
+          check the current status rather than asserting one.
+        - Carnegie Boulevard rezoning: approved 16 February 2026, allowing up to
+          350 apartments with ground-floor commercial on about four acres. Work
+          is not expected to begin before 2028.
+
+      DELIBERATELY ABSENT.
+        - Every dollar figure. The Symphony Park and Carnegie project costs are
+          public and still do not ship: any "$" pulls <ResultsDisclaimer /> onto
+          the page, and the same rule dropped Ballantyne's office-park sale.
+        - Any average price for "SouthPark". It would average a condo beside the
+          mall with a detached house on a third of an acre — which is the exact
+          error this page exists to argue against.
+        - A tenant list for the mall or a restaurant directory. Both are
+          maintenance debt and neither helps a housing decision.
+        - "Prestigious", "exclusive", "elite", "luxury at its finest". Tested.
+        - School names and ratings.
+        - The condo complex from the ledger row, per the privacy rule above.
+        - A "View homes for sale" CTA pointed at the brokerage IDX. CLAUDE.md
+          §12 keeps that link footer-only because a registration there becomes a
+          broker-sourced lead; the intent routes to her intake instead.
+        - Images. Nothing licensed is in the repo. Wanted, and the set matters
+          here more than on the other guides: an established residential street
+          AND the mixed-use core, so the page looks like somewhere people live
+          rather than somewhere people shop.
+    */
+    slug: "southpark",
+    name: "SouthPark",
+    state: "NC",
+
+    targetQuery: "what is it like to live in southpark charlotte",
+
+    answer:
+      "SouthPark is a mixed-use district in south-central Charlotte, centred near the intersection of Sharon Road and Fairview Road, about six miles from Uptown. It is one of the city's largest concentrations of shopping, offices, hotels and restaurants, and it is also a place people live.\n\nThat combination is the thing to understand before searching. A SouthPark address can mean an established street of detached houses with mature trees and yards, or a condo or townhome within walking distance of the mall and the offices, or a house in one of the nearby neighborhoods that use the SouthPark name because it is the closest landmark. Those are three different daily experiences at three different price points.\n\nThe commercial core is also the part that is changing: the district's own plan, SouthPark Forward 2035, is aimed at making it more walkable and more residential, while the established neighborhoods around it are expected to stay as they are.",
+
+    lede:
+      "SouthPark is a mixed-use district in south-central Charlotte where established residential streets sit beside one of the city's largest shopping and office centers.",
+
+    metaDescription:
+      "SouthPark, Charlotte NC: detached streets, townhomes and condos near the core, how the district is changing, and what to check before buying or selling.",
+
+    housingStock:
+      "SouthPark carries a wider range of housing than any other guide on this site. The established neighborhoods around the core were largely built from the mid-twentieth century onward, and hold detached houses on generous lots — brick ranches and two-storey traditional houses among them, many since renovated, extended, or taken down and rebuilt.\n\nCloser to the commercial core the housing changes character entirely: townhomes, condos in buildings of very different ages, and apartments, some of it recent and some of it decades old.\n\nBoth are correctly described as SouthPark, and they are not substitutes for one another. Neither one is the more expensive option by default — a rebuilt house on a large lot and a newer condo can trade in the same range while offering nothing like the same life.",
+
+    priceContext:
+      "An average price for SouthPark is close to meaningless, more so than in any other market on this site, because the label covers a condo beside the mall and a detached house on a third of an acre in the same figure.\n\nWhat decides the number for a specific property is which of the three SouthPark propositions it belongs to, then the usual particulars: the street, the lot, the age of the building, what has been done to it, and — for anything attached — the association behind it. The ownership picture is where attached and detached housing diverge most:",
+
+    commute:
+      "SouthPark sits roughly six miles south of Uptown, with Myers Park immediately to its north and Ballantyne further south. Sharon Road and Fairview Road cross at its centre; Park Road, Colony Road, Morrison Boulevard, Carnegie Boulevard and Barclay Downs Drive carry most of the rest of the traffic.\n\nWalkability is the claim to be most careful about here. Parts of the core genuinely are walkable — you can live in a condo and reach shops, restaurants and an office on foot — while most of the surrounding residential streets are not, and were never laid out to be. Which of those you are buying depends on the address, not on the name.\n\nThe district is working on exactly this gap. The SouthPark Loop, a planned three-mile urban trail, is being built in segments, and the Backlot Trail's first phase opened in 2023 running from the Cross Charlotte Trail to Park South Drive.",
+
+    whatTrades:
+      "The most expensive mistake a SouthPark seller can make is accepting the wrong comparable set, and it is an easy one to make because the search label invites it.\n\nA detached house in an established SouthPark-area neighborhood is not competing with a high-rise condo, a new townhome, or a rebuilt custom house on a larger lot, even though all four will appear in the same search and all four can carry the same address line. A buyer choosing between them has already decided which of the three SouthPark options they want, and your house is either in that set or it is not.\n\nWhat actually decides the price within the right set:",
+
+    /* The three SouthPark propositions. Labelled Option rather than Level,
+       because unlike Ballantyne's or Myers Park's three, these are genuine
+       alternatives rather than layers of one address. */
+    levers: [
+      {
+        title: "An established residential street",
+        body: "Detached houses on real lots, mature trees, and a street laid out for driving rather than walking — Barclay Downs, closest to the core, is the one most people can name. The stock is largely mid-century onward, which means a lot of it has been renovated, extended, or replaced outright, so two houses on the same street can be forty years apart in everything but the address. You are buying a neighborhood that is not expected to change much, next door to a district that is.",
+      },
+      {
+        title: "Attached housing near the core",
+        body: "Townhomes and condos within reach of the shops, restaurants and offices, where walkability is a real feature rather than a claim. The building is most of the purchase: its age, its association, what the dues cover, what is in reserve, what the rules say about renting, and how units in that specific building have resold. Her one recorded SouthPark closing is in this segment — a condo bought under list price — and the work in these purchases is nearly always in the documents rather than the price.",
+      },
+      {
+        title: "A nearby neighborhood that uses the name",
+        body: "A ring of established neighborhoods sits close enough to use SouthPark as shorthand, because it is the nearest landmark worth naming. Nothing dishonest in that, and the houses are often excellent value, but the practical consequences differ: the drive to the core is a drive, the school assignment follows the address, and the comparable sales that matter are the ones on those streets rather than the ones nearer the mall.",
+      },
+    ],
+
+    faq: [
+      {
+        question: "Where is SouthPark in Charlotte?",
+        answer:
+          "SouthPark is in south-central Charlotte, about six miles south of Uptown, centred near where Sharon Road and Fairview Road cross. Myers Park sits immediately to its north, Ballantyne is further south, and Park Road, Colony Road, Morrison Boulevard and Carnegie Boulevard run through the surrounding area. It is part of the City of Charlotte, in Mecklenburg County.",
+      },
+      {
+        question: "Is SouthPark a neighborhood or a business district?",
+        answer:
+          "Both, and that is the most useful thing to know about it. SouthPark is one of Charlotte's largest concentrations of retail, offices and hotels, and it is surrounded by established residential neighborhoods, with condos and townhomes closer in. When someone says they live in SouthPark, they may mean a detached house on a quiet street or an apartment within walking distance of the mall.",
+      },
+      {
+        question: "What types of homes are in SouthPark?",
+        answer:
+          "A wide range. The surrounding established neighborhoods hold detached houses on generous lots, largely mid-twentieth century onward, many of them renovated, extended or rebuilt. Nearer the commercial core there are townhomes, condos in buildings of varying ages, and apartments. Both ends of that range carry a SouthPark address, and they are not substitutes for one another.",
+      },
+      {
+        question: "Are there condos in SouthPark Charlotte?",
+        answer:
+          "Yes. Condos and townhomes are concentrated closer to the commercial core, which is where walkability to shops, restaurants and offices is a genuine feature. Buildings vary considerably in age, amenities and monthly dues. With attached housing, the association matters as much as the unit: dues, reserves, rental rules and any planned assessment all belong in the comparison.",
+      },
+      {
+        question: "Is SouthPark walkable?",
+        answer:
+          "Parts of it are, and most of it is not. Around the commercial core, living without driving for every errand is realistic. The established residential neighborhoods nearby were laid out for cars and generally stay that way. The district is building the SouthPark Loop, a planned three-mile urban trail, in segments to improve those connections, but walkability today depends on the specific address.",
+      },
+      {
+        question: "What is SouthPark known for?",
+        answer:
+          "SouthPark is best known as a major shopping and employment district, anchored by SouthPark Mall along with other retail centers, offices and hotels. For residents, what distinguishes it is the combination: established residential neighborhoods with a concentration of shops, restaurants, services and jobs close by, rather than a long drive away.",
+      },
+      {
+        question: "How is SouthPark changing?",
+        answer:
+          "The commercial core is gradually becoming more mixed-use. SouthPark Forward 2035, the district's vision plan, focuses on public spaces, pedestrian and cycling connections, and transportation options. Recent rezonings have allowed apartments with ground-floor commercial on sites that were previously commercial only. The surrounding established residential neighborhoods are not expected to change in the same way.",
+      },
+      {
+        question: "Is there new construction in SouthPark?",
+        answer:
+          "Yes, in two different forms. Near the core, new construction is mostly attached and mixed-use — apartments, condos and townhomes, sometimes replacing older commercial buildings or surface parking. In the established neighborhoods, it is generally one house at a time on an existing lot, often replacing an older house, rather than new subdivisions.",
+      },
+      {
+        question: "What should I check before buying a SouthPark condo?",
+        answer:
+          "Start with the association: monthly dues and what they cover, reserve funding, any approved or discussed special assessment, rental restrictions, and how the building has been maintained. Then the unit: parking, storage, floor, orientation and noise. Then financing, since some buildings carry requirements that affect which loans are available. Review the association's own documents before you commit.",
+      },
+      {
+        question: "What schools serve SouthPark?",
+        answer:
+          "SouthPark is served by Charlotte-Mecklenburg Schools. Assignment depends on the specific property address rather than the neighborhood name, and the district can change assignment boundaries. Magnet and choice programs run separately and have their own application process. Confirm the current assignment for any address with CMS before making an offer.",
+      },
+    ],
+
+    guide: {
+      city: "Charlotte",
+      headline:
+        "Three very different things get called SouthPark — decide which one you actually want.",
+      heroCloser:
+        "Jasmine Garcia can tell you which of the three a specific address belongs to, and what that means for what you pay, what you own, and who you sell it to later.",
+      seoTitle: "SouthPark Charlotte NC Homes & Real Estate",
+      heroCta: "Ask about a SouthPark address",
+
+      answerHeading: "What is it like to live in SouthPark?",
+      facts: [
+        { label: "Where", value: "South-central Charlotte, about six miles from Uptown" },
+        { label: "Centred on", value: "Sharon Road and Fairview Road" },
+        {
+          label: "Housing",
+          value: "Detached houses on established streets, plus townhomes, condos and apartments near the core",
+        },
+        {
+          label: "Main roads",
+          value: "Sharon Road, Fairview Road, Park Road, Colony Road, Morrison Boulevard, Carnegie Boulevard",
+        },
+        { label: "Also", value: "One of Charlotte's largest retail and office districts" },
+        { label: "Changing", value: "The core, under the SouthPark Forward 2035 vision plan" },
+      ],
+
+      orientation: {
+        eyebrow: "Where it is",
+        heading: "Where is SouthPark, and what does the name cover?",
+        body: [
+          "SouthPark sits in south-central Charlotte, roughly six miles south of Uptown, with Myers Park immediately north and Ballantyne further south. The commercial core is centred near Sharon Road and Fairview Road, and includes SouthPark Mall along with other retail centers, offices and hotels.",
+          "The residential use of the name is looser. Some neighborhoods sit directly against the core — Barclay Downs is the one most people name — while others nearby use SouthPark as shorthand because it is the closest landmark worth naming. There is no municipal line to settle it, because SouthPark is a district within the City of Charlotte rather than a town.",
+          "This matters more here than the same ambiguity does elsewhere. Any average price quoted for SouthPark depends on how much of that ring the person quoting it included, and on whether they mixed condos in with detached houses. Those are not the same market and a single number cannot describe both.",
+        ],
+      },
+
+      housingHeading: "What can you buy in SouthPark?",
+      propertyTypes: [
+        {
+          name: "Detached house",
+          goodFor:
+            "Buyers who want a lot, a yard and an established street, and who accept driving to most things.",
+          checks: [
+            "Which neighborhood, and how close to the core",
+            "Build year, and what has been replaced since",
+            "Whether it was extended or rebuilt, and how well",
+            "Lot size, trees and drainage",
+            "Traffic on the street itself",
+            "Recent sales on these streets, not district-wide",
+          ],
+        },
+        {
+          name: "Townhome",
+          goodFor:
+            "Buyers who want less exterior maintenance while staying close to the shops, restaurants and offices.",
+          checks: [
+            "Fee-simple ownership, or legally a condo",
+            "What the association maintains",
+            "Dues, reserves and any assessment",
+            "Parking, including for guests",
+            "Rental restrictions",
+            "How often comparable units come up",
+          ],
+        },
+        {
+          name: "Condo near the core",
+          goodFor:
+            "Buyers who want walkability as a real feature rather than a claim, and who will read the association's documents.",
+          checks: [
+            "Age and maintenance history of the building",
+            "Dues, and what they actually cover",
+            "Reserve funding and any planned work",
+            "Rental rules and owner-occupancy",
+            "Financing requirements for the building",
+            "How units in this building have resold",
+          ],
+        },
+      ],
+      housingCta: {
+        prompt: "Weighing a house on a quiet street against a condo by the mall?",
+        label: "Talk the tradeoff through with Jasmine",
+        href: "#start",
+      },
+
+      layersHeading: "Choosing the right part of SouthPark.",
+      layersIntro:
+        "These are not three price points on one thing. They are three different ways to live in the same district, and picking between them settles more than any individual listing will.",
+      layersLabel: "Option",
+      layersClosing:
+        "Most people arrive certain they want SouthPark and undecided between these three without knowing it. Deciding on purpose is worth more than any amount of listing-scrolling.",
+
+      notes: [
+        {
+          eyebrow: "Attached housing",
+          heading: "What the association decides, and what you can check before you offer",
+          body: [
+            "With a condo or townhome near the core, a meaningful share of what you are buying sits outside the unit. Two apparently similar units can carry very different monthly costs, very different rules, and very different prospects at resale, depending entirely on the association behind them.",
+            "The things worth establishing early: what the dues cover and what they have done recently, how well reserves are funded, whether any special assessment has been approved or is being discussed, what the rules say about renting the unit out, and how the building has handled major work such as roofs, elevators, windows and mechanical systems.",
+            "Financing is the one buyers most often discover late. Some buildings carry requirements that affect which loans are available, and that is far better established before an offer than during one.",
+            "Jasmine can help you gather these, read what the answers imply for resale, and structure an offer around them. The association's own documents are the authority on what they say, and a lender and an attorney are the right people to advise on financing and legal effect.",
+          ],
+        },
+      ],
+
+      transitEyebrow: "Getting around",
+      transitHeading: "How walkable is SouthPark, really?",
+      transitColumns: [
+        {
+          heading: "The roads that matter",
+          items: [
+            "Sharon Road and Fairview Road, at the centre",
+            "Park Road",
+            "Colony Road",
+            "Morrison Boulevard",
+            "Carnegie Boulevard",
+            "Barclay Downs Drive",
+          ],
+        },
+        {
+          heading: "What the location gives you",
+          items: [
+            "Shops, restaurants and services concentrated close by",
+            "A large employment base inside the district",
+            "Myers Park to the north, Ballantyne to the south",
+            "Backlot Trail to the Cross Charlotte Trail",
+            "Park Road Park and greenway connections nearby",
+          ],
+        },
+        {
+          heading: "What to account for",
+          items: [
+            "Walkability that changes street by street",
+            "Retail traffic at peak times and holidays",
+            "Trail segments still being built",
+            "Construction around the core",
+            "A car for most errands outside the core",
+          ],
+        },
+      ],
+      transitCallout:
+        "Walkable SouthPark is a handful of blocks, not the whole district. Stand on the street before you assume which one you are buying into.",
+
+      changeHeading: "How SouthPark is changing.",
+      changeBody: [
+        "The district has its own long-range plan, SouthPark Forward 2035, produced by SouthPark Community Partners and organised around three ideas: public places, pedestrian and cycling connections, and transportation options. Its subject is the commercial core, not the residential streets around it.",
+        "For a homeowner that is the important distinction. The core is being rezoned and rebuilt toward something denser and more walkable, which adds amenities and also adds construction and, eventually, more attached housing competing with yours. The established neighborhoods nearby are not part of that programme and are not expected to change in the same way.",
+        "Each item below states where it actually stands. Trail segments and park work move, so check the district's own pages before relying on a date.",
+      ],
+      changeItems: [
+        {
+          status: "Open",
+          name: "Backlot Trail, phase one",
+          body: "Opened in October 2023, running from the Cross Charlotte Trail to Park South Drive, with a future connection planned toward the McMullen Creek Greenway.",
+        },
+        {
+          status: "Complete",
+          name: "Barclay Downs sidewalks",
+          body: "Sidewalk work completed in 2021, along with enhanced crosswalks at Fairview and Sharon in 2020 — part of the city's neighborhood improvement programme in the district.",
+        },
+        {
+          status: "Partly built",
+          name: "The SouthPark Loop",
+          body: "A planned three-mile urban trail through the district. Segments are complete along Apex SouthPark and The Colony, and the Cameron Valley segment is under construction.",
+        },
+        {
+          status: "Starting 2027",
+          name: "Cameron Valley Parkway segment",
+          body: "A further stretch of the Loop along Fairview, scheduled to begin construction in 2027. Scheduled, not built.",
+        },
+        {
+          status: "Check current status",
+          name: "TowneBank Symphony Park",
+          body: "A renovation of the district's main public green space, with groundbreaking scheduled for 2026 and completion targeted for 2027. It is expected to close the park for roughly a year, so confirm where it stands before counting on it.",
+        },
+        {
+          status: "Approved, not started",
+          name: "Carnegie Boulevard mixed-use",
+          body: "A rezoning approved in February 2026 allows up to 350 apartments with ground-floor commercial on about four acres near the core. Work is not expected to begin before 2028.",
+        },
+      ],
+
+      costHeading: "What does a SouthPark home cost to own?",
+      costChecks: [
+        "HOA or condo association dues, and what they cover",
+        "Reserve funding, and any approved or discussed assessment",
+        "Parking — deeded, assigned, shared, or on the street",
+        "Mecklenburg County and City of Charlotte property taxes",
+        "Insurance, and how it splits with the association's policy",
+        "Age of the roof and the major systems",
+        "Tree and lot maintenance on a detached property",
+        "What the building or neighborhood has planned",
+        "Financing requirements attached to a specific building",
+      ],
+      costClosing:
+        "Detached and attached ownership diverge most here, and the difference rarely shows up in the list price. Jasmine can put the full monthly picture for two specific properties side by side; your lender, tax adviser and attorney are the right people to interpret it.",
+      costCta: {
+        prompt: "Comparing what two SouthPark properties will actually cost?",
+        label: "Go through the numbers with Jasmine",
+        href: "#start",
+      },
+
+      schools: {
+        eyebrow: "Schools",
+        heading: "Schools serving the SouthPark area",
+        body: [
+          "SouthPark is served by Charlotte-Mecklenburg Schools. Assignment follows the specific property address rather than the neighborhood name, and the district can change assignment boundaries, so an assignment attached to a house today is not a permanent feature of it.",
+          "Because the SouthPark name covers a wide ring of neighborhoods, two properties both described as SouthPark can carry different assignments. Magnet and choice programs run separately from home-school assignment and have their own application windows.",
+          "Confirm the current assignment for any specific address at the source before writing an offer.",
+        ],
+        link: {
+          href: "https://www.cmsk12.org",
+          label: "Check assignment with Charlotte-Mecklenburg Schools",
+        },
+      },
+
+      buyerHeading: "Buying in SouthPark? Start with these.",
+      buyerQuestions: [
+        "Which of the three SouthPark options is this?",
+        "How far is it from the core, honestly?",
+        "Is this address walkable, or does it just sound walkable?",
+        "If it is attached, what do the dues cover?",
+        "Are reserves funded, and is an assessment coming?",
+        "What do the rules say about renting it out?",
+        "Will this building finance conventionally?",
+        "How old are the roof and the major systems?",
+        "What has sold recently in this specific set?",
+        "What is being built or rezoned nearby?",
+        "What does the street sound like at peak retail hours?",
+        "What is the CMS assignment for this exact address?",
+      ],
+      buyerClosing:
+        "The first question governs most of the others. Answer it before you spend a weekend touring properties that are not really alternatives to each other.",
+      buyerCta: {
+        prompt: "Narrowed it down to a couple of SouthPark options?",
+        label: "Send Jasmine the addresses",
+        href: "#start",
+      },
+
+      sellerHeading: "Selling in SouthPark? The wrong comparable set is the expensive mistake.",
+      sellerChecks: [
+        "Which of the three segments your property actually competes in",
+        "Recent sales inside that segment, not district-wide",
+        "For attached homes, sales in your own building",
+        "Dues and amenities against nearby alternatives",
+        "Renovation level against the street's baseline",
+        "Lot, trees and position for a detached house",
+        "New attached housing competing for the same buyer",
+        "Construction or rezoning visible from the property",
+        "The objection a buyer will raise, before they raise it",
+      ],
+      sellerClosing:
+        "A single SouthPark average will not price your home, because it describes four markets at once. The number that matters comes from the set your buyer is actually choosing within.",
+      sellerCta: {
+        prompt: "Thinking about selling in SouthPark?",
+        label: "Ask what your home is competing against",
+        href: "/home-value",
+      },
+
+      nearbyHeading: "SouthPark or somewhere nearby?",
+      nearby: [
+        {
+          name: "SouthPark",
+          chooseWhen:
+            "You want shops, restaurants and offices close by, and you are deliberate about which of the three SouthPark options you pick.",
+        },
+        {
+          name: "Myers Park",
+          slug: "myers-park",
+          chooseWhen:
+            "You want older architecture and the 1911 street plan immediately north of here, with less commercial activity next door.",
+        },
+        {
+          name: "Ballantyne",
+          slug: "ballantyne",
+          chooseWhen:
+            "You want master-planned subdivisions and I-485 access further south, with its own newer mixed-use core.",
+        },
+        {
+          name: "South End",
+          slug: "south-end",
+          chooseWhen:
+            "You want the light rail and a denser, more urban setting closer to Uptown, mostly in condos and townhomes.",
+        },
+        {
+          name: "Steele Creek",
+          slug: "steele-creek",
+          chooseWhen:
+            "You want newer detached houses at a lower price point, southwest of the city near I-485 and the airport.",
+        },
+      ],
+
+      faqHeading: "SouthPark real estate: common questions",
+
+      closingHeading: "Looking at a place in SouthPark?",
+      closingBody:
+        "Send Jasmine the address. She can tell you which part of SouthPark it is really in, what the association or the street brings with it, and which recent sales your offer should actually be measured against.",
+      intakeHeading: "Tell me what you are looking at.",
+      intakeBody:
+        "Property type, rough timing, and which side of the table you are on. If you have an address or a listing link, put it in the message box.",
+      intakeMarket: "south-charlotte",
     },
   },
 ];
