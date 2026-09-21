@@ -160,7 +160,8 @@ export default function BuyersPage() {
           </Link>
           cover that market by market: <GuideLink slug="steele-creek" /> for newer detached houses
           priced against builder inventory, <GuideLink slug="south-end" /> for condos, where the
-          building and the HOA matter as much as the price.
+          building and the HOA matter as much as the price, and <GuideLink slug="myers-park" /> for
+          older houses, where what was replaced and when decides more than square footage.
         </p>
       </section>
 

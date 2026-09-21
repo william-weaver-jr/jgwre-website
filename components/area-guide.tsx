@@ -6,7 +6,7 @@ import { ClosingCta, PhoneCta } from "@/components/phone-cta";
 import { Button } from "@/components/ui/button";
 import { areaBySlug } from "@/lib/areas";
 import { GUIDE_TITLE } from "@/lib/intake";
-import type { Area, AreaCta, AreaGuide } from "@/lib/areas";
+import type { Area, AreaCta, AreaGuide, AreaNote } from "@/lib/areas";
 
 /*
   The diligence layout for /areas/[slug]. lib/areas/types.ts AreaGuide.
@@ -73,6 +73,45 @@ function CheckList({ items, className = "mt-4" }: { items: readonly string[]; cl
         </li>
       ))}
     </ul>
+  );
+}
+
+/**
+ * A qualified explainer with the authority's own link under it. Used for the
+ * schools block and for anything else a reader has to confirm at the source
+ * rather than take from this page — see AreaNote in lib/areas/types.ts.
+ */
+function Note({
+  note,
+  id,
+  band = "",
+}: {
+  note: AreaNote;
+  id: string;
+  /** Band styling for the full-width section; the inner column is fixed. */
+  band?: string;
+}) {
+  return (
+    <section aria-labelledby={id} className={band || undefined}>
+      <div className="mx-auto max-w-6xl px-gutter py-section">
+        <SectionHeading eyebrow={note.eyebrow} id={id}>
+          {note.heading}
+        </SectionHeading>
+        <div className="mt-5 max-w-2xl space-y-4 text-base leading-relaxed text-ink-muted">
+          {note.body.map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </div>
+        {note.link ? (
+          <p className="mt-6 text-base">
+            <a href={note.link.href} target="_blank" rel="noopener noreferrer" className={link}>
+              {note.link.label}
+              <span className="sr-only"> (opens an external site)</span>
+            </a>
+          </p>
+        ) : null}
+      </div>
+    </section>
   );
 }
 
@@ -215,6 +254,16 @@ export function AreaGuidePage({ area, guide }: { area: Area; guide: AreaGuide })
         </p>
       </section>
 
+      {/* ------------------------------------------------------------ NOTES */}
+      {guide.notes?.map((note, i) => (
+        <Note
+          key={note.heading}
+          note={note}
+          id={`note-${i + 1}`}
+          band="border-t border-border bg-surface-sunken"
+        />
+      ))}
+
       {/* ---------------------------------------------------------- TRANSIT */}
       <section
         aria-labelledby="walkability"
@@ -285,27 +334,7 @@ export function AreaGuidePage({ area, guide }: { area: Area; guide: AreaGuide })
 
       {/* ---------------------------------------------------------- SCHOOLS */}
       {guide.schools ? (
-        <section aria-labelledby="schools" className="mx-auto max-w-6xl px-gutter py-section">
-          <SectionHeading eyebrow={guide.schools.eyebrow} id="schools">
-            {guide.schools.heading}
-          </SectionHeading>
-          <div className="mt-5 max-w-2xl space-y-4 text-base leading-relaxed text-ink-muted">
-            {guide.schools.body.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
-          </div>
-          <p className="mt-6 text-base">
-            <a
-              href={guide.schools.link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={link}
-            >
-              {guide.schools.link.label}
-              <span className="sr-only"> (opens an external site)</span>
-            </a>
-          </p>
-        </section>
+        <Note note={guide.schools} id="schools" />
       ) : null}
 
       {/* ----------------------------------------------------------- BUYERS */}

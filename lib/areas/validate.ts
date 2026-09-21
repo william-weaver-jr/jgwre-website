@@ -1,4 +1,4 @@
-import type { Area } from "./types";
+import type { Area, AreaNote } from "./types";
 
 /**
  * Content rules for area pages, checked as data rather than as rendered markup.
@@ -68,6 +68,10 @@ export function areaText(area: Area): string {
  * than walked generically, so the type checker fails here when AreaGuide gains
  * a field nobody decided to scan.
  */
+function noteText(note: AreaNote): string[] {
+  return [note.eyebrow, note.heading, ...note.body, ...(note.link ? [note.link.label] : [])];
+}
+
 function guideText(guide: NonNullable<Area["guide"]>): string[] {
   const cta = (c: { prompt: string; label: string }) => [c.prompt, c.label];
   return [
@@ -81,14 +85,8 @@ function guideText(guide: NonNullable<Area["guide"]>): string[] {
     ...(guide.orientation
       ? [guide.orientation.eyebrow, guide.orientation.heading, ...guide.orientation.body]
       : []),
-    ...(guide.schools
-      ? [
-          guide.schools.eyebrow,
-          guide.schools.heading,
-          ...guide.schools.body,
-          guide.schools.link.label,
-        ]
-      : []),
+    ...(guide.schools ? noteText(guide.schools) : []),
+    ...(guide.notes ?? []).flatMap(noteText),
     guide.housingHeading,
     ...guide.propertyTypes.flatMap((t) => [t.name, t.goodFor, ...(t.checks ?? [])]),
     ...cta(guide.housingCta),
