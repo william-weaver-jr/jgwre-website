@@ -634,3 +634,46 @@ there. And a "View homes for sale" button pointed at the brokerage IDX — CLAUD
 (2026-09-04) made that link footer-only because a registration there becomes a
 broker-sourced lead at the worse split, so the buyer who wants to see what is for sale is
 sent to Jasmine instead. A test keeps every CTA on `#start` or a route on this site.
+
+## 17. Myers Park, and the designation distinction — 2026-09-21
+
+The fourth guide, third in the §14 diligence format. It reuses that format because what
+decides value here is the property, and one attribute of the property — whether it sits in a
+**local** historic district — changes what its owner may do to the outside of it.
+
+**The distinction the page exists to get right.** Two things get called "historic district"
+and they do different work:
+
+| | What it is | What it does to an owner |
+|---|---|---|
+| **National Register** — Myers Park Historic District, listed 1987, ~597 acres | A recognition of significance and a planning record | By itself, nothing. It does not put private exterior work under review |
+| **City of Charlotte local historic district** — Hermitage Court, inside Myers Park | A zoning overlay regulated by the Historic District Commission | A Certificate of Appropriateness is required **before** exterior work: alterations, restoration, new construction, moving, demolition; landscaping and site work sometimes. In-kind repair generally exempt; interior work not covered |
+
+Most of Myers Park is not under design review and part of it is, and the page says exactly
+that. Conflating the two fails in both directions — it scares a buyer off an unrestricted
+house, or leaves a Hermitage Court owner believing they can replace windows without asking.
+`index.test.ts` asserts both designations are named, that the page says the Register alone
+does not restrict, and that the City's own Certificate of Appropriateness page is linked.
+**This page does not answer the question for any specific address and must never start to.**
+
+**New in the format:** `AreaNote` — a qualified explainer with the authority's own link under
+it — now backs both the schools block and a new optional `notes` array. The pattern is the
+point: state what is true, state what it does not mean, and send the reader to the body that
+can settle it for their address. Reach for it whenever a market has a rule attached to it.
+
+**Evidence.** One ledger row, `2024-tranquil-court-01`: a buyer-side condo purchase closed on
+a non-conforming loan with seller concessions. It is referenced once, in the cost section,
+because financing is the quiet problem in a market of older and unusual properties — which is
+a better use of that row than a trophy line.
+
+**Sources verified 2026-09-21:** the 1911 start and John Nolen's authorship, with George
+Stephens as developer (Wikipedia, Myers Park (Charlotte); TCLF); the National Register listing
+date, reference 87000655, acreage and approximate bounds; Certificate of Appropriateness rules
+(charlottenc.gov); Little Sugar Creek Greenway through Freedom Park (parkandrec.mecknc.gov).
+
+**Not shipped:** any dollar figure or percentage — a Myers Park median depends entirely on
+which boundary was drawn, which is the same argument the page makes about comps. A count of
+Charlotte's local historic districts, because sources disagree between six and seven and the
+count is not what a reader needs. School names and ratings. "Prestigious", "exclusive",
+"elite" and the rest of the register this market invites — a test blocks them, along with the
+apostrophe misspellings of the neighborhood's name.

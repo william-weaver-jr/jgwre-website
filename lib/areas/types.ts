@@ -112,6 +112,19 @@ export type Area = Market & {
   guide?: AreaGuide;
 };
 
+/**
+ * A qualified explainer: what is true, what it does not mean, and where the
+ * reader confirms it for their own address. The link is what keeps this page
+ * out of the business of giving legal or district advice it cannot give.
+ */
+export type AreaNote = {
+  eyebrow: string;
+  heading: string;
+  body: readonly string[];
+  /** The authority's own site. External, and labelled as such in the markup. */
+  link?: { href: string; label: string };
+};
+
 /** A contextual call to action between sections. Every one goes somewhere real. */
 export type AreaCta = {
   /** The question or prompt the reader is left holding, in display type. */
@@ -184,13 +197,19 @@ export type AreaGuide = {
    * that this is the single most common way a careful neighborhood page ends
    * up making a familial-status argument. Optional; omit rather than pad.
    */
-  schools?: {
-    eyebrow: string;
-    heading: string;
-    body: readonly string[];
-    /** The district's own site. External, and labelled as such in the markup. */
-    link: { href: string; label: string };
-  };
+  schools?: AreaNote;
+
+  /**
+   * Explainers that carry their own authority — a rule a buyer has to verify
+   * somewhere official, not a claim this page can settle. Written for Myers
+   * Park, where what a local historic district requires of an owner is the
+   * most consequential thing on the page and the thing every competing page
+   * gets wrong.
+   *
+   * Rendered between the levels and the location sections. Optional; each one
+   * has to earn its place by changing what a reader would do.
+   */
+  notes?: readonly AreaNote[];
 
   housingHeading: string;
   propertyTypes: readonly {

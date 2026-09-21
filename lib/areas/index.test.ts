@@ -604,7 +604,7 @@ describe("Ballantyne", () => {
     expect(body).toContain("charlotte-mecklenburg schools");
     expect(body).toContain("address");
     expect(body).toMatch(/change|changes/);
-    expect(schools!.link.href).toBe("https://www.cmsk12.org");
+    expect(schools!.link?.href).toBe("https://www.cmsk12.org");
   });
 
   /**
@@ -671,6 +671,133 @@ describe("Ballantyne", () => {
         MARKETS.some((m) => m.slug === place.slug),
         `${place.slug} is not a §5 market`,
       ).toBe(true);
+    }
+  });
+});
+
+describe("Myers Park", () => {
+  const myersPark = () => publishedAreas().find((a) => a.slug === "myers-park");
+  const text = () => areaText(myersPark()!);
+
+  it("is published in the diligence format", () => {
+    expect(myersPark()).toBeDefined();
+    expect(myersPark()?.guide).toBeDefined();
+  });
+
+  /** The neighborhood has no apostrophe. It is the most common way to get it wrong. */
+  it("spells the neighborhood Myers Park", () => {
+    expect(text()).not.toMatch(/Myer['’]s Park|Myers['’] Park/);
+  });
+
+  /**
+   * THE distinction this page exists for. National Register listing is a
+   * recognition; a City of Charlotte local historic district is design review
+   * with a Certificate of Appropriateness in front of exterior work. Every
+   * competing page treats them as one thing.
+   *
+   * The failure this guards is a later edit "tidying" the two into a single
+   * sentence — which would either scare a buyer off an unrestricted house or
+   * leave a Hermitage Court owner believing they can replace windows freely.
+   */
+  it("keeps National Register listing and local district regulation apart", () => {
+    const lower = text().toLowerCase();
+    expect(lower).toContain("national register");
+    expect(lower).toContain("local historic district");
+    expect(lower).toContain("certificate of appropriateness");
+    expect(lower).toContain("hermitage court");
+    /* Says out loud that the Register alone does not restrict an owner. */
+    expect(lower).toMatch(/does not (by itself |on its own )?(place|restrict)/);
+    /* And that not every house here is covered. */
+    expect(lower).toMatch(/most of myers park is not|much of myers park is not/);
+  });
+
+  it("sends the designation question to the city, not to this page", () => {
+    const note = myersPark()!.guide!.notes?.[0];
+    expect(note).toBeDefined();
+    expect(note!.link?.href).toContain("charlottenc.gov");
+    expect(note!.link?.href).toContain("Certificate-of-Appropriateness");
+  });
+
+  it("sends the school question to the district, with the caveat attached", () => {
+    const schools = myersPark()!.guide!.schools;
+    expect(schools).toBeDefined();
+    const body = schools!.body.join(" ").toLowerCase();
+    expect(body).toContain("charlotte-mecklenburg schools");
+    expect(body).toContain("address");
+    expect(body).toMatch(/change|changes/);
+  });
+
+  /**
+   * Myers Park is where the register of the copy is most likely to drift. §7
+   * bans some of this outright, BRAND-VOICE bans the rest, and the page's own
+   * argument is that the market is varied rather than uniformly grand.
+   */
+  it("describes architecture and lots, never status or who lives there", () => {
+    const lower = text().toLowerCase();
+    for (const word of [
+      "prestigious",
+      "exclusive",
+      "elite",
+      "crown jewel",
+      "timeless",
+      "elegant",
+      "luxury",
+      "affluent",
+      "upscale",
+      "safe",
+      "crime",
+      "famil",
+      "young professional",
+      "demographic",
+      "charming",
+      "hidden gem",
+    ]) {
+      expect(lower, `myers-park copy contains "${word}"`).not.toContain(word);
+    }
+  });
+
+  /* A median here depends entirely on which boundary was drawn, which is the
+     same argument the page makes about comps. So no figure at all. */
+  it("quotes no dollar figure or percentage", () => {
+    expect(showsDollarFigure(myersPark()!)).toBe(false);
+    expect(text()).not.toMatch(/\d+(\.\d+)?\s?%/);
+  });
+
+  /**
+   * The one documented claim about her record: 2024-tranquil-court-01, a
+   * buyer-side condo purchase closed on a non-conforming loan with seller
+   * concessions. It earns its place because financing is the quiet problem in
+   * a market of older and unusual properties.
+   */
+  it("claims nothing about her record beyond the one documented closing", () => {
+    const lower = text().toLowerCase();
+    expect(lower).toContain("non-conforming loan");
+    for (const claim of ["has lived", "lives in", "she lives", "her clients", "years in myers park"]) {
+      expect(lower, `myers-park copy contains "${claim}"`).not.toContain(claim);
+    }
+  });
+
+  it("keeps every FAQ answer quotable on its own", () => {
+    for (const entry of myersPark()!.faq) {
+      const words = entry.answer.trim().split(/\s+/).length;
+      expect(words, `"${entry.question}" is ${words} words`).toBeGreaterThanOrEqual(40);
+      expect(words, `"${entry.question}" is ${words} words`).toBeLessThanOrEqual(100);
+    }
+  });
+
+  it("routes every CTA to the intake or a page on this site", () => {
+    const guide = myersPark()!.guide!;
+    for (const cta of [guide.housingCta, guide.costCta, guide.buyerCta, guide.sellerCta]) {
+      expect(cta.href, cta.label).toMatch(/^(#start|\/[a-z-]+)$/);
+    }
+  });
+
+  it("links only neighbours that are real markets", () => {
+    for (const place of myersPark()!.guide!.nearby) {
+      if (!place.slug) continue;
+      expect(MARKETS.some((m) => m.slug === place.slug), `${place.slug} is not a §5 market`).toBe(
+        true,
+      );
     }
   });
 });
