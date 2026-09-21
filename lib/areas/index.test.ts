@@ -929,3 +929,135 @@ describe("SouthPark", () => {
     }
   });
 });
+
+describe("Dilworth", () => {
+  const dilworth = () => publishedAreas().find((a) => a.slug === "dilworth");
+  const text = () => areaText(dilworth()!);
+
+  it("is published in the diligence format", () => {
+    expect(dilworth()).toBeDefined();
+    expect(dilworth()?.guide).toBeDefined();
+  });
+
+  /**
+   * The thesis: Dilworth is a streetcar suburb, not Myers Park with smaller
+   * houses. The physical pattern — compact blocks, long narrow lots, houses
+   * close to the street, and small multifamily mixed among the houses — is
+   * what makes buying here different, and it is the first of the three levels.
+   */
+  it("leads with the streetcar-suburb pattern, including the multifamily", () => {
+    const lower = text().toLowerCase();
+    expect(lower).toContain("streetcar");
+    expect(lower).toMatch(/quadraplex|duplex|triplex/);
+    expect(lower).toContain("olmsted");
+    /* Two street patterns is the checkable fact that separates it from the
+       single-plan neighborhoods next door. */
+    expect(lower).toMatch(/two street patterns|grid or the/);
+  });
+
+  /**
+   * The designation default here is the INVERSE of Myers Park's. There, most
+   * of the neighborhood is not under review and one pocket is. Here a large
+   * share is locally designated, so the page tells a reader to assume the
+   * rules apply and check for the exception. Both pages must make the
+   * distinction; neither may be written from the other.
+   */
+  it("keeps the two designations apart and gets Dilworth's default right", () => {
+    const lower = text().toLowerCase();
+    expect(lower).toContain("national register");
+    expect(lower).toContain("local historic district");
+    expect(lower).toContain("certificate of appropriateness");
+    /* The Register alone regulates nobody. */
+    expect(lower).toMatch(/does not control what a private owner|recognition of significance/);
+    /* And the local default: assume it applies, then check. */
+    expect(lower).toMatch(/expect the rules to apply|safest to assume|sensible default is to assume/);
+    /* Never claims every property is covered. */
+    expect(lower).toMatch(/not every property|may sit inside|outside both/);
+  });
+
+  it("sends the designation question to the city, not to this page", () => {
+    const note = dilworth()!.guide!.notes?.find((n) => /designation/i.test(n.eyebrow));
+    expect(note).toBeDefined();
+    expect(note!.link?.href).toContain("Certificate-of-Appropriateness");
+  });
+
+  /**
+   * The older-home note must list what to examine and hand the conclusions to
+   * people qualified to reach them. A page that diagnoses a crawlspace is
+   * giving inspection advice it cannot give.
+   */
+  it("says what to inspect without reaching inspection conclusions", () => {
+    const note = dilworth()!.guide!.notes?.find((n) => /older/i.test(n.eyebrow));
+    expect(note).toBeDefined();
+    const body = note!.body.join(" ").toLowerCase();
+    expect(body).toMatch(/inspector|trades/);
+    expect(body).toContain("permit history");
+  });
+
+  /* The brief's banned register, plus the usual §7 set. Older houses are never
+     romanticised without the ownership consequence in the same breath. */
+  it("never romanticises the housing stock", () => {
+    const lower = text()
+      .toLowerCase()
+      .replaceAll("single-family", "detached")
+      .replaceAll("multifamily", "small apartments");
+    for (const word of [
+      "charming",
+      "quaint",
+      "timeless",
+      "hidden gem",
+      "urban oasis",
+      "nestled",
+      "prestigious",
+      "exclusive",
+      "luxury",
+      "safe",
+      "crime",
+      "famil",
+      "young professional",
+      "demographic",
+      "something for everyone",
+    ]) {
+      expect(lower, `dilworth copy contains "${word}"`).not.toContain(word);
+    }
+  });
+
+  it("quotes no dollar figure or percentage", () => {
+    expect(showsDollarFigure(dilworth()!)).toBe(false);
+    expect(text()).not.toMatch(/\d+(\.\d+)?\s?%/);
+  });
+
+  /* One documented closing: 2022-dilworth-01, a condo bought under list price
+     with seller concessions. Nothing else about her record. */
+  it("claims nothing about her record beyond the one documented closing", () => {
+    const lower = text().toLowerCase();
+    expect(lower).toContain("under list price");
+    for (const claim of ["has lived", "lives in", "she lives", "her clients", "years in dilworth"]) {
+      expect(lower, `dilworth copy contains "${claim}"`).not.toContain(claim);
+    }
+  });
+
+  it("keeps every FAQ answer quotable on its own", () => {
+    for (const entry of dilworth()!.faq) {
+      const words = entry.answer.trim().split(/\s+/).length;
+      expect(words, `"${entry.question}" is ${words} words`).toBeGreaterThanOrEqual(40);
+      expect(words, `"${entry.question}" is ${words} words`).toBeLessThanOrEqual(100);
+    }
+  });
+
+  it("routes every CTA to the intake or a page on this site", () => {
+    const guide = dilworth()!.guide!;
+    for (const cta of [guide.housingCta, guide.costCta, guide.buyerCta, guide.sellerCta]) {
+      expect(cta.href, cta.label).toMatch(/^(#start|\/[a-z-]+)$/);
+    }
+  });
+
+  it("links only neighbours that are real markets", () => {
+    for (const place of dilworth()!.guide!.nearby) {
+      if (!place.slug) continue;
+      expect(MARKETS.some((m) => m.slug === place.slug), `${place.slug} is not a §5 market`).toBe(
+        true,
+      );
+    }
+  });
+});
