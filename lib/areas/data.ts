@@ -1,7 +1,7 @@
 /**
  * Area page content — the real dataset.
  *
- * Five entries as of 2026-09-21. The discipline below is why there are not seventeen.
+ * Six entries as of 2026-09-21. The discipline below is why there are not seventeen.
  *
  * docs/CONTENT-PLAN.md is explicit: "Thin duplicated pages hurt more than they
  * help. If there isn't real content for a market, don't publish the page."
@@ -1922,6 +1922,461 @@ export const AREAS: readonly Area[] = [
       intakeBody:
         "Property type, rough timing, and which side of the table you are on. If you have an address or a listing link, put it in the message box.",
       intakeMarket: "south-charlotte",
+    },
+  },
+  {
+    /*
+      Dilworth — the sixth area page, fifth in the diligence format, shipped
+      2026-09-21.
+
+      THE ARGUMENT. Dilworth is not Myers Park with smaller houses, and the
+      page refuses that framing from the first screen. It was Charlotte's first
+      streetcar suburb, and what the streetcar left behind is a different
+      physical pattern: compact blocks, long narrow lots, houses set close to
+      the street, and — the part most buyers do not expect — duplexes,
+      triplexes and 1920s quadraplexes standing among the single-family houses.
+      That pattern, not the architecture, is what makes buying here different.
+
+      WHAT IS DOCUMENTED ABOUT HER RECORD.
+      One closing: 2022-dilworth-01 — February 2022, buyer side, a CONDO,
+      recorded lever "Purchased under list price, with seller concessions on
+      top." Referenced once, in the cost section. Nothing else about her.
+
+      THE DESIGNATION PICTURE, WHICH IS THE INVERSE OF MYERS PARK'S.
+      On /areas/myers-park the point is that most of the neighborhood is NOT
+      under design review and one pocket is. Here it is the other way round: a
+      large part of Dilworth IS a City of Charlotte Local Historic District, so
+      the default assumption should be that the rules apply and the check is
+      whether a given parcel falls outside them. Both pages have to make the
+      same distinction and they reach opposite defaults, which is exactly why
+      neither may be written from the other.
+
+      VERIFIED 2026-09-21. Sources in docs/AREAS-SPEC.md §19.
+        - Laid out in 1891 by Edward Dilworth Latta's Charlotte Consolidated
+          Construction Company, on roughly 442 acres, as Charlotte's first
+          suburb, served by the city's first electric streetcar. Latta Park
+          (about 20 acres) opened the same year.
+        - A second phase in 1911 was planned by the Olmsted Brothers, who
+          brought curving streets following the land's contours. So Dilworth
+          carries TWO street patterns — the early grid and the later curves —
+          which is a visible, checkable fact on the ground and a genuine
+          difference from Myers Park's single Nolen plan.
+        - Local Historic District: designated 1983, expanded 1992. It was
+          Charlotte's FIRST local historic district, and is one of eight
+          (charlottenc.gov, Historic District).
+        - A Certificate of Appropriateness is required before exterior work in
+          a local district — and the city's own wording includes windows and
+          doors, fencing, and TREE REMOVAL. Interiors are not covered. HDC
+          Design Standards adopted December 2021, updated April 2023.
+        - National Register: the Dilworth Historic District was listed 9 April
+          1987, with a boundary increase on 7 December 2000. Roughly 399 acres.
+          National Register listing and local designation are different things
+          and the page never lets them blur.
+        - Housing types include bungalows, revival-style houses, apartment
+          buildings, and 1920s quadraplexes, with duplexes and triplexes mixed
+          among single-family houses (NC HPO Charlotte architectural survey;
+          city design standards).
+        - Little Sugar Creek Greenway runs nearby; the Liz Hair Trail segment
+          runs from East Morehead Street to East Boulevard, past the Atrium
+          Health Carolinas Medical Center campus (parkandrec.mecknc.gov).
+
+      DELIBERATELY ABSENT.
+        - Every dollar figure and percentage. A Dilworth average would blend an
+          unrenovated 1920s bungalow, a gut-renovated one, a quadraplex and a
+          new infill house — the page argues against exactly that.
+        - "Charming", "quaint", "timeless", "hidden gem", "urban oasis". The
+          brief bans them and so does BRAND-VOICE; a test enforces it. Older
+          houses are never romanticised without the ownership consequences in
+          the same breath.
+        - School names and ratings.
+        - Any suggestion that every Dilworth property is regulated, or that
+          National Register listing regulates anybody. Tested both ways.
+        - Inspection or engineering conclusions. The older-home note lists what
+          to have looked at and says who should look at it.
+        - A "View homes for sale" CTA pointed at the brokerage IDX. CLAUDE.md
+          §12 keeps that link footer-only.
+        - Images. Nothing licensed is in the repo. Wanted: a bungalow street
+          under canopy, porches at close setback, an East Boulevard
+          streetscape, and — the one that distinguishes this guide visually —
+          a small multifamily building standing in a residential block.
+    */
+    slug: "dilworth",
+    name: "Dilworth",
+    state: "NC",
+
+    targetQuery: "what should i know before buying an older home in dilworth charlotte",
+
+    answer:
+      "Dilworth is a close-in Charlotte neighborhood immediately south of Uptown, laid out in 1891 as the city's first streetcar suburb and served by Charlotte's first electric streetcar. A second phase in 1911 was planned by the Olmsted Brothers, so the neighborhood carries two street patterns: an early grid and later curving streets.\n\nThat origin is still the most useful thing to know about its real estate. Streetcar suburbs were built compact — smaller blocks, long narrow lots, houses set close to the street — and mixed their housing types, so bungalows and revival-style houses stand alongside duplexes, triplexes and 1920s quadraplexes. It is denser and more varied than the neighborhoods built after the car.\n\nMuch of Dilworth is also a City of Charlotte Local Historic District, designated in 1983 and expanded in 1992, where exterior changes need approval before work starts. Not every property marketed as Dilworth falls inside it, which is why the address matters more than the label.",
+
+    lede:
+      "Dilworth was Charlotte's first streetcar suburb: compact blocks, long lots, porches close to the street, and bungalows standing next to 1920s quadraplexes.",
+
+    metaDescription:
+      "Dilworth, Charlotte NC: bungalows and small multifamily, what the historic district actually requires, and what to check in an older home before you buy.",
+
+    housingStock:
+      "Dilworth's housing is more varied than its reputation suggests. Bungalows are the type people picture, and there are many, but the neighborhood also holds revival-style houses, foursquare forms, early apartment buildings, and the duplexes, triplexes and 1920s quadraplexes that streetcar-era builders put up alongside single-family houses. Several of those multifamily buildings were finished to match their neighbors, so they do not read as apartments from the sidewalk.\n\nOn top of that century sits everything that has happened since: houses preserved close to original, houses renovated to the studs, houses extended at the back, and newer infill built on lots that were cleared.\n\nThe practical consequence is that two houses on the same block can be a hundred years apart in everything except the year on the deed, and the differences that matter are rarely visible from the street.",
+
+    priceContext:
+      "An average price for Dilworth would blend an unrenovated 1920s bungalow, the same bungalow gut-renovated, a quadraplex, and a newly built infill house. Those are four different buyers, and the average describes none of them.\n\nWhat sets the number for a specific house is its condition and what has actually been replaced, the lot and how the house sits on it, whether the parcel is inside the local historic district, and how close it is to East Boulevard or another busy corridor. Older houses also carry ownership costs that a newer house does not, and those belong in the comparison from the start:",
+
+    commute:
+      "Dilworth sits immediately south of Uptown, between South End to its west and Myers Park to its east, with Freedom Park just beyond its southern end. East Boulevard is the spine; Morehead Street, Kenilworth Avenue, Scott Avenue, Park Road and the Dilworth Roads carry the rest. The Atrium Health Carolinas Medical Center campus sits at its edge, which matters to some buyers as a place of work rather than as an amenity.\n\nWalkability is real here but uneven, and it is worth being specific. Streetcar-era blocks are short and largely sidewalked, so many interior streets genuinely do put shops and restaurants within a walk. How useful that is depends on which end of the neighborhood you are in and what you are walking to.\n\nThe Little Sugar Creek Greenway runs along the eastern side; its Liz Hair Trail segment connects East Morehead Street to East Boulevard past the medical campus.",
+
+    whatTrades:
+      "A Dilworth seller's hardest problem is that the houses nearest theirs are often the least comparable.\n\nOn a single block you can have an original house that has never been through a renovation, one that was taken back to the studs five years ago, a quadraplex, and a new house on a cleared lot. All four will show up in the same search, and a buyer touring them has already decided which kind they want. Yours is either in that set or it is being measured against the wrong thing.\n\nWhat actually decides the price inside the right set:",
+
+    /* Three levels, Dilworth's version: the pattern the streetcar left, the
+       individual house's history, and whether the rules reach the parcel. */
+    levers: [
+      {
+        title: "The pattern the streetcar left behind",
+        body: "Dilworth was built to be reached on foot from a streetcar line, and the layout still shows it: compact blocks, lots that run long and narrow, and houses set close to the street with the yard behind rather than in front. It also mixed housing types deliberately, so a duplex or a quadraplex on your block is original to the place rather than a later intrusion. Check which of the two street patterns you are in as well — the 1891 grid or the curving streets the Olmsted Brothers laid out in 1911 — because they produce different lots, different frontages and different parking realities.",
+      },
+      {
+        title: "What has been done to this particular house",
+        body: "Age tells you almost nothing here; what has been replaced tells you everything. Wiring, plumbing, heating and cooling, roof, windows, foundation and crawlspace, drainage, and any addition and whether it was permitted. Two houses that photograph identically can be a full renovation apart, and the one that shows better is not always the one that was done properly. Have the systems you cannot see inspected by people who work on houses of this age, and read the permit history before you fall for the porch.",
+      },
+      {
+        title: "Whether the rules reach this parcel",
+        body: "A large part of Dilworth is a City of Charlotte Local Historic District, so here the sensible default is to assume exterior work needs approval and then check whether your particular parcel falls outside the boundary. That is the opposite of the assumption to make in most Charlotte neighborhoods. If your plans involve an addition, new windows, a garage, fencing, taking a tree down, or replacing the house altogether, find out what applies before you write the offer rather than after.",
+      },
+    ],
+
+    faq: [
+      {
+        question: "Where is Dilworth in Charlotte?",
+        answer:
+          "Dilworth is immediately south of Uptown Charlotte, in Mecklenburg County, with South End to its west and Myers Park to its east. East Boulevard runs through its centre, and Morehead Street, Kenilworth Avenue and Park Road bound or cross it. Freedom Park lies just beyond its southern end, and the Atrium Health Carolinas Medical Center campus sits at its edge.",
+      },
+      {
+        question: "What is Dilworth known for?",
+        answer:
+          "Dilworth is known as Charlotte's first suburb, laid out in 1891 and connected to the city by Charlotte's first electric streetcar. That origin produced its defining features: compact blocks, mature street trees, front porches close to the sidewalk, and bungalows and revival-style houses standing alongside early apartment buildings and small multifamily properties.",
+      },
+      {
+        question: "What types of homes are in Dilworth?",
+        answer:
+          "A genuine mix. Bungalows are the best-known type, along with revival-style houses and foursquare forms. Dilworth also has early apartment buildings and the duplexes, triplexes and 1920s quadraplexes that streetcar-era builders put up beside single-family houses. Newer infill houses and renovated older houses are common too, so the range on one block can be wide.",
+      },
+      {
+        question: "Is Dilworth a historic district?",
+        answer:
+          "Yes, in two separate senses. A large part of Dilworth is a City of Charlotte Local Historic District, designated in 1983 and expanded in 1992, which regulates exterior changes. Separately, the Dilworth Historic District was listed on the National Register of Historic Places in 1987, with a boundary increase in 2000. The two designations are different and do not cover identical ground.",
+      },
+      {
+        question: "Are all Dilworth homes in the historic district?",
+        answer:
+          "No. Properties marketed as Dilworth may sit inside the local historic district, inside the National Register district, inside both, or outside both. Because a large share of the neighborhood is locally designated, the sensible assumption is that exterior work needs approval and then confirm whether a specific parcel falls outside the boundary. Verify the designation by address before planning any work.",
+      },
+      {
+        question: "Can you renovate a home in the Dilworth historic district?",
+        answer:
+          "Yes, with approval. In a City of Charlotte Local Historic District, a Certificate of Appropriateness is required before exterior work begins — that includes alterations, additions, new construction and demolition, and the city's rules also reach windows and doors, fencing and tree removal. Interior work is not covered. Confirm what your project needs with the Historic District Commission before you start.",
+      },
+      {
+        question: "Is Dilworth walkable?",
+        answer:
+          "Much of it is, because streetcar suburbs were built for walking: blocks are short, sidewalks are common, and East Boulevard puts shops, restaurants and services within reach of many streets. Walkability still varies by exact location and destination, and the busier corridors around the neighborhood are a different experience from the interior streets. Check the specific address rather than assuming.",
+      },
+      {
+        question: "What should I inspect when buying an older home in Dilworth?",
+        answer:
+          "Have the systems looked at that a century of ownership hides: wiring, plumbing, heating and cooling, roof, foundation and crawlspace, drainage, windows and insulation. Review any addition and whether it was permitted. Mature trees and lot drainage matter here too. Use inspectors experienced with houses of this age, and read the permit history before making decisions.",
+      },
+      {
+        question: "Is there new construction in Dilworth?",
+        answer:
+          "Yes, mostly as infill rather than as subdivisions — individual new houses built on existing lots, sometimes replacing an older house. Where a parcel sits inside the local historic district, new construction and demolition are subject to review, and the design standards ask new buildings to fit in beside their historic neighbors rather than stand out.",
+      },
+      {
+        question: "What schools serve Dilworth?",
+        answer:
+          "Dilworth is served by Charlotte-Mecklenburg Schools. Assignment is determined by the specific property address rather than the neighborhood name, and the district can change assignment boundaries. Magnet and choice programs run separately from home-school assignment and have their own application windows. Confirm the current assignment for any address with CMS before making an offer.",
+      },
+    ],
+
+    guide: {
+      city: "Charlotte",
+      headline:
+        "Dilworth is not Myers Park with smaller houses — it is what the streetcar built.",
+      heroCloser:
+        "Jasmine Garcia can tell you what a specific Dilworth house has actually had done to it, and whether the historic district reaches that parcel, before you commit to it.",
+      seoTitle: "Dilworth Charlotte NC Homes & Real Estate",
+      heroCta: "Ask about a Dilworth address",
+
+      answerHeading: "What is it like to live in Dilworth?",
+      facts: [
+        { label: "Where", value: "Immediately south of Uptown, between South End and Myers Park" },
+        { label: "Laid out", value: "1891, Charlotte's first suburb, on the first electric streetcar line" },
+        { label: "Second phase", value: "1911, planned by the Olmsted Brothers — hence two street patterns" },
+        {
+          label: "Housing",
+          value: "Bungalows and revival-style houses, plus duplexes, triplexes, 1920s quadraplexes and newer infill",
+        },
+        {
+          label: "Designation",
+          value: "A local historic district since 1983, expanded 1992; a National Register district since 1987",
+        },
+        { label: "Main roads", value: "East Boulevard, Morehead Street, Kenilworth Avenue, Park Road" },
+      ],
+
+      orientation: {
+        eyebrow: "Where it is",
+        heading: "Where is Dilworth, and which Dilworth do you mean?",
+        body: [
+          "Dilworth sits immediately south of Uptown, with South End on its western side and Myers Park to its east. East Boulevard runs through the middle of it, Freedom Park lies past its southern end, and the Atrium Health Carolinas Medical Center campus sits against its edge.",
+          "Three different shapes go by the name, and they do not line up. There is the broader area people and listings call Dilworth. There is the National Register district, listed in 1987 and enlarged in 2000, covering roughly 399 acres. And there is the City of Charlotte Local Historic District, designated in 1983 and expanded in 1992 — the only one of the three that regulates anything.",
+          "So a house can be in all three, two, one, or none of them while still being honestly described as Dilworth. Which one a parcel falls in changes what you may do to the outside of it, and it is a question about an address rather than about a neighborhood name.",
+        ],
+      },
+
+      housingHeading: "What can you buy in Dilworth?",
+      propertyTypes: [
+        {
+          name: "Bungalow or older house",
+          goodFor:
+            "Buyers who want the streetcar-era street and are clear-eyed about what a century-old house asks of an owner.",
+          checks: [
+            "What has been replaced, and when",
+            "Foundation, crawlspace and drainage",
+            "Knob-and-tube or aluminium wiring, and old plumbing",
+            "Additions, and whether they were permitted",
+            "Whether the parcel is locally designated",
+            "Lot width, driveway and where a car actually goes",
+          ],
+        },
+        {
+          name: "Small multifamily",
+          goodFor:
+            "Buyers looking at a duplex, triplex or quadraplex — original to a streetcar suburb, and a different purchase from a house.",
+          checks: [
+            "Zoning and the legal use on record",
+            "How it will be financed as a multi-unit property",
+            "Existing leases and their terms",
+            "Separate or shared systems and meters",
+            "Parking for every unit",
+            "Local historic district status, if you plan changes",
+          ],
+        },
+        {
+          name: "Renovated, infill or attached",
+          goodFor:
+            "Buyers who want the location without a project list — a gut-renovated house, a newer infill build, or a condo or townhome nearby.",
+          checks: [
+            "Which systems the renovation actually reached",
+            "Permits for the work that was done",
+            "How a new build was reviewed, if it is in the district",
+            "For attached homes, dues, reserves and assessments",
+            "Rental restrictions where they apply",
+            "What comparable rebuilds have sold for",
+          ],
+        },
+      ],
+      housingCta: {
+        prompt: "Comparing an original house with one that has been gut-renovated?",
+        label: "Work through the difference with Jasmine",
+        href: "#start",
+      },
+
+      layersHeading: "Three things to establish about any Dilworth address.",
+      layersIntro:
+        "The neighborhood name tells you the least of the three. Work down these before you get attached to a porch.",
+      layersClosing:
+        "Answer these three and you know what you are buying. Skip the third and you can end up owning a house you are not permitted to change the way you planned.",
+
+      notes: [
+        {
+          eyebrow: "Historic designation",
+          heading: "What the historic district actually requires",
+          body: [
+            "Two designations get used interchangeably in conversation and only one of them regulates anything.",
+            "The Dilworth Historic District was listed on the National Register of Historic Places in 1987, with a boundary increase in 2000. National Register listing is a recognition of significance. By itself it does not control what a private owner does to their house.",
+            "The City of Charlotte Local Historic District does. Dilworth was Charlotte's first, designated in 1983 and expanded in 1992, and it is one of eight in the city. Inside it, a Certificate of Appropriateness is required before exterior work begins — alterations, additions, new construction and demolition — and the city's own description also reaches windows and doors, fencing, and taking down a tree. Interior work is not covered.",
+            "Because a large share of Dilworth is locally designated, the sensible assumption is the reverse of most neighborhoods: expect the rules to apply, then confirm whether your specific parcel sits outside them. If your plan for a house involves changing its outside, that confirmation belongs before the offer. This page cannot answer it for an address, and neither can a listing.",
+          ],
+          link: {
+            href: "https://www.charlottenc.gov/Growth-and-Development/Planning-and-Development/Historic-District/Certificate-of-Appropriateness",
+            label: "Certificate of Appropriateness rules, City of Charlotte",
+          },
+        },
+        {
+          eyebrow: "Older houses",
+          heading: "What to have looked at before you buy a century-old house",
+          body: [
+            "The romance of an older house is in what you can see. The cost of one is almost entirely in what you cannot.",
+            "Worth having examined properly: electrical, including any original wiring still in service; plumbing and the line out to the main; the roof and its age; the foundation and crawlspace; drainage and how water moves across the lot; heating and cooling; windows and insulation; and any structural change made during an earlier renovation. Mature trees deserve a look too, both for their condition and because removing one may need approval.",
+            "Ask for the permit history. An addition that was never permitted is a problem that transfers to you, and it is far cheaper to find during due diligence than during a later sale.",
+            "Two houses on the same block can look alike and have completely different renovation histories. Jasmine can help you read what a house has had done and what it implies for what you will spend; the conclusions about condition belong to inspectors and trades who work on houses of this age.",
+          ],
+        },
+      ],
+
+      transitEyebrow: "Getting around",
+      transitHeading: "Is Dilworth walkable?",
+      transitColumns: [
+        {
+          heading: "The roads that matter",
+          items: [
+            "East Boulevard, the neighborhood spine",
+            "East Morehead Street",
+            "Kenilworth Avenue",
+            "Scott Avenue",
+            "Park Road",
+            "The Dilworth Roads, east and west",
+          ],
+        },
+        {
+          heading: "What the location gives you",
+          items: [
+            "Uptown immediately north",
+            "East Boulevard shops, restaurants and services",
+            "Little Sugar Creek Greenway on the eastern side",
+            "Latta Park inside the neighborhood, Freedom Park beyond it",
+            "South End and Myers Park either side",
+          ],
+        },
+        {
+          heading: "What to account for",
+          items: [
+            "Traffic on Morehead, Kenilworth and East Boulevard",
+            "On-street parking on narrow older lots",
+            "Sidewalk coverage that varies street to street",
+            "Activity near the medical campus",
+            "Construction from renovations and infill",
+          ],
+        },
+      ],
+      transitCallout:
+        "A house four doors off East Boulevard and one facing it are different properties. Same walk to the coffee, very different evening.",
+
+      changeHeading: "What is changing in Dilworth?",
+      changeBody: [
+        "Not the street plan. The 1891 grid and the Olmsted Brothers' curving streets from 1911 are still the shape of the place, and inside the local historic district they are expected to stay that way.",
+        "What changes is the houses. Older houses get renovated, extended, and occasionally replaced, so the character of a block turns over slowly, one lot at a time. Inside the local district that turnover is reviewed: the design standards ask new construction to sit comfortably beside its historic neighbors rather than stand out, which is why infill here rarely looks like infill elsewhere in Charlotte.",
+        "For a buyer, the question is what that does to the specific house you are considering — what is being built beside it, and whether your own plans for it will need approval. For an owner, it is what keeps the comparable set moving.",
+      ],
+
+      costHeading: "What does an older Dilworth home cost to own?",
+      costChecks: [
+        "Age and remaining life of the major systems",
+        "Roof, windows, foundation and drainage",
+        "Insurance on an older structure",
+        "Mecklenburg County and City of Charlotte property taxes",
+        "Tree work on a mature lot, and approval if one comes down",
+        "What exterior work will require review",
+        "Materials that have to match rather than merely fit",
+        "For attached or multifamily, dues or the cost of running units",
+        "Whether the property needs non-standard financing",
+      ],
+      costClosing:
+        "Materials are the line people miss: inside a local historic district, replacing something in kind is a different budget from replacing it with whatever the store stocks. Her one recorded Dilworth closing was a condo bought under list price with seller concessions on top, which is the other half of the same point — what you can negotiate depends on knowing what the property will actually ask of you.",
+      costCta: {
+        prompt: "Working out what an older house will really cost to run?",
+        label: "Go through it with Jasmine",
+        href: "#start",
+      },
+
+      schools: {
+        eyebrow: "Schools",
+        heading: "Schools serving Dilworth",
+        body: [
+          "Dilworth is served by Charlotte-Mecklenburg Schools. Assignment follows the specific property address rather than the neighborhood name, and the district can change assignment boundaries, so an assignment attached to a house today is not a permanent feature of it.",
+          "Magnet and choice programs run separately from home-school assignment and have their own application windows.",
+          "Confirm the current assignment for any specific address at the source before you write an offer.",
+        ],
+        link: {
+          href: "https://www.cmsk12.org",
+          label: "Check assignment with Charlotte-Mecklenburg Schools",
+        },
+      },
+
+      buyerHeading: "Buying in Dilworth? Ask these before you get attached to a porch.",
+      buyerQuestions: [
+        "Is this parcel in the local historic district?",
+        "What would my plans for it actually require?",
+        "What has been replaced in this house, and when?",
+        "Was the addition permitted?",
+        "What does the crawlspace and drainage look like?",
+        "Is any original wiring still in service?",
+        "How old is the roof, and what is under it?",
+        "Which street pattern is this — grid or the 1911 curves?",
+        "How wide is the lot, and where does a car go?",
+        "How close is this to East Boulevard or Kenilworth, really?",
+        "What has sold on this block, and how comparable was it?",
+        "If it is multifamily, how will it be financed?",
+      ],
+      buyerClosing:
+        "The first two belong together. A house you cannot change the way you intended is a different purchase from the one you thought you were making, and that is knowable before the offer.",
+      buyerCta: {
+        prompt: "Found a Dilworth house you are serious about?",
+        label: "Send Jasmine the address",
+        href: "#start",
+      },
+
+      sellerHeading: "Selling in Dilworth? Your neighbours are often the wrong comparables.",
+      sellerChecks: [
+        "Recent sales that match your house's renovation level",
+        "Whether those houses were original, renovated, or rebuilt",
+        "Lot width, depth and how the house sits on it",
+        "Permits for everything you have had done",
+        "Distance from East Boulevard and the busier corridors",
+        "Parking, and how buyers will read it",
+        "Infill and gut renovations competing nearby",
+        "Whether the parcel's designation helps or limits a buyer's plans",
+        "The objection a buyer will raise, before they raise it",
+      ],
+      sellerClosing:
+        "A fully renovated bungalow, a new infill house and an untouched original a few doors apart are not competing for the same buyer, even at the same price. Pricing against the wrong one of the three is how a good house sits on the market.",
+      sellerCta: {
+        prompt: "Thinking about selling in Dilworth?",
+        label: "Ask what your home is competing against",
+        href: "/home-value",
+      },
+
+      nearbyHeading: "Dilworth or somewhere nearby?",
+      nearby: [
+        {
+          name: "Dilworth",
+          chooseWhen:
+            "You want a streetcar-era street close to Uptown and you are prepared to do real diligence on an older house.",
+        },
+        {
+          name: "South End",
+          slug: "south-end",
+          chooseWhen:
+            "You want the light rail and newer condos and townhomes on its western side, in a much denser setting.",
+        },
+        {
+          name: "Myers Park",
+          slug: "myers-park",
+          chooseWhen:
+            "You want larger lots and a different planning history immediately east, with less mixed-in multifamily.",
+        },
+        {
+          name: "SouthPark",
+          slug: "southpark",
+          chooseWhen:
+            "You want shopping and offices close by, and are open to a house or a condo further from Uptown.",
+        },
+        {
+          name: "Steele Creek",
+          slug: "steele-creek",
+          chooseWhen:
+            "You want newer detached houses with fewer maintenance unknowns, at a lower price point southwest of the city.",
+        },
+      ],
+
+      faqHeading: "Dilworth real estate: common questions",
+
+      closingHeading: "Looking at a house in Dilworth?",
+      closingBody:
+        "Send Jasmine the address. She can tell you which designation reaches that parcel, what the house has actually had done to it, and which of the very different properties nearby your offer should really be measured against.",
+      intakeHeading: "Tell me what you are looking at.",
+      intakeBody:
+        "Property type, rough timing, and which side of the table you are on. If you have an address or a listing link, put it in the message box.",
+      intakeMarket: "in-town-charlotte",
     },
   },
 ];

@@ -726,3 +726,54 @@ costs — the mechanical `$` rule pulls the results disclaimer, and Ballantyne's
 was dropped for the same reason. No mall tenant list or restaurant directory, both maintenance
 debt that helps no housing decision. No school names or ratings. No "prestigious", "exclusive",
 "elite", "luxury" — tested, as is the two-word "South Park" misspelling.
+
+## 19. Dilworth, and the inverted designation default — 2026-09-21
+
+The sixth guide, fifth in the diligence format. Two things make it worth reading before
+writing the next historic-neighborhood page.
+
+**It refuses the obvious framing, in the h1.** "Dilworth is not Myers Park with smaller
+houses — it is what the streetcar built." The differentiator is not architecture, it is the
+physical pattern a streetcar suburb produced: compact blocks, long narrow lots, houses set
+close to the street with the yard behind, and duplexes, triplexes and 1920s quadraplexes
+standing among the single-family houses as original neighbours rather than later intrusions.
+Dilworth also carries **two street patterns** — the 1891 grid and the curving streets the
+Olmsted Brothers laid out in 1911 — which is checkable on the ground and a real difference
+from Myers Park's single Nolen plan. A test asserts the streetcar pattern, the multifamily,
+and the two street plans all survive future edits.
+
+**The designation default is the inverse of Myers Park's, and that is the point.**
+
+| | Local historic district | The page's instruction |
+|---|---|---|
+| Myers Park | One pocket (Hermitage Court) | Most of it is not under review; check whether yours is |
+| Dilworth | A large share — Charlotte's first local district, 1983, expanded 1992 | Assume the rules apply; check whether your parcel falls outside |
+
+Both pages draw the same National Register / local distinction and arrive at opposite
+defaults. **That is why neither may be written from the other**, and why the tests for each
+assert its own default rather than a shared form of words. Charlotte has eight local historic
+districts (charlottenc.gov) — the count is stated here and deliberately not on either page,
+since what a reader needs is whether their own address is in one.
+
+**The Certificate of Appropriateness scope is worth keeping accurate.** The city's own wording
+reaches exterior alterations, additions, new construction and demolition, and also windows and
+doors, fencing, and **tree removal** — which is the detail buyers of a mature-canopy lot do not
+expect. Interiors are not covered. Design Standards adopted December 2021, updated April 2023.
+
+**A second `notes` block.** Dilworth carries two: the designation explainer, and one on what to
+have examined in a century-old house. The second deliberately lists what to inspect and hands
+every conclusion to inspectors and trades — a test asserts it names them and asks for the
+permit history, because a page that diagnoses a crawlspace is giving advice it cannot give.
+
+**Verified 2026-09-21:** laid out 1891 by Edward Dilworth Latta's company on roughly 442 acres
+as Charlotte's first suburb, on the first electric streetcar line, with Latta Park opening the
+same year; Olmsted Brothers' 1911 phase; local district 1983 and 1992; National Register listing
+9 April 1987 with a boundary increase 7 December 2000, roughly 399 acres; housing types from the
+NC HPO Charlotte architectural survey and the city design standards; Little Sugar Creek
+Greenway's Liz Hair Trail segment from East Morehead Street to East Boulevard past the Atrium
+Health Carolinas Medical Center campus (parkandrec.mecknc.gov).
+
+**Not shipped:** any dollar figure — a Dilworth average blends an untouched bungalow, a gut
+renovation, a quadraplex and new infill, which is the page's own argument against it. School
+names and ratings. "Charming", "quaint", "timeless", "hidden gem", "urban oasis" — all tested,
+along with the word "safe", which is why two sentences read "the sensible assumption" instead.
